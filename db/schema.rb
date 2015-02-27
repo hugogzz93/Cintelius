@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150227002500) do
+ActiveRecord::Schema.define(version: 20150227040045) do
 
   create_table "categories", force: true do |t|
     t.integer  "supercategory_id", limit: 4
-    t.string   "name",             limit: 255
+    t.string   "name",             limit: 255, null: false
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
   end
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20150227002500) do
   create_table "combo_products", force: true do |t|
     t.integer  "combo_id",    limit: 4
     t.integer  "products_id", limit: 4
-    t.integer  "units",       limit: 4
+    t.integer  "units",       limit: 4, null: false
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end
@@ -33,16 +33,16 @@ ActiveRecord::Schema.define(version: 20150227002500) do
   create_table "combos", force: true do |t|
     t.integer  "user_id",    limit: 4
     t.integer  "order_id",   limit: 4
-    t.decimal  "price",                precision: 10
-    t.integer  "status",     limit: 4
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.decimal  "price",                precision: 10,             null: false
+    t.integer  "status",     limit: 4,                default: 0, null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
   end
 
   create_table "comments", force: true do |t|
     t.integer  "commentable_id",   limit: 4
     t.string   "commentable_type", limit: 255
-    t.text     "content",          limit: 65535
+    t.text     "content",          limit: 65535, null: false
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
   end
@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 20150227002500) do
   create_table "offer_details", force: true do |t|
     t.integer  "order_id",   limit: 4
     t.integer  "offer_id",   limit: 4
-    t.integer  "units",      limit: 4
-    t.integer  "status",     limit: 4
+    t.integer  "units",      limit: 4, null: false
+    t.integer  "status",     limit: 4, null: false
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
@@ -61,10 +61,10 @@ ActiveRecord::Schema.define(version: 20150227002500) do
   create_table "offers", force: true do |t|
     t.integer  "user_id",       limit: 4
     t.integer  "product_id",    limit: 4
-    t.integer  "status",        limit: 4
-    t.decimal  "unitary_price",           precision: 10
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.integer  "status",        limit: 4,                default: 0, null: false
+    t.decimal  "unitary_price",           precision: 10,             null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
   end
 
   create_table "order_products", force: true do |t|
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20150227002500) do
   end
 
   create_table "orders", force: true do |t|
-    t.string   "title",      limit: 255
+    t.string   "title",      limit: 255, null: false
     t.integer  "user_id",    limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
@@ -92,10 +92,13 @@ ActiveRecord::Schema.define(version: 20150227002500) do
   end
 
   create_table "products", force: true do |t|
-    t.string   "name",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name",        limit: 255, null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "category_id", limit: 4
   end
+
+  add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
 
   create_table "review_tickets", force: true do |t|
     t.integer  "reviewable_id",   limit: 4
