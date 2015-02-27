@@ -27,6 +27,7 @@ gem 'mysql2'
 gem 'foundation-rails'
 gem 'binding_of_caller'
 gem 'devise'
+gem 'arel', '6.0.0.beta2'
 
 # Use ActiveModel has_secure_password
  gem 'bcrypt', '~> 3.1.7'

@@ -1,0 +1,26 @@
+product
+ t.belongs_to :category
+ t.has_and_belongs_to_many :orders
+ 
+ users
+ # has_many :offers
+  # has_many :combos
+  # has_many :product_scores
+  # has_many :review_tickets
+  # has_one :service_grade
+
+ category
+  t.has_many :products
+
+ order
+ t.has_and_belongs_to_many :products
+ t.has_many :offers, through :offer_details, dependent :destroy
+ t.has_many :combos, dependent :destroy
+
+offer
+ has_one :comment, as :commentable
+ has_one :order, through: :offer_details
+
+ combo
+ 
+ has_one :comment, as :commentable
