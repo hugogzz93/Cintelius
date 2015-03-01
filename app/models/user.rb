@@ -11,6 +11,6 @@ class User < ActiveRecord::Base
   has_many :product_scores
   has_many :review_tickets, dependent: :destroy
   has_one :service_grade
-  has_one :user_details, dependent: :destroy
+  has_one :user_detail, dependent: :destroy
 
 end
