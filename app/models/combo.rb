@@ -7,5 +7,5 @@ class Combo < ActiveRecord::Base
 
     validates :price, presence: true, numericality: true
 
-	enum status: %w(ready selected locked received)
+	enum status: [:ready, :selected, :locked, :received]
 end

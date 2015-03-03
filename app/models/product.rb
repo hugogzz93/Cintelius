@@ -1,10 +1,14 @@
 class Product < ActiveRecord::Base
-	  has_and_belongs_to_many :users
- 	  has_many :orders, through: :order_products
 
 	  belongs_to :category
 	  has_many :offers
+	  has_many :user_products, dependent: :destroy
+	  has_many :users, through: :user_products
+	  has_many :product_scores
+	  has_many :orders, through: :order_products
 	  has_many :combo_products, dependent: :destroy
 	  has_many :combos, through: :combo_products, dependent: :destroy
-	  has_many :product_scores
+
+ 	  
+	  validates :name, uniqueness: {message: "Ya existe un producto con este nombre."}
 end

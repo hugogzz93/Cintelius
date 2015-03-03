@@ -4,5 +4,5 @@ class OfferDetail < ActiveRecord::Base
 
     validates :units, presence: true, numericality: true
     
-    enum status: %w(provider client both denied_by_provider)
+    enum status: [:provider, :client, :both, :denied_by_provider]
 end

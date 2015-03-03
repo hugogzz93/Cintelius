@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150227040045) do
+ActiveRecord::Schema.define(version: 20150303003757) do
 
   create_table "categories", force: true do |t|
     t.integer  "supercategory_id", limit: 4
@@ -23,12 +23,14 @@ ActiveRecord::Schema.define(version: 20150227040045) do
   add_index "categories", ["supercategory_id"], name: "index_categories_on_supercategory_id", using: :btree
 
   create_table "combo_products", force: true do |t|
-    t.integer  "combo_id",    limit: 4
-    t.integer  "products_id", limit: 4
-    t.integer  "units",       limit: 4, null: false
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.integer  "combo_id",   limit: 4
+    t.integer  "units",      limit: 4, null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "product_id", limit: 4
   end
+
+  add_index "combo_products", ["product_id"], name: "index_combo_products_on_product_id", using: :btree
 
   create_table "combos", force: true do |t|
     t.integer  "user_id",    limit: 4
@@ -52,10 +54,10 @@ ActiveRecord::Schema.define(version: 20150227040045) do
   create_table "offer_details", force: true do |t|
     t.integer  "order_id",   limit: 4
     t.integer  "offer_id",   limit: 4
-    t.integer  "units",      limit: 4, null: false
-    t.integer  "status",     limit: 4, null: false
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.integer  "units",      limit: 4,             null: false
+    t.integer  "status",     limit: 4, default: 0, null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
   create_table "offers", force: true do |t|
@@ -65,7 +67,10 @@ ActiveRecord::Schema.define(version: 20150227040045) do
     t.decimal  "unitary_price",           precision: 10,             null: false
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
+    t.integer  "order_id",      limit: 4
   end
+
+  add_index "offers", ["order_id"], name: "index_offers_on_order_id", using: :btree
 
   create_table "order_products", force: true do |t|
     t.integer  "order_id",   limit: 4
@@ -105,9 +110,11 @@ ActiveRecord::Schema.define(version: 20150227040045) do
     t.string   "reviewable_type", limit: 255
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.integer  "user_id",         limit: 4
   end
 
   add_index "review_tickets", ["reviewable_id", "reviewable_type"], name: "index_review_tickets_on_reviewable_id_and_reviewable_type", using: :btree
+  add_index "review_tickets", ["user_id"], name: "index_review_tickets_on_user_id", using: :btree
 
   create_table "service_scores", force: true do |t|
     t.integer  "user_id",       limit: 4
@@ -125,6 +132,16 @@ ActiveRecord::Schema.define(version: 20150227040045) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
+
+  create_table "user_products", force: true do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "product_id", limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "user_products", ["product_id"], name: "index_user_products_on_product_id", using: :btree
+  add_index "user_products", ["user_id"], name: "index_user_products_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  limit: 255, default: "", null: false
