@@ -13,3 +13,29 @@
  *= require_tree .
  *= require_self
  */
+
+ /*
+	@newOrder
+ */
+
+ .newOrder.container {
+ 	width: 92%;
+	margin: 3%;
+	border-style: dotted;
+	border-color: red;
+	overflow: auto;
+ }
+
+ .newOrder .column {
+ 	border-style: solid;
+ 	border-width: 1%;
+ 	float: left;
+ 	width: 24%;
+ }
+
+ .newOrder .column.order {
+ 	width: 26%;
+ 	border-color: blue;
+ }
+
+
