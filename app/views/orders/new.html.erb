@@ -1,9 +1,9 @@
-<div class="container newOrder">
+<div class="newOrder">
 	<div class="column categories">
 		<!-- categorias -->
 		<ul class="category-list">
-			<%= @categories.each do |category|  %>
-
+			<% @categories.each do |category|  %>
+				<li><%= button_tag category.name %></li>
 			<% end %>
 		</ul>
 		
@@ -11,10 +11,26 @@
 
 	<div class="column subcategories">
 		<!-- subcategorias -->
+			<% @categories.each do |category| %>
+				<ul class="<%=category.name%>-list">
+					<% category.subcategories.each do |subcategory| %>
+						<li><%= button_tag subcategory.name %></li>
+					<% end %>
+				</ul>
+			<% end %>
 	</div>
 
 	<div class="column products">
 		<!-- productos -->
+		<% @categories.each do |category| %>
+			<% category.subcategories.each do |subcategory| %>
+				<ul class="<%=subcategory.name%>-list">
+					<% subcategory.products.each do |product| %>
+						<li><%= button_tag product.name %></li>
+					<% end %>
+				</ul>
+			<% end %>
+		<% end %>
 	</div>
 	
 	<div class="column order">
@@ -24,5 +40,9 @@
 		<!-- comentario -->
 		<!-- cancelar -->
 		<!-- terminar -->
+
+		<div class="new-order-product">
+			
+		</div>
 	</div>	
 </div>

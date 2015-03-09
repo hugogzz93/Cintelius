@@ -5,5 +5,5 @@ class Category < ActiveRecord::Base
 
 	belongs_to :supercategory, class_name: "Category"
 
-	validates :name, uniqueness: {message: "Ya existe una categoria con este nombre."}
+	validates :name, uniqueness: {message: "Ya existe una categoria con este nombre."}, case_sensitive: false;
 end

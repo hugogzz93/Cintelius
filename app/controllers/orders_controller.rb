@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 	end
 
 	def new
-		@categories = Category.all
+		@categories = Category.where(supercategory_id: nil)
 		@order = Order.new
 	end
 end

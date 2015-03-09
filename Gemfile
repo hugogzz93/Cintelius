@@ -30,7 +30,7 @@ gem 'devise'
 gem 'arel', '6.0.0.beta2'
 
 # Use ActiveModel has_secure_password
- gem 'bcrypt', '~> 3.1.7'
+ # gem 'bcrypt', '~> 3.1.7'
 
  gem "paperclip", "~> 4.2"
 
