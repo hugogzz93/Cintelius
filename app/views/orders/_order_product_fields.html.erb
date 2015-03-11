@@ -1,0 +1,11 @@
+
+<div class="product_box">
+	<%= f.label "Producto" %> <br>
+	<%= f.text_field :product_id, style: "display: none;" %>
+	<%= f.label :units,  "Kg" %>
+	<%= f.number_field :units %> <br>
+	<%= fields_for(:comment, comment_object, child_index: comment_object.object_id) do |comment|%>
+		<%=  comment.text_area :content%>
+	<% end %>
+
+	</div>

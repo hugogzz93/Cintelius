@@ -26,7 +26,7 @@
 			<% category.subcategories.each do |subcategory| %>
 				<ul class="<%=subcategory.name%>-list">
 					<% subcategory.products.each do |product| %>
-						<li><%= button_tag product.name %></li>
+						<li><%= button_tag product.name, data: {product_id: product.id} %></li>
 					<% end %>
 				</ul>
 			<% end %>
@@ -42,7 +42,17 @@
 		<!-- terminar -->
 
 		<div class="new-order-product">
-			
+			<%= form_for@order, url: {action: "create"}, html: {
+				class: "new_order_form"} do |order|%>
+				<%= order.label :title, "Nombre de la Orden" %>
+				<%= order.text_field :title %>
+				<%= fields_for :order_products do |product_fields| %>
+					
+				<% end %>
+				<%= link_to_add_fields "Add product ", order, :order_products %>
+
+				<%= order.submit %>
+			<% end %>
 		</div>
 	</div>	
 </div>

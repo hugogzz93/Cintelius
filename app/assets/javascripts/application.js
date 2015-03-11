@@ -18,6 +18,10 @@
 
 $(function() {
 
+
+
+	// @@NEWORDER
+
 	// Arreglar tamaño de la pantalla.
 	$('body').height($(window).height());
 
@@ -48,4 +52,48 @@ $(function() {
 
 		$(e.target).addClass('active');	
 	})
+
+
+	// Click agrega el nombre al product_box o destruye la caja si ya esta seleccionado el prod
+	$('.products button').on('click', function(e) {
+		if ($(e.target).hasClass('selected_product')) {
+			$('.product_box:contains('+ $(e.target).text() +')').remove();
+			$(e.target).removeClass('selected_product')
+		} else {
+			$('a.add_fields').click()
+			productName = $(e.target).text()
+			product_fields = $('.product_box').last().children().first()
+			product_fields.text(productName)
+			$($('.product_box').last().children().get(2)).val($(e.target).attr('data-product-id'))
+			orderProductId = $($('.newOrder .product_box').last().children('textarea').siblings().get(2)).attr('name').slice(33, 46)
+			commentName = "order[order_products_attributes][" + orderProductId + "][comment_attributes][content]"
+			// $($('.product_box').last().children('textarea').siblings().get(2)).attr('id')
+			console.log(commentName)
+			$($('.product_box').last().children('textarea')).attr('name', commentName)
+			$(e.target).addClass('selected_product')
+		}
+
+	})
+
+	// Agrega caja de producto
+
+	$('form .add_fields').on('click', function(e) {
+		time = new Date().getTime()
+		regexp = new RegExp($(this).data('id'), 'g')
+		$(this).before($(this).data('fields').replace(regexp, time))
+		event.preventDefault()
+	})
+
+	// $('.product_box').last().children().first().text('Carne')
+
+	// Para que cada producto agrege un nuevo campo
+	// function add_fields(link, association, content) {
+	// 	var new_id = new Date.getTime();
+	// 	var regexp = new RegExp("new_" + association, "g")
+	// 	$(link).up().insert({
+	// 		before: content.replace(regexp, new_id)
+	// 	});
+	// }
+
+	// $$NEWORDER
 })

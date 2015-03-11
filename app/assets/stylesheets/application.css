@@ -143,10 +143,24 @@
  	/*border: 2px black solid;*/
  	/*border-right: none;*/
 }
+.newOrder li button.selected_product {
+	background-color: #808080;
+	color: white;
+}
 
 .new-order-product {
-	border: 1px solid black;
-	width: 90%;
-	height: 20%;
+	/*border: 1px solid black;*/
+	height: 100%;
 }
+
+.new-order-form {
+	height: 100%;
+}
+
+.new_order_form .product_box {
+  height: 20%;
+  border: 1px solid black;
+  margin: 5px 5px;
+}
+
 
