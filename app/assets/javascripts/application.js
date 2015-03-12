@@ -54,6 +54,11 @@ $(function() {
 	})
 
 
+	// function showNewOrderTextArea(image_box) {
+	// 	console.log('done')
+	// 	image_box.siblings('textarea').addClass('editable')
+	// }
+
 	// Click agrega el nombre al product_box o destruye la caja si ya esta seleccionado el prod
 	$('.products button').on('click', function(e) {
 		if ($(e.target).hasClass('selected_product')) {
@@ -71,11 +76,40 @@ $(function() {
 			console.log(commentName)
 			$($('.product_box').last().children('textarea')).attr('name', commentName)
 			$(e.target).addClass('selected_product')
+
+			// para que la tacha borre al producto del formulario
+			$('.product_box img.x-button').on('click', function(e) {
+				textForTarget = $(e.target).parent().children().first().text()
+				$(e.target).parent().remove()
+				$('button.selected_product:contains('+textForTarget+')').removeClass('selected_product')
+
+				console.log()
+			})
+
+			// Para que aparesca el textarea animado
+			$('.letter_image_box').on('click', function(e) {
+				$(e.target).parent().addClass('active');
+				setTimeout(function() {
+					$(e.target).parent().siblings('textarea').addClass('editable').focus()
+				}, 1000)
+				$(e.target).parent().siblings('textarea').on('blur', function(evnt) {
+					$(evnt.target).removeClass('editable')
+					$(e.target).parent().removeClass('active');
+				})
+				// setTimeout(showNewOrderTextArea(), 1000);				
+			})
+
+
 		}
 
 	})
 
+
+
+	
+
 	// Agrega caja de producto
+
 
 	$('form .add_fields').on('click', function(e) {
 		time = new Date().getTime()

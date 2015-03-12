@@ -10,8 +10,9 @@ class OrdersController < ApplicationController
 	end
 
 	def create
-		order = Order.create(order_params)
+		current_user.orders.create(order_params)
 		exit
+
 	end
 
 	private

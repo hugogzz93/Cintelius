@@ -46,12 +46,15 @@
 				class: "new_order_form"} do |order|%>
 				<%= order.label :title, "Nombre de la Orden" %>
 				<%= order.text_field :title %>
-				<%= fields_for :order_products do |product_fields| %>
+				<div class="product_form_area">
+					<%= fields_for :order_products do |product_fields| %>
 					
-				<% end %>
+					<% end %>
+				
 				<%= link_to_add_fields "Add product ", order, :order_products %>
+				</div>
 
-				<%= order.submit %>
+				<%= order.submit "Terminar Orden" %>
 			<% end %>
 		</div>
 	</div>	
