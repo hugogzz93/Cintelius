@@ -53,12 +53,6 @@ $(function() {
 		$(e.target).addClass('active');	
 	})
 
-
-	// function showNewOrderTextArea(image_box) {
-	// 	console.log('done')
-	// 	image_box.siblings('textarea').addClass('editable')
-	// }
-
 	// Click agrega el nombre al product_box o destruye la caja si ya esta seleccionado el prod
 	$('.products button').on('click', function(e) {
 		if ($(e.target).hasClass('selected_product')) {
@@ -109,8 +103,6 @@ $(function() {
 	
 
 	// Agrega caja de producto
-
-
 	$('form .add_fields').on('click', function(e) {
 		time = new Date().getTime()
 		regexp = new RegExp($(this).data('id'), 'g')
@@ -118,16 +110,8 @@ $(function() {
 		event.preventDefault()
 	})
 
-	// $('.product_box').last().children().first().text('Carne')
-
-	// Para que cada producto agrege un nuevo campo
-	// function add_fields(link, association, content) {
-	// 	var new_id = new Date.getTime();
-	// 	var regexp = new RegExp("new_" + association, "g")
-	// 	$(link).up().insert({
-	// 		before: content.replace(regexp, new_id)
-	// 	});
-	// }
-
-	// $$NEWORDER
+	// @NEWOFFER
+	$('.order_box a').on('click', function() {
+		$('.new_offer .offer_list').empty()
+	})
 })

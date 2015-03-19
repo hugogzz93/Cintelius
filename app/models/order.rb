@@ -1,5 +1,5 @@
 class Order < ActiveRecord::Base
-	belongs_to :User
+	belongs_to :user
 	has_many :offer_details, dependent: :destroy
 	has_many :offers, dependent: :destroy
 	has_many :combos, dependent: :destroy

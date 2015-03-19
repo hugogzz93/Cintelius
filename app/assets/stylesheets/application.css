@@ -235,9 +235,9 @@ form#new_order.new_order_form textarea.editable {
   z-index: 4;
   display: block;
   position: relative;
-  bottom: 10.3em;
+  bottom: 11em;
   width: 98%;
-  height: 92%;
+  height: 94%;
   resize: none;
 }
 
@@ -263,7 +263,7 @@ form#new_order.new_order_form textarea.editable {
   		border: 1px solid black;
   		width: 99.5%;
   		margin-left: -57%;
-  		margin-top: -6%;
+  		margin-top: -5%;
   		height: 95%;
   		z-index: 3;
   		background-color: white;
@@ -273,20 +273,20 @@ form#new_order.new_order_form textarea.editable {
 
  @-webkit-keyframes image-box-expand{
 	0% {
-		width: 14%;
-  		height: 40%;
+		width: 5%;
+  		height: 20%;
   		position: relative;
   		left: 57%;
-  		top: -61%;
+  		/*top: -62%;*/
   		cursor: pointer;
   		display: hidden;
 
 	}
 	50% {
-		height: 40%;
+		height: 20%;
 		position: relative;
 		left: 57%;
-		top: -61%;
+		/*top: -62%;*/
   		border: 1px solid black;
   		width: 100%;
   		margin-left: -57%;
@@ -297,7 +297,7 @@ form#new_order.new_order_form textarea.editable {
   		border: 1px solid black;
   		width: 99.5%;
   		margin-left: -57%;
-  		margin-top: -6%;
+  		margin-top: -5%;
   		height: 95%;
   		z-index: 3;
   		background-color: white;
@@ -307,3 +307,70 @@ form#new_order.new_order_form textarea.editable {
 .letter_image_box.active img{
 	visibility: hidden;
 }
+
+
+/*
+  @NEWOFFER
+*/
+
+
+.new_offer {
+  width: 98%;
+  margin-top: 1%;
+ }
+
+.order_list {
+
+}
+/*#00DfDc*/
+ .new_offer .column {
+  float: left;
+  width: 35%;
+  height: 100%;
+  /*overflow: hidden;*/
+  overflow-y: scroll;
+  
+ }
+
+ .new_offer .column.new_offer_orders {
+    width: 20%;
+  }
+
+  .new_offer ul {
+  margin: 0px;
+  list-style: none;
+  padding: 0px;
+ }
+  
+.new_offer li {
+  overflow: auto;
+}
+/*#e8f4f8*/
+
+.new_offer li.order_box {
+  font-size: 0.9em;
+  color: black;
+  border: none;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  transition: text-indent 0.3s,  background-color 0.3s;
+}
+.new_offer li.order_box:hover {
+  color: #ff6500;
+    transition: text-indent 0.3s, background-color 0.3s;
+}
+
+.new_offer li.order_box.active {
+  background-color: #ff6500;
+  color: white;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.new_offer li a {
+  display: block;
+}
+
+
+
+

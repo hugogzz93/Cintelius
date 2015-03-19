@@ -5,6 +5,9 @@ class Offer < ActiveRecord::Base
 	has_one :comment, as: :commentable, dependent: :destroy
 	has_many :offer_details, dependent: :destroy	
 
+	accepts_nested_attributes_for :offer_details
+	accepts_nested_attributes_for :comment
+
 	validates :unitary_price, presence: true, numericality: true
 	validate :authorized_product
 	after_update :create_review_ticket, if: :received?

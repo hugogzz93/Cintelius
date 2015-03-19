@@ -1,0 +1,5 @@
+NEWORDER
+
+	Error en los event handlers que utilizan nombre como identificacion de objectos
+	ya que si dos objetos tienen el mismo nombre en cualquier ubicacoin, los dos son
+	cambiados por el event handler "Carne, Carne Blanca"

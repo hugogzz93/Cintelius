@@ -4,5 +4,14 @@ class OfferDetail < ActiveRecord::Base
 
     validates :units, presence: true, numericality: true
     
-    enum status: [:provider, :client, :both, :denied_by_provider]
+    enum status: [:provider, :buyer, :both, :denied_by_provider]
+    after_create :bind_to_parent
+
+    def bind_to_parent
+    	# So that it is associated to both, order and offer
+    	if self.order_id == nil
+    		self.update(order_id: self.offer.order.id)
+    	end
+    	
+    end
 end

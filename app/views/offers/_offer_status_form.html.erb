@@ -1,0 +1,36 @@
+<!-- TIENE QUE ENSE;AR DIFERENTES DEPENDIENDO DEL STATUS DE LA OFERTA -->
+<!-- Los que ha mandado el proveedor -->
+<!-- Los que ha regresado el cliente-->
+<!-- Los que ha rechazado el proveedor -->
+<!-- Los que se han aceptado -->
+<!-- Los que se han entregado -->
+
+
+<!-- recibe un offer = f y con ese objecto crea los hijos -->
+<!-- product_id -->
+<!-- order_id -->
+<!-- status -->
+<!-- unitary_price -->
+	<!-- offer_detail -->
+		<!-- order_id -->
+		<!-- offer_id -->
+		<!-- units -->
+		<!-- status -->
+	<!-- comment -->
+		<!-- content -->
+
+
+<%= if f.status == "ready" %>
+<!-- El provedor mando la oferta y no ha respondido el comprador -->
+	<div class="offer_product_box ready">
+		<h5>Producto</h5>
+		<h5><%= f.product.name %></h5>
+		<h5>Kg</h5>
+		<h5><%= f.order.order_products.where(product_id: f.product.id) %></h5>
+		<h5><%= f.offer_details.last.units %></h5>
+		<h5>Precio Unitario</h5>
+		<h5><%= f.unitary_price %></h5>
+	</div>
+<%= end %>
+
+

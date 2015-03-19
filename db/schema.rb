@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150303003757) do
+ActiveRecord::Schema.define(version: 20150315221523) do
 
   create_table "categories", force: true do |t|
     t.integer  "supercategory_id", limit: 4
@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(version: 20150303003757) do
     t.string   "organization", limit: 255
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "credentials",  limit: 4
   end
 
   create_table "user_products", force: true do |t|
