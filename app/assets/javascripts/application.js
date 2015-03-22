@@ -111,7 +111,12 @@ $(function() {
 	})
 
 	// @NEWOFFER
+
+	// Limpia las listas despues de cada ajax
 	$('.order_box a').on('click', function() {
 		$('.new_offer .offer_list').empty()
+		$('.new_offer .combo_list').empty()
 	})
+
+	// $('.order_box a').on()
 })

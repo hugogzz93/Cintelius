@@ -14,23 +14,36 @@
  *= require_self
  */
 
+
+
+
+.top-bar  {
+  position: fixed;
+  width: 100%;
+  height: 7%;
+  background-color: #3d3d3e;
+  z-index: 1;
+  top: 0px;
+}
  /*
 	@newOrder
  */
 
  body {
  	font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif !important;
- 	background-color: #343026;
+ 	background-color: #262626;  /*343026*/
+  margin: 0px;
  }
 
  .container {
 	position: absolute;
-	left: 5%;
-	width: 90%;
-	overflow: auto;
-	background-color: white;
-	height: 90%;
-	box-shadow: -5px -5px 20px black;
+  left: 5%;
+  width: 90%;
+  overflow: auto;
+  background-color: white;
+  height: 90%;
+  box-shadow: -5px -5px 20px black;
+  top: 7%;
 }
 
  button:focus {outline:0;}
@@ -317,6 +330,8 @@ form#new_order.new_order_form textarea.editable {
 .new_offer {
   width: 98%;
   margin-top: 1%;
+  height: 97%;
+  margin-left:1%;
  }
 
 .order_list {
@@ -329,12 +344,18 @@ form#new_order.new_order_form textarea.editable {
   height: 100%;
   /*overflow: hidden;*/
   overflow-y: scroll;
+  border: 1px solid black;
   
  }
 
  .new_offer .column.new_offer_orders {
-    width: 20%;
+    width: 12%;
   }
+
+ .new_offer .column.new_offer_order_products {
+  width: 50%;
+ }
+
 
   .new_offer ul {
   margin: 0px;
@@ -370,6 +391,96 @@ form#new_order.new_order_form textarea.editable {
 .new_offer li a {
   display: block;
 }
+.new_offer .offer_product_box {
+  border:1px solid black;
+  overflow: auto;
+}
+
+.new_offer .offer_product_box .left_side {
+  width: 37%;
+  float: left;
+  /*border: 1px solid red;*/
+}
+
+.new_offer .offer_product_box .right_side {
+  width: 62%;
+  float: left;
+  height: 100%;
+  /*border: 1px solid white;*/
+}
+
+.left_side .product_name_box{
+    font-size: 1.3em;
+    width: 83%;
+    text-align: center;
+}
+
+.left_side .offer_numbers_box {
+  margin-top: 3%;
+  margin-left: 6%;
+  font-size: 1.1em;
+  width: 98%;
+  overflow: auto;
+  padding-bottom: 6%;
+}
+
+.background_box {
+  background-color: #e6e6e6;
+  overflow-x: scroll;
+  margin-left: 3%;
+}
+
+.offer_numbers_box .background_box {
+  float: left;
+  width: 21%;
+  text-align: center;
+  margin-left: 3%;
+  overflow: auto;
+}
+
+.new_offer .offer_product_box.locked {
+  background-color: #46b98a;
+}
+
+.new_offer .offer_product_box.received {
+  background-color: #2db6cf
+}
+.new_offer .offer_product_box.pending {
+  background-color: #e0645c;
+}
+.new_offer .offer_product_box.denied {
+  background-color: #999999;
+}
+.new_combo_form input[type=checkbox] {
+  /*display:none*/;
+}
+
+
+.offer_product_box .comment_box {
+  background-color: white;
+  height: 4.3em;
+  margin-bottom: 0.7%;
+  width: 99%;
+}
+
+
+.combo_product_add_button {
+  display: none;
+}
+.combo_product_add_button.selection_active {
+  float: right;
+}
+
+.offer_product_box .comment_box.selection_active {
+  background-color: white;
+  clear: right;
+  height: 4.1em;
+  overflow-y: scroll;
+  margin-bottom: 0.7%;
+}
+
+
+/*polygon(nonzero, 9px 64px, 16px 52px, 27px 44px, 49px 36px, 95px 29px, 385px 28px, 385px 83px, -4px 83px);*/
 
 
 

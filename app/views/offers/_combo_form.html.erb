@@ -1,0 +1,15 @@
+<!-- Recibe un objeto combo vacio f-->
+
+<% comment_object = f.build_comment %>
+<%= form_for f, url: create_combo_path(f), html: {
+				class: "new_combo_form"} do |combo|%>
+	<% @products.each do |product| %>
+			<%= check_box_tag "combo[product_ids][]", product.id, false, data: {product_id: product.id} %>
+			<%= product.name %>
+	<% end %>
+	<%= combo.number_field :price, placeholder: "Precio" %>
+	<%= combo.fields_for(:comment, comment_object, child_index: comment_object.object_id) do |comment|%>
+		<%=  comment.text_area :content, placeholder: "Tu comentario.."%>
+	<% end %>
+	<%= combo.submit "Terminar", confirm: "¿Esta seguro que desea terminar su combo?", disabled: true%>
+<% end %>

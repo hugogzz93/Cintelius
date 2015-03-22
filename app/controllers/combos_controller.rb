@@ -1,24 +1,21 @@
-class OffersController < ApplicationController
-	def index
-		@orders = Order.all
-	end
+class CombosController < ApplicationController
+
 
 	def new
 
 	end
 
 	def create
-		current_user.offers.create(offer_params)
+		# current_user.offers.create(offer_params)
 		exit
 	end
 
 	def from_order
 		respond_to do |format|
 			format.js {
-				@order = (Order.where(id: params[:id]).includes(:offers, :combos, order_products: :comment)).first
-				@products = @order.products
+				@order = (Order.where(id: params[:id]).includes(:offers, :order_products)).first
+				@order_products = @order.order_products
 				@offers = @order.offers
-				@combos = @order.combos
 			}
 		end
 	end

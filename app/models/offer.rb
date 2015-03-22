@@ -24,12 +24,12 @@ class Offer < ActiveRecord::Base
 	end
 
 
-	def create_offer_details(units, order_id)
-		self.offer_details.create(order_id: order_id, units: units)
-	end
+	# def create_offer_details(units, order_id)
+	# 	self.offer_details.create(order_id: order_id, units: units)
+	# end
 
 	def create_review_ticket
-		self.user.review_tickets.create(product_id: self.id)
+		self.order.user.review_tickets.create(reviewable_type: "product_scores", reviewable_id: self.product.id)
 	end
 
 end
