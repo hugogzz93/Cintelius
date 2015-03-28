@@ -20,34 +20,66 @@
 	<!-- comment -->
 		<!-- content -->
 
+
+		
+
 <% offer_detail_object = f.offer_details.build %>
 <% comment_object = f.build_comment %>
-<div class="offer_product_box">
+<div class="offer_product_box form_for">
 	<%= form_for f, url: {action: "create"}, html: {
 				class: "new_offer_form"} do |offer|%>
 
 		<%= offer.text_field :order_id, style: "display: none;" %>
 		<%= offer.number_field :product_id, style: "display: none;" %>
-		<h5><%= f.product.name %></h5>
-		<%= offer.label :unitary_price, "Precio Kg" %>
-		<%= offer.number_field :unitary_price %>
+		<div class="left_side">
 
-		<div class="offer_detail_area">
-			<%= offer.fields_for(:offer_details, offer_detail_object, child_index: offer_detail_object.object_id) do |offer_detail_fields| %>
-				<%= offer_detail_fields.label :units, "Kg" %>
-				<%= offer_detail_fields.number_field :units %>
-			<% end %>
+			<div class="product_name_box">
+				Producto <br>
+				<div class="background_box">
+					<%= f.product.name %>
+				</div>
+
+				<div class="offer_numbers_box">
+					<span style="float:left;">Kg</span>
+					<div class="background_box">
+						<%= units = f.order.order_products.where(product_id: f.product.id).first.units %>
+					</div>
+					<span style="margin-left:3%">Oferta:</span>
+					<div class="form_box_inside_numbers">
+						<%= offer.fields_for(:offer_details, offer_detail_object, child_index: offer_detail_object.object_id) do |offer_detail_fields| %>
+							<span style="margin-left:3%; float:left;">Kg</span>
+							<%= offer_detail_fields.number_field :units%>
+						<% end %>
+						<span style="float:left; margin-left: 7%;">$</span>
+							<%= offer.number_field :unitary_price %>
+					</div>
+				</div>
+
+			</div>			
 		</div>
+		<div class="right_side">
+				<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id}%>
+				<%= button_tag "Cliente", class: "buyer_comment_tag" %>
+				<%= button_tag "Tu Comentario", class: "seller_comment_tag" %>
+				<span class="unitary_price_notice">* Precio por kilo</span>
+				<div class="comment_box">
+					<div class="buyer_comment">
+						<%= f.order.order_products.where(product_id: f.product_id).first.comment.content %>
+					</div>
+					<div class="seller_comment">
+						<%= offer.fields_for(:comment, comment_object, child_index: comment_object.object_id) do |comment|%>
+							<%=  comment.text_area :content, placeholder: "Tu comentario.."%>
+						<% end %>
+					</div>
+				</div>
+			</div>
 
 		<div class="offer_comment_area">
-			<%= offer.fields_for(:comment, comment_object, child_index: comment_object.object_id) do |comment|%>
-				<%=  comment.text_area :content, placeholder: "Tu comentario.."%>
-			<% end %>
+			
 		</div>
 		
-		<%= offer.submit "Enviar Oferta" %>
+		<%= offer.submit "Enviar Oferta", class: "submit_button" %>
 	<% end %>
-	<%= button_tag "+" , style: "display, none", class: "combo_product_add_button", data: {product_id: f.product.id}%>
 
 </div>
 

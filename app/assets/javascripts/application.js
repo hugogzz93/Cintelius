@@ -108,6 +108,7 @@ $(function() {
 		regexp = new RegExp($(this).data('id'), 'g')
 		$(this).before($(this).data('fields').replace(regexp, time))
 		event.preventDefault()
+		console.log("ran helper")
 	})
 
 	// @NEWOFFER
@@ -116,6 +117,13 @@ $(function() {
 	$('.order_box a').on('click', function() {
 		$('.new_offer .offer_list').empty()
 		$('.new_offer .combo_list').empty()
+	})
+
+	$('form .add_combo_field').on('click', function(e) {
+		time = new Date().getTime()
+		regexp = new RegExp($(this).data('id'), 'g')
+		$(this).before($(this).data('fields').replace(regexp, time))
+		event.preventDefault()
 	})
 
 	// $('.order_box a').on()

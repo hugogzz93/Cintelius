@@ -17,8 +17,8 @@ class OffersController < ApplicationController
 			format.js {
 				@order = (Order.where(id: params[:id]).includes(:offers, :combos, order_products: :comment)).first
 				@products = @order.products
-				@offers = @order.offers
-				@combos = @order.combos
+				@offers = @order.offers.where(user_id: current_user.id)
+				@combos = @order.combos.where(user_id: current_user.id)
 			}
 		end
 	end

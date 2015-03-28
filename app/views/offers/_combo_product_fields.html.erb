@@ -1,0 +1,11 @@
+<!-- recibe un order_product en f -->
+<div class="combo_product_box">
+	<%= button_tag "-", class: "combo_product_remove_button"%>
+	<div class="combo_product_box_title">
+		Product
+	</div>
+	<%= d.number_field :product_id, class: "product_id_field" %>
+	<span class="combo_product_box_label">Kg</span>
+	<%= d.number_field :units, class: "combo_product_unit_field" %>
+
+</div>

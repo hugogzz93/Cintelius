@@ -1,44 +1,66 @@
 <!-- recibe un objecto combo en f -->
 <% if f.status == "ready" %>
 	<div class="combo_box ready">
-		<div class="product_list_area">
-			<% f.combo_products.each do |product| %>
-				<div class="product_name_box">
-					<%= product.name %>
-				</div>
-			<% end %>	
-		</div>
-		$
-		<div class="price_box">
+		<ul class="product_list_area">
+			<% f.combo_products.each do |combo_product| %>		
+				<%= combo_product.product.name %>
+				<span class="combo_product_unit_label">Kg</span>
+				<%= combo_product.units %>	
+			<% end %>
+		</ul>
+		<span class="combo_price_label">
+			Total: $
+		</span>
+		<div class="combo_price_label">
 			<%= f.price %>
 		</div>
+		<div class="comment_box">
+			<%= f.comment.content %>
+		</div>
+
 	</div>
-<%= elsif f.status == "locked" %>
+<% elsif f.status == "locked" %>
 	<div class="combo_box locked">
-		<div class="product_list_area">
-			<% f.combo_products.each do |product| %>
-				<div class="product_name_box">
-					<%= product.name %>
-				</div>
-			<% end %>	
-		</div>
-		$
-		<div class="price_box">
+		<ul class="product_list_area">
+			<% f.combo_products.each do |combo_product| %>		
+				<%= combo_product.product.name %>
+				<span class="combo_product_unit_label">Kg</span>
+				<%= combo_product.units %>	
+			<% end %>
+		</ul>
+		<span class="combo_price_label">
+			Total: $
+		</span>
+		<div class="combo_price_label">
 			<%= f.price %>
 		</div>
+		<div class="comment_box">
+			<%= f.comment.content %>
+		</div>
+
 	</div>
-<%= elsif f.status == "received" %>
+<% elsif f.status == "received" %>
 	<div class="combo_box received">
-		<div class="product_list_area">
-			<% f.combo_products.each do |product| %>
-				<div class="product_name_box">
-					<%= product.name %>
-				</div>
-			<% end %>	
-		</div>
-		$
-		<div class="price_box">
+		<ul class="product_list_area">
+			<% f.combo_products.each do |combo_product| %>		
+				<%= combo_product.product.name %>
+				<span class="combo_product_unit_label">Kg</span>
+				<%= combo_product.units %>	
+			<% end %>
+		</ul>
+		<span class="combo_price_label">
+			Total: $
+		</span>
+		<div class="combo_price_label">
 			<%= f.price %>
 		</div>
+		<div class="comment_box">
+			<%= f.comment.content %>
+		</div>
+
 	</div>
 <% end %>
+
+
+
+	

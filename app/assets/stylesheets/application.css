@@ -14,6 +14,10 @@
  *= require_self
  */
 
+ /*azul 2db6cf*/
+ /*verde 46b98a*/
+ /*rojo e0645c*/
+ /*gris 999999*/
 
 
 
@@ -392,8 +396,10 @@ form#new_order.new_order_form textarea.editable {
   display: block;
 }
 .new_offer .offer_product_box {
-  border:1px solid black;
   overflow: auto;
+  border: 1px solid white;
+  border-radius: 7px;
+  color: white;
 }
 
 .new_offer .offer_product_box .left_side {
@@ -403,16 +409,17 @@ form#new_order.new_order_form textarea.editable {
 }
 
 .new_offer .offer_product_box .right_side {
-  width: 62%;
+  width: 61%;
   float: left;
   height: 100%;
-  /*border: 1px solid white;*/
+  margin-top: 1%;
 }
 
 .left_side .product_name_box{
     font-size: 1.3em;
     width: 83%;
     text-align: center;
+    font-weight: bold;
 }
 
 .left_side .offer_numbers_box {
@@ -425,9 +432,12 @@ form#new_order.new_order_form textarea.editable {
 }
 
 .background_box {
-  background-color: #e6e6e6;
+  border: 1px solid white;
   overflow-x: scroll;
   margin-left: 3%;
+  font-weight: lighter;
+  border-radius: 8px;
+  margin-right: 2%;
 }
 
 .offer_numbers_box .background_box {
@@ -445,7 +455,7 @@ form#new_order.new_order_form textarea.editable {
 .new_offer .offer_product_box.received {
   background-color: #2db6cf
 }
-.new_offer .offer_product_box.pending {
+.new_offer .offer_product_box.form_for.pending {
   background-color: #e0645c;
 }
 .new_offer .offer_product_box.denied {
@@ -457,15 +467,19 @@ form#new_order.new_order_form textarea.editable {
 
 
 .offer_product_box .comment_box {
-  background-color: white;
+  border-radius: 4px;
+  border: 1px solid white;
   height: 4.3em;
+  clear: both;
   margin-bottom: 0.7%;
   width: 99%;
+  color: white;
+  font-weight: lighter;
 }
 
 
 .combo_product_add_button {
-  display: none;
+  /*display: none;*/
 }
 .combo_product_add_button.selection_active {
   float: right;
@@ -479,9 +493,278 @@ form#new_order.new_order_form textarea.editable {
   margin-bottom: 0.7%;
 }
 
+.right_side .buyer_comment_tag {
+  cursor: pointer;
+  border: 1px solid white;
+  background-color: transparent;
+  border-bottom: none;
+  color: white;
+  border-radius: 4px;
+  float: left;
+  transition: color 0.3s, background-color 0.3s;
 
+
+}
+
+.right_side .buyer_comment_tag:active {
+  background-color: white;
+  color: black;
+  transition: color 0.3s, background-color 0.3s;
+
+}
+
+.right_side .seller_comment_tag {
+  border: 1px solid white;
+  background-color: transparent;
+  cursor: pointer;
+  border-bottom: none;
+  color: white;
+  margin-left: 0px;
+  float: left;
+  border-left: none;
+  transition: color 0.3s, background-color 0.3s;
+  border-radius: 4px;
+
+}
+
+.right_side .seller_comment_tag:active {
+  background-color: white;
+  color: black;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+
+.seller_comment {
+  display:none;
+}
+
+
+
+.offer_product_box #new_offer  {
+    background-color: #444444;
+}
+
+
+#new_offer .seller_comment {
+  height: 100%;
+}
+
+textarea, input {outline: none;}
+
+#new_offer #offer_comment_attributes_content {
+  width: 98.5%;
+  height: 92%;
+  background-color: transparent;
+  color: white;
+  font-size: inherit;
+  font-weight: lighter;
+  font-family: helvetica;
+  resize: none;
+  border: none;
+}
+
+
+#new_offer input[type=number]::-webkit-inner-spin-button,
+#new_offer input[type=number]::-webkit-outer-spin-button,  
+#new_combo input[type=number]::-webkit-inner-spin-button,  
+#new_combo input[type=number]::-webkit-outer-spin-button  {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#new_offer input[type=number] {
+  float: left;
+  width: 21%;
+  text-align: center;
+  margin-left: 3%;
+  overflow: auto;
+  border: 1px solid white;
+  border-radius: 8px;
+  font-weight: lighter;
+  font-size: 1.1em;
+  height: 1em;
+}
+
+
+#new_offer .offer_numbers_box {
+  font-size: 0.8em;
+  font-weight: 300;
+  overflow: initial;
+}
+
+.offer_product_box.form_for {
+  background-color: #444444;
+}
+
+.form_box_inside_numbers {
+  overflow: auto;
+  border: 1px solid white;
+  border-radius: 8px;
+  clear: both;
+  padding: 2% 0%;
+  margin-top: 3%;
+  margin-left: -3%;
+}
+
+.pending .offer_numbers_box {
+  margin-top: 3%;
+  margin-left: 6%;
+  font-size: 0.8em;
+  font-weight: 100;
+  padding-bottom: 6%;
+  overflow: initial;
+}
 /*polygon(nonzero, 9px 64px, 16px 52px, 27px 44px, 49px 36px, 95px 29px, 385px 28px, 385px 83px, -4px 83px);*/
 
+.unitary_price_notice {
+  visibility: hidden;
+  font-weight: 100;
+  font-size: 0.8em;
+  margin-left: 2%;
+  color:#ff6500;
+}
+
+.unitary_price_notice.active {
+  visibility: visible;
+  color: white;
+  transition: color 1s;
+
+}
+
+.new_combo_form {
+  background-color: #444444;
+  margin-left: 1%;
+  overflow: auto;
+  border-radius: 4px;
+}
+
+.new_combo_form .checkbox_area{
+  display: none;
+}
+
+.new_combo_form .product_list_area{
+  /*border: 1px solid white;*/
+  width: 95%;
+  margin-left: 2.5%;
+  overflow: auto;
+  margin-bottom: 2%;
+}
+
+.new_combo_form .product_list_area_box{
+  float: left;
+  width: 32%;
+  margin-left: 2%;
+}
+
+.product_id_field {
+  display: none;
+}
+
+.combo_product_box {
+  padding: 1%;
+  border: 1px solid white;
+  width: 45%;
+  border-radius: 4px;
+  color: white;
+  font-weight: 300;
+  float: left;
+  margin: 1%;
+}
+
+button.combo_product_remove_button {
+  float: right;
+  margin-top: 1%;
+}
+
+.combo_product_unit_field {
+  width: 21%;
+  text-align: center;
+  margin-left: 3%;
+  overflow: auto;
+  border: 1px solid white;
+  border-radius: 8px;
+  font-weight: lighter;
+  font-size: 1.1em;
+  height: 1em;
+}
+
+.combo_product_box_label {
+}
+
+.product_list_area a.add_fields {
+  display: none;
+}
+
+.combo_product_box_title {
+  display: block;
+  width: 61%;
+  overflow-x: scroll;
+  margin-bottom: 2%;
+  border-bottom: 1px solid white;
+  padding-bottom: 3%;
+}
+
+input.combo_price {
+  margin-left: 2.5%
+}
+
+.combo_price_label {
+  margin-left: 2.5%;
+  color: white;
+  float: left;
+}
+
+#combo_price {
+  width: 10%;
+  text-align: center;
+  margin-left: 3%;
+  overflow: auto;
+  border: 1px solid white;
+  border-radius: 8px;
+  font-weight: lighter;
+  font-size: 1.1em;
+  height: 1em;
+  float: left;
+
+}
+
+#combo_comment_attributes_content {
+  float: left;
+  resize: none;
+  background-color: transparent;
+  border-radius: 4px;
+  border: 1px solid white;
+  width: 60%;
+  margin-left: 3%;
+  height: 5em;
+  color: white;
+}
+
+.new_combo_form input[type=submit]{
+  position: relative;
+  bottom: 2.5em;
+  left: 2.5%;
+}
+
+.submit_button {
+  border: 1px solid white;
+  background-color: transparent;
+  color: #ffffff;
+  border-radius: 5px;
+}
+
+.submit_button:hover {
+  border: 1px solid #ff6500;
+  color: #ff6500;
 
 
+}
 
+.pending .submit_button:hover {
+  border: 1px solid #444444;
+  color: #444444; 
+}
+
+#combo_order_id {
+  display: none;
+}
