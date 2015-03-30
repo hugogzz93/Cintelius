@@ -8,8 +8,16 @@ class OffersController < ApplicationController
 	end
 
 	def create
-		current_user.offers.create(offer_params)
-		exit
+		respond_to do |format| 
+			format.js {
+				@offer = current_user.offers.build(offer_params)
+				if @offer.save
+					@success = true
+				else
+					@success = false
+				end
+			}
+		end
 	end
 
 	def from_order

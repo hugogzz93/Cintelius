@@ -400,6 +400,7 @@ form#new_order.new_order_form textarea.editable {
   border: 1px solid white;
   border-radius: 7px;
   color: white;
+  margin-left: 1%;
 }
 
 .new_offer .offer_product_box .left_side {
@@ -440,7 +441,7 @@ form#new_order.new_order_form textarea.editable {
   margin-right: 2%;
 }
 
-.offer_numbers_box .background_box {
+.offer_numbers_box .background_box, .combo_price_label .background_box {
   float: left;
   width: 21%;
   text-align: center;
@@ -448,6 +449,13 @@ form#new_order.new_order_form textarea.editable {
   overflow: auto;
 }
 
+.combo_price_label .background_box {
+  width: 6em;
+  overflow-x: scroll;
+}
+.new_offer .offer_product_box.ready {
+  background-color:  #2db6cf;
+}
 .new_offer .offer_product_box.locked {
   background-color: #46b98a;
 }
@@ -475,6 +483,18 @@ form#new_order.new_order_form textarea.editable {
   width: 99%;
   color: white;
   font-weight: lighter;
+}
+
+.combo_box .comment_box {
+  border-radius: 4px;
+  border: 1px solid white;
+  height: 4.3em;
+  clear: both;
+  color: white;
+  font-weight: lighter;
+  margin: 1%;
+  width: 91.5%;
+  float: left;
 }
 
 
@@ -631,18 +651,24 @@ textarea, input {outline: none;}
 
 }
 
-.new_combo_form {
+.new_combo_form, .combo_box {
   background-color: #444444;
   margin-left: 1%;
   overflow: auto;
   border-radius: 4px;
+  margin-bottom: 1%;
+  border: 1px solid white;
+}
+
+.combo_box.ready {
+  background-color: #2db6cf;
 }
 
 .new_combo_form .checkbox_area{
   display: none;
 }
 
-.new_combo_form .product_list_area{
+.product_list_area{
   /*border: 1px solid white;*/
   width: 95%;
   margin-left: 2.5%;
@@ -650,7 +676,7 @@ textarea, input {outline: none;}
   margin-bottom: 2%;
 }
 
-.new_combo_form .product_list_area_box{
+.product_list_area_box{
   float: left;
   width: 32%;
   margin-left: 2%;
@@ -704,6 +730,10 @@ button.combo_product_remove_button {
   padding-bottom: 3%;
 }
 
+.combo_product_unit_label {
+  float: right;
+}
+
 input.combo_price {
   margin-left: 2.5%
 }
@@ -712,6 +742,22 @@ input.combo_price {
   margin-left: 2.5%;
   color: white;
   float: left;
+  margin-bottom: 1%;
+}
+
+.combo_product_name {
+    display: inline;
+  float: left;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  height: 1em;
+  width: 50%;
+}
+
+.combo_product_box .background_box {
+  width: 2.5em;
+  text-align: center;
+  float: right;
 }
 
 #combo_price {
@@ -767,4 +813,28 @@ input.combo_price {
 
 #combo_order_id {
   display: none;
+}
+
+.order_list a {
+    display: block;
+  text-decoration: none;
+  color: white;
+  background-color: #445662;
+  font-size: 1.2em;
+  margin: 1% 0%;
+  height: 3em;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.new_offer_orders a {
+  text-decoration: none;
+  color: white;
+  background-color: #445662;
+  font-size: 1.2em;
+  margin: 1% 0%;
+  height: 3em;
+  border-radius: 4px;
+  text-align: center;
+}
 }

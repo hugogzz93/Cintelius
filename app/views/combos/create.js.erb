@@ -1,0 +1,11 @@
+<% if @success %>
+	$('.combo_list').prepend("<%= j render partial: '/offers/combo_box.html.erb', locals: {f: @combo} %>")
+	$('.clear_candidate .product_list_area').empty()
+	$('.combo_product_add_button').prop('disabled', false)
+	$('#combo_price').val('')
+	$('#combo_comment_attributes_content').val('')
+<% else %>
+	alert('Ocurrio un error al registrar su oferta.')
+<% end %>
+	$('.clear_candidate').removeClass('.clear_candidate')
+

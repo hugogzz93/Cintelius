@@ -2,7 +2,7 @@
 
 <% comment_object = f.build_comment %>
 <%= form_for f, url: create_combo_path(f), html: {
-				class: "new_combo_form"} do |combo|%>
+				class: "new_combo_form"}, remote: true do |combo|%>
 	<%= combo.number_field :order_id %>
 	<ul class="product_list_area">
 		<%= link_to_add_combo_fields "Add combo fields", combo, :combo_products %>				

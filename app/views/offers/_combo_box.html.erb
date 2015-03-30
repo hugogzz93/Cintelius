@@ -3,19 +3,29 @@
 	<div class="combo_box ready">
 		<ul class="product_list_area">
 			<% f.combo_products.each do |combo_product| %>		
-				<%= combo_product.product.name %>
-				<span class="combo_product_unit_label">Kg</span>
-				<%= combo_product.units %>	
+				<li class="combo_product_box">
+					<div class="combo_product_name">
+						<%= combo_product.product.name %>
+					</div>
+					<div class="background_box">
+						<%= combo_product.units %>
+					</div>
+					<span class="combo_product_unit_label">Kg</span>
+				</li>
 			<% end %>
 		</ul>
+		
+		<div class="comment_box">
+			<%= f.comment.content %>
+		</div>
+
 		<span class="combo_price_label">
 			Total: $
 		</span>
 		<div class="combo_price_label">
-			<%= f.price %>
-		</div>
-		<div class="comment_box">
-			<%= f.comment.content %>
+			<div class="background_box">
+				<%= f.price %>
+			</div>
 		</div>
 
 	</div>
@@ -23,19 +33,30 @@
 	<div class="combo_box locked">
 		<ul class="product_list_area">
 			<% f.combo_products.each do |combo_product| %>		
-				<%= combo_product.product.name %>
-				<span class="combo_product_unit_label">Kg</span>
-				<%= combo_product.units %>	
+				<li class="combo_product_box">
+					<div class="combo_product_name">
+						<%= combo_product.product.name %>
+					</div>
+					<div class="background_box">
+						<%= combo_product.units %>
+					</div>
+					<span class="combo_product_unit_label">Kg</span>
+				</li>
+				
 			<% end %>
 		</ul>
+		
+		<div class="comment_box">
+			<%= f.comment.content %>
+		</div>
+
 		<span class="combo_price_label">
 			Total: $
 		</span>
 		<div class="combo_price_label">
-			<%= f.price %>
-		</div>
-		<div class="comment_box">
-			<%= f.comment.content %>
+			<div class="background_box">
+				<%= f.price %>
+			</div>
 		</div>
 
 	</div>
@@ -43,19 +64,30 @@
 	<div class="combo_box received">
 		<ul class="product_list_area">
 			<% f.combo_products.each do |combo_product| %>		
-				<%= combo_product.product.name %>
-				<span class="combo_product_unit_label">Kg</span>
-				<%= combo_product.units %>	
+				<li class="combo_product_box">
+					<div class="combo_product_name">
+						<%= combo_product.product.name %>
+					</div>
+					<div class="background_box">
+						<%= combo_product.units %>
+					</div>
+					<span class="combo_product_unit_label">Kg</span>
+				</li>
+				
 			<% end %>
 		</ul>
+		
+		<div class="comment_box">
+			<%= f.comment.content %>
+		</div>
+
 		<span class="combo_price_label">
 			Total: $
 		</span>
 		<div class="combo_price_label">
-			<%= f.price %>
-		</div>
-		<div class="comment_box">
-			<%= f.comment.content %>
+			<div class="background_box">
+				<%= f.price %>
+			</div>
 		</div>
 
 	</div>

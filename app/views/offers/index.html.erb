@@ -4,8 +4,8 @@
 			<% @orders.each do |order|  %>
 				<li class="order_box">
 					<%= link_to(from_order_path(id: order.id), remote: true) do %>
-					  <strong><%= order.user.user_detail.organization %></strong> <br/>
-					  <span><%= order.created_at.strftime('%d/%m/%Y') %></span>
+					  <%= order.user.user_detail.organization %>
+					  <%= order.created_at.strftime('%d/%m/%Y') %>
 					<% end %>
 				</li>			
 			<% end %>

@@ -60,6 +60,17 @@ $('input#offer_unitary_price').on('blur', function(e){
 	$($(e.target).closest('.left_side').siblings('.right_side').children('.unitary_price_notice')).removeClass('active');
 })
 
+// Para que se elimine el formulario si se creo la oferta
+$('.offer_product_box .submit_button').on('click', function(e) {
+	$(e.target).closest('.offer_product_box').addClass('deletion_candidate');
+})
+
+// Para que se elimine el formulario si se creo el combo
+$('.new_combo_form .submit_button').on('click', function(e) {
+	$(e.target).closest('.new_combo_form').addClass('clear_candidate');
+})
+
+
 
 
 // Para que se agreguen campos por producto
@@ -69,6 +80,9 @@ $('form .add_fields').on('click', function(e) {
 		$(this).before($(this).data('fields').replace(regexp, time))
 		event.preventDefault()
 		$('.new_combo_form input[type=submit]').prop('disabled', false)
-	})
+})
+
+
+
 
 

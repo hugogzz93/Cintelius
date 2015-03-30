@@ -6,8 +6,16 @@ class CombosController < ApplicationController
 	end
 
 	def create
-		current_user.combos.create(combo_params)
-		exit
+		respond_to do |format| 
+			format.js {
+				@combo = current_user.combos.build(combo_params)
+				if @combo.save
+					@success = true
+				else
+					@success = false
+				end
+			}
+		end
 	end
 
 	private

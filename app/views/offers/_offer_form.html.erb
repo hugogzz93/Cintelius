@@ -27,7 +27,7 @@
 <% comment_object = f.build_comment %>
 <div class="offer_product_box form_for">
 	<%= form_for f, url: {action: "create"}, html: {
-				class: "new_offer_form"} do |offer|%>
+				class: "new_offer_form"}, remote: true do |offer|%>
 
 		<%= offer.text_field :order_id, style: "display: none;" %>
 		<%= offer.number_field :product_id, style: "display: none;" %>

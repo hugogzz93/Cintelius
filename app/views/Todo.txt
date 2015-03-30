@@ -8,3 +8,8 @@ NEWOFFER
 	
 	Que se deshabilite el boton de terminar combo cuando no hay productos y en las ofertas cuando
 	no esta la informacion requerida.
+
+	>Agregar producto
+	>Mandar Oferta
+	-Boton de agregar producto de la oferta en la nueva caja no se deshabilita si ya esta agregado el producto.
+	
