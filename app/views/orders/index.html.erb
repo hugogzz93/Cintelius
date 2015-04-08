@@ -1,0 +1,30 @@
+<div class="order_index">
+	<div class="column orders">
+		<ul class="provider_list">
+			
+		</ul>
+		<ul class="order_list">
+			<% @orders.each do |order|  %>
+				<li class="order_box">
+					<%= link_to(order_path(id: order.id), remote: true) do %>
+					  <%= order.user.user_detail.organization %>
+					  <%= order.created_at.strftime('%d/%m/%Y') %>
+					<% end %>
+				</li>			
+			<% end %>
+		</ul>		
+	</div>
+
+	<!-- Ofertas y combos -->
+	<div class="column order_offers">
+		<ul class="offer_list">
+			
+		</ul>
+	</div>
+
+	<div class="column order_products">
+		<ul class="order_product_list">
+			
+		</ul>
+	</div>
+</div>

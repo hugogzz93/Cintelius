@@ -1,6 +1,6 @@
 <!-- recibe un objecto combo en f -->
 <% if f.status == "ready" %>
-	<div class="combo_box ready" data-combo-id="<%= f.id %>", data-attribute-user-id="<%= f.user.id %>">
+	<div class="selected_combo_box", data-combo-id="<%= f.id %>">
 		<ul class="product_list_area">
 			<% f.combo_products.each do |combo_product| %>		
 				<li class="combo_product_box">
@@ -14,7 +14,7 @@
 				</li>
 			<% end %>
 		</ul>
-	
+		
 		<div class="comment_box">
 			<%= f.comment.content %>
 		</div>
@@ -27,13 +27,11 @@
 				<%= f.price %>
 			</div>
 		</div>
-		<% if function == "order" %>
-				<%= button_tag "+", class: "combo_selection_button", data: {combo_id: f.id}%>
-		<% end %>
+		<%= button_tag "-", class: "combo_deselection_button", data: {combo_id: f.id}%>
 
 	</div>
 <% elsif f.status == "locked" %>
-	<div class="combo_box locked">
+	<div class="selected_combo_box locked">
 		<ul class="product_list_area">
 			<% f.combo_products.each do |combo_product| %>		
 				<li class="combo_product_box">
@@ -64,7 +62,7 @@
 
 	</div>
 <% elsif f.status == "received" %>
-	<div class="combo_box received">
+	<div class="selected_combo_box received">
 		<ul class="product_list_area">
 			<% f.combo_products.each do |combo_product| %>		
 				<li class="combo_product_box">

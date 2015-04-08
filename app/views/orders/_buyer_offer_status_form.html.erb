@@ -1,0 +1,239 @@
+
+<% if f.status == 'ready' && f.offer_details.last.status == "both"%>
+		<div class='offer_product_box accepted', data-attribute-user-id="<%= f.user_id %>", 
+			data-attribute-offer-id="<%= f.id %>", data-attribute-product-name="<%= f.product.name %>">
+			<div class="left_side">
+				<div class="product_name_box">
+					Producto <br>
+					<div class="background_box">
+						<%= f.product.name %>
+					</div>
+				</div>
+				<div class="offer_numbers_box">
+					<span style="float:left;">Kg</span>
+					<div class="background_box">
+						<%= f.offer_details.last.units %>
+					</div>
+					<span style="float:left; margin-left: 7%;">$</span>
+					<div class="background_box">
+						<%= f.unitary_price %>
+					</div>
+				</div>
+
+			</div>
+			<div class="right_side">				
+				<%= button_tag "Comentario", class: "seller_comment_tag" %>
+				<%= button_tag "+", class: "offer_selection_button", data: {offer_id: f.id}%>
+				<div class="comment_box">
+					<div class="seller_comment">
+						<%= f.comment.content %>
+					</div>
+				</div>
+							
+			</div>
+		</div>
+<% elsif f.status == 'ready' %>
+<!-- El provedor mando la oferta y no ha respondido el comprador -->
+	<div class='offer_product_box ready', data-attribute-user-id="<%= f.user_id %>", 
+		data-attribute-offer-id="<%= f.id %>", data-attribute-product-name="<%= f.product.name %>">
+			<div class="left_side">
+				<div class="product_name_box">
+					Producto <br>
+					<div class="background_box">
+						<%= f.product.name %>
+					</div>
+				</div>
+				<div class="offer_numbers_box">
+					<span style="float:left;">Kg</span>
+					<div class="background_box">
+						<%= f.offer_details.last.units %>
+					</div>
+					<span style="float:left; margin-left: 7%;">$</span>
+					<div class="background_box">
+						<%= f.unitary_price %>
+					</div>
+					<%= button_tag "Contraoferta", class: "show_counter_form_button"%>
+					<% offer_detail = f.offer_details.build %>
+					<% logger.info offer_detail %>
+					<%= form_for offer_detail, html: {
+						class: 'offer_detail_form '}, remote: true do |offer_detail|%>
+						<%= offer_detail.number_field :offer_id, style: "display:none;" %>
+						<%= offer_detail.number_field :units %>
+						<%= offer_detail.submit "Cambiar" %>
+						<%= button_tag "-", class: "hide_offer_detail_form"%>
+					<% end %>
+				</div>
+
+			</div>
+			<div class="right_side">				
+				<%= button_tag "Comentario", class: "seller_comment_tag" %>
+				<%= button_tag "+", class: "offer_selection_button", data: {offer_id: f.id}%>
+				<div class="comment_box">
+					<div class="seller_comment">
+						<%= f.comment.content %>
+					</div>
+				</div>
+							
+			</div>
+	</div>
+<% elsif f.status == 'pending' && f.offer_details.last.status == 'denied_by_provider' %>
+		<div class='offer_product_box denied', data-attribute-user-id="<%= f.user_id %>", 
+			data-attribute-offer-id="<%= f.id %>", data-attribute-product-name="<%= f.product.name %>">
+			<div class="left_side">
+				<div class="product_name_box">
+					Producto <br>
+					<div class="background_box">
+						<%= f.product.name %>
+					</div>
+				</div>
+				<div class="offer_numbers_box">
+					<span style="float:left;">Kg</span>
+					<div class="background_box">
+						<%= f.offer_details.last.units %>
+					</div>
+					<span style="float:left; margin-left: 7%;">$</span>
+					<div class="background_box">
+						<%= f.unitary_price %>
+					</div>
+				</div>
+
+			</div>
+			<div class="right_side">				
+				<%= button_tag "Comentario", class: "seller_comment_tag" %>
+				<div class="comment_box">
+					<div class="seller_comment">
+						<%= f.comment.content %>
+					</div>
+				</div>
+							
+			</div>
+		</div>
+
+<% elsif f.status == 'pending' %>
+	<div class="offer_product_box form_for pending", data-attribute-user-id="<%= f.user_id %>", 
+		data-attribute-offer-id="<%= f.id %>", data-attribute-product-name="<%= f.product.name %>">
+		<div class="left_side">
+			<div class="product_name_box">
+				Producto <br>
+				<div class="background_box">
+					<%= f.product.name %>
+				</div>
+			</div>
+			<div class="offer_numbers_box">
+				<span style="float:left;">Kg</span>
+				<div class="background_box">
+					<%= f.offer_details.last.units %>
+				</div>
+				<span style="float:left; margin-left: 7%;">$</span>
+				<div class="background_box">
+					<%= f.unitary_price %>
+				</div>
+			</div>
+		</div>
+		<div class="right_side">
+			<%= button_tag "Comentario", class: "seller_comment_tag" %>
+			<div class="comment_box">
+				<div class="seller_comment">
+					<%= f.comment.content %>
+				</div>
+			</div>				
+		</div>
+	</div>
+
+<% elsif f.status == "selected" %>
+	<div class='offer_product_box selected', data-attribute-user-id="<%= f.user_id %>", 
+		data-attribute-offer-id="<%= f.id %>", data-attribute-product-name="<%= f.product.name %>">
+			<div class="left_side">
+				<div class="product_name_box">
+					Producto <br>
+					<div class="background_box">
+						<%= f.product.name %>
+					</div>
+				</div>
+				<div class="offer_numbers_box">
+					<span style="float:left;">Kg</span>
+					<div class="background_box">
+						<%= f.offer_details.last.units %>
+					</div>
+					<span style="float:left; margin-left: 7%;">$</span>
+					<div class="background_box">
+						<%= f.unitary_price %>
+					</div>
+				</div>
+			</div>
+			<div class="right_side">
+				<%= button_tag "Comentario", class: "seller_comment_tag" %>
+				<%= button_tag "+", class: "offer_selection_button", data: {offer_id: f.id}%>
+				<div class="comment_box">
+					<div class="seller_comment">
+						<%= f.comment.content %>
+					</div>
+				</div>				
+			</div>
+	</div>
+
+<% elsif f.status == 'locked' %>
+		<div class='offer_product_box locked', data-attribute-user-id="<%= f.user_id %>", 
+			data-attribute-offer-id="<%= f.id %>", data-attribute-product-name="<%= f.product.name %>">
+			<div class="left_side">
+				<div class="product_name_box">
+					Producto <br>
+					<div class="background_box">
+						<%= f.product.name %>
+					</div>
+				</div>
+				<div class="offer_numbers_box">
+					<span style="float:left;">Kg</span>
+					<div class="background_box">
+						<%= f.offer_details.last.units %>
+					</div>
+					<span style="float:left; margin-left: 7%;">$</span>
+					<div class="background_box">
+						<%= f.unitary_price %>
+					</div>
+				</div>
+			</div>
+			<div class="right_side">
+				<%= button_tag "Comentario", class: "seller_comment_tag" %>
+				<%= button_tag "+", class: "offer_selection_button", data: {offer_id: f.id}%>
+				<div class="comment_box">
+					<div class="seller_comment">
+						<%= f.comment.content %>
+					</div>
+				</div>				
+			</div>	
+		</div>
+<% elsif f.status == 'received' %>
+		<div class='offer_product_box received', data-attribute-user-id="<%= f.user_id %>", 
+			data-attribute-offer-id="<%= f.id %>", data-attribute-product-name="<%= f.product.name %>">
+				<div class="left_side">
+				<div class="product_name_box">
+					Producto <br>
+					<div class="background_box">
+						<%= f.product.name %>
+					</div>
+				</div>
+				<div class="offer_numbers_box">
+					<span style="float:left;">Kg</span>
+					<div class="background_box">
+						<%= f.offer_details.last.units %>
+					</div>
+					<span style="float:left; margin-left: 7%;">$</span>
+					<div class="background_box">
+						<%= f.unitary_price %>
+					</div>
+				</div>
+			</div>
+			<div class="right_side">
+				<%= button_tag "Comentario", class: "seller_comment_tag" %>
+				<%= button_tag "+", class: "offer_selection_button", data: {offer_id: f.id}%>
+				<div class="comment_box">
+					<div class="seller_comment">
+						<%= f.comment.content %>
+					</div>
+				</div>				
+			</div>
+		</div>
+<% end %>
+
+

@@ -32,4 +32,15 @@ class Offer < ActiveRecord::Base
 		self.order.user.review_tickets.create(reviewable_type: "product_scores", reviewable_id: self.product.id)
 	end
 
+	def self.lock_offers(offers)
+		offers.each do |offer|
+			if offer.offer_details.last.status == "provider"
+				offer.update(status: "locked")
+				offer.offer_details.last.update(status: "both")
+				return offers.where(status: "locked")
+			end
+		end
+		
+	end
+
 end

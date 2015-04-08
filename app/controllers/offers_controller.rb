@@ -20,6 +20,14 @@ class OffersController < ApplicationController
 		end
 	end
 
+	def edit
+		respond_to do |format|
+			format.js {
+				@locked_offers = Offer.lock_offers(Offer.find(params[:selected_offers_id]))
+			}
+		end
+	end
+
 	def from_order
 		respond_to do |format|
 			format.js {

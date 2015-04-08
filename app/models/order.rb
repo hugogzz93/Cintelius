@@ -9,6 +9,11 @@ class Order < ActiveRecord::Base
 	accepts_nested_attributes_for :order_products
 
 	validates :title, presence: true, length: {maximum: 100}
+
+
+	# ready: la orden se ha creado y espera ofertas, locked: la orden ya tiene sus ofertas
+	# seleccionadas y esprea recibirlas
+	enum status: [:ready, :locked]
 	
 
 end

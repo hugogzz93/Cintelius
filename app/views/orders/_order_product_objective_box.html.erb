@@ -1,0 +1,25 @@
+<!-- recibe un order_product en f -->
+<div class='offer_product_box objective', data-attribute-product-name="<%= f.product.name %>">
+			<div class="left_side">
+				<div class="product_name_box">
+					Producto <br>
+					<div class="background_box">
+						<%= f.product.name %>
+					</div>
+				</div>
+				<div class="offer_numbers_box">
+					<span style="float:left;">Kg</span>
+					<div class="background_box">
+						<%= f.units %>
+					</div>
+				</div>
+			</div>
+			<div class="right_side">
+				<div class="comment_box">
+					<div class="buyer_comment">
+						<%= f.comment.content %>
+					</div>
+				</div>
+							
+			</div>
+	</div>

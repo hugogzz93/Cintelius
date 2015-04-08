@@ -1,0 +1,25 @@
+<!-- recibe una oferta en f -->
+<div class='selected_offer_box' data-offer-id=<%= f.id %>>
+			<div class="left_side">
+				<div class="product_name_box">
+					<%= f.user.user_detail.organization %> <br>
+					<div class="background_box">
+						<%= f.product.name %>
+					</div>
+				</div>
+				<div class="offer_numbers_box">
+					<span style="float:left;">Kg</span>
+					<div class="background_box">
+						<%= f.offer_details.last.units %>
+					</div>
+				</div>
+			</div>
+			<div class="right_side">
+				<%= button_tag "-", class: "offer_deselection_button", data: {offer_id: f.id}%>
+				<div class="comment_box">
+					<div class="buyer_comment">
+						<%= f.comment.content %>
+					</div>
+				</div>		
+			</div>
+	</div>

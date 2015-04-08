@@ -11,7 +11,7 @@
 <% end %>
 
 <% @combos.each do |combo| %>
-	$('.combo_list').append("<%= j render partial: 'combo_box.html.erb', locals: {f: combo} %>")
+	$('.combo_list').append("<%= j render partial: 'combo_box.html.erb', locals: {f: combo, function: 'offer'} %>")
 <% end %>
 <% combo = @order.combos.create %>
 $('.combo_list').append("<%= j render partial: 'combo_form.html.erb', locals: {f: combo} %>")

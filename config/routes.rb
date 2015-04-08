@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   devise_for :users
   resources :orders
   resources :offers
+  # resources :offer_details
 
+  post '/offer_details/edit' => 'offer_details#edit', as: 'edit_offer_details'
+  post '/offer_details/create' => 'offer_details#create', as: 'offer_details'
   post '/combos/create' => 'combos#create',  as: 'create_combo'  
   get 'from_order/:id' => "offers#from_order", as: 'from_order'
   # The priority is based upon order of creation: first created -> highest priority.

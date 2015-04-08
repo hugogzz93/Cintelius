@@ -1,0 +1,8 @@
+<% if @success %>
+	<%= logger.info  @offer_detail.offer.id%>
+	$('.offer_list').prepend("<%= j render partial: '/orders/buyer_offer_status_form.html.erb', locals: {f: @offer_detail.offer}%>")
+	$('.deletion_candidate').remove()
+<% else %>
+	$('.deletion_candidate').removeClass('.deletion_candidate')
+	alert('Ocurrio un error al registrar su contraoferta.')
+<% end %>

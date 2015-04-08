@@ -1,0 +1,74 @@
+// Este limpio la lista al cambiar de orden
+$('.provider_box').remove()
+$('.offer_list').empty()
+$('.order_product_list').empty()
+<% @providers.each do |provider| %>
+	$('.orders .provider_list').append("<%= j render partial: 'provider_box.html.erb', locals: {provider: provider}%>")
+<% end %>
+
+<% @order.offers.each do |offer| %>
+	$('.offer_list').append("<%= j render partial: 'buyer_offer_status_form.html.erb', locals: {f: offer}%>")
+	$('.order_product_list').prepend("<%= j render partial: 'selected_offer_box.html.erb', locals: {f: offer}%>")	
+<% end %>
+
+// agrega combos
+<% @order.combos.each do |combo| %>
+	$('.offer_list').append("<%= j render partial: 'offers/combo_box.html.erb', locals: {f: combo, function: 'order'}%>")
+	$('.order_product_list').append("<%= j render partial: 'selected_combo_box.html.erb', locals: {f: combo}%>")
+<% end %>
+
+<% @order.order_products.each do |order_product| %>
+	$('.order_product_list').append("<%= j render partial: 'order_product_objective_box.html.erb', locals: {f: order_product}%>")
+<% end %>
+
+
+
+
+// Los productos del provedor indicado se vuelvan visibles
+$('.provider_box').on('click', function(e) {
+	$('.offer_product_box.active').removeClass('active')	
+	idToCheck = $(e.target).attr('data-attribute-user-id')
+	console.log(idToCheck)
+	$('.offer_product_box[data-attribute-user-id=' + idToCheck + ']').addClass('active')
+	$('.combo_box[data-attribute-user-id=' + idToCheck + ']').addClass('active')
+})
+
+$('.offer_detail_form input').on('click', function(e){
+	$(e.target).closest('.offer_product_box').addClass('deletion_candidate')
+})
+
+$('.order_product_list').append("<%= j render partial: 'offer_selection_form.html.erb', locals: {f: @order}%>")
+
+$('.offer_selection_button').on('click', function(e) {
+	$(e.target).attr('type', 'button').prop('disabled', true)
+	idToCheck = $(e.target).attr('data-offer-id')
+	$('.offer_deselection_button[data-offer-id=' + idToCheck + ']').prop('disabled', false)
+	$('.order_product_list input[data-offer-id=' + idToCheck + ']').trigger('click')
+	$('.selected_offer_box[data-offer-id=' + idToCheck + ']').addClass('selected')
+})
+
+$('.offer_deselection_button').on('click', function(e) {
+	$(e.target).attr('type', 'button').prop('disabled', true)
+	idToCheck = $(e.target).attr('data-offer-id')
+	$('.offer_selection_button[data-offer-id=' + idToCheck + ']').prop('disabled', false)
+	$('.order_product_list input[data-offer-id=' + idToCheck + ']').trigger('click')
+	$('.selected_offer_box[data-offer-id=' + idToCheck + ']').removeClass('selected')
+})
+
+$('.combo_selection_button').on('click', function(e) {
+	$(e.target).attr('type', 'button').prop('disabled', true)
+	idToCheck = $(e.target).attr('data-combo-id')
+	$('.combo_deselection_button[data-combo-id=' + idToCheck + ']').prop('disabled', false)
+	$('.order_product_list input[data-combo-id=' + idToCheck + ']').trigger('click')
+	$('.selected_combo_box[data-combo-id=' + idToCheck + ']').addClass('selected')
+})
+
+$('.combo_deselection_button').on('click', function(e) {
+	$(e.target).attr('type', 'button').prop('disabled', true)
+	idToCheck = $(e.target).attr('data-combo-id')
+	$('.combo_selection_button[data-combo-id=' + idToCheck + ']').prop('disabled', false)
+	$('.order_product_list input[data-combo-id=' + idToCheck + ']').trigger('click')
+	$('.selected_combo_box[data-combo-id=' + idToCheck + ']').removeClass('selected')
+})
+
+
