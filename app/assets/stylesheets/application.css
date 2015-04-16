@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require jquery-ui/datepicker
  */
 
  /*azul 2db6cf*/
@@ -506,6 +507,7 @@ form#new_order.new_order_form textarea.editable {
 
 .combo_product_add_button {
   /*display: none;*/
+  float: right
 }
 .combo_product_add_button.selection_active {
   float: right;
@@ -989,4 +991,22 @@ input.combo_price {
   float: right;
   margin-top: -26.3%;
   margin-right: 2%;
+}
+
+
+/*poner en posicion adecuada*/
+#datepicker {
+  position: absolute;
+  bottom: 6%;
+  right: 8%;
+}
+
+#timepicker {
+  position: absolute;
+  bottom: 2%;
+  right: 8%;
+}
+
+.due_date_info {
+  font-size: 0.7em;
 }

@@ -11,8 +11,9 @@ class OrdersController < ApplicationController
 	end
 
 	def create
+		params[:order][:due_date] = params[:order][:due_date] + " " +params[:order][:due_time]
 		current_user.orders.create(order_params)
-		exit
+		exit		
 	end
 
 	def edit
@@ -29,7 +30,7 @@ class OrdersController < ApplicationController
 	
 	private
 		def order_params
-			params.require(:order).permit(:title, order_products_attributes: [:product_id, :units, 
+			params.require(:order).permit(:title, :due_date, order_products_attributes: [:product_id, :units, 
 				comment_attributes: [:content]])
 		end
 		

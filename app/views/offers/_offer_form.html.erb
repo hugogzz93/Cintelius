@@ -29,8 +29,8 @@
 	<%= form_for f, url: {action: "create"}, html: {
 				class: "new_offer_form"}, remote: true do |offer|%>
 
-		<%= offer.text_field :order_id, style: "display: none;" %>
-		<%= offer.number_field :product_id, style: "display: none;" %>
+		<%= offer.text_field :order_id, style: "display: none;", required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)"  %>
+		<%= offer.number_field :product_id, style: "display: none;", required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)"  %>
 		<div class="left_side">
 
 			<div class="product_name_box">
@@ -48,10 +48,10 @@
 					<div class="form_box_inside_numbers">
 						<%= offer.fields_for(:offer_details, offer_detail_object, child_index: offer_detail_object.object_id) do |offer_detail_fields| %>
 							<span style="margin-left:3%; float:left;">Kg</span>
-							<%= offer_detail_fields.number_field :units%>
+							<%= offer_detail_fields.number_field :units, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
 						<% end %>
 						<span style="float:left; margin-left: 7%;">$</span>
-							<%= offer.number_field :unitary_price %>
+							<%= offer.number_field :unitary_price, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)"  %>
 					</div>
 				</div>
 

@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui/datepicker
 //= require turbolinks
 //= require_tree .
 
@@ -128,3 +129,49 @@ $(function() {
 
 	// $('.order_box a').on()
 })
+
+
+
+// Para que calendario este en español
+ $.datepicker.regional['es'] = {clearText: 'Borrar', clearStatus: '',
+    closeText: 'Fermer', closeStatus: 'Fermer sans modifier',
+    prevText: '&lt;Préc', prevStatus: 'Ver mes anterior',
+    nextText: 'Suiv&gt;', nextStatus: 'Ver siguiente mes',
+    currentText: 'Actual', currentStatus: 'Ver mes actual',
+    monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+    'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+    monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
+    'Jul','Ago','Sep','Oct','Nov','Dic'],
+    monthStatus: 'Ver otros meses', yearStatus: 'Ver otros años',
+    weekHeader: 'Sm', weekStatus: '',
+    dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+    dayNamesShort: ['Dom','Lun','Mar','Mie','Jue','Vie','Sab'],
+    dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
+    dayStatus: 'Utilice DD como el primer día de la semana', dateStatus: 'Elija DD , MM d',
+    dateFormat: 'dd/mm/yy', firstDay: 0, 
+    initStatus: 'Elija la fecha', isRTL: false};
+
+     $.datepicker.setDefaults($.datepicker.regional['es']);
+// Seleccion fecha limite en nueva orden
+$(function() {
+    $('#datepicker').datepicker({dateFormat: 'yy-mm-dd', minDate: 0})
+  });
+
+
+
+
+
+// Los campos requeridos muestren el mensaje indicado
+function InvalidMsg(textbox) {
+    
+    if (textbox.value == '') {
+        textbox.setCustomValidity('Obligatorio');
+    }
+    else if(textbox.validity.typeMismatch){
+        textbox.setCustomValidity('please enter a valid email address');
+    }
+    else {
+        textbox.setCustomValidity('');
+    }
+    return true;
+}

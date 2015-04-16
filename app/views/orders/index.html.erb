@@ -7,8 +7,10 @@
 			<% @orders.each do |order|  %>
 				<li class="order_box">
 					<%= link_to(order_path(id: order.id), remote: true) do %>
-					  <%= order.user.user_detail.organization %>
-					  <%= order.created_at.strftime('%d/%m/%Y') %>
+					  <%= order.user.user_detail.organization %> <br>
+					  <div class="due_date_info">
+					  	<%= l order.due_date, format: :cust %>
+					  </div>
 					<% end %>
 				</li>			
 			<% end %>

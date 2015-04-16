@@ -2,7 +2,11 @@
 	$('.offer_list').prepend("<%= j render partial:  'offer_status_form.html.erb', locals: {f: @offer} %>")
 	$('.deletion_candidate').remove()
 <% else %>
-	alert('Ocurrio un error al registrar su oferta.')
+	<% error_string = "No se pudo guardar su oferta:\n" %>
+	<% @offer.errors.each do |attribute, message| %>
+		<% error_string += message + "\n" %>
+	<% end %>
+	alert("<%= j error_string %>")
 	$('.deletion_candidate').removeClass('.deletion_candidate')
 <% end %>
 $('.seller_comment_tag').on('click', function(e){

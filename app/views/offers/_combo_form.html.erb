@@ -10,9 +10,9 @@
 	<span class="combo_price_label">
 		Total: $
 	</span>
-	<%= combo.number_field :price %>
+	<%= combo.number_field :price, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)"  %>
 	<%= combo.fields_for(:comment, comment_object, child_index: comment_object.object_id) do |comment|%>
-		<%=  comment.text_area :content, placeholder: "Tu comentario.."%>
+		<%=  comment.text_area :content, placeholder: "Tu comentario..", required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
 	<% end %>
 	<%= combo.submit "Terminar Combo", confirm: "¿Esta seguro que desea terminar su combo?", disabled: true, class: "submit_button"%>
 <% end %>

@@ -3,7 +3,7 @@
 	<%= f.label "Producto" %> <br>
 	<%= f.text_field :product_id, style: "display: none;" %>
 	<%= f.label :units,  "Kg" %>
-	<%= f.number_field :units %> <br>
+	<%= f.number_field :units, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %> <br>
 	<%= image_tag 'x-image.png', class: 'x-button' %>
 	<div class="letter_image_box">
 		<%= image_tag 'letter_orange.png' %>
@@ -11,7 +11,4 @@
 	<%= fields_for(:comment, comment_object, child_index: comment_object.object_id) do |comment|%>
 		<%=  comment.text_area :content, placeholder: "Tu comentario.."%>
 	<% end %>
-	
-	
-
 </div>

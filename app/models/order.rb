@@ -6,14 +6,13 @@ class Order < ActiveRecord::Base
 	has_many :order_products, dependent: :destroy
 	has_many :products, through: :order_products
 
+	attr_accessor :due_time
+
 	accepts_nested_attributes_for :order_products
 
 	validates :title, presence: true, length: {maximum: 100}
 
-
-	# ready: la orden se ha creado y espera ofertas, locked: la orden ya tiene sus ofertas
-	# seleccionadas y esprea recibirlas
-	enum status: [:ready, :locked]
+	enum status: [:awaiting_offers, :choosing_offers, :awaiting_products, :closed]
 	
 
 end

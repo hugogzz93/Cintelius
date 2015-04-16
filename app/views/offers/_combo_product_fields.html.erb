@@ -4,8 +4,8 @@
 	<div class="combo_product_box_title">
 		Product
 	</div>
-	<%= d.number_field :product_id, class: "product_id_field" %>
+	<%= d.number_field :product_id, class: "product_id_field", required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)"  %>
 	<span class="combo_product_box_label">Kg</span>
-	<%= d.number_field :units, class: "combo_product_unit_field" %>
+	<%= d.number_field :units, class: "combo_product_unit_field", required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)"  %>
 
 </div>
