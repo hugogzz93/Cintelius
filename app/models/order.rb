@@ -13,6 +13,16 @@ class Order < ActiveRecord::Base
 	validates :title, presence: true, length: {maximum: 100}
 
 	enum status: [:awaiting_offers, :choosing_offers, :awaiting_products, :closed]
+
+	def due_date_past?
+		if due_date <= Time.now
+			self.update(status: "choosing_offers")
+			return true
+		else
+			return false
+		end
+		
+	end
 	
 
 end

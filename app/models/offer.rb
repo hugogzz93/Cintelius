@@ -9,7 +9,7 @@ class Offer < ActiveRecord::Base
 	accepts_nested_attributes_for :comment
 
 	validates :unitary_price, presence: true, numericality: true
-	validate :authorized_product
+	# validate :authorized_product
 	after_update :create_review_ticket, if: :received?
 	validates :user_id, uniqueness: { scope: [:order_id, :product_id],
     message: "No se puede hacer mas de una oferta para le mismo producto." }

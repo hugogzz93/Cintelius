@@ -6,6 +6,7 @@ class Product < ActiveRecord::Base
 	  has_many :users, through: :user_products
 	  has_many :product_scores
 	  has_many :orders, through: :order_products
+	  has_many :order_products
 	  has_many :combo_products, dependent: :destroy
 	  has_many :combos, through: :combo_products, dependent: :destroy
 

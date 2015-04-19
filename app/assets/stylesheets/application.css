@@ -285,7 +285,7 @@ form#new_order.new_order_form textarea.editable {
   		height: 95%;
   		z-index: 3;
   		background-color: white;
-	-webkit-animation: image-box-expand 1s ease 1;
+	-webkit-animation: image-box-expand 0.3s ease 1;
 
 }
 
@@ -349,7 +349,7 @@ form#new_order.new_order_form textarea.editable {
   height: 100%;
   /*overflow: hidden;*/
   overflow-y: scroll;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   
  }
 
