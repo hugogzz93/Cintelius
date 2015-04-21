@@ -1,21 +1,36 @@
 // Para que salga un formulario nuevo si no se ha hecho oferta e indique con un formulario diferente si ya se ha hecho
 <%= created_offers_ids = @offers.collect { |offer| offer.product.id} %>	
 <% @order.order_products.each do |order_product| %>
-	<% if created_offers_ids.include?(order_product.product.id) %>
-		<% offer_builder = @offers.where(product_id: order_product.product.id).first %>
-		$('.offer_list').append("<%= j render partial:  'offer_status_form.html.erb', locals: {f: offer_builder} %>")
+	// Antes de fecha limite
+	<% if @order.due_date_past? %>
+		<% if created_offers_ids.include?(order_product.product.id) %>			
+			<% offer_builder = @offers.where(product_id: order_product.product.id).first %>
+			$('.offer_list').append("<%= j render partial:  'offer_status_form.html.erb', locals: {f: offer_builder} %>")
+		<% else %>
+			$('.offer_list').append("<%= j render partial:  'orders/order_product_objective_box.html.erb', locals: {f: order_product} %>")		
+		<% end %>		
+	// Despues de la fecha limite
 	<% else %>
-		<% offer_builder = order_product.order.offers.build(product_id: order_product.product.id)  %>
-		$('.offer_list').append("<%= j render partial:  'offer_form.html.erb', locals: {f: offer_builder} %>")		
-	<% end %>		
+	<% if created_offers_ids.include?(order_product.product.id) %>
+			<% offer_builder = @offers.where(product_id: order_product.product.id).first %>
+			$('.offer_list').append("<%= j render partial:  'offer_status_form.html.erb', locals: {f: offer_builder} %>")
+		<% else %>
+			<% offer_builder = order_product.order.offers.build(product_id: order_product.product.id)  %>
+			$('.offer_list').append("<%= j render partial:  'offer_form.html.erb', locals: {f: offer_builder} %>")		
+		<% end %>		
+	<% end %>
 <% end %>
+
 
 <% @combos.each do |combo| %>
 	$('.combo_list').append("<%= j render partial: 'combo_box.html.erb', locals: {f: combo, function: 'offer'} %>")
 <% end %>
-<% combo = @order.combos.create %>
-$('.combo_list').append("<%= j render partial: 'combo_form.html.erb', locals: {f: combo} %>")
-
+// Para que no se pueda hcer ningun combo despues de la fecha limite
+<% unless @order.due_date_past? %>
+	<% combo = @order.combos.create %>
+	$('.combo_list').append("<%= j render partial: 'combo_form.html.erb', locals: {f: combo} %>")
+<% end %>
+	
 
 // Para que el checkbox se marque cuando un producto sea agregado
 $('.combo_product_add_button').on('click', function(e) {

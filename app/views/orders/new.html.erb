@@ -47,7 +47,7 @@
 			<%= form_for@order, url: {action: "create"}, html: {
 				class: "new_order_form"} do |order|%>
 				<%= order.label :title, "Nombre de la Orden"  %>
-				<%= order.text_field :title, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
+				<%= order.text_field :title, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>				
 				<div class="product_form_area">
 					<%= fields_for :order_products do |product_fields| %>
 					
@@ -58,7 +58,9 @@
 
 				<%= order.text_field "due_date", id: "datepicker", placeholder: "Fecha limite", required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)", html: {readonly: true}  %>
 				<%= order.time_field "due_time", id: "timepicker", required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
-
+				<%= order.fields_for :comment, Comment.new do |comment| %>
+					<%= comment.text_area :content %>
+				<% end %>
 				<%= order.submit "Terminar Orden" %>
 
 			<% end %>

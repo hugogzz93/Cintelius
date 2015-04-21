@@ -2,19 +2,23 @@
 $('.provider_box').remove()
 $('.offer_list').empty()
 $('.order_product_list').empty()
-<% @providers.each do |provider| %>
-	$('.orders .provider_list').append("<%= j render partial: 'provider_box.html.erb', locals: {provider: provider}%>")
-<% end %>
 
-<% @order.offers.each do |offer| %>
-	$('.offer_list').append("<%= j render partial: 'buyer_offer_status_form.html.erb', locals: {f: offer}%>")
-	$('.order_product_list').prepend("<%= j render partial: 'selected_offer_box.html.erb', locals: {f: offer}%>")	
-<% end %>
 
-// agrega combos
-<% @order.combos.each do |combo| %>
-	$('.offer_list').append("<%= j render partial: 'offers/combo_box.html.erb', locals: {f: combo, function: 'order'}%>")
-	$('.order_product_list').append("<%= j render partial: 'selected_combo_box.html.erb', locals: {f: combo}%>")
+<% if @order.due_date_past? %>
+	<% @providers.each do |provider| %>
+		$('.orders .provider_list').append("<%= j render partial: 'provider_box.html.erb', locals: {provider: provider}%>")
+	<% end %>
+
+	<% @order.offers.each do |offer| %>
+		$('.offer_list').append("<%= j render partial: 'buyer_offer_status_form.html.erb', locals: {f: offer}%>")
+		$('.order_product_list').prepend("<%= j render partial: 'selected_offer_box.html.erb', locals: {f: offer}%>")	
+	<% end %>
+
+	// agrega combos
+	<% @order.combos.each do |combo| %>
+		$('.offer_list').append("<%= j render partial: 'offers/combo_box.html.erb', locals: {f: combo, function: 'order'}%>")
+		$('.order_product_list').append("<%= j render partial: 'selected_combo_box.html.erb', locals: {f: combo}%>")
+	<% end %>
 <% end %>
 
 <% @order.order_products.each do |order_product| %>
