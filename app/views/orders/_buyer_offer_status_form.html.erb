@@ -4,16 +4,14 @@
 			data-attribute-offer-id="<%= f.id %>", data-attribute-product-name="<%= f.product.name %>">
 			<div class="left_side">
 				<div class="product_name_box">
-					Producto <br>
+					<!-- Producto <br> -->
 					<div class="background_box">
 						<%= f.product.name %>
 					</div>
 				</div>
 				<div class="offer_numbers_box">
 					<span style="float:left;">Kg</span>
-					<div class="background_box">
-						<%= f.offer_details.last.units %>
-					</div>
+					<div class="background_box" data-product-id="<%= f.product.id %>"><%= f.offer_details.last.units %></div>
 					<span style="float:left; margin-left: 7%;">$</span>
 					<div class="background_box">
 						<%= f.unitary_price %>
@@ -23,7 +21,7 @@
 			</div>
 			<div class="right_side">				
 				<%= button_tag "Comentario", class: "seller_comment_tag" %>
-				<%= button_tag "+", class: "offer_selection_button", data: {offer_id: f.id}%>
+				<%= button_tag "+", class: "offer_selection_button", data: {offer_id: f.id, product_id: f.product.id}%>
 				<div class="comment_box">
 					<div class="seller_comment">
 						<%= f.comment.content %>
@@ -38,16 +36,14 @@
 		data-attribute-offer-id="<%= f.id %>", data-attribute-product-name="<%= f.product.name %>">
 			<div class="left_side">
 				<div class="product_name_box">
-					Producto <br>
+					<!-- Producto <br> -->
 					<div class="background_box">
 						<%= f.product.name %>
 					</div>
 				</div>
 				<div class="offer_numbers_box">
 					<span style="float:left;">Kg</span>
-					<div class="background_box">
-						<%= f.offer_details.last.units %>
-					</div>
+					<div class="background_box" data-product-id="<%= f.product.id %>"><%= f.offer_details.last.units %></div>
 					<span style="float:left; margin-left: 7%;">$</span>
 					<div class="background_box">
 						<%= f.unitary_price %>
@@ -67,7 +63,7 @@
 			</div>
 			<div class="right_side">				
 				<%= button_tag "Comentario", class: "seller_comment_tag" %>
-				<%= button_tag "+", class: "offer_selection_button", data: {offer_id: f.id}%>
+				<%= button_tag "+", class: "offer_selection_button", data: {offer_id: f.id, product_id: f.product.id}%>
 				<div class="comment_box">
 					<div class="seller_comment">
 						<%= f.comment.content %>
@@ -81,16 +77,14 @@
 			data-attribute-offer-id="<%= f.id %>", data-attribute-product-name="<%= f.product.name %>">
 			<div class="left_side">
 				<div class="product_name_box">
-					Producto <br>
+					<!-- Producto <br> -->
 					<div class="background_box">
 						<%= f.product.name %>
 					</div>
 				</div>
 				<div class="offer_numbers_box">
 					<span style="float:left;">Kg</span>
-					<div class="background_box">
-						<%= f.offer_details.last.units %>
-					</div>
+					<div class="background_box" data-product-id="<%= f.product.id %>"><%= f.offer_details.last.units %></div>
 					<span style="float:left; margin-left: 7%;">$</span>
 					<div class="background_box">
 						<%= f.unitary_price %>
@@ -114,16 +108,14 @@
 		data-attribute-offer-id="<%= f.id %>", data-attribute-product-name="<%= f.product.name %>">
 		<div class="left_side">
 			<div class="product_name_box">
-				Producto <br>
+				<!-- Producto <br> -->
 				<div class="background_box">
 					<%= f.product.name %>
 				</div>
 			</div>
 			<div class="offer_numbers_box">
 				<span style="float:left;">Kg</span>
-				<div class="background_box">
-					<%= f.offer_details.last.units %>
-				</div>
+				<div class="background_box" data-product-id="<%= f.product.id %>"><%= f.offer_details.last.units %></div>
 				<span style="float:left; margin-left: 7%;">$</span>
 				<div class="background_box">
 					<%= f.unitary_price %>
@@ -145,16 +137,14 @@
 		data-attribute-offer-id="<%= f.id %>", data-attribute-product-name="<%= f.product.name %>">
 			<div class="left_side">
 				<div class="product_name_box">
-					Producto <br>
+					<!-- Producto <br> -->
 					<div class="background_box">
 						<%= f.product.name %>
 					</div>
 				</div>
 				<div class="offer_numbers_box">
 					<span style="float:left;">Kg</span>
-					<div class="background_box">
-						<%= f.offer_details.last.units %>
-					</div>
+					<div class="background_box" data-product-id="<%= f.product.id %>"><%= f.offer_details.last.units %></div>
 					<span style="float:left; margin-left: 7%;">$</span>
 					<div class="background_box">
 						<%= f.unitary_price %>
@@ -163,7 +153,7 @@
 			</div>
 			<div class="right_side">
 				<%= button_tag "Comentario", class: "seller_comment_tag" %>
-				<%= button_tag "+", class: "offer_selection_button", data: {offer_id: f.id}%>
+				<%= button_tag "+", class: "offer_selection_button", data: {offer_id: f.id, product_id: f.product.id}%>
 				<div class="comment_box">
 					<div class="seller_comment">
 						<%= f.comment.content %>
@@ -177,16 +167,14 @@
 			data-attribute-offer-id="<%= f.id %>", data-attribute-product-name="<%= f.product.name %>">
 			<div class="left_side">
 				<div class="product_name_box">
-					Producto <br>
+					<!-- Producto <br> -->
 					<div class="background_box">
 						<%= f.product.name %>
 					</div>
 				</div>
 				<div class="offer_numbers_box">
 					<span style="float:left;">Kg</span>
-					<div class="background_box">
-						<%= f.offer_details.last.units %>
-					</div>
+					<div class="background_box" data-product-id="<%= f.product.id %>"><%= f.offer_details.last.units %></div>
 					<span style="float:left; margin-left: 7%;">$</span>
 					<div class="background_box">
 						<%= f.unitary_price %>
@@ -195,7 +183,7 @@
 			</div>
 			<div class="right_side">
 				<%= button_tag "Comentario", class: "seller_comment_tag" %>
-				<%= button_tag "+", class: "offer_selection_button", data: {offer_id: f.id}%>
+				<%= button_tag "+", class: "offer_selection_button", data: {offer_id: f.id, product_id: f.product.id}%>
 				<div class="comment_box">
 					<div class="seller_comment">
 						<%= f.comment.content %>
@@ -208,16 +196,14 @@
 			data-attribute-offer-id="<%= f.id %>", data-attribute-product-name="<%= f.product.name %>">
 				<div class="left_side">
 				<div class="product_name_box">
-					Producto <br>
+					<!-- Producto <br> -->
 					<div class="background_box">
 						<%= f.product.name %>
 					</div>
 				</div>
 				<div class="offer_numbers_box">
 					<span style="float:left;">Kg</span>
-					<div class="background_box">
-						<%= f.offer_details.last.units %>
-					</div>
+					<div class="background_box" data-product-id="<%= f.product.id %>"><%= f.offer_details.last.units %></div>
 					<span style="float:left; margin-left: 7%;">$</span>
 					<div class="background_box">
 						<%= f.unitary_price %>
@@ -226,7 +212,7 @@
 			</div>
 			<div class="right_side">
 				<%= button_tag "Comentario", class: "seller_comment_tag" %>
-				<%= button_tag "+", class: "offer_selection_button", data: {offer_id: f.id}%>
+				<%= button_tag "+", class: "offer_selection_button", data: {offer_id: f.id, product_id: f.product.id}%>
 				<div class="comment_box">
 					<div class="seller_comment">
 						<%= f.comment.content %>

@@ -21,7 +21,7 @@
 				</div>
 			</div>
 			<div class="right_side">
-				<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id}%>
+				<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id} unless order_status%>
 				<%= button_tag "Cliente", class: "buyer_comment_tag" %>
 				<%= button_tag "Tu Comentario", class: "seller_comment_tag" %>
 				<div class="comment_box">
@@ -56,7 +56,7 @@
 				</div>
 			</div>
 			<div class="right_side">
-				<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id}%>
+				<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id} unless order_status%>
 				<%= button_tag "Cliente", class: "buyer_comment_tag" %>
 				<%= button_tag "Tu Comentario", class: "seller_comment_tag" %>
 				<div class="comment_box">
@@ -108,7 +108,7 @@
 				</div>			
 			</div>
 			<div class="right_side">
-					<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id}%>
+					<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id} unless order_status%>
 					<%= button_tag "Cliente", class: "buyer_comment_tag" %>
 					<%= button_tag "Tu Comentario", class: "seller_comment_tag" %>
 					<span class="unitary_price_notice">* Precio por kilo</span>
@@ -152,7 +152,7 @@
 				</div>
 			</div>
 			<div class="right_side">
-				<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id}%>
+				<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id} unless order_status%>
 				<%= button_tag "Cliente", class: "buyer_comment_tag" %>
 				<%= button_tag "Tu Comentario", class: "seller_comment_tag" %>
 				<div class="comment_box">
@@ -188,7 +188,7 @@
 				</div>
 			</div>
 			<div class="right_side">
-				<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id}%>
+				<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id} unless order_status%>
 				<%= button_tag "Cliente", class: "buyer_comment_tag" %>
 				<%= button_tag "Tu Comentario", class: "seller_comment_tag" %>
 				<div class="comment_box">
@@ -223,7 +223,7 @@
 				</div>
 			</div>
 			<div class="right_side">
-				<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id}%>
+				<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id} unless order_status%>
 				<%= button_tag "Cliente", class: "buyer_comment_tag"%>
 				<%= button_tag "Tu Comentario", class: "seller_comment_tag"%>
 				<div class="comment_box">

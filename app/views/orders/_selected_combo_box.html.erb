@@ -3,7 +3,7 @@
 	<div class="selected_combo_box", data-combo-id="<%= f.id %>">
 		<ul class="product_list_area">
 			<% f.combo_products.each do |combo_product| %>		
-				<li class="combo_product_box">
+				<li class="combo_product_box" data-product-id="<%= combo_product.product.id %>" data-product-units="<%= combo_product.units %>">
 					<div class="combo_product_name">
 						<%= combo_product.product.name %>
 					</div>
@@ -34,7 +34,7 @@
 	<div class="selected_combo_box locked">
 		<ul class="product_list_area">
 			<% f.combo_products.each do |combo_product| %>		
-				<li class="combo_product_box">
+				<li class="combo_product_box" data-product-id="<%= combo_product.product.id %>" data-product-units="<%= combo_product.units %>">
 					<div class="combo_product_name">
 						<%= combo_product.product.name %>
 					</div>
@@ -65,7 +65,7 @@
 	<div class="selected_combo_box received">
 		<ul class="product_list_area">
 			<% f.combo_products.each do |combo_product| %>		
-				<li class="combo_product_box">
+				<li class="combo_product_box" data-product-id="<%= combo_product.product.id %>" data-product-units="<%= combo_product.units %>">
 					<div class="combo_product_name">
 						<%= combo_product.product.name %>
 					</div>

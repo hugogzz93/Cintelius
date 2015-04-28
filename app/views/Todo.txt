@@ -13,3 +13,8 @@ NEWOFFER
 	>Mandar Oferta
 	-Boton de agregar producto de la oferta en la nueva caja no se deshabilita si ya esta agregado el producto.
 	
+
+SHOW
+
+	Bug - por alguna razon no se puede eseñar todas las unidades de la ultima offer_Detail del una
+	ofertas

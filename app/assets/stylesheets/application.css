@@ -22,6 +22,15 @@
 
 
 
+ /*buenos*/
+ /* amarillo #EB9E4A*/
+ /*rojo obscuro #CC686C*/
+ /*amarillo naranja #EFC647*/
+ /* azul-morado #7986CB*/
+ /*verde #7986CB*/
+ /*naranja padre #ff6500*/
+
+
 .top-bar  {
   position: fixed;
   width: 100%;
@@ -47,7 +56,7 @@
   overflow: auto;
   background-color: white;
   height: 90%;
-  box-shadow: -5px -5px 20px black;
+  box-shadow: -5px -5px 20px #31353c;
   top: 7%;
 }
 
@@ -61,7 +70,7 @@
  }
 
 .categories-list {
-	border-left: 1px black solid;
+	border-left: 1px #31353c solid;
 }
 /*#00DfDc*/
  .newOrder .column {
@@ -73,14 +82,14 @@
  .newOrder .column.order {
  	width: 26%;
  	height: 80%;
-  	border: 1px solid black;
+  	border: 1px solid #31353c;
   	position: absolute;
   	right: 1.85%;
  }
 
  .subcategories ul {
  	/*background-color: #ff6500;*/
- 	border-left: 1px solid black
+ 	border-left: 1px solid #31353c
  }
 
  .subcategories ul, .products ul{
@@ -90,16 +99,16 @@
  }
 
  .subcategories > ul.active > li {
- 	/*border-left: 2px black solid;
- 	border-right: 2px black solid;*/
+ 	/*border-left: 2px #31353c solid;
+ 	border-right: 2px #31353c solid;*/
  }
 
  .subcategories > ul.active > li:first-child {
-	/*border-top: 2px black solid;*/
+	/*border-top: 2px #31353c solid;*/
  }
 
  .subcategories > ul.active > li:last-child {
-	/*border-bottom: 2px black solid;*/
+	/*border-bottom: 2px #31353c solid;*/
  }
 
  .subcategories > ul.active /*, .products > ul.active*/ {
@@ -114,7 +123,7 @@
 	display: block;
   	position: relative;
   	left: 0%;
-  	border-left: 1px solid black;
+  	border-left: 1px solid #31353c;
  	-webkit-animation: column-fade-in 0.3s cubic-bezier(0,1,1,1) 1;
  }
 
@@ -158,7 +167,7 @@
 	color: white;
 	transition: background-color 0.3s, color 0.3s;
 	text-indent: 20%;
- 	/*border: 2px black solid;*/
+ 	/*border: 2px #31353c solid;*/
  	/*border-right: none;*/
 }
 .newOrder li button.selected_product {
@@ -167,7 +176,7 @@
 }
 
 .new-order-product {
-	/*border: 1px solid black;*/
+	/*border: 1px solid #31353c;*/
 	height: 100%;
 }
 
@@ -177,7 +186,7 @@
 
 .new_order_form .product_box {
   height: 15%;
-  border: 1px solid black;
+  border: 1px solid #31353c;
   margin: 5px 0px;
 }
 img.x-button {
@@ -191,7 +200,7 @@ img.x-button {
 }
 
 img.x-button:hover {
-	border: 1px solid black;
+	border: 1px solid #31353c;
  	transition: border 0.5s;
 }
 
@@ -212,8 +221,8 @@ height: 100%
   position: absolute;
   left: 1%;
   overflow-y: scroll;
-  border-bottom: 1px solid black;
-  border-top: 1px solid black;
+  border-bottom: 1px solid #31353c;
+  border-top: 1px solid #31353c;
 }
 form#new_order.new_order_form input[type=submit] {
 	  border: 1px solid transparent;
@@ -260,8 +269,8 @@ form#new_order.new_order_form textarea.editable {
 }
 
 .letter_image_box {
-	/*background-image: image-url("letter-black.png");*/
-	/*border: 1px solid black;*/
+	/*background-image: image-url("letter-#31353c.png");*/
+	/*border: 1px solid #31353c;*/
   	width: 14%;
   	height: 40%;
   	position: relative;
@@ -278,7 +287,7 @@ form#new_order.new_order_form textarea.editable {
 .letter_image_box.active {
 	position: relative;
   		cursor: pointer;
-  		border: 1px solid black;
+  		border: 1px solid #31353c;
   		width: 99.5%;
   		margin-left: -57%;
   		margin-top: -5%;
@@ -305,14 +314,14 @@ form#new_order.new_order_form textarea.editable {
 		position: relative;
 		left: 57%;
 		/*top: -62%;*/
-  		border: 1px solid black;
+  		border: 1px solid #31353c;
   		width: 100%;
   		margin-left: -57%;
 	}
 	100% {
 		position: relative;
   		cursor: pointer;
-  		border: 1px solid black;
+  		border: 1px solid #31353c;
   		width: 99.5%;
   		margin-left: -57%;
   		margin-top: -5%;
@@ -349,7 +358,7 @@ form#new_order.new_order_form textarea.editable {
   height: 100%;
   /*overflow: hidden;*/
   overflow-y: scroll;
-  /*border: 1px solid black;*/
+  /*border: 1px solid #31353c;*/
   
  }
 
@@ -375,7 +384,7 @@ form#new_order.new_order_form textarea.editable {
 
 .new_offer li.order_box {
   font-size: 0.9em;
-  color: black;
+  color: #31353c;
   border: none;
   width: 100%;
   height: 100%;
@@ -456,17 +465,17 @@ form#new_order.new_order_form textarea.editable {
   overflow-x: scroll;
 }
 /*.new_offer*/ .offer_product_box.ready {
-  background-color:  #2db6cf;
+  background-color:  #EB9E4A;
 }
 /*.new_offer*/ .offer_product_box.locked {
-  background-color: #46b98a;
+  background-color: #7986CB;
 }
 
 /*.new_offer*/ .offer_product_box.received {
   background-color: #2db6cf
 }
 /*.new_offer*/ .offer_product_box.form_for.pending {
-  background-color: #e0645c;
+  background-color: #CC686C;
 }
 /*.new_offer*/ .offer_product_box.denied {
   background-color: #999999;
@@ -536,7 +545,7 @@ form#new_order.new_order_form textarea.editable {
 
 .right_side .buyer_comment_tag:active {
   background-color: white;
-  color: black;
+  color: #31353c;
   transition: color 0.3s, background-color 0.3s;
 
 }
@@ -557,7 +566,7 @@ form#new_order.new_order_form textarea.editable {
 
 .right_side .seller_comment_tag:active {
   background-color: white;
-  color: black;
+  color: #31353c;
   transition: color 0.3s, background-color 0.3s;
 }
 
@@ -569,7 +578,7 @@ form#new_order.new_order_form textarea.editable {
 
 
 .offer_product_box #new_offer  {
-    background-color: #444444;
+    /*background-color: #444444;*/
 }
 
 
@@ -621,7 +630,7 @@ textarea, input {outline: none;}
 }
 
 .offer_product_box.form_for {
-  background-color: #444444;
+  background-color: #CC686C;
 }
 
 .form_box_inside_numbers {
@@ -827,7 +836,7 @@ input.combo_price {
     display: block;
   text-decoration: none;
   color: white;
-  background-color: #445662;
+  background-color: #31353c;
   font-size: 1.2em;
   margin: 1% 0%;
   height: 3em;
@@ -838,7 +847,7 @@ input.combo_price {
 .new_offer_orders a {
   text-decoration: none;
   color: white;
-  background-color: #445662;
+  background-color: #31353c;
   font-size: 1.2em;
   margin: 1% 0%;
   height: 3em;
@@ -862,7 +871,7 @@ input.combo_price {
   height: 100%;
   /*overflow: hidden;*/
   overflow-y: scroll;
-  /*border: 1px solid black;*/
+  /*border: 1px solid #31353c;*/
   
  }
 
@@ -888,7 +897,7 @@ input.combo_price {
 
 .order_index li.order_box {
   font-size: 0.9em;
-  color: black;
+  color: #31353c;
   border: none;
   width: 100%;
   height: 100%;
@@ -900,7 +909,7 @@ input.combo_price {
   display: block;
   text-decoration: none;
   color: white;
-  background-color: #445662;
+  background-color: #31353c;
   font-size: 1.2em;
   margin: 1% 0%;
   height: 3em;
@@ -935,17 +944,17 @@ input.combo_price {
 
 .selected_offer_box.selected{
   display: block;
-  color: black;
-  border: 1px solid black;
+  color: #31353c;
+  border: 1px solid #31353c;
 }
 
 .selected_offer_box.selected .background_box{
-  border: 1px solid black;
+  border: 1px solid #31353c;
 }
 
 .selected_offer_box.selected .comment_box {
   border-radius: 4px;
-  border: 1px solid black !important;
+  border: 1px solid #31353c !important;
   height: 4.3em;
   clear: both;
   margin-bottom: 0.7%;
@@ -1009,4 +1018,92 @@ input.combo_price {
 
 .due_date_info {
   font-size: 0.7em;
+}
+
+
+
+
+/* @Show*/
+.column.order_info  {
+  color: white;
+    background-color: #3d3d3e;
+    margin-right: -3%;
+    width: 38%;
+    border: 0px solid #31353c;
+    position: absolute;
+    right: -36%;
+    -webkit-animation: slide-out-order-info 0.5s ease 1;
+}
+
+.column.order_info.active  {
+    position: absolute;
+    right: 3%;
+    -webkit-animation: slide-in-order-info 0.5s ease 1;
+
+}
+
+
+ @-webkit-keyframes slide-in-order-info{
+  0% {
+      border: 1px solid #31353c;
+      position: absolute;
+      right: -36%;
+  }
+  100% {
+      border: 1px solid #31353c;
+      position: absolute;
+      right: 3%;
+  }
+}
+
+ @-webkit-keyframes slide-out-order-info{
+  0% {
+      border: 1px solid #31353c;
+      position: absolute;
+      right: 3%;
+  }
+  100% {
+      border: 1px solid #31353c;
+      position: absolute;
+      right: -36%;
+  }
+}
+
+
+.info_tab_close_button {
+  width: 0;
+  height: 0;
+  position: absolute;
+  right: 2%;
+  top: 4%;
+  border-top: 0.5em solid transparent;
+  border-bottom: 0.5em solid transparent;
+  border-left: 1em solid #666666;
+  cursor: pointer;
+}
+
+ .info_tab_button {
+  width: 0;
+  height: 0;
+  position: absolute;
+  right: 2%;
+  top: 4%;
+  border-top: 0.5em solid transparent;
+  border-bottom: 0.5em solid transparent;
+  border-right: 1em solid #666666;
+  cursor: pointer;
+}
+
+
+.order_product_info_list li {
+  width: 70%;
+  margin: 5%;
+}
+
+.product_name_container {
+  float: left;
+}
+
+.product_quantity_container {
+  float: right;
 }

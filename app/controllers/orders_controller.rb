@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
 	before_action :authenticate_user!
 	def index
 		@orders = Order.where(user_id: current_user.id)
-	end
+	end		
 
 	def new
 		@categories = Category.where(supercategory_id: nil)
@@ -22,7 +22,7 @@ class OrdersController < ApplicationController
 	def show
 		respond_to do |format|
 			format.js {
-				@order = (Order.where(id: params[:id]).includes(offers: :comment, combos: :comment, order_products: :comment)).first
+				@order = (Order.where(id: params[:id]).includes(offers: [:comment, :offer_details], combos: :comment, order_products: :comment)).first
 				@providers = User.find(@order.offers.collect {|offer| offer.user_id}.uniq)
 			}
 		end

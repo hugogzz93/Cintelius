@@ -16,6 +16,8 @@ class Offer < ActiveRecord::Base
 
 	enum status: [:ready, :pending, :selected, :locked, :received]
 
+	
+
 	# Falta craer un offer_detail con al craer el offer
 
 	def authorized_product

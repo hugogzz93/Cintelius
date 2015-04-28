@@ -1,0 +1,8 @@
+<!-- recibe un order_product en f: -->
+
+<li> 
+	<div class="product_name_container">
+		<%= j f.product.name %>
+	</div>
+	<div class="product_quantity_container" data-product-id="<%= f.product.id %>">0/<%= j f.units.to_s %></div>
+</li>
