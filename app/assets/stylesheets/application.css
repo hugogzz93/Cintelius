@@ -490,6 +490,11 @@ form#new_order.new_order_form textarea.editable {
 }
 
 
+.comment_box {
+  overflow-x: scroll;
+  padding: 1%;
+}
+
 .offer_product_box .comment_box {
   border-radius: 4px;
   border: 1px solid white;
@@ -1025,14 +1030,15 @@ input.combo_price {
 
 /* @Show*/
 .column.order_info  {
+  font-weight: 100;
   color: white;
-    background-color: #3d3d3e;
-    margin-right: -3%;
-    width: 38%;
-    border: 0px solid #31353c;
-    position: absolute;
-    right: -36%;
-    -webkit-animation: slide-out-order-info 0.5s ease 1;
+  background-color: #1e1e1e;
+  margin-right: -3%;
+  width: 38%;
+  border: 0px solid #31353c;
+  position: absolute;
+  right: -36%;
+  -webkit-animation: slide-out-order-info 0.5s ease 1;
 }
 
 .column.order_info.active  {
@@ -1095,9 +1101,68 @@ input.combo_price {
 }
 
 
-.order_product_info_list li {
-  width: 70%;
-  margin: 5%;
+.product_main_info{
+  width: 100%;
+  padding: 3%;
+  overflow: scroll;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  -webkit-animation: background-color-change 0.5s linear 1;  
+  
+}
+.product_main_info:hover {
+  background-color: #252526;
+  transition: background-color 0.3s;  
+}
+
+.product_main_info.changed {
+    -webkit-animation: background-color-change2 0.5s linear 1;  
+}
+
+@-webkit-keyframes background-color-change{
+  0% {
+    background-color: #0098F1;
+  }
+  30% {
+    background-color: #0098F1;
+    
+  }
+  100% {
+     background-color: #262626;      
+  }
+}
+
+@-webkit-keyframes background-color-change2{
+  0% {
+    background-color: #0098F1;
+  }
+  30% {
+    background-color: #0098F1;
+    
+  }
+  100% {
+     background-color: #262626;      
+  }
+}
+
+.product_comment_container {
+  background-color: #3F3E47;
+  font-size: 0.8em;
+  font-weight: 200;
+  box-shadow: inset 1px 2px 6px 1px black;
+  max-height: 0px;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.product_comment_container.active {
+  height: auto;
+  max-height: 500px;
+  overflow-y: scroll;
+  transition: max-height 0.3s ease-in-out;  
+}
+
+.product_comment_container .comment_content {
+  padding: 3%;
 }
 
 .product_name_container {
@@ -1106,4 +1171,23 @@ input.combo_price {
 
 .product_quantity_container {
   float: right;
+  padding-right: 6%;
 }
+
+.order_title_container {
+  padding: 3%;
+  background-color: #2e2e2f;
+  box-shadow: 0px 1px 9px black;
+}
+
+
+/*principal*/
+
+.wrapper {
+  background-color: white;
+  height: 100%;
+  width: 100%;
+}
+
+
+

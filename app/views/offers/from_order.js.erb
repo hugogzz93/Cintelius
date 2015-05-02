@@ -1,24 +1,17 @@
 // Para que salga un formulario nuevo si no se ha hecho oferta e indique con un formulario diferente si ya se ha hecho
 
-<%= created_offers_product_ids = @offers.collect { |offer| offer.product.id} %>	
+<%= created_offers_product_ids = @offers.collect { |offer| offer.product.id} %>
 <% @order.order_products.each do |order_product| %>
-	// Antes de fecha limite
-	<% if @order.due_date_past? %>
-		<% if created_offers_product_ids.include?(order_product.product.id) %>			
-			<% offer_builder = @offers.where(product_id: order_product.product.id).first %>
-			$('.offer_list').append("<%= j render partial:  'offer_status_form.html.erb', locals: {f: offer_builder, order_status: @order.due_date_past?} %>")
-		<% else %>
-			$('.offer_list').append("<%= j render partial:  'orders/order_product_objective_box.html.erb', locals: {f: order_product} %>")		
-		<% end %>		
-	// Despues de la fecha limite
+	<% if created_offers_product_ids.include?(order_product.product_id) %>
+		<% offer_builder = @offers.where(product_id: order_product.product_id).first %>
+		$('.offer_list').append("<%= j render partial:  'offer_status_form.html.erb', locals: {f: offer_builder, order_due_date_past: @order.due_date_past?} %>")
 	<% else %>
-	<% if created_offers_product_ids.include?(order_product.product.id) %>
-			<% offer_builder = @offers.where(product_id: order_product.product.id).first %>
-			$('.offer_list').append("<%= j render partial:  'offer_status_form.html.erb', locals: {f: offer_builder, order_status: @order.due_date_past?} %>")
+		<% if @order.due_date_past? || !@authorized_products.include?(order_product.product_id)%>
+			$('.offer_list').append("<%= j render partial:  'orders/order_product_objective_box.html.erb', locals: {f: order_product} %>")					
 		<% else %>
-			<% offer_builder = order_product.order.offers.build(product_id: order_product.product.id)  %>
+			<% offer_builder = order_product.order.offers.build(product_id: order_product.product_id)  %>
 			$('.offer_list').append("<%= j render partial:  'offer_form.html.erb', locals: {f: offer_builder} %>")		
-		<% end %>		
+		<% end %>
 	<% end %>
 <% end %>
 

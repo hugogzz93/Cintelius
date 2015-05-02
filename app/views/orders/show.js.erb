@@ -20,7 +20,6 @@ $('.order_title_container').append('<%= j @order.title %>')
 
 
 
-
 <% if @order.due_date_past? %>
 	<% @providers.each do |provider| %>
 		$('.orders .provider_list').append("<%= j render partial: 'provider_box.html.erb', locals: {provider: provider}%>")
@@ -40,7 +39,7 @@ $('.order_title_container').append('<%= j @order.title %>')
 
 <% @order.order_products.each do |order_product| %>
 	// $('.order_product_list').append("<%= j render partial: 'order_product_objective_box.html.erb', locals: {f: order_product}%>")	
-	$('.order_product_info_list').append("<%= j render partial: 'tab_product_info.html.erb', locals: {f: order_product}%>") // actualizar el tab
+	$('.order_product_info_list').append("<%= j render partial: 'tab_product_info.html.erb', locals: {f: order_product}%>") // actualizar el tab	
 
 	
 
@@ -135,8 +134,6 @@ function infoTabProdChange(prodId, offerQuantity, mode ) {
 	productInfoArray = $('.product_quantity_container[data-product-id=' + prodId + ']').text().split("/");
 	tabQuantity = parseInt(productInfoArray[0]);
 	objectiveQuantity = productInfoArray[1];
-	console.log("tabQuantity: " + tabQuantity)
-	console.log("offerQuantity: " + offerQuantity)
 
 	if (mode == "select") {
 		newQuantity = tabQuantity + offerQuantity;
@@ -145,5 +142,20 @@ function infoTabProdChange(prodId, offerQuantity, mode ) {
 	};
 	newString = newQuantity.toString() + "/" + objectiveQuantity
 	console.log(newQuantity.toString() + "/" + objectiveQuantity)
-	$('.product_quantity_container[data-product-id=' + prodId + ']').text(newString)
+	target = $('.product_quantity_container[data-product-id=' + prodId + ']');
+	target.text(newString);
+	target.closest('.product_main_info').toggleClass('changed')
+
 }
+
+
+// Revela/esconde el comentrio de cada producto en into tabQuantity
+$('.product_main_info').on('click', function(e) {
+	if ($(e.target).hasClass('active')) {
+		$(e.target).removeClass('active')
+		$(e.target).siblings('.product_comment_container').removeClass('active')		
+	} else {
+		$(e.target).addClass('active')
+		$(e.target).siblings('.product_comment_container').addClass('active')	
+	}
+})

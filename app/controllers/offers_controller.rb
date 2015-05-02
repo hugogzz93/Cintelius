@@ -10,7 +10,6 @@ class OffersController < ApplicationController
 	# 		inner JOIN orders
 	# 			ON order_products.order_id = orders.id
 	# 		WHERE user_products.user_id = 2
-
 	end
 
 	def new
@@ -43,6 +42,7 @@ class OffersController < ApplicationController
 			format.js {
 				@order = (Order.where(id: params[:id]).includes(:offers, :combos, order_products: :comment)).first
 				@products = @order.products
+				@authorized_products = current_user.authorized_products
 				@offers = @order.offers.where(user_id: current_user.id)
 				@combos = @order.combos.where(user_id: current_user.id)
 			}

@@ -1,4 +1,5 @@
 es:
+  log_in: 'Iniciar Sesion'
   date:
     abbr_day_names:
     - dom

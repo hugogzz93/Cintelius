@@ -1,5 +1,5 @@
 <% if @success %>
-	$('.offer_list').prepend("<%= j render partial:  'offer_status_form.html.erb', locals: {f: @offer} %>")
+	$('.offer_list').prepend("<%= j render partial:  'offer_status_form.html.erb', locals: {f: @offer, order_due_date_past: @offer.order.due_date_past?} %>")
 	$('.deletion_candidate').remove()
 <% else %>
 	<% error_string = "No se pudo guardar su oferta:\n" %>

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   post '/offer_details/create' => 'offer_details#create', as: 'offer_details'
   post '/combos/create' => 'combos#create',  as: 'create_combo'  
   get 'from_order/:id' => "offers#from_order", as: 'from_order'
-  get '/orders/principal' => "orders#principal", as: 'principal'
+  get '/welcome/index' => "welcome#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

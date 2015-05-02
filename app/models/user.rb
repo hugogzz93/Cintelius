@@ -14,4 +14,8 @@ class User < ActiveRecord::Base
   has_one :service_grade
   has_one :user_detail, dependent: :destroy
 
+  def authorized_products
+    self.products.collect {|product| product.id}
+  end
+
 end

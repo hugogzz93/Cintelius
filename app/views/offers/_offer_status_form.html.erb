@@ -21,7 +21,7 @@
 				</div>
 			</div>
 			<div class="right_side">
-				<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id} unless order_status%>
+				<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id} unless order_due_date_past%>
 				<%= button_tag "Cliente", class: "buyer_comment_tag" %>
 				<%= button_tag "Tu Comentario", class: "seller_comment_tag" %>
 				<div class="comment_box">
