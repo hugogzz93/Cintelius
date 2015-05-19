@@ -26,6 +26,7 @@
 <% end %>
 	
 
+
 // Para que el checkbox se marque cuando un producto sea agregado
 $('.combo_product_add_button').on('click', function(e) {
 	$(e.target).attr('type', 'button')
@@ -46,6 +47,8 @@ $('.combo_product_add_button').on('click', function(e) {
 		$($('.combo_product_add_button[data-product-id='+ idToRemove+ ']')).prop('disabled', false)
 	})
 })
+
+
 
 
 

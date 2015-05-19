@@ -21,6 +21,9 @@ $('.buyer_comment_tag').on('click', function(e){
 	$(e.target).siblings('.comment_box').children('.seller_comment').css('display', 'none')
 })
 
+//se metian varvios productos al combo box porque el bind agabjo se agregaba varias veces al mismo boton
+$('.combo_product_add_button').unbind('click');  
+
 $('.combo_product_add_button').on('click', function(e) {
 	$(e.target).attr('type', 'button')
 	idToCheck = $(e.target).attr('data-product-id')
