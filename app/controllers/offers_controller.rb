@@ -1,15 +1,17 @@
 class OffersController < ApplicationController
+	
+	before_action :authenticate_user!, :check_if_seller
 	def index
 		# No deben de aparecer ordenes que no tengan productos autorizados para el usuario proveedor
-		@orders = Order.joins(:order_products, products: :user_products).where(user_id: current_user.id).distinct
-	# 	SELECT  DISTINCT orders.* 
-	# 	FROM user_products inner join products
-	# 		ON user_products.product_id = products.id
-	# 		inner JOIN order_products
-	# 			ON user_products.product_id = order_products.product_id			
-	# 		inner JOIN orders
-	# 			ON order_products.order_id = orders.id
-	# 		WHERE user_products.user_id = 2
+		@orders = Order.joins(:order_products, products: :user_products).where(user_products: {user_id: current_user.id}).distinct
+		# SELECT  DISTINCT orders.* 
+		# FROM user_products inner join products
+		# 	ON user_products.product_id = products.id
+		# 	inner JOIN order_products
+		# 		ON user_products.product_id = order_products.product_id			
+		# 	inner JOIN orders
+		# 		ON order_products.order_id = orders.id
+		# 	WHERE user_products.user_id = 2
 	end
 
 	def new
@@ -53,5 +55,9 @@ class OffersController < ApplicationController
 		def offer_params
 			params.require(:offer).permit(:order_id, :product_id, :unitary_price, offer_details_attributes: [:units],
 			 comment_attributes: [:content])
+		end
+
+		def check_if_seller
+			redirect_to orders_path unless current_user.is_seller? or current_user.is_admin?
 		end
 end

@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
 
-	before_action :authenticate_user!
+	before_action :authenticate_user!, :check_if_buyer
 	def index
 		@orders = Order.where(user_id: current_user.id)
 	end		
@@ -11,7 +11,8 @@ class OrdersController < ApplicationController
 	end
 
 	def create
-		params[:order][:due_date] = params[:order][:due_date] + " " +params[:order][:due_time]
+		# importante: se le agrega -0500 por el timezone, falta implementar esto pero para todos los timezones
+		params[:order][:due_date] = params[:order][:due_date] + " " +params[:order][:due_time] + " -0500"
 		current_user.orders.create(order_params)
 		exit		
 	end
@@ -32,6 +33,10 @@ class OrdersController < ApplicationController
 		def order_params
 			params.require(:order).permit(:title, :due_date, comment_attributes: [:content], order_products_attributes: [:product_id, :units, 
 				comment_attributes: [:content]])
+		end
+
+		def check_if_buyer
+			redirect_to offers_path unless current_user.is_buyer? or current_user.is_admin?
 		end
 		
 end

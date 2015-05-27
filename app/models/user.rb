@@ -18,4 +18,16 @@ class User < ActiveRecord::Base
     self.products.collect {|product| product.id}
   end
 
+  def is_buyer?
+    self.user_detail.is_buyer?
+  end
+
+  def is_seller?
+    self.user_detail.is_seller?
+  end
+
+  def is_admin?
+    self.user_detail.is_admin?
+  end
+
 end

@@ -1,3 +1,4 @@
+# Borrar este controlador
 class WelcomeController < ApplicationController
 
 	def index

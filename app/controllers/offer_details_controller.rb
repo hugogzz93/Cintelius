@@ -1,5 +1,7 @@
 class OfferDetailsController < ApplicationController
 
+	before_action :authenticate_user!
+
 	def create
 		respond_to do |format|
 			format.js {
