@@ -30,6 +30,17 @@
  /*verde #7986CB*/
  /*naranja padre #ff6500*/
 
+@font-face {
+  font-family: 'din1451alt';
+  src: url(/assets/din1451alt.eot);
+  src: url(/assets/din1451alt.eot?#iefix) format("embedded-opentype"), 
+    url(/assets/din1451alt.ttf) format("truetype"), 
+    url(/assets/din1451alt.woff) format("woff"), 
+    url(/assets/din1451alt.svg#din1451alt) format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
 
 .top-bar  {
   position: fixed;

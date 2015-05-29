@@ -1,27 +1,81 @@
-<h2>Log in</h2>
+<div id="rectangle">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label "Correo" %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+  
 
-  <div class="field">
-    <%= f.label "Clave" %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+  <div id="form-background" class="rectangle-middle-box">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="email-container">
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label "Recuerdame" %>
+        <div class="box">
+          <div class="icon-container" id="user-icon">
+            <%= image_tag "icons/icon-user.jpg" %>      
+          </div>
+
+          <div class="field">
+            <%= f.email_field :email, autofocus: true, autocomplete: "off" %>
+          </div>
+        </div>
+      </div>
+
+      <div id="password-container">
+        <div class="box">
+          <div class="icon-container" id="password-icon">
+              <%= image_tag "icons/icon-lock.jpg" %>      
+          </div>
+
+          <div class="field">
+            <%= f.password_field :password, autocomplete: "off" %>
+          </div>
+        </div>
+      </div>
+
+      
+
+      <% if devise_mapping.rememberable? -%>
+        <div class="field">
+          <!-- <%= f.check_box :remember_me %> -->
+          <!-- <%= f.label "Recuerdame" %> -->
+        </div>
+      <% end -%>
+
+      <div class="actions">
+        <%= f.submit "Iniciar Sesion" %>
+      </div>
+    <% end %>  
+    <div id="logo-holder">
+      <%= image_tag "logo.png" %>      
     </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Iniciar Sesion" %>
   </div>
-<% end %>
+  
 
-<%= render "devise/shared/links" %>
+  <div id="image-blur-background" class="rectangle-middle-box">
+  <!-- para que este el efecto de blur   -->
+  </div>
+
+
+</div>
+
+<div id="square1" class="frontpage-square">
+  <div class="message">
+    DESCARTA TUS LíMITES
+  </div>
+  <div class="line-holder" id="arrow-holder">
+    <%= image_tag("frontpage/arrow.png") %>
+  </div>
+  <%= image_tag("frontpage/ramen.png") %>
+</div>
+<div id="square2" class="frontpage-square">
+  <div class="line-holder">
+    <%= image_tag("frontpage/aguila.png") %>
+  </div>
+  <%= image_tag("frontpage/cuadrado2.jpg") %>
+</div>
+<div id="square3" class="frontpage-square">
+  <div class="line-holder">
+    <%= image_tag("frontpage/nopal.png") %>
+  </div>
+  <%= image_tag("frontpage/cuadromapa.jpg") %>
+</div>
+
+<!-- # <%= render "devise/shared/links" %> -->
 

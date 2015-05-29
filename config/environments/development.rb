@@ -14,12 +14,21 @@ Rails.application.configure do
     :port                     => 587, 
     :domain                   => 'gmail.com',
     :user_name                => 'pinelo93@gmail.com',
-    :password                 => '7288145h',
+    :password                 => 'eeee',
     :authentication           => 'plain',
     :enable_starttls_auto     => true
 
   }
   config.cache_classes = false
+
+  # Add the fonts path
+  # config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+
+  config.assets.enabled = true
+  config.assets.paths << Rails.root.join('/app/assets/fonts')
+
+  # Precompile additional assets
+  config.assets.precompile += %w( .svg .eot .woff .ttf )
 
   # Do not eager load code on boot.
   config.eager_load = false

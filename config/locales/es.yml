@@ -1,4 +1,8 @@
 es:
+  devise:
+    failure:
+      user:
+        unauthenticated: 'Usuario no reconocido'
   log_in: 'Iniciar Sesion'
   date:
     abbr_day_names:
