@@ -40,6 +40,41 @@ $(function() {
 // }
 
 
+// Order Index {
+$('.order_box a').on('click', function(e) {
+	$('.order_box').removeClass('fade-in').addClass('fade-out');
+	$($(e.target).closest('.order_box')).addClass('active').removeClass('fade-out');	
+	$('.order_box.active img').css('display', 'none');
+	$('.order_box.active .return_arrow').css('display', 'block');
+	setTimeout(function() {
+		$('.fade-out').css('display', 'none');
+		console.log('active')
+	}, 500)
+	// $('.order_box a').unbind(); //para que no se active esta funcion si ya esta activa
+})
+
+
+$('.return_arrow').on('click', function(e) {
+	$('.provider_box').addClass('fade-out');
+	$('.order_box.fade-out').addClass('fade-in').removeClass('fade-out').css('display', 'block');
+	// $('.fade-out').css('display', 'none');
+	$('.order_box.active img').css('display', 'block');
+	$('.order_box.active .return_arrow').css('display', 'none');
+	$($(e.target).closest('.order_box')).removeClass('active');
+	setTimeout(function() {
+		$('.provider_box').remove();
+
+	}, 500)	
+	console.log('hello')
+})
+
+
+
+
+
+// }
+
+
 	// @@NEWORDER
 
 	// Arreglar tamaño de la pantalla.

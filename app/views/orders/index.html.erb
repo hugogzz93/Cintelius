@@ -1,11 +1,28 @@
 <div class="order_index">
 	<div class="column orders">
-		<ul class="provider_list">
-			
-		</ul>
+		<div class="column_header">
+			Órdenes
+		</div>
+
+
+		
+
+		<!-- lista de ordenes que tiene el comprador -->
 		<ul class="order_list">
+			<!-- cada orden es un link para la accion Orders#show  -->
 			<% @orders.each do |order|  %>
 				<li class="order_box">
+					<%= image_tag("icons/icon-back-arrow.png", class: "return_arrow") %>
+					<% if order.due_date_past? %>
+						<% if order.is_locked? %>
+							<%= image_tag("icons/icon-checkmark.png") %>
+						<% elsif order.is_open?%>
+							<%= image_tag("icons/icon-eye.png") %>
+						<% end %>
+					<% else %>
+							<%= image_tag("icons/icon-clock.png") %>
+					<% end %>
+
 					<%= link_to(order_path(id: order.id), remote: true) do %>
 					  <%= order.user.user_detail.organization %> <br>
 					  <div class="due_date_info">
@@ -14,17 +31,28 @@
 					<% end %>
 				</li>			
 			<% end %>
-		</ul>		
+		</ul>
+		<ul class="provider_list">
+			
+		</ul>
 	</div>
 
 	<!-- Ofertas y combos -->
 	<div class="column order_offers">
+		<div class="column_header">
+			Productos
+		</div>
+
 		<ul class="offer_list">
 			
 		</ul>
 	</div>
 
 	<div class="column order_products">
+		<div class="column_header">
+			Selección
+		</div>
+
 		<ul class="order_product_list">
 			
 		</ul>

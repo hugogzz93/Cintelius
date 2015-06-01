@@ -47,17 +47,7 @@
 					<span style="float:left; margin-left: 7%;">$</span>
 					<div class="background_box">
 						<%= f.unitary_price %>
-					</div>
-					<%= button_tag "Contraoferta", class: "show_counter_form_button"%>
-					<% offer_detail = f.offer_details.build %>
-					<% logger.info offer_detail %>
-					<%= form_for offer_detail, html: {
-						class: 'offer_detail_form '}, remote: true do |offer_detail|%>
-						<%= offer_detail.number_field :offer_id, style: "display:none;" %>
-						<%= offer_detail.number_field :units %>
-						<%= offer_detail.submit "Cambiar" %>
-						<%= button_tag "-", class: "hide_offer_detail_form"%>
-					<% end %>
+					</div>					
 				</div>
 
 			</div>

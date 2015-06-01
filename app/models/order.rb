@@ -14,6 +14,8 @@ class Order < ActiveRecord::Base
 
 	validates :title, presence: true, length: {maximum: 100}
 
+	# open: usuario puede seleccionar ofertas, locked: ya selecciono, closed: se termino la orden
+
 	enum status: [:open, :locked, :closed]
 
 	def due_date_past?
@@ -25,7 +27,18 @@ class Order < ActiveRecord::Base
 		# end
 
 		self.due_date <= Time.now
-		
+	end
+
+	def is_locked?
+		self.status == "locked"
+	end
+
+	def is_open?
+		self.status == "open"
+	end
+
+	def is_closed?
+		self.status == "closed"
 	end
 	
 
