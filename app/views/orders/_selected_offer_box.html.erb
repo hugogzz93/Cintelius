@@ -1,25 +1,33 @@
 <!-- recibe una oferta en f -->
 <div class='selected_offer_box' data-offer-id="<%= f.id %>">
-			<div class="left_side">
-				<div class="product_name_box">
-					<%= f.user.user_detail.organization %> <br>
-					<div class="background_box">
-						<%= f.product.name %>
-					</div>
-				</div>
-				<div class="offer_numbers_box">
-					<span style="float:left;">Kg</span>
-					<div class="background_box">
-						<%= OfferDetail.where(offer_id: f.id).last.units %>
-					</div>
-				</div>
-			</div>
-			<div class="right_side">
-				<%= button_tag "-", class: "offer_deselection_button", data: {offer_id: f.id, product_id: f.product.id}%>
-				<div class="comment_box">
-					<div class="buyer_comment">
-						<%= f.comment.content %>
-					</div>
-				</div>		
-			</div>
+	<div class="provider_name_box">
+		<%= f.organization %>
 	</div>
+
+	<div class="options_box">
+		<%= button_tag "-", class: "offer_deselection_button", 
+					data: {offer_id: f.id, product_id: f.product.id}%>
+	</div>
+	
+	<div class="product_name_box">
+		<%= f.product_name %>
+	</div>
+
+	<div class="unit_box">
+		<span class="unit_code">Kg:</span>
+		<%= f.units %>
+	</div>
+
+	<div class="unitary_price_box">
+		<span class="unit_code">Unitario</span>
+		<span class="unit_code" style="color:#C8C8C8;"><%= t 'currency_code' %>:</span>
+		<%= f.unitary_price %>
+	</div>
+
+	<div class="total_price_box">
+		<span class="unit_code">Total:</span>
+		<%= f.total_price %>
+	</div>
+			
+		
+</div>

@@ -67,6 +67,14 @@ class Offer < ActiveRecord::Base
 		self.units * self.unitary_price
 	end
 
+	def organization
+		self.user.user_detail.organization
+	end
+
+	def product_name
+		self.product.name
+	end
+
 	
 
 	# Falta craer un offer_detail con al craer el offer
