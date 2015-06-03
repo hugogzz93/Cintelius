@@ -38,11 +38,7 @@ $('.order_title_container').append('<%= j @order.title %>')
 <% end %>
 
 <% @order.order_products.each do |order_product| %>
-	// $('.order_product_list').append("<%= j render partial: 'order_product_objective_box.html.erb', locals: {f: order_product}%>")	
 	$('.order_product_info_list').append("<%= j render partial: 'tab_product_info.html.erb', locals: {f: order_product}%>") // actualizar el tab	
-
-	
-
 <% end %>
 // Se pueda acceder al tab de informacion con un boton
 $('.column.order_products').append("<div class='info_tab_button'></div>")

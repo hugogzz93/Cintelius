@@ -22,3 +22,4 @@
 en:
   hello: "Hello world"
   log_in: 'Log In'
+  currency_code: "USD"

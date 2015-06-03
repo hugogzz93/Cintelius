@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415003514) do
+ActiveRecord::Schema.define(version: 20150602231710) do
 
   create_table "categories", force: true do |t|
     t.integer  "supercategory_id", limit: 4
@@ -54,19 +54,19 @@ ActiveRecord::Schema.define(version: 20150415003514) do
   create_table "offer_details", force: true do |t|
     t.integer  "order_id",   limit: 4
     t.integer  "offer_id",   limit: 4
-    t.integer  "units",      limit: 4,             null: false
-    t.integer  "status",     limit: 4, default: 0, null: false
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.decimal  "units",                precision: 10, scale: 2,             null: false
+    t.integer  "status",     limit: 4,                          default: 0, null: false
+    t.datetime "created_at",                                                null: false
+    t.datetime "updated_at",                                                null: false
   end
 
   create_table "offers", force: true do |t|
     t.integer  "user_id",       limit: 4
     t.integer  "product_id",    limit: 4
-    t.integer  "status",        limit: 4,                default: 0, null: false
-    t.decimal  "unitary_price",           precision: 10,             null: false
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
+    t.integer  "status",        limit: 4,                          default: 0, null: false
+    t.decimal  "unitary_price",           precision: 10, scale: 2,             null: false
+    t.datetime "created_at",                                                   null: false
+    t.datetime "updated_at",                                                   null: false
     t.integer  "order_id",      limit: 4
   end
 

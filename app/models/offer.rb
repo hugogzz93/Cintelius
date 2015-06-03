@@ -16,6 +16,57 @@ class Offer < ActiveRecord::Base
 
 	enum status: [:ready, :pending, :selected, :locked, :received]
 
+	def is_ready?
+		self.status == "ready"
+	end
+
+	def is_pending?
+		self.status == "pending"
+	end
+
+	def is_selected?
+		self.status == "selected"
+	end
+
+	def is_locked
+		self.status == "locked"
+	end
+
+	def is_received?
+		self.status == "received"
+	end
+
+	def detail_status
+		self.offer_details.last.status
+	end
+
+	def complete_status
+		if self.is_ready? and detail_status == "both"
+			"ready-both"
+		elsif self.is_ready? and detail_status == "provider"
+			"ready-provider"
+		elsif self.is_pending?
+			# se hizo una contraoferta y espera decision de proveedor
+			"pending"
+		elsif self.is_selected?
+			# ambos aceptaron y comprador la selecciono la
+			"selected"
+		elsif self.is_locked?
+			#despues de ser seleccionada, ya se confirmo y no se puede cambiar
+			"locked"
+		elsif self.is_received?
+			"received"			
+		end
+	end
+
+	def units
+		self.offer_details.last.units
+	end
+
+	def total_price
+		self.units * self.unitary_price
+	end
+
 	
 
 	# Falta craer un offer_detail con al craer el offer

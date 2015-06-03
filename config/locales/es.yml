@@ -1,5 +1,9 @@
 es:
+  currency_code: "MXN"
   devise:
+    sessions:
+      user:
+        signed_in: "Sesión Iniciada"
     failure:
       user:
         unauthenticated: 'Usuario no reconocido'
