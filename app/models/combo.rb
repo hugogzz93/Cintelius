@@ -11,4 +11,25 @@ class Combo < ActiveRecord::Base
     validates :price, presence: true, numericality: true
 
 	enum status: [:ready, :selected, :locked, :received]
+
+	def is_ready?
+		self.status == "ready"
+	end
+
+	def is_selected?
+		self.status == "selected"
+	end
+
+	def is_locked?
+		self.status == "locked"
+	end
+
+	def is_received?
+		self.status == "received"
+	end
+
+	def organization
+		self.user.user_detail.organization
+	end
+
 end

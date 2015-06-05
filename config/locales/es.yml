@@ -1,4 +1,6 @@
 es:
+  confirm_selection: "Confirmar Selección"
+  selection: 'Selección'
   currency_code: "MXN"
   devise:
     sessions:

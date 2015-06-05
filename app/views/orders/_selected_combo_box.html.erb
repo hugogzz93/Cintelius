@@ -1,6 +1,15 @@
 <!-- recibe un objecto combo en f -->
-<% if f.status == "ready" %>
 	<div class="selected_combo_box", data-combo-id="<%= f.id %>">
+
+		<div class="combo_provider_name_box">
+			<%= f.organization %>
+			<div class="combo_options_box">
+				<%= button_tag "-", class: "combo_deselection_button", data: {combo_id: f.id} do %>
+					<%= image_tag "icons/icon-x.png"%>
+				<% end %>
+			</div>	
+		</div>
+
 		<ul class="product_list_area">
 			<% f.combo_products.each do |combo_product| %>		
 				<li class="combo_product_box" data-product-id="<%= combo_product.product.id %>" data-product-units="<%= combo_product.units %>">
@@ -10,7 +19,7 @@
 					<div class="background_box">
 						<%= combo_product.units %>
 					</div>
-					<span class="combo_product_unit_label">Kg</span>
+					<span class="combo_product_unit_label unit_code">Kg</span>
 				</li>
 			<% end %>
 		</ul>
@@ -20,80 +29,14 @@
 		</div>
 
 		<span class="combo_price_label">
-			Total: $
+			Total <span class="unit_code" style="color:#C8C8C8"><%= t 'currency_code' %>:</span>
 		</span>
 		<div class="combo_price_label">
 			<div class="background_box">
 				<%= f.price %>
 			</div>
 		</div>
-		<%= button_tag "-", class: "combo_deselection_button", data: {combo_id: f.id}%>
-
 	</div>
-<% elsif f.status == "locked" %>
-	<div class="selected_combo_box locked">
-		<ul class="product_list_area">
-			<% f.combo_products.each do |combo_product| %>		
-				<li class="combo_product_box" data-product-id="<%= combo_product.product.id %>" data-product-units="<%= combo_product.units %>">
-					<div class="combo_product_name">
-						<%= combo_product.product.name %>
-					</div>
-					<div class="background_box">
-						<%= combo_product.units %>
-					</div>
-					<span class="combo_product_unit_label">Kg</span>
-				</li>
-				
-			<% end %>
-		</ul>
-		
-		<div class="comment_box">
-			<%= f.comment.content %>
-		</div>
-
-		<span class="combo_price_label">
-			Total: $
-		</span>
-		<div class="combo_price_label">
-			<div class="background_box">
-				<%= f.price %>
-			</div>
-		</div>
-
-	</div>
-<% elsif f.status == "received" %>
-	<div class="selected_combo_box received">
-		<ul class="product_list_area">
-			<% f.combo_products.each do |combo_product| %>		
-				<li class="combo_product_box" data-product-id="<%= combo_product.product.id %>" data-product-units="<%= combo_product.units %>">
-					<div class="combo_product_name">
-						<%= combo_product.product.name %>
-					</div>
-					<div class="background_box">
-						<%= combo_product.units %>
-					</div>
-					<span class="combo_product_unit_label">Kg</span>
-				</li>
-				
-			<% end %>
-		</ul>
-		
-		<div class="comment_box">
-			<%= f.comment.content %>
-		</div>
-
-		<span class="combo_price_label">
-			Total: $
-		</span>
-		<div class="combo_price_label">
-			<div class="background_box">
-				<%= f.price %>
-			</div>
-		</div>
-
-	</div>
-<% end %>
 
 
-
-	
+<!-- si la orden ya esta completada, debe de mostrar diferentes opciones -->

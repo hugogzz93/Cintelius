@@ -27,7 +27,7 @@
  /*rojo obscuro #CC686C*/
  /*amarillo #EFC647*/
  /* azul-morado #7986CB*/
- /*verde #7986CB*/
+ /*verde #39bf00*/
  /*naranja padre #ff6500*/
 
 @font-face {
@@ -41,6 +41,68 @@
   font-style: normal;
 }
 
+.flash_messages {
+  position: fixed;
+
+  right: -10%;
+  opacity: 0;
+  top: -2%;
+  overflow: auto;
+  width: 31%;
+  -webkit-animation: flash-message-slide-in 5s linear  1;
+
+}
+
+@-webkit-keyframes flash-message-slide-in{
+  0% {
+    right: -10%;
+    opacity: 0;
+    z-index: 99;
+  }
+
+  5% {
+    opacity: 1;
+    z-index: 99;
+    right: 0%
+  }
+
+  95% {
+    opacity: 1;
+    z-index: 99;
+    right: 0%;
+  }
+
+  100% {
+    right: -10%;
+    opacity: 0;
+    z-index: 99;
+  }
+}
+
+img.alert-icon {
+  width: 12%;
+  float: left;
+  margin-right: 3%;
+  margin-top: -4%;
+  margin-bottom: 2%;
+}
+
+.alert {
+  margin-right: 10%;
+  padding: 6%;
+}
+
+.alert-success {
+  background-color: #39bf00;
+  margin-right: 10%;
+  padding: 6%;
+  overflow: auto;
+}
+
+.flash_value_box {
+  color: white;
+  float: left;
+}
 
 .top-bar  {
   position: fixed;
@@ -72,6 +134,16 @@
     float: left;
     width: 80%;
     pointer-events: none;
+  }
+
+  .confirmation_button {
+  height: auto;
+  width: 5%;
+  float: left;
+  margin-left: 5%;
+  margin-right: -8%;
+  cursor: pointer;
+  /*background-color:green;*/
   }
 
   .order_box.fade-in {
@@ -136,11 +208,35 @@
   color: black;
 }
 
+.combo_deselection_button img {
+  height: auto;
+  width: 35%;
+}
+
+.combo_options_box {
+  height: auto;
+  border: none;
+  background-color: transparent;
+  float: right;
+  height: 1.15em;
+  margin-top: -1%;
+}
+
+
+
 .options_box {
   padding: 1%;
   float: left;
   width: 8%;
   border-bottom: 1px solid #e5e5e5;
+  height: 1.13em;
+}
+
+.combo_provider_name_box {
+  border-bottom: 1px solid #e5e5e5;
+  padding: 1%;
+  width: 100%;
+  float: left;
 }
 
 .provider_name_box {
@@ -580,6 +676,18 @@ form#new_order.new_order_form textarea.editable {
   margin: 7%;
 }
 
+.combo_status_circle {
+  width: 3em;
+  height: 3em;
+  border-radius: 2em;
+  float: left;
+  margin: 7%;
+}
+
+.combo_status_circle.ready {
+  background-color: #EFC647;
+}
+
 /*.new_offer*/ .offer_product_box .left_side, .selected_offer_box .left_side {
   width: 37%;
   float: left;
@@ -656,7 +764,7 @@ form#new_order.new_order_form textarea.editable {
 
 .offer_numbers_box .background_box, .combo_price_label .background_box {
   float: left;
-  width: 68%;
+  width: 64%;
   text-align: left;
   margin-left: 3%;
   overflow: auto;
@@ -665,6 +773,10 @@ form#new_order.new_order_form textarea.editable {
 .combo_price_label .background_box {
   width: 6em;
   overflow-x: scroll;
+  position: relative;
+  left: -11%;
+  top: -0.05em;
+  color: #20bdff;
 }
 /*.new_offer*/ .offer_product_box.ready {
   background-color:  #EB9E4A;
@@ -692,6 +804,10 @@ form#new_order.new_order_form textarea.editable {
 }
 
 
+.combo.comment_box {
+  border:1px solid #E5E5E5;
+  height: 7.35em;
+}
 .comment_box {
   overflow-x: scroll;
   padding: 1%;
@@ -705,14 +821,12 @@ form#new_order.new_order_form textarea.editable {
   font-weight: lighter;
 }
 
-.button_offer
-
-.combo_box .comment_box, .selected_combo_box .comment_box {
+.button_offer .combo_box .comment_box, .selected_combo_box .comment_box {
   border-radius: 4px;
-  border: 1px solid white;
+  border: 1px solid #E5E5E5;
   height: 4.3em;
   clear: both;
-  color: white;
+  color: black;
   font-weight: lighter;
   margin: 1%;
   width: 91.5%;
@@ -875,16 +989,12 @@ textarea, input {outline: none;}
 }
 
 .new_combo_form, .combo_box, .selected_combo_box {
-  background-color: #444444;
-  margin-left: 1%;
   overflow: auto;
-  border-radius: 4px;
-  margin-bottom: 1%;
-  border: 1px solid white;
 }
 
 .combo_box.ready {
-  background-color: #2db6cf;
+  background-color: white;
+  color: black;
 }
 
 .new_combo_form .checkbox_area{
@@ -911,10 +1021,9 @@ textarea, input {outline: none;}
 
 .combo_product_box {
   padding: 1%;
-  border: 1px solid white;
+  border: 1px solid #E5E5E5;
   width: 45%;
-  border-radius: 4px;
-  color: white;
+  color: black;
   font-weight: 300;
   float: left;
   margin: 1%;
@@ -963,9 +1072,9 @@ input.combo_price {
 
 .combo_price_label {
   margin-left: 2.5%;
-  color: white;
+  color: black;
   float: left;
-  margin-bottom: 1%;
+  margin-top: 1%;
 }
 
 .combo_product_name {
@@ -975,12 +1084,15 @@ input.combo_price {
   overflow-y: hidden;
   height: 1em;
   width: 50%;
+  color: black;
 }
 
 .combo_product_box .background_box {
-  width: 2.5em;
-  text-align: center;
+  width: 3em;
+  text-align: left;
   float: right;
+  border-radius: 0px;
+  color: #20bdff;
 }
 
 #combo_price {
@@ -1216,7 +1328,18 @@ img.return_arrow {
 .selected_offer_box.selected{
   display: block;
   color: #31353c;
-  /*border: 1px solid #31353c;*/
+  -webkit-animation: yellow-highlight 1s ease 1;
+  border-bottom: 1px solid #E5E5E5;
+  border-top: 1px solid #E5E5E5;
+}
+
+@-webkit-keyframes yellow-highlight{
+  0% {
+      background-color: #ffff9a;
+  }
+  100% {
+      background-color: white
+  }
 }
 
 .selected_offer_box.selected .background_box{
@@ -1234,11 +1357,14 @@ img.return_arrow {
 }
 
  .offer_deselection_button {
-  float: right
+  height: 100%;
+  padding: 0px;
+  border: none;
+  background-color: transparent;
 }
 
 .offer_selection_button {
-  float: right;
+  /*float: right;
   font-size: 2em;
   padding-bottom: 15%;
   border-radius: 2em;
@@ -1251,8 +1377,52 @@ img.return_arrow {
   bottom: 26%;
   border: none;
   color: white;
+  cursor: pointer;*/
+
+  float: right;
+  font-size: 2em;
+  padding-bottom: 25%;
+  border-radius: 5em;
+  height: 120%;
+  box-sizing: content-box;
+  width: 120%;
+  background-color: transparent;
+  position: relative;
+  left: 29%;
+  bottom: 27%;
+  border: none;
+  color: white;
   cursor: pointer;
+  border:1px solid transparent;
 }
+
+.offer_selection_button.active {
+  cursor: default;
+  opacity: 0;
+  -webkit-animation: offer_selection_rotate_out 0.5s ease 1;
+  
+}
+
+ @-webkit-keyframes offer_selection_rotate_out{
+  0% {
+    font-size: 2em;
+      background-color: #ffff9a;
+      opacity: 1;
+  }
+  100% {
+    background-color: transparent;
+      opacity: 0;
+    font-size: 0.0em
+      
+  }
+}
+
+.offer_deselection_button img{
+  width: 2em;
+  margin-top: -8%;
+}
+
+
 
 .order_index .combo_box {
   display: none;
@@ -1260,7 +1430,9 @@ img.return_arrow {
 
 .order_index .combo_box.active{
   display: block;
+  border-bottom: 1px solid #E5E5E5;
 }
+
 
 .combo_select_button {
   float: left;
@@ -1275,19 +1447,58 @@ img.return_arrow {
 
 .selected_combo_box.selected {
   display: block;
-  background-color: #2db6cf;
+  border-top: 1px solid #E5E5E5;
+  border-bottom: 1px solid #E5E5E5;
+  -webkit-animation: yellow-highlight 1s ease 1;
+
 }
 
 .combo_selection_button {
+  /*float: right;
+  font-size: 2em;
+  padding-bottom: 25%;
+  border-radius: 5em;
+  height: 120%;
+  box-sizing: content-box;
+  width: 120%;
+  background-color: transparent;
+  position: relative;
+  left: 29%;
+  bottom: 5%;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border: 1px solid transparent;*/
+
+    font-size: 3em;
   float: right;
-  margin-top: -20%;
-  margin-right: 2%;
+  padding-bottom: 19%;
+  border-radius: 5em;
+  height: 120%;
+  box-sizing: content-box;
+  width: 120%;
+  background-color: transparent;
+  position: relative;
+  left: 27%;
+  bottom: 27%;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.combo_selection_button.active {
+  cursor: default;
+  opacity: 0;
+  -webkit-animation: offer_selection_rotate_out 0.5s ease 1;
+
+
 }
 
 .combo_deselection_button {
-  float: right;
-  margin-top: -26.3%;
-  margin-right: 2%;
+  height: auto;
+  border: none;
+  background-color: transparent;
 }
 
 
@@ -1364,27 +1575,27 @@ img.return_arrow {
 
 
 .info_tab_close_button {
-  width: 0;
-  height: 0;
-  position: absolute;
-  right: 2%;
-  top: 4%;
-  border-top: 0.5em solid transparent;
-  border-bottom: 0.5em solid transparent;
-  border-left: 1em solid #666666;
+    position: absolute;
+  right: -4%;
+  top: 2%;
   cursor: pointer;
 }
 
+.info_tab_close_button img {
+  height: auto;
+  width: 35%;
+}
+
  .info_tab_button {
-  width: 0;
-  height: 0;
   position: absolute;
-  right: 2%;
-  top: 4%;
-  border-top: 0.5em solid transparent;
-  border-bottom: 0.5em solid transparent;
-  border-right: 1em solid #666666;
+  right: 0%;
+  top: 2%;
   cursor: pointer;
+}
+
+.info_tab_button img {
+  height: auto;
+  width: 50%;
 }
 
 

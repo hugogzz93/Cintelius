@@ -1,101 +1,37 @@
-<!-- recibe un objecto combo en f -->
-<% if f.status == "ready" %>
-	<div class="combo_box ready" data-combo-id="<%= f.id %>", data-attribute-user-id="<%= f.user.id %>">
-		<ul class="product_list_area">
-			<% f.combo_products.each do |combo_product| %>		
-				<li class="combo_product_box" data-product-id="<%= combo_product.product.id %>" data-product-units="<%= combo_product.units %>">
-					<div class="combo_product_name">
-						<%= combo_product.product.name %>
-					</div>
-					<div class="background_box">
-						<%= combo_product.units %>
-					</div>
-					<span class="combo_product_unit_label">Kg</span>
-				</li>
-			<% end %>
-		</ul>
-	
-		<div class="comment_box">
-			<%= f.comment.content %>
-		</div>
+<!-- recibe un objecto combo en f y en function recibe 'order' o 'offer'-->
+<div class="combo_box <%= f.status %>" data-combo-id="<%= f.id %>", 
+		data-attribute-user-id="<%= f.user.id %>">
 
-		<span class="combo_price_label">
-			Total: $
-		</span>
-		<div class="combo_price_label">
-			<div class="background_box">
-				<%= f.price %>
-			</div>
-		</div>
-		<% if function == "order" %>
-				<%= button_tag "+", class: "combo_selection_button", data: {combo_id: f.id}%>
+	<ul class="product_list_area">
+		<% f.combo_products.each do |combo_product| %>		
+			<li class="combo_product_box" data-product-id="<%= combo_product.product.id %>" data-product-units="<%= combo_product.units %>">
+				<div class="combo_product_name">
+					<%= combo_product.product.name %>
+				</div>
+				<div class="background_box">
+					<%= combo_product.units %>
+				</div>
+				<span class="combo_product_unit_label">Kg:</span>
+			</li>
 		<% end %>
+	</ul>
 
+	<div class="combo_status_circle <%= f.status %>" >
+		<% if function == "order" and f.is_ready? %>
+			<%= button_tag "+", class: "combo_selection_button", data: {combo_id: f.id}%>
+		<% end %>
 	</div>
-<% elsif f.status == "locked" %>
-	<div class="combo_box locked">
-		<ul class="product_list_area">
-			<% f.combo_products.each do |combo_product| %>		
-				<li class="combo_product_box" data-product-id="<%= combo_product.product.id %>" data-product-units="<%= combo_product.units %>">
-					<div class="combo_product_name">
-						<%= combo_product.product.name %>
-					</div>
-					<div class="background_box">
-						<%= combo_product.units %>
-					</div>
-					<span class="combo_product_unit_label">Kg</span>
-				</li>
-				
-			<% end %>
-		</ul>
-		
-		<div class="comment_box">
-			<%= f.comment.content %>
-		</div>
 
-		<span class="combo_price_label">
-			Total: $
-		</span>
-		<div class="combo_price_label">
-			<div class="background_box">
-				<%= f.price %>
-			</div>
-		</div>
-
+	<div class="comment_box combo">
+		<%= f.comment.content %>
 	</div>
-<% elsif f.status == "received" %>
-	<div class="combo_box received">
-		<ul class="product_list_area">
-			<% f.combo_products.each do |combo_product| %>		
-				<li class="combo_product_box" data-product-id="<%= combo_product.product.id %>" data-product-units="<%= combo_product.units %>">
-					<div class="combo_product_name">
-						<%= combo_product.product.name %>
-					</div>
-					<div class="background_box">
-						<%= combo_product.units %>
-					</div>
-					<span class="combo_product_unit_label">Kg</span>
-				</li>
-				
-			<% end %>
-		</ul>
-		
-		<div class="comment_box">
-			<%= f.comment.content %>
+	<span class="combo_price_label">
+		Total <%= t 'currency_code' %>:
+	</span>
+	<div class="combo_price_label">
+		<div class="background_box">
+			<%= f.price %>
 		</div>
-
-		<span class="combo_price_label">
-			Total: $
-		</span>
-		<div class="combo_price_label">
-			<div class="background_box">
-				<%= f.price %>
-			</div>
-		</div>
-
 	</div>
-<% end %>
-
-
-
 	
+</div>

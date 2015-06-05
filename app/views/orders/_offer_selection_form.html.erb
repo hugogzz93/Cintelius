@@ -1,9 +1,9 @@
-<%= form_tag edit_offer_details_path do  %>
+<%= form_tag edit_offer_details_path, remote: true do  %>
 	<% @order.offers.each do |offer| %>
 		<%= check_box_tag 'selected_offers_id[]', offer.id, nil, data: {offer_id: offer.id} %>
 	<% end %>
 	<% @order.combos.each do |combo| %>
 		<%= check_box_tag 'selected_combos_id[]', combo.id, nil, data: {combo_id: combo.id} %>		
 	<% end %>
-	<%= submit_tag "Terminar" %>
+	<%= submit_tag "", id: "order_form_submit" %>
 <% end %>

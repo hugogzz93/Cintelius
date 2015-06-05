@@ -1,6 +1,6 @@
 <div class="order_index">
 	<div class="column orders">
-		<div class="column_header">
+		<div class="column_header" id="orders_header">
 			Órdenes
 		</div>
 
@@ -39,7 +39,7 @@
 
 	<!-- Ofertas y combos -->
 	<div class="column order_offers">
-		<div class="column_header">
+		<div class="column_header" id="products_header">
 			Productos
 		</div>
 
@@ -49,8 +49,8 @@
 	</div>
 
 	<div class="column order_products">
-		<div class="column_header">
-			Selección
+		<div class="column_header" id="selection_header">
+			<%= t('selection') %>
 		</div>
 
 		<ul class="order_product_list">
@@ -59,7 +59,7 @@
 	</div>
 
 	<div class="column order_info">
-		<div class="info_tab_close_button">			
+		<div class="info_tab_close_button">		
 		</div>
 		<div class="order_title_container"></div>
 		<div class="order_product_info_container">

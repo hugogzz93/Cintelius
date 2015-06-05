@@ -6,13 +6,13 @@
 		<div class="product_name_box">
 			<!-- color del circulo debe indicar el estado de la oferta { -->
 			<div class="status_circle <%= f.complete_status %>" >
-				<%= button_tag "+", class: "offer_selection_button", data: {offer_id: f.id, product_id: f.product.id}%>
+				<%= button_tag "+", class: "offer_selection_button", data: {offer_id: f.id, product_id: f.product.id} %>
 			</div>
 			<span style="float:left;margin-top:11%;"><%= f.product.name %></span>
 		</div>
 		<div class="offer_numbers_box">
 			<div class="unit_container">
-				<span style="float:left;margin-top: -2%;">Kg:</span>
+				<span style="float:left;margin-top: -2%;margin-left:5%">Kg:</span>
 				<div class="background_box units" data-product-id="<%= f.product.id %>" ><%= f.offer_details.last.units %></div>
 			</div>
 				<div class="total_price_container">

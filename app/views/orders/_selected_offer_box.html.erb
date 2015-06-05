@@ -5,10 +5,12 @@
 	</div>
 
 	<div class="options_box">
-		<%= button_tag "-", class: "offer_deselection_button", 
-					data: {offer_id: f.id, product_id: f.product.id}%>
+		<%= button_tag "", class: "offer_deselection_button", 
+					data: {offer_id: f.id, product_id: f.product.id} do%> 
+					 <%= image_tag "icons/icon-x.png"%>
+		<% end %>
 	</div>
-	
+
 	<div class="product_name_box">
 		<%= f.product_name %>
 	</div>

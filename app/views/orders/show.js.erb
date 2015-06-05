@@ -6,6 +6,7 @@ $('.column.order_info').removeClass('active')
 $('.column.order_info').children().empty()
 $('.order_product_info_container').append('<ul class="order_product_info_list"></ul>')
 $('.info_tab_button').remove()
+$('.confirmation_button').remove()
 
 // tab de informacion debe estar actualizado
 // <div class="order_title_container"></div>
@@ -41,7 +42,10 @@ $('.order_title_container').append('<%= j @order.title %>')
 	$('.order_product_info_list').append("<%= j render partial: 'tab_product_info.html.erb', locals: {f: order_product}%>") // actualizar el tab	
 <% end %>
 // Se pueda acceder al tab de informacion con un boton
-$('.column.order_products').append("<div class='info_tab_button'></div>")
+$('#selection_header').append("<div class='info_tab_button'><%= j image_tag('icons/icon-info.png')%></div>")
+$('#selection_header').append("<%= j image_tag('icons/icon-style-checkmark-gray.png', class: 'confirmation_button', alt: t('confirm_selection') )%>")
+$('.info_tab_close_button').append("<%= j image_tag('icons/icon-x.png') %>")
+
 
 
 
@@ -61,9 +65,11 @@ $('.offer_detail_form input').on('click', function(e){
 $('.order_product_list').append("<%= j render partial: 'offer_selection_form.html.erb', locals: {f: @order}%>")
 
 $('.offer_selection_button').on('click', function(e) {
-	$(e.target).attr('type', 'button').prop('disabled', true)
-	idToCheck = $(e.target).attr('data-offer-id')
-	prodID = $(e.target).attr('data-product-id')
+	target = $(e.target)
+	target.addClass('active')
+	target.attr('type', 'button').prop('disabled', true)
+	idToCheck = target.attr('data-offer-id')
+	prodID = target.attr('data-product-id')
 	$('.offer_deselection_button[data-offer-id=' + idToCheck + ']').prop('disabled', false)
 	$('.order_product_list input[data-offer-id=' + idToCheck + ']').trigger('click')
 	$('.selected_offer_box[data-offer-id=' + idToCheck + ']').addClass('selected')
@@ -71,17 +77,18 @@ $('.offer_selection_button').on('click', function(e) {
 })
 
 $('.offer_deselection_button').on('click', function(e) {
-	$(e.target).attr('type', 'button').prop('disabled', true)
-	idToCheck = $(e.target).attr('data-offer-id')
-	prodID = $(e.target).attr('data-product-id')	
-	$('.offer_selection_button[data-offer-id=' + idToCheck + ']').prop('disabled', false)
+	target = $(e.target).closest('button')
+	target.attr('type', 'button').prop('disabled', true)
+	idToCheck = target.attr('data-offer-id')
+	prodID = target.attr('data-product-id')	
+	$('.offer_selection_button[data-offer-id=' + idToCheck + ']').prop('disabled', false).removeClass('active')
 	$('.order_product_list input[data-offer-id=' + idToCheck + ']').trigger('click')
 	$('.selected_offer_box[data-offer-id=' + idToCheck + ']').removeClass('selected')
 	prodSelUpdate(prodID, "deselect");
 })
 
 $('.combo_selection_button').on('click', function(e) {
-	$(e.target).attr('type', 'button').prop('disabled', true)
+	$(e.target).attr('type', 'button').prop('disabled', true).addClass('active')
 	idToCheck = $(e.target).attr('data-combo-id')
 	$('.combo_deselection_button[data-combo-id=' + idToCheck + ']').prop('disabled', false)
 	$('.order_product_list input[data-combo-id=' + idToCheck + ']').trigger('click')
@@ -90,9 +97,10 @@ $('.combo_selection_button').on('click', function(e) {
 })
 
 $('.combo_deselection_button').on('click', function(e) {
-	$(e.target).attr('type', 'button').prop('disabled', true)
-	idToCheck = $(e.target).attr('data-combo-id')
-	$('.combo_selection_button[data-combo-id=' + idToCheck + ']').prop('disabled', false)
+	target = $(e.target).closest('button')
+	target.attr('type', 'button').prop('disabled', true)
+	idToCheck = target.attr('data-combo-id')
+	$('.combo_selection_button[data-combo-id=' + idToCheck + ']').prop('disabled', false).removeClass('active')
 	$('.order_product_list input[data-combo-id=' + idToCheck + ']').trigger('click')
 	$('.selected_combo_box[data-combo-id=' + idToCheck + ']').removeClass('selected')
 	comboSelUpdate(idToCheck, "deselect");
@@ -111,7 +119,7 @@ $('.info_tab_close_button').on('click', function() {
 
 // tab de info debe actualizar la cantidad de productos seleccionados
 function prodSelUpdate(prodId, mode) {
-	offerQuantity = parseInt($('.background_box[data-product-id=' + prodId + ']').text());
+	offerQuantity = parseInt($('.units[data-product-id=' + prodId + ']').text());
 	infoTabProdChange(prodId, offerQuantity, mode); //debe de actualizar el string en tab de informacion
 
 }
@@ -154,4 +162,9 @@ $('.product_main_info').on('click', function(e) {
 		$(e.target).addClass('active')
 		$(e.target).siblings('.product_comment_container').addClass('active')	
 	}
+})
+
+// confirmation button es una imagen que actua como boton proxy para el submit
+$('.confirmation_button').on('click', function() {
+	$('#order_form_submit').click();
 })
