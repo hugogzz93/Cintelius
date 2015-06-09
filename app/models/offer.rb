@@ -28,7 +28,7 @@ class Offer < ActiveRecord::Base
 		self.status == "selected"
 	end
 
-	def is_locked
+	def is_locked?
 		self.status == "locked"
 	end
 
@@ -93,12 +93,15 @@ class Offer < ActiveRecord::Base
 		self.order.user.review_tickets.create(reviewable_type: "product_scores", reviewable_id: self.product.id)
 	end
 
-	def self.lock_offers(offers)
-		offers.each do |offer|
+	def self.lock_set(offers_ids) 
+	#le cambie el nombre de lock_offer para ver donde se utiliza, 
+	# tambien la altere para que ahora reciba ids en vez de ofertas
+	return unless offers_ids
+		offers_ids.each do |offer_id|
+			offer = Offer.find(offer_id)
 			if offer.offer_details.last.status == "provider"
 				offer.update(status: "locked")
 				offer.offer_details.last.update(status: "both")
-				return offers.where(status: "locked")
 			end
 		end
 		

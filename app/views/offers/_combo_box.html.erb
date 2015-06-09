@@ -16,9 +16,9 @@
 		<% end %>
 	</ul>
 
-	<div class="combo_status_circle <%= f.status %>" >
+	<div class="combo_status_circle <%= f.status %>" data-combo-id="<%= f.id %>" >
 		<% if function == "order" and f.is_ready? %>
-			<%= button_tag "+", class: "combo_selection_button", data: {combo_id: f.id}%>
+			<%= button_tag "+", class: "combo_selection_button", data: {combo_id: f.id} if f.order.is_open? %>
 		<% end %>
 	</div>
 

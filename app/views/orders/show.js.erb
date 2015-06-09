@@ -1,3 +1,4 @@
+// recibe una orden en @order
 // Este limpio la lista al cambiar de orden
 $('.provider_box').remove()
 $('.offer_list').empty()
@@ -22,6 +23,12 @@ $('.order_title_container').append('<%= j @order.title %>')
 
 
 <% if @order.due_date_past? %>
+
+	<% if @order.is_open? %>
+		$('#selection_header').append("<%= j image_tag('icons/icon-style-checkmark-gray.png', class: 'confirmation_button', alt: t('confirm_selection') )%>")
+		$('.order_product_list').append("<%= j render partial: 'offer_selection_form.html.erb', locals: {f: @order}%>")
+	<% end %>
+
 	<% @providers.each do |provider| %>
 		$('.orders .provider_list').append("<%= j render partial: 'provider_box.html.erb', locals: {provider: provider}%>")
 	<% end %>
@@ -43,8 +50,9 @@ $('.order_title_container').append('<%= j @order.title %>')
 <% end %>
 // Se pueda acceder al tab de informacion con un boton
 $('#selection_header').append("<div class='info_tab_button'><%= j image_tag('icons/icon-info.png')%></div>")
-$('#selection_header').append("<%= j image_tag('icons/icon-style-checkmark-gray.png', class: 'confirmation_button', alt: t('confirm_selection') )%>")
 $('.info_tab_close_button').append("<%= j image_tag('icons/icon-x.png') %>")
+
+
 
 
 
@@ -61,8 +69,6 @@ $('.provider_box').on('click', function(e) {
 $('.offer_detail_form input').on('click', function(e){
 	$(e.target).closest('.offer_product_box').addClass('deletion_candidate')
 })
-
-$('.order_product_list').append("<%= j render partial: 'offer_selection_form.html.erb', locals: {f: @order}%>")
 
 $('.offer_selection_button').on('click', function(e) {
 	target = $(e.target)

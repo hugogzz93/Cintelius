@@ -18,6 +18,15 @@ class OrdersController < ApplicationController
 	end
 
 	def edit
+			if Order.lock(params[:id], params[:selected_offers_id], params[:selected_combos_id])
+				# flash[:success] = t('order_lock_success')
+				redirect_to root_path, flash: {success: t('order_lock_success')}
+			else
+
+				redirect_to root_path, flash: {failure: t('order_lock_failure')}
+			end
+				# flash.keep(:success)
+				# render js: "window.location = '#{order_path(id: params[:id])}'"
 	end
 
 	def show
@@ -37,6 +46,5 @@ class OrdersController < ApplicationController
 
 		def check_if_buyer
 			redirect_to offers_path unless current_user.is_buyer? or current_user.is_admin?
-		end
-		
+		end	
 end

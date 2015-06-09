@@ -1,12 +1,18 @@
 <!-- recibe un objecto combo en f -->
-	<div class="selected_combo_box", data-combo-id="<%= f.id %>">
+	<div class="selected_combo_box <%= f.status %>", data-combo-id="<%= f.id %>">
 
 		<div class="combo_provider_name_box">
 			<%= f.organization %>
 			<div class="combo_options_box">
-				<%= button_tag "-", class: "combo_deselection_button", data: {combo_id: f.id} do %>
-					<%= image_tag "icons/icon-x.png"%>
+
+				<% if f.order.is_open? %>
+					<%= button_tag "-", class: "combo_deselection_button", data: {combo_id: f.id} do %>
+						<%= image_tag "icons/icon-x.png"%>
+					<% end %>
+				<% elsif f.is_locked? %>
+					<%= render partial: 'received_combo_form', locals:{combo: f} %> 
 				<% end %>
+
 			</div>	
 		</div>
 
@@ -24,18 +30,21 @@
 			<% end %>
 		</ul>
 		
-		<div class="comment_box">
-			<%= f.comment.content %>
-		</div>
+		<div class="status_icon", data-combo-id="<%= f.id %>">
+			<%= image_tag("icons/icon-package.png", class: "package_img ", data: {combo_id: f.id }) if f.is_locked? %>
+			<%= image_tag("icons/icon-package-hands.png", class: "package_img ", data: {combo_id: f.id }) if f.is_received? %>
 
-		<span class="combo_price_label">
-			Total <span class="unit_code" style="color:#C8C8C8"><%= t 'currency_code' %>:</span>
-		</span>
-		<div class="combo_price_label">
-			<div class="background_box">
-				<%= f.price %>
+			<span class="combo_price_label">
+				Total <span class="unit_code" style="color:#C8C8C8"><%= t 'currency_code' %>:</span>
+			</span>
+			<div class="combo_price_label">
+				<div class="background_box">
+					<%= f.price %>
+				</div>
 			</div>
 		</div>
+
+		
 	</div>
 
 

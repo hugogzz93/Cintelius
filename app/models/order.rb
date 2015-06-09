@@ -40,6 +40,18 @@ class Order < ActiveRecord::Base
 	def is_closed?
 		self.status == "closed"
 	end
-	
 
+
+
+	def self.lock(order_id, offer_ids, combo_ids)
+		Offer.lock_set(offer_ids)
+		Combo.lock_set(combo_ids)
+		order = Order.find(order_id)
+		order.update(status: "locked")
+		return 0
+	end
+
+	def close
+		# pasar al historial
+	end
 end

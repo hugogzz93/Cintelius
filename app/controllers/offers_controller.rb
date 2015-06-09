@@ -1,6 +1,7 @@
 class OffersController < ApplicationController
 	
-	before_action :authenticate_user!, :check_if_seller
+	before_action :authenticate_user!
+	before_filter :check_if_seller, :except => ["update"]
 	def index
 		# No deben de aparecer ordenes que no tengan productos autorizados para el usuario proveedor
 		@orders = Order.joins(:order_products, products: :user_products).where(user_products: {user_id: current_user.id}).distinct
@@ -31,10 +32,17 @@ class OffersController < ApplicationController
 		end
 	end
 
-	def edit
+	def update
 		respond_to do |format|
 			format.js {
-				@locked_offers = Offer.lock_offers(Offer.find(params[:selected_offers_id]))
+		# 		@locked_offers = Offer.lock_offers(Offer.find(params[:selected_offers_id]))
+				@offer = Offer.find(params[:id])
+				unless @offer.update(status: "received") 
+					# no funciona esto {
+					flash[:failure] = t('order_lock_failure')
+					flash.keep[:failure]
+					# } puedes quitarlo o tratar de hacer que aparesca el error cuando no se updatee
+				end
 			}
 		end
 	end

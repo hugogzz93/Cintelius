@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :orders
+  resources :combos
   resources :offers
   # resources :offer_details
 
   post '/offer_details/edit' => 'offer_details#edit', as: 'edit_offer_details'
   post '/offer_details/create' => 'offer_details#create', as: 'offer_details'
+  post '/orders/:id/edit' => 'orders#edit', as: 'lock_order'
   post '/combos/create' => 'combos#create',  as: 'create_combo'  
   get 'from_order/:id' => "offers#from_order", as: 'from_order'
   get '/welcome/index' => "welcome#index"

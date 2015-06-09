@@ -1,4 +1,6 @@
 es:
+  order_lock_failure: "Error en confirmacion de pedido"
+  order_lock_success: "Pedido confirmado."
   confirm_selection: "Confirmar Selección"
   selection: 'Selección'
   currency_code: "MXN"

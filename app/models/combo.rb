@@ -32,4 +32,11 @@ class Combo < ActiveRecord::Base
 		self.user.user_detail.organization
 	end
 
+	def self.lock_set(combo_ids)
+		return unless combo_ids #checar que no este vacia
+		combo_ids.each do |combo_id|
+			combo = Combo.find(combo_id)
+			combo.update(status: "locked")
+		end
+	end
 end

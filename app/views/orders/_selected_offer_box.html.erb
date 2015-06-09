@@ -1,14 +1,23 @@
 <!-- recibe una oferta en f -->
-<div class='selected_offer_box' data-offer-id="<%= f.id %>">
+<div class='selected_offer_box <%= f.complete_status %>' data-offer-id="<%= f.id %>">
 	<div class="provider_name_box">
 		<%= f.organization %>
 	</div>
 
 	<div class="options_box">
-		<%= button_tag "", class: "offer_deselection_button", 
-					data: {offer_id: f.id, product_id: f.product.id} do%> 
-					 <%= image_tag "icons/icon-x.png"%>
+		<% if f.order.is_open? %>
+			<%= button_tag "", class: "offer_deselection_button", 
+						data: {offer_id: f.id, product_id: f.product.id} do %> 
+						 <%= image_tag "icons/icon-x.png"%>
+			<% end %>
+		<% elsif f.is_locked? %>
+			<%= render partial: 'received_offer_form', locals:{offer: f} %> 
 		<% end %>
+	</div>
+
+	<div class="status_icon", data-offer-id="<%= f.id %>">
+		<%= image_tag("icons/icon-package.png", class: "package_img ", data: {offer_id: f.id }) if f.is_locked? %>
+		<%= image_tag("icons/icon-package-hands.png", class: "package_img ", data: {offer_id: f.id }) if f.is_received? %>
 	</div>
 
 	<div class="product_name_box">
@@ -29,7 +38,5 @@
 	<div class="total_price_box">
 		<span class="unit_code">Total:</span>
 		<%= f.total_price %>
-	</div>
-			
-		
+	</div>					
 </div>

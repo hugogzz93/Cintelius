@@ -99,6 +99,13 @@ img.alert-icon {
   overflow: auto;
 }
 
+.alert-failure {
+  background-color: red;
+  margin-right: 10%;
+  padding: 6%;
+  overflow: auto;
+}
+
 .flash_value_box {
   color: white;
   float: left;
@@ -117,6 +124,12 @@ img.alert-icon {
 
   .order_product_list form {
   display: none;
+}
+
+form.edit_combo {
+  display: block;
+  position: static;
+  margin-left: -3em;
 }
   
   .column_header {
@@ -665,9 +678,21 @@ form#new_order.new_order_form textarea.editable {
 }
 
 
-.ready-provider {
+.status_circle.ready-provider, .combo_status_circle.ready{
+  transition: background-color 1s;
+  background-color: #cc686c;
+}
+
+.status_circle.locked, .combo_status_circle.locked{
+  transition: background-color 1s;
   background-color: #EB9E4A;
 }
+
+.status_circle.received, .combo_status_circle.received{
+  transition: background-color 1s;
+  background-color: #39bf00;
+}
+
 .status_circle {
   width: 2em;
   height: 2em;
@@ -682,10 +707,6 @@ form#new_order.new_order_form textarea.editable {
   border-radius: 2em;
   float: left;
   margin: 7%;
-}
-
-.combo_status_circle.ready {
-  background-color: #EFC647;
 }
 
 /*.new_offer*/ .offer_product_box .left_side, .selected_offer_box .left_side {
@@ -1320,7 +1341,11 @@ img.return_arrow {
 .offer_selection_add_button {
   float: right;
 }
-
+.selected_offer_box.locked, .selected_offer_box.received {
+  display: block;
+  border-bottom: 1px solid #e5e5e5;
+  border-top: 1px solid #e5e5e5;
+}
 .selected_offer_box {
   display: none;  
 }
@@ -1342,6 +1367,46 @@ img.return_arrow {
   }
 }
 
+.selected_offer_box.locked .product_name_box, .selected_offer_box.received .product_name_box,
+.selected_offer_box.locked .unit_box, .selected_offer_box.received .unit_box,   
+.selected_offer_box.locked .unitary_price_box, .selected_offer_box.received .unitary_price_box, 
+.selected_offer_box.locked .total_price_box, .selected_offer_box.received .total_price_box {
+  width: 40.5%;
+}
+
+img.package_img, input.package_img {
+  height: 2.95em;
+  width: 3em;
+  float: left;
+  border-right: 1px solid #E5E5E5;
+  border-bottom: 1px solid #e5E5E5;
+  padding: 0.9% 2%;
+}
+
+.selected_combo_box img.package_img {
+  border-bottom: none;
+}
+
+.selected_combo_box .status_icon {
+  width: 100%;
+  overflow: auto;
+  border-top: 1px solid #e5e5e5;
+}
+
+input.package_img {
+  border: none;
+  height: 2em;
+  width: 2em;
+  padding: 0;
+}
+
+form.edit_offer {
+  width: 100%;
+  height: 100%;
+  position: static;
+  display: block;
+}
+
 .selected_offer_box.selected .background_box{
   border: 1px solid #31353c;
 }
@@ -1356,8 +1421,8 @@ img.return_arrow {
   font-weight: lighter;
 }
 
- .offer_deselection_button {
-  height: 100%;
+ .offer_deselection_button, .product_received_button {
+  /*height: 100%;*/
   padding: 0px;
   border: none;
   background-color: transparent;
@@ -1443,6 +1508,8 @@ img.return_arrow {
 
 .selected_combo_box {
   display: none;
+  border-bottom: 1px solid #e5e5e5;
+  border-top: 1px solid #e5e5e5;
 }
 
 .selected_combo_box.selected {
@@ -1451,6 +1518,10 @@ img.return_arrow {
   border-bottom: 1px solid #E5E5E5;
   -webkit-animation: yellow-highlight 1s ease 1;
 
+}
+
+.selected_combo_box.locked, .selected_combo_box.received {
+  display: block;
 }
 
 .combo_selection_button {

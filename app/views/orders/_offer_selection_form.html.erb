@@ -1,4 +1,4 @@
-<%= form_tag edit_offer_details_path, remote: true do  %>
+<%= form_tag lock_order_path do  %>
 	<% @order.offers.each do |offer| %>
 		<%= check_box_tag 'selected_offers_id[]', offer.id, nil, data: {offer_id: offer.id} %>
 	<% end %>

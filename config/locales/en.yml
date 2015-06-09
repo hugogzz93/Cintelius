@@ -25,3 +25,5 @@ en:
   currency_code: "USD"
   confirm_selection: "Confirm Selection"
   selection: "Selection"
+  order_lock_success: "Selection confirmed"
+  order_lock_failure: "An error has ocurred"
