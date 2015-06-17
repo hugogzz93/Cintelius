@@ -3,16 +3,26 @@
 <% comment_object = f.build_comment %>
 <%= form_for f, url: create_combo_path(f), html: {
 				class: "new_combo_form"}, remote: true do |combo|%>
-	<%= combo.number_field :order_id %>
+
+	<%= combo.number_field :order_id %> <!-- escondido -->
 	<ul class="product_list_area">
-		<%= link_to_add_combo_fields "Add combo fields", combo, :combo_products %>				
+		<%= link_to_add_combo_fields "Add combo fields", combo, :combo_products %>	<!-- escondido, llama a _combo_product_fields -->			
 	</ul>
-	<span class="combo_price_label">
-		Total: $
-	</span>
-	<%= combo.number_field :price, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)"  %>
+
+	<div class="new_combo_status_icon">
+
+		<%= image_submit_tag('icons/icon-style-checkmark-white.png', class: "new_combo_submit_button" )%>
+	</div>
+
 	<%= combo.fields_for(:comment, comment_object, child_index: comment_object.object_id) do |comment|%>
 		<%=  comment.text_area :content, placeholder: "Tu comentario..", required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
 	<% end %>
-	<%= combo.submit "Terminar Combo", confirm: "¿Esta seguro que desea terminar su combo?", disabled: true, class: "submit_button"%>
+
+	<div class="combo_form_footer">
+		<span class="combo_price_label">
+			Total <span class="unit_code" style="color:#C8C8C8"><%= t 'currency_code' %>:</span> </span>
+			<%= combo.number_field :price, value: 0.00, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)"  %>
+	</div>	
+	
 <% end %>
+

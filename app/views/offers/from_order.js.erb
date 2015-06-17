@@ -1,16 +1,23 @@
 // Para que salga un formulario nuevo si no se ha hecho oferta e indique con un formulario diferente si ya se ha hecho
 
+// ids de ofertas para esta orden que ha hecho el usuario
 <%= created_offers_product_ids = @offers.collect { |offer| offer.product.id} %>
+
 <% @order.order_products.each do |order_product| %>
 	<% if created_offers_product_ids.include?(order_product.product_id) %>
 		<% offer_builder = @offers.where(product_id: order_product.product_id).first %>
+		// ofertas que ya fueron hechas por el vendedor
 		$('.offer_list').append("<%= j render partial:  'offer_status_form.html.erb', locals: {f: offer_builder, order_due_date_past: @order.due_date_past?} %>")
 	<% else %>
 		<% if @order.due_date_past? || !@authorized_products.include?(order_product.product_id)%>
-			$('.offer_list').append("<%= j render partial:  'orders/order_product_objective_box.html.erb', locals: {f: order_product} %>")					
-		<% else %>
+		// si ya paso la fecha limite o no esta autorizado para ofrecer este producto
+			// parcial para los objetivos de la orden
+			// $('.offer_list').append("<%= j render partial:  'orders/order_product_objective_box.html.erb', locals: {f: order_product} %>")					
+		<% elsif @order.is_open? %>
+		// no ha pasado la fecha limite, esta abierta la orden y esta autorizado este producto
+			// formulario para ofertas que puede hacer el vendedor
 			<% offer_builder = order_product.order.offers.build(product_id: order_product.product_id)  %>
-			$('.offer_list').append("<%= j render partial:  'offer_form.html.erb', locals: {f: offer_builder} %>")		
+			$('.offer_list').append("<%= j render partial:  'offer_form.html.erb', locals: {f: offer_builder, units_wanted_by_buyer: order_product.units} %>")		
 		<% end %>
 	<% end %>
 <% end %>
@@ -20,7 +27,7 @@
 	$('.combo_list').append("<%= j render partial: 'combo_box.html.erb', locals: {f: combo, function: 'offer'} %>")
 <% end %>
 // Para que no se pueda hcer ningun combo despues de la fecha limite
-<% unless @order.due_date_past? %>
+<% if !@order.due_date_past? and @order.is_open? %>
 	<% combo = @order.combos.create %>
 	$('.combo_list').append("<%= j render partial: 'combo_form.html.erb', locals: {f: combo} %>")
 <% end %>
@@ -38,8 +45,9 @@ $('.combo_product_add_button').on('click', function(e) {
 	$($('ul.product_list_area').children('.combo_product_box').last().children('.product_id_field')).val(idToCheck)
 	$($('.combo_product_remove_button').last()).attr('data-product-id', idToCheck).attr('type', 'button')
 	$(e.target).prop('disabled', true)
-	productName = $(e.target).parents('.right_side').siblings('.left_side').children('.product_name_box').children('.background_box').text()
-	$('.combo_product_box').last().children('.combo_product_box_title').text(productName)
+	productName = $(e.target).attr('data-product-name')
+	console.log(productName)
+	$('.combo_product_box').last().children('.combo_product_name').text(productName)
 	// Para que se eliminen los campos si se desea remover el producto
 	$('button.combo_product_remove_button').on('click', function(e){
 		idToRemove = $(e.target).attr('data-product-id')
@@ -73,7 +81,7 @@ $('input#offer_unitary_price').on('blur', function(e){
 })
 
 // Para que se elimine el formulario si se creo la oferta
-$('.offer_product_box .submit_button').on('click', function(e) {
+$('.new_offer_submit_button').on('click', function(e) {
 	$(e.target).closest('.offer_product_box').addClass('deletion_candidate');
 })
 

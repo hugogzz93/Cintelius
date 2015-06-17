@@ -1,243 +1,36 @@
+<!-- recibe una oferta en f -->
+<div class='sent offer_product_box', data-attribute-offer-id="<%= f.id %>", data-attribute-product-name="<%= f.product.name %>">
 
-<% if f.status == 'ready' %>
-<!-- El provedor mando la oferta y no ha respondido el comprador -->
-	<div class='offer_product_box ready'>
-			<div class="left_side">
-				<div class="product_name_box">
-					Producto <br>
-					<div class="background_box">
-						<%= f.product.name %>
-					</div>
-				</div>
-				<div class="offer_numbers_box">
-					<span style="float:left;">Kg</span>
-					<div class="background_box">
-						<%= f.offer_details.last.units %>
-					</div>
-					<span style="float:left; margin-left: 7%;">$</span>
-					<div class="background_box">
-						<%= f.unitary_price %>
-					</div>
-				</div>
+	<div class="left_side">
+		<div class="product_name_box">
+			<!-- color del circulo debe indicar el estado de la oferta { -->
+			<div class="status_circle <%= f.complete_status %>" data-offer-id="<%= f.id %>">
+				<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id} if f.order.is_open? %>
 			</div>
-			<div class="right_side">
-				<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id} unless order_due_date_past%>
-				<%= button_tag "Cliente", class: "buyer_comment_tag" %>
-				<%= button_tag "Tu Comentario", class: "seller_comment_tag" %>
-				<div class="comment_box">
-					<div class="buyer_comment">
-						<%= f.order.order_products.where(product_id: f.product.id).first.comment.content %>
-					</div>
-					<div class="seller_comment">
-						<%= f.comment.content %>
-					</div>
-				</div>
-							
+			<span style="float:left;margin-top:11%;"><%= f.product.name %></span>
+		</div>
+		<div class="offer_numbers_box">
+			<div class="unit_container">
+				<span style="float:left;margin-top: -2%;margin-left:5%">Kg:</span>
+				<div class="background_box units" data-product-id="<%= f.product.id %>" ><%= f.offer_details.last.units %></div>
 			</div>
-	</div>
-<% elsif f.status == 'pending' && f.offer_details.last.status == 'denied_by_provider' %>
-		<div class='offer_product_box denied'>
-			<div class="left_side">
-				<div class="product_name_box">
-					Producto <br>
-					<div class="background_box">
-						<%= f.product.name %>
-					</div>
+				<div class="total_price_container">
+					<div class="unit_code" style="float: left; margin-top: -2%; margin-left: 5%;">Total</div>
+					<div class="currency_code"><%= t 'currency_code' %>:</div>
+					<div class="background_box total_price"> <%= f.total_price %></div>  
 				</div>
-				<div class="offer_numbers_box">
-					<span style="float:left;">Kg</span>
-					<div class="background_box">
-						<%= f.offer_details.last.units %>
-					</div>
-					<span style="float:left; margin-left: 7%;">$</span>
-					<div class="background_box">
-						<%= f.unitary_price %>
-					</div>
-				</div>
-			</div>
-			<div class="right_side">
-				<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id} unless order_status%>
-				<%= button_tag "Cliente", class: "buyer_comment_tag" %>
-				<%= button_tag "Tu Comentario", class: "seller_comment_tag" %>
-				<div class="comment_box">
-					<div class="buyer_comment">
-						<%= f.order.order_products.where(product_id: f.product.id).first.comment.content %>
-					</div>
-					<div class="seller_comment">
-						<%= f.comment.content %>
-					</div>
-				</div>
-							
+		</div>
+	</div>	
+
+	<div class="right_side">						
+		<div class="comment_box">
+			<div class="seller_comment">
+				<%= f.comment.content %>
 			</div>
 		</div>
-
-<% elsif f.status == 'pending' %>
-	<div class="offer_product_box form_for pending">
-	<% offer_detail_object = f.offer_details.last %>
-	<%= form_for f, url: {action: 'update'}, html: {
-			class: 'status_offer_form pending'} do |offer|%>
-
-			<div class="left_side">
-
-				<div class="product_name_box">
-					Producto <br>
-					<div class="background_box">
-						<%= f.product.name %>
-					</div>
-
-					<div class="offer_numbers_box">
-						<span style="float:left;">Kg</span>
-						<div class="background_box">
-							<%= units = f.offer_details.last.units %>
-						</div>
-						<span style="margin-left:3%">Contraoferta:</span>
-						<div class="form_box_inside_numbers">
-							<%= offer.fields_for offer_detail_object do |offer_detail_fields| %>
-								<span style="margin-left:3%; float:left;">Kg</span>
-								<div class="background_box">
-									<%= offer_detail_object.units %>
-								</div>
-							<% end %>
-							<span style="float:left; margin-left: 7%;">$</span>
-								<div class="background_box">
-									<%= f.unitary_price %>
-								</div>
-						</div>
-					</div>
-
-				</div>			
-			</div>
-			<div class="right_side">
-					<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id} unless order_status%>
-					<%= button_tag "Cliente", class: "buyer_comment_tag" %>
-					<%= button_tag "Tu Comentario", class: "seller_comment_tag" %>
-					<span class="unitary_price_notice">* Precio por kilo</span>
-					<div class="comment_box">
-						<div class="buyer_comment">
-							<%= f.order.order_products.where(product_id: f.product_id).first.comment.content %>
-						</div>
-						<div class="seller_comment">							
-							<%= f.comment.content %>
-						</div>
-					</div>
-				</div>
-
-			<div class="offer_comment_area">
-				
-			</div>
-			
-			<%= offer.submit "Aceptar", class: "submit_button" %>
-			<%= offer.submit "Rechazar", class: "submit_button" %>
-		<% end %>
+					
 	</div>
+</div>
 
-<% elsif f.status == "selected" %>
-	<div class='offer_product_box selected'>
-			<div class="left_side">
-				<div class="product_name_box">
-					Producto <br>
-					<div class="background_box">
-						<%= f.product.name %>
-					</div>
-				</div>
-				<div class="offer_numbers_box">
-					<span style="float:left;">Kg</span>
-					<div class="background_box">
-						<%= f.offer_details.last.units %>
-					</div>
-					<span style="float:left; margin-left: 7%;">$</span>
-					<div class="background_box">
-						<%= f.unitary_price %>
-					</div>
-				</div>
-			</div>
-			<div class="right_side">
-				<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id} unless order_status%>
-				<%= button_tag "Cliente", class: "buyer_comment_tag" %>
-				<%= button_tag "Tu Comentario", class: "seller_comment_tag" %>
-				<div class="comment_box">
-					<div class="buyer_comment">
-						<%= f.order.order_products.where(product_id: f.product.id).first.comment.content %>
-					</div>
-					<div class="seller_comment">
-						<%= f.comment.content %>
-					</div>
-				</div>
-							
-			</div>
-	</div>
-
-<% elsif f.status == 'locked' %>
-		<div class='offer_product_box locked'>
-			<div class="left_side">
-				<div class="product_name_box">
-					Producto <br>
-					<div class="background_box">
-						<%= f.product.name %>
-					</div>
-				</div>
-				<div class="offer_numbers_box">
-					<span style="float:left;">Kg</span>
-					<div class="background_box">
-						<%= f.offer_details.last.units %>
-					</div>
-					<span style="float:left; margin-left: 7%;">$</span>
-					<div class="background_box">
-						<%= f.unitary_price %>
-					</div>
-				</div>
-			</div>
-			<div class="right_side">
-				<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id} unless order_status%>
-				<%= button_tag "Cliente", class: "buyer_comment_tag" %>
-				<%= button_tag "Tu Comentario", class: "seller_comment_tag" %>
-				<div class="comment_box">
-					<div class="buyer_comment">
-						<%= f.order.order_products.where(product_id: f.product.id).first.comment.content %>
-					</div>
-					<div class="seller_comment">
-						<%= f.comment.content %>
-					</div>
-				</div>
-							
-			</div>
-		</div>
-<% elsif f.status == 'received' %>
-		<div class='offer_product_box received'>
-			<div class="left_side">
-				<div class="product_name_box">
-					Producto <br>
-					<div class="background_box">
-						<%= f.product.name %>
-					</div>
-				</div>
-				<div class="offer_numbers_box">
-					<span style="float:left;">Kg</span>
-					<div class="background_box">
-						<%= f.offer_details.last.units %>
-					</div>
-					<span style="float:left; margin-left: 7%;">$</span>
-					<div class="background_box">
-						<%= f.unitary_price %>
-					</div>
-				</div>
-			</div>
-			<div class="right_side">
-				<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id} unless order_status%>
-				<%= button_tag "Cliente", class: "buyer_comment_tag"%>
-				<%= button_tag "Tu Comentario", class: "seller_comment_tag"%>
-				<div class="comment_box">
-					<div class="buyer_comment">
-						<%= f.order.order_products.where(product_id: f.product.id).first.comment.content %>
-					</div>
-					<div class="seller_comment">
-						<%= f.comment.content %>
-					</div>
-				</div>
-							
-			</div>
-		</div>
-
-<% end %>
 
 

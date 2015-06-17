@@ -23,3 +23,8 @@ SHOW
 General
 	Agregar campos de user_detail al craer un usuario (no sirven las otras paginas ya que necesitan leer datos de user_details)
 	
+
+Offer
+	se pueden hacer ofertas en ordenes que estan cerradas.
+
+	

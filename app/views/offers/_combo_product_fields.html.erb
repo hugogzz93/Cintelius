@@ -1,11 +1,17 @@
-<!-- recibe un order_product en f -->
+<!-- llamado para formularo de unidades en combos -->
+<!-- recibe un order_product en d -->
 <div class="combo_product_box">
 	<%= button_tag "-", class: "combo_product_remove_button"%>
-	<div class="combo_product_box_title">
-		Product
+
+	<div class="combo_product_name">
+		<!-- se agrega con javascript el nombre -->
 	</div>
+
+	<span class="combo_product_form_label unit_code">Kg</span>
+		<%= d.number_field :units, class: "combo_product_unit_field", value: 0.00, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)"  %>	
+
+	<!-- escondido -->
 	<%= d.number_field :product_id, class: "product_id_field", required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)"  %>
-	<span class="combo_product_box_label">Kg</span>
-	<%= d.number_field :units, class: "combo_product_unit_field", required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)"  %>
+	
 
 </div>

@@ -14,6 +14,7 @@ class Order < ActiveRecord::Base
 
 	validates :title, presence: true, length: {maximum: 100}
 
+
 	# open: usuario puede seleccionar ofertas, locked: ya selecciono, closed: se termino la orden
 
 	enum status: [:open, :locked, :closed]
@@ -54,4 +55,5 @@ class Order < ActiveRecord::Base
 	def close
 		# pasar al historial
 	end
+
 end

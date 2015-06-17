@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150604170745) do
+ActiveRecord::Schema.define(version: 20150611175635) do
 
   create_table "categories", force: true do |t|
     t.integer  "supercategory_id", limit: 4
@@ -75,9 +75,9 @@ ActiveRecord::Schema.define(version: 20150604170745) do
   create_table "order_products", force: true do |t|
     t.integer  "order_id",   limit: 4
     t.integer  "product_id", limit: 4
-    t.integer  "units",      limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.decimal  "units",                precision: 10, scale: 2
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
   end
 
   create_table "orders", force: true do |t|
