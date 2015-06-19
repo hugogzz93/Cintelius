@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :orders
   resources :combos
   resources :offers
+  resources :user_details
+  resources :user_products
   # resources :offer_details
 
   post '/offer_details/edit' => 'offer_details#edit', as: 'edit_offer_details'
@@ -10,7 +12,12 @@ Rails.application.routes.draw do
   post '/orders/:id/edit' => 'orders#edit', as: 'lock_order'
   post '/combos/create' => 'combos#create',  as: 'create_combo'  
   get 'from_order/:id' => "offers#from_order", as: 'from_order'
+  # login
   get '/welcome/index' => "welcome#index"
+  # edit user settings
+  get '/settings' => 'user_settings#index', as: 'settings'
+  # edit user information
+  # get '/user_details' => 'user_details#edit', as: 'edit_user_details'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

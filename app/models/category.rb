@@ -6,4 +6,12 @@ class Category < ActiveRecord::Base
 	belongs_to :supercategory, class_name: "Category"
 
 	validates :name, uniqueness: {message: "Ya existe una categoria con este nombre."}, case_sensitive: false;
+
+	def self.subcategories
+		Category.where.not(subcategory_id: nil)
+	end
+
+	def self.supercategories
+		Category.where(supercategory_id: nil)
+	end
 end

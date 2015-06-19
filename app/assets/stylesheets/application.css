@@ -43,7 +43,7 @@
 
 .flash_messages {
   position: fixed;
-
+  color: white;
   right: -10%;
   opacity: 0;
   top: -2%;
@@ -1790,3 +1790,102 @@ form.edit_offer {
 
 
 
+
+
+
+/*@user_settings {*/
+.side_bar {
+  float: left;
+  width: 20%;
+  border-right: 1px solid #e5e5e5;
+  height: 100%;
+  background-color: #20bdff;
+}
+
+.side_bar ul {
+  margin: 0px;
+  padding: 0px;
+}
+
+.side_bar li a {
+  display: block;
+  height: 3em;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  padding-top: 1.3em;
+  transition: color 1s, background-color 1s;
+}
+
+.side_bar ul, .side_bar li {
+  list-style: none;
+}
+.side_bar li a:hover {
+  color: #20bdff;
+  background-color: white;
+}
+
+.side_bar #logo-holder img{ 
+  position: static;
+  width: 100%;
+  height: auto;
+}
+
+.content_body {
+  float: left;
+  width: 79.9%;
+  height: 100%;
+}
+
+.content_body input[type=submit] {
+    border-radius: 0px;
+    display: block;
+  border: none;
+  background-color: transparent;
+    color: #a9a9a9;
+    border:1px solid #a9a9a9;
+  font-size: 1.3em;
+  float: left;
+  margin: 0% 15%;
+  padding: 2% 6%;
+  transition: color 1s, border 1s;
+}
+
+
+.content_body input[type=submit]:hover {
+  color: #0d0c0d;
+  font-size: 1.3em;
+  float: left;
+  border: 1px solid #0c0d0c;
+}
+
+.content_body input[type=text], .content_body input[type=number] {
+  border:0; 
+padding:10px; 
+font-size:1.3em; 
+font-family:Arial, sans-serif; 
+color:#aaa; 
+border:solid 1px #ccc; 
+margin:0 0 20px; 
+width:300px;
+}
+
+form.edit_user_detail {
+  overflow: auto;
+  border: 1px solid #ccc;
+  width: 40%;
+  padding: 2%;
+  margin: 1% 3%;
+}
+
+input#user_detail_telephone {
+  width:150px;
+  float: left;
+}
+
+.content_body .form_label {
+
+}
+
+
+/*}*/

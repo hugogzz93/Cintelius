@@ -7,6 +7,11 @@ Devise.setup do |config|
   # config.secret_key = 'fa9252d762a80e31cec72a4386483b708898ec644560f6734ea6e4d675c06f157fcfb8108f556118fd23325388dd52997d28e2a54b94972e72cae535ff0e049d'
   config.secret_key = '5a41c1fb1d17f6d34c2ab96f48c51305ffd1785801756648985000f523999ac3a0cc269e419152996bf949103161597a19206c09848a34c64dd4ca18a6939fba'
 
+
+  # acepta AJAX
+  config.http_authenticatable_on_xhr = false
+  config.navigational_formats = ["*/*", :html, :json]
+
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
