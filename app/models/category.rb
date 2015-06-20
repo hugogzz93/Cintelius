@@ -8,7 +8,7 @@ class Category < ActiveRecord::Base
 	validates :name, uniqueness: {message: "Ya existe una categoria con este nombre."}, case_sensitive: false;
 
 	def self.subcategories
-		Category.where.not(subcategory_id: nil)
+		Category.where.not(supercategory_id: nil)
 	end
 
 	def self.supercategories

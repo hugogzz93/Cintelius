@@ -29,3 +29,5 @@ en:
   order_lock_failure: "An error has ocurred."
   user_detail_update_success: "Informacion updated."
   user_detail_update_failure: "An error has ocurred while updating your information."
+  products: "Products"
+  selected: "Selected"

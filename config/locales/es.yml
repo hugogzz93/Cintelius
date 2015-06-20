@@ -1,4 +1,6 @@
 es:
+  products: "Productos"
+  selected: "Seleccionados"
   user_detail_update_success: "Se actualizo su informacion exitosamente"
   user_detail_update_failure: "No se pudo actualizar su informacion"
   order_lock_failure: "Error en confirmacion de pedido"

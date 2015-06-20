@@ -27,4 +27,8 @@ General
 Offer
 	se pueden hacer ofertas en ordenes que estan cerradas.
 
-	
+
+
+
+Order
+	parece que hay un typo en css de product_main_info.change
