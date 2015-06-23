@@ -1,5 +1,6 @@
 class Order < ActiveRecord::Base
 	belongs_to :user
+	has_many :review_tickets
 	has_many :offer_details, dependent: :destroy
 	has_many :offers, dependent: :destroy
 	has_many :combos, dependent: :destroy
@@ -12,10 +13,12 @@ class Order < ActiveRecord::Base
 	accepts_nested_attributes_for :order_products
 	accepts_nested_attributes_for :comment
 
+	after_update :create_review_tickets, if: :locked?
+
 	validates :title, presence: true, length: {maximum: 100}
 
 
-	# open: usuario puede seleccionar ofertas, locked: ya selecciono, closed: se termino la orden
+	# open: usuario puede seleccionar ofertas, locked: ya selecciono, closed: se recibieron los productos
 
 	enum status: [:open, :locked, :closed]
 
@@ -55,5 +58,26 @@ class Order < ActiveRecord::Base
 	def close
 		# pasar al historial
 	end
+
+	def create_review_tickets
+		providers = self.get_participating_providers
+		providers.each do |provider| 
+			self.review_tickets.create(reviewable_type: "ServiceScore", user_id: self.user_id, reviewable_id: provider.service_score.id)
+		end
+	end
+
+	def get_participating_providers
+		providers = self.offers.collect { |offer| offer.user }.uniq
+	end
+
+	def get_service_review_tickets
+		review_tickets = self.review_tickets.where(reviewable_type: "ServiceScore")
+	end
+
+	def get_product_review_tickets
+		review_tickets = self.review_tickets.where(reviewable_type: "ProductScore")
+	end
+
+
 
 end

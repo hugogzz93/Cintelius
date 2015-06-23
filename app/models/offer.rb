@@ -90,7 +90,8 @@ class Offer < ActiveRecord::Base
 	# end
 
 	def create_review_ticket
-		self.order.user.review_tickets.create(reviewable_type: "product_scores", reviewable_id: self.product.id)
+		product_score_id = ProductScore.where(product_id: self.product_id, user_id: self.user_id).first.id
+		ReviewTicket.create_ticket_for_product(self.order_id, self.order.user_id, product_score_id, self.product_id)
 	end
 
 	def self.lock_set(offers_ids) 

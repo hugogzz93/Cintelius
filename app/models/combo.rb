@@ -8,6 +8,8 @@ class Combo < ActiveRecord::Base
 	accepts_nested_attributes_for :combo_products
 	accepts_nested_attributes_for :comment
 
+	after_update :create_review_tickets, if: :received?
+
     validates :price, presence: true, numericality: true
 
 	enum status: [:ready, :selected, :locked, :received]
@@ -30,6 +32,14 @@ class Combo < ActiveRecord::Base
 
 	def organization
 		self.user.user_detail.organization
+	end
+
+	def create_review_tickets
+		self.combo_products.each do |combo_product|
+			product_score_id = ProductScore.where(product_id: combo_product.product_id, user_id: self.user_id).first.id
+			ReviewTicket.create_ticket_for_product(self.order_id, self.order.user_id, product_score_id, combo_product.product_id)
+		end
+		
 	end
 
 	def self.lock_set(combo_ids)

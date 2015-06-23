@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   get '/welcome/index' => "welcome#index"
   # edit user settings
   get '/settings' => 'user_settings#index', as: 'settings'
+
+  # feedback
+  get '/review_tickets' => 'review_tickets#index', as: 'review_tickets'
   # edit user information
   # get '/user_details' => 'user_details#edit', as: 'edit_user_details'
   # The priority is based upon order of creation: first created -> highest priority.

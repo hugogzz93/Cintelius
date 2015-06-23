@@ -11,8 +11,10 @@ class User < ActiveRecord::Base
   has_many :combos, dependent: :destroy
   has_many :product_scores
   has_many :review_tickets, dependent: :destroy
-  has_one :service_grade
+  has_one :service_score
   has_one :user_detail, dependent: :destroy
+
+  after_create :setup_service_score
 
   def authorized_products
     self.products.collect {|product| product.id}
@@ -28,6 +30,22 @@ class User < ActiveRecord::Base
 
   def is_admin?
     self.user_detail.is_admin?
+  end
+
+  def setup_service_score
+    self.create_service_score
+  end
+
+  def setup_product_score(product_id)
+    self.product_scores.create(product_id: product_id)
+  end
+
+  def closed_orders
+    
+  end
+
+  def get_organization
+    self.user_detail.organization
   end
 
 end
