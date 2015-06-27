@@ -188,9 +188,9 @@ $('.return_arrow').on('click', function(e) {
 
 // Para que calendario este en español
  $.datepicker.regional['es'] = {clearText: 'Borrar', clearStatus: '',
-    closeText: 'Fermer', closeStatus: 'Fermer sans modifier',
-    prevText: '&lt;Préc', prevStatus: 'Ver mes anterior',
-    nextText: 'Suiv&gt;', nextStatus: 'Ver siguiente mes',
+    closeText: 'Cerrar', closeStatus: '',
+    prevText: 'Anterior', prevStatus: 'Ver mes anterior',
+    nextText: 'Siguiente;', nextStatus: 'Ver siguiente mes',
     currentText: 'Actual', currentStatus: 'Ver mes actual',
     monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
     'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],

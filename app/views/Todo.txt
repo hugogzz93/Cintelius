@@ -32,3 +32,8 @@ Offer
 
 Order
 	parece que hay un typo en css de product_main_info.change
+
+sign up
+	mensajes en ingles cuando la clave y confirmacion no coincide
+
+	agregar user_Details

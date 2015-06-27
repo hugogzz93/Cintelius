@@ -14,6 +14,7 @@ class OrdersController < ApplicationController
 		# importante: se le agrega -0500 por el timezone, falta implementar esto pero para todos los timezones
 		params[:order][:due_date] = params[:order][:due_date] + " " +params[:order][:due_time] + " -0500"
 		current_user.orders.create(order_params)
+		redirect_to root_path
 	end
 
 	def edit

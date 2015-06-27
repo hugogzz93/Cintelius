@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :offers
   resources :user_details
   resources :user_products
+  resources :service_scores
+  resources :product_scores
   # resources :offer_details
 
   post '/offer_details/edit' => 'offer_details#edit', as: 'edit_offer_details'
