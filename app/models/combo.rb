@@ -11,6 +11,7 @@ class Combo < ActiveRecord::Base
 	after_update :create_review_tickets, if: :received?
 
     validates :price, presence: true, numericality: true
+    # before_destroy :create_history
 
 	enum status: [:ready, :selected, :locked, :received]
 
@@ -48,5 +49,17 @@ class Combo < ActiveRecord::Base
 			combo = Combo.find(combo_id)
 			combo.update(status: "locked")
 		end
+	end
+
+	def create_history_recursively(order_history_object)
+		history_object_hash = self.attributes
+		history_object_hash.delete("id")
+		history_object_hash.delete("order_id")
+		history_object_hash["order_history_id"] = order_history_object.id
+		combo_history_object = ComboHistory.create(history_object_hash)
+		self.combo_products.each do |combo_product|
+			combo_product.create_history_recursively(combo_history_object)
+		end
+		self.comment.create_history_recursively(combo_history_object)
 	end
 end

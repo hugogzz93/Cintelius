@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   has_many :orders, dependent: :destroy
   has_many :offers, dependent: :destroy
   has_many :combos, dependent: :destroy
+  has_many :order_histories, dependent: :destroy
+  has_many :offer_histories, dependent: :destroy
+  has_many :combo_histories, dependent: :destroy
   has_many :product_scores
   has_many :review_tickets, dependent: :destroy
   has_one :service_score

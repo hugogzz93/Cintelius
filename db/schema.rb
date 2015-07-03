@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150620210419) do
+ActiveRecord::Schema.define(version: 20150629190902) do
 
   create_table "categories", force: true do |t|
     t.integer  "supercategory_id", limit: 4
@@ -21,6 +21,23 @@ ActiveRecord::Schema.define(version: 20150620210419) do
   end
 
   add_index "categories", ["supercategory_id"], name: "index_categories_on_supercategory_id", using: :btree
+
+  create_table "combo_histories", force: true do |t|
+    t.integer  "user_id",          limit: 4
+    t.integer  "order_history_id", limit: 4
+    t.decimal  "price",                      precision: 10, scale: 2,             null: false
+    t.integer  "status",           limit: 4,                          default: 0, null: false
+    t.datetime "created_at",                                                      null: false
+    t.datetime "updated_at",                                                      null: false
+  end
+
+  create_table "combo_product_histories", force: true do |t|
+    t.integer  "combo_history_id", limit: 4
+    t.decimal  "units",                      precision: 7, scale: 2, null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+    t.integer  "product_id",       limit: 4
+  end
 
   create_table "combo_products", force: true do |t|
     t.integer  "combo_id",   limit: 4
@@ -41,6 +58,14 @@ ActiveRecord::Schema.define(version: 20150620210419) do
     t.datetime "updated_at",                                                null: false
   end
 
+  create_table "comment_histories", force: true do |t|
+    t.integer  "commentable_history_id",   limit: 4
+    t.string   "commentable_history_type", limit: 255
+    t.text     "content",                  limit: 65535, null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
   create_table "comments", force: true do |t|
     t.integer  "commentable_id",   limit: 4
     t.string   "commentable_type", limit: 255
@@ -51,6 +76,15 @@ ActiveRecord::Schema.define(version: 20150620210419) do
 
   add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
 
+  create_table "offer_detail_histories", force: true do |t|
+    t.integer  "order_history_id", limit: 4
+    t.integer  "offer_history_id", limit: 4
+    t.decimal  "units",                      precision: 10, scale: 2,             null: false
+    t.integer  "status",           limit: 4,                          default: 0, null: false
+    t.datetime "created_at",                                                      null: false
+    t.datetime "updated_at",                                                      null: false
+  end
+
   create_table "offer_details", force: true do |t|
     t.integer  "order_id",   limit: 4
     t.integer  "offer_id",   limit: 4
@@ -58,6 +92,16 @@ ActiveRecord::Schema.define(version: 20150620210419) do
     t.integer  "status",     limit: 4,                          default: 0, null: false
     t.datetime "created_at",                                                null: false
     t.datetime "updated_at",                                                null: false
+  end
+
+  create_table "offer_histories", force: true do |t|
+    t.integer  "user_id",          limit: 4
+    t.integer  "product_id",       limit: 4
+    t.integer  "status",           limit: 4,                          default: 0, null: false
+    t.decimal  "unitary_price",              precision: 10, scale: 2,             null: false
+    t.datetime "created_at",                                                      null: false
+    t.datetime "updated_at",                                                      null: false
+    t.integer  "order_history_id", limit: 4
   end
 
   create_table "offers", force: true do |t|
@@ -71,6 +115,23 @@ ActiveRecord::Schema.define(version: 20150620210419) do
   end
 
   add_index "offers", ["order_id"], name: "index_offers_on_order_id", using: :btree
+
+  create_table "order_histories", force: true do |t|
+    t.string   "title",      limit: 255,             null: false
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.integer  "status",     limit: 4,   default: 0
+    t.datetime "due_date",                           null: false
+  end
+
+  create_table "order_product_histories", force: true do |t|
+    t.integer  "order_history_id", limit: 4
+    t.integer  "product_id",       limit: 4
+    t.decimal  "units",                      precision: 10, scale: 2
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+  end
 
   create_table "order_products", force: true do |t|
     t.integer  "order_id",   limit: 4

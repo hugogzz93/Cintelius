@@ -37,3 +37,8 @@ sign up
 	mensajes en ingles cuando la clave y confirmacion no coincide
 
 	agregar user_Details
+
+
+REvIEWS
+	elegir el service score sin elegir los products scores, hace que a la siguiente
+	los products scores on salgan, porque los products scores se determinan en un for loop adentro del loop para service scores

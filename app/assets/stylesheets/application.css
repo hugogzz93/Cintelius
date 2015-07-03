@@ -1690,9 +1690,14 @@ form.edit_offer {
 
 .info_tab_close_button {
     position: absolute;
-  right: -4%;
+  /*right: -4%;*/
+  right: 0%;
   top: 2%;
   cursor: pointer;
+}
+
+li.order_product_info_tab {
+  overflow: hidden;
 }
 
 .info_tab_close_button img {
@@ -1714,7 +1719,7 @@ form.edit_offer {
 
 
 .product_main_info{
-  width: 100%;
+  /*width: 100%;*/
   padding: 3%;
   overflow: scroll;
   transition: background-color 0.3s;
@@ -2121,8 +2126,208 @@ div#user_product_form_header::before {
     opacity: 0;
     background-color: white;
   }
-  
-
 }
 
 /*}
+
+
+/*  @history { */
+
+  .hide_order_history_button {
+    background-color: red;
+    width: 1em;
+    height: 1em;
+    float: right;
+    margin: 1%;
+  }
+  .order_history_container  {
+    /*display: none;*/
+    position: fixed;
+    width: 0%;
+    height: 0%;
+    transition: width 0.5s, height 0.5s;
+  }
+  .order_history_container.active  {
+    /*display: block;*/
+    overflow: scroll;
+    position: fixed;
+    background-color: white;
+    top: 10%;
+    left: 30%;
+    width: 60%;
+    height: 85%;
+  }
+
+  ul.provider_history_list {
+      border: 1px solid transparent;
+    margin: 1em;
+    float: left;
+    width: 55%;
+  }
+
+  ul.order_product_histories {
+    border: 1px solid transparent;
+    float: right;
+    margin: 1em;
+  }
+
+  ul.provider_offer_histories_list {
+    width: 100%;
+    max-height: 0px;
+    overflow: hidden;
+    /*padding: 1% 1%;*/
+    transition: max-height 0.5s;
+  }
+
+  ul.provider_offer_histories_list.active {
+    /*overflow-y: scroll;*/
+    max-height: 50em;
+
+  }
+  
+  li.offer_history {
+    /*max-height: 1.5em;*/
+    overflow: hidden;
+    cursor: pointer;
+    text-indent: 2%;
+    margin: 1%;
+  }
+
+  .offer_history_header {
+    border-bottom: 1px solid transparent;
+    border-radius: 1em;
+    -webkit-transition: background-color 0.3s;
+    -o-transition: background-color 0.3s;
+    transition: background-color 0.3s;
+  }
+
+  .offer_history_header:hover {
+    background-color: #DDDDDD;
+  }
+
+  .offer_history_header.received{
+    background-color: #b0ffb0;
+  }
+
+  .offer_history_header.locked{
+    background-color: #f5dc8f;
+  }
+
+  
+
+  li.offer_history.active {
+    /*max-height: 500px;*/
+    overflow: scroll
+  }
+
+  
+
+  .offer_comment_history_container {
+    text-indent: 0px;
+    color: red;    
+    max-height: 0px;
+    padding-left: 5%;
+    font-size: 0.8em;
+    transition: max-height 0.5s;
+  }
+
+  .offer_comment_history_container.active {
+    color: #005686;    
+    max-height: 500px;
+  }
+
+  .fade_layer {
+    position: fixed;
+    width: 0%;
+    height: 0%;
+    /*display: none;*/
+    background: white;
+    /*opacity: 1;*/
+    transition: background-color 1s, opacity 1s;
+  }
+
+  .fade_layer.active {
+    /*display: block;*/
+    width: 100%;
+    height: 100%;
+    background: rgb(34,34,34); /* for IE */
+    background: rgba(34,34,34,0.75);
+    /*opacity: 0.9;*/
+    transition: background 1s, opacity 1s;
+    /* box-shadow: 0 5px 100px 40px rgba(0,0,0,0.8); */
+  }
+
+  .order_history_header {
+    font-size: 1.2em;
+    padding: 1%;
+    font-weight: 200;
+    text-indent: 1%;
+  }
+
+  .order_history_header .time_container {
+    color: #20bdff;
+    font-weight: 400;
+    font-size: 0.7em;
+  }
+
+  .provider_header {
+    color: #005686;
+    font-weight: 500;
+  }
+
+  .order_history_footer  {
+    position: absolute;
+    padding: 1%;
+    bottom: 1px;
+    width: 98%;
+    background-color: white;
+  }
+
+  .status_locked {
+    float: left;
+    border: 1px solid transparent;
+    border-radius: 1em;
+    width: 1em;
+    height: 1em;
+    background-color: #f5dc8f;
+  }
+
+  .status_received {
+    float: left;
+    border: 1px solid transparent;
+    border-radius: 1em;
+    width: 1em;
+    height: 1em;
+    background-color: #b0ffb0; 
+  }
+
+  .order_history_legend {
+    float: right;
+    width: 25%;
+  }
+
+  .locked_information {
+    color: #DDDDDD;
+    display: inline;
+    font-weight: 200;
+    float: left;
+    margin: 0% 3%;
+  }
+
+  .received_information {
+    color: #DDDDDD;
+    display: inline;
+    font-weight: 200;
+    float: left;
+    margin: 0% 3%;
+  }
+
+  li.order_product_history {
+    margin: 1%;
+    font-weight: 500;
+}
+
+  /*.offer_comment_history_container {
+    display: none;
+  }*/
+/* }*/

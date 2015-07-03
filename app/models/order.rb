@@ -14,6 +14,7 @@ class Order < ActiveRecord::Base
 	accepts_nested_attributes_for :comment
 
 	after_update :create_service_review_tickets, if: :locked?
+	before_destroy :create_history_recursively
 
 	validates :title, presence: true, length: {maximum: 100}
 
@@ -100,6 +101,24 @@ class Order < ActiveRecord::Base
 		end
 
 		self.review_tickets.destroy
+	end
+
+	def create_history_recursively
+		# los detalles de ofertas son creadas por las ofertas
+		history_object_hash = self.attributes
+		history_object_hash.delete("id")
+		new_order_history = OrderHistory.create(history_object_hash) 
+		self.offers.each do |offer|
+			offer.create_history_recursively(new_order_history)
+		end
+		self.combos.each do |combo|
+			combo.create_history_recursively(new_order_history)
+		end
+		self.order_products.each do |order_product|
+			order_product.create_history_recursively(new_order_history)
+		end
+       	self.comment.create_history_recursively(new_order_history)
+
 	end
 
 

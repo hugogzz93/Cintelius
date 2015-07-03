@@ -11,6 +11,7 @@ class Offer < ActiveRecord::Base
 	validates :unitary_price, presence: true, numericality: true
 	# validate :authorized_product
 	after_update :create_review_ticket, if: :received?
+	# before_destroy :create_history
 	validates :user_id, uniqueness: { scope: [:order_id, :product_id],
     message: "No se puede hacer mas de una oferta para le mismo producto." }
 
@@ -95,9 +96,9 @@ class Offer < ActiveRecord::Base
 	end
 
 	def self.lock_set(offers_ids) 
-	#le cambie el nombre de lock_offer para ver donde se utiliza, 
-	# tambien la altere para que ahora reciba ids en vez de ofertas
-	return unless offers_ids
+		#le cambie el nombre de lock_offer para ver donde se utiliza, 
+		# tambien la altere para que ahora reciba ids en vez de ofertas
+		return unless offers_ids
 		offers_ids.each do |offer_id|
 			offer = Offer.find(offer_id)
 			if offer.offer_details.last.status == "provider"
@@ -105,7 +106,18 @@ class Offer < ActiveRecord::Base
 				offer.offer_details.last.update(status: "both")
 			end
 		end
-		
+	end
+
+	def create_history_recursively(order_history)
+		history_object_hash = self.attributes
+		history_object_hash.delete("id")
+		history_object_hash.delete("order_id")
+		history_object_hash["order_history_id"] = order_history.id
+		new_offer_history = OfferHistory.create(history_object_hash)
+		self.comment.create_history_recursively(new_offer_history)
+		self.offer_details.each do |offer_detail|
+			offer_detail.create_history_recursively(new_offer_history)
+		end
 	end
 
 end

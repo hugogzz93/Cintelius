@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   get '/welcome/index' => "welcome#index"
   # edit user settings
   get '/settings' => 'user_settings#index', as: 'settings'
+  # history
+  get '/history' => 'history#show', as: 'history'
+  get '/history/:id/order/' => 'order_histories#show', as: 'order_history'
 
   # feedback
   get '/review_tickets' => 'review_tickets#index', as: 'review_tickets'
