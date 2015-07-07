@@ -1,14 +1,12 @@
 
 <div class="product_box">
-	<%= f.label "Producto" %> <br>
-	<%= f.text_field :product_id, style: "display: none;" %>
+	<%= f.label "Producto" %>
+	<%= f.text_area :product_id, style: "display: none;", class: "order_product_id_field" %>
 	<%= f.label :units,  "Kg" %>
-	<%= f.number_field :units, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %> <br>
+	<%= f.number_field :units, step: 0.1, min: 0.1, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
 	<%= image_tag 'x-image.png', class: 'x-button' %>
-	<div class="letter_image_box">
-		<%= image_tag 'letter_orange.png' %>
-	</div>
+	<%= image_tag 'letter_orange.png', class: "letter_image_box" %>
 	<%= fields_for(:comment, comment_object, child_index: comment_object.object_id) do |comment|%>
-		<%=  comment.text_area :content, placeholder: "Tu comentario.."%>
+		<%=  comment.text_area :content, class: "comment_field", placeholder: "Tu comentario.."%>
 	<% end %>
 </div>

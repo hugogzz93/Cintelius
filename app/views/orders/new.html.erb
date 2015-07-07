@@ -46,22 +46,53 @@
 		<div class="new-order-product">
 			<%= form_for@order, url: {action: "create"}, html: {
 				class: "new_order_form"} do |order|%>
-				<%= order.label :title, "Nombre de la Orden"  %>
-				<%= order.text_field :title, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>				
+
 				<div class="product_form_area">
 					<%= fields_for :order_products do |product_fields| %>
 					
 					<% end %>
-				
-				<%= link_to_add_fields "Add product ", order, :order_products %>
+					<%= link_to_add_fields "Add product ", order, :order_products %>
 				</div>
 
-				<%= order.text_field "due_date", id: "datepicker", placeholder: "Fecha limite", required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)", html: {readonly: true}  %>
-				<%= order.time_field "due_time", id: "timepicker", required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
-				<%= order.fields_for :comment, Comment.new do |comment| %>
-					<%= comment.text_area :content %>
-				<% end %>
-				<%= order.submit "Terminar Orden" %>
+				<div class="new_order_pop_up_screen">
+					<div class="new_order_pop_up_fields">
+						<div class="order_name_field_container new_order_field">
+							<%= order.label :title, "Nombra tu orden"  %>
+							<div class="new_order_field_information">
+								<span>*</span>Solo tu podras ver el nombre
+							</div>
+							<%= order.text_area :title, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
+						</div>		
+
+						<div class="order_comment_field_container new_order_field">
+							<%= order.fields_for :comment, Comment.new do |comment| %>
+								<%= comment.label :content, "Deja un mensaje para los proveedores" %>
+								<div class="order_message_explanation">
+									<!-- Informacion para los proveedores -->
+								</div>
+								<%= comment.text_area :content %>
+							<% end %>
+						</div> 
+
+						<div class="order_date_field_container new_order_field">
+							<div class="new_order_date_field_explanation">
+								Escoge la fecha y hora limite para hacerte ofertas
+								<div class="new_order_field_information">*Recuerda que tu no podras ver las ofertas antes de la fecha limite.</div>
+							</div>
+							<div class="date_field_container">
+								<%= order.text_field "due_date", id: "datepicker", placeholder: "Fecha limite", required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)", html: {readonly: true}  %>
+								<br>
+								<%= order.time_field "due_time", id: "timepicker", required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
+							</div>
+						</div>
+
+						<%= order.submit "Terminar Orden", id: "new_order_submit" %>
+					</div>
+					
+				</div>
+
+				<%= button_tag "Continuar", id: "new_order_form_continue_button"%>
+				
 
 			<% end %>
 		</div>

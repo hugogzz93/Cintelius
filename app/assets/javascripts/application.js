@@ -19,6 +19,19 @@
 
 $(function() {
 
+	$('#new_order_form_continue_button').on('click', function(e) {
+		e.preventDefault();
+		console.log('activated')
+		$('.new_order_pop_up_screen').addClass('active')
+		$('.product_form_area').addClass('active')
+		$(e.target).css('display', 'none')
+	})
+
+	$('.user_settings_list a').on('click', function() {
+		$('.loading_animation').addClass('active')
+		console.log('clicked')
+	})
+
 
 // {fontpage
 	$(".frontpage-square").on({
@@ -42,6 +55,11 @@ $(function() {
 
 // Order Index {
 $('.order_box a').on('click', function(e) {
+
+	// agregar animacion de cargando
+	$('.loading_animation').addClass('active');
+
+
 	$('.order_box').removeClass('fade-in').addClass('fade-out');
 	$($(e.target).closest('.order_box')).addClass('active').removeClass('fade-out');	
 	$('.order_box.active img').css('display', 'none');
@@ -116,14 +134,24 @@ $('.return_arrow').on('click', function(e) {
 		} else {
 			$('a.add_fields').click()
 			productName = $(e.target).text()
-			product_fields = $('.product_box').last().children().first()
+			productId = $(e.target).attr('data-product-id')
+			targetProductBox = $('.product_box').last()
+			// agrega productId
+			targetProductBox.attr('data-product-id', productId)
+			targetProductBox.children('.order_product_id_field').text(productId)
+			targetProductBox.children('img').attr('data-product-id', productId)
+			targetProductBox.children('.comment_field').attr('data-product-id', productId)
+			console.log('Added ' + productId + ' to comment');
+			// cambia el nombre
+			product_fields = targetProductBox.children().first()
 			product_fields.text(productName)
-			$($('.product_box').last().children().get(2)).val($(e.target).attr('data-product-id'))
-			orderProductId = $($('.newOrder .product_box').last().children('textarea').siblings().get(2)).attr('name').slice(33, 46)
+
+			// obtiene seed para el comentario
+			$(targetProductBox.children().get(2)).val($(e.target).attr('data-product-id'))
+			orderProductId = $(targetProductBox.children('textarea').siblings().get(1)).attr('name').slice(33, 46)
 			commentName = "order[order_products_attributes][" + orderProductId + "][comment_attributes][content]"
-			// $($('.product_box').last().children('textarea').siblings().get(2)).attr('id')
-			console.log(commentName)
-			$($('.product_box').last().children('textarea')).attr('name', commentName)
+			$(targetProductBox.children('#comment_content')).attr('name', commentName)
+
 			$(e.target).addClass('selected_product')
 
 			// para que la tacha borre al producto del formulario
@@ -138,10 +166,12 @@ $('.return_arrow').on('click', function(e) {
 			// Para que aparesca el textarea animado
 			$('.letter_image_box').on('click', function(e) {
 				$(e.target).parent().addClass('active');
-				setTimeout(function() {
-					$(e.target).parent().siblings('textarea').addClass('editable').focus()
-				}, 1000)
-				$(e.target).parent().siblings('textarea').on('blur', function(evnt) {
+				productId = $(e.target).attr('data-product-id')
+				console.log(productId)
+				// setTimeout(function() {
+					$('.comment_field[data-product-id=' + productId +']').addClass('editable').focus()
+				// }, 1000)
+				$('.comment_field[data-product-id=' + productId +']').on('blur', function(evnt) {
 					$(evnt.target).removeClass('editable')
 					$(e.target).parent().removeClass('active');
 				})
@@ -208,7 +238,7 @@ $('.return_arrow').on('click', function(e) {
      $.datepicker.setDefaults($.datepicker.regional['es']);
 // Seleccion fecha limite en nueva orden
 $(function() {
-    $('#datepicker').datepicker({dateFormat: 'yy-mm-dd', minDate: 0})
+    $('#datepicker').datepicker({dateFormat: 'yy-mm-dd', minDate: 1, maxDate: 10})
   });
 
 
@@ -229,3 +259,8 @@ function InvalidMsg(textbox) {
     }
     return true;
 }
+
+
+
+
+

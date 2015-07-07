@@ -1,5 +1,5 @@
 
- * This is a manifest file that'll be compiled into application.css, which will include all the files
+/* This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
  * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
@@ -155,6 +155,17 @@ form.edit_combo {
   /*background-color:green;*/
   }
 
+  img.loading_animation {
+    display: none;
+    width: 50%;
+    height: auto;
+    margin: 25%;
+  }
+
+  img.loading_animation.active {
+    display: block;
+  }
+
   .order_box.fade-in {
     position: relative;
     bottom: 0%;
@@ -308,7 +319,8 @@ form.edit_combo {
   top: 7%;
   /*left: 5%;*/
   height: 93%;
-  width: 100%;
+  width: 100% !important; 
+  margin: 0px !important;
   overflow: auto;
   background-color: white;
   /*box-shadow: -5px -5px 20px #31353c;*/
@@ -317,7 +329,7 @@ form.edit_combo {
  button:focus {outline:0;}
 
  .newOrder {
-	height: 34%;
+	height: 90%;
 	width: 100%;
 	margin-top: 1%;
 	overflow: scroll;
@@ -337,16 +349,17 @@ form.edit_combo {
 
  .newOrder .column {
  	float: left;
+  border: none;
  	width: 24%;
  	overflow: hidden;
  }
 
  .newOrder .column.order {
- 	width: 26%;
- 	height: 80%;
-  	border: 1px solid #31353c;
-  	position: absolute;
-  	right: 1.85%;
+ 	  width: 26%;
+ 	  height: 90%;
+    border: 1px solid #31353c;
+    position: absolute;
+    right: 1.85%;
  }
 
  .subcategories ul {
@@ -415,11 +428,15 @@ form.edit_combo {
 	width: 100%;
 	height: 100%;
 	background-color: transparent;
-	transition: text-indent 0.3s,  background-color 0.3s;
+  -webkit-transition: text-indent 0.3s, background-color 0.3s;
+  -o-transition: text-indent 0.3s, background-color 0.3s;
+  transition: text-indent 0.3s, background-color 0.3s;
 }
 .newOrder li button:hover {
 	color: #ff6500;
-  	transition: text-indent 0.3s, background-color 0.3s;
+  -webkit-transition: text-indent 0.3s, background-color 0.3s;
+  -o-transition: text-indent 0.3s, background-color 0.3s;
+  transition: text-indent 0.3s, background-color 0.3s;
   	text-indent: 20%;
   	/*background-color: #8a8a8a;*/
 }
@@ -427,7 +444,9 @@ form.edit_combo {
 .newOrder li button.active {
 	background-color: #ff6500;
 	color: white;
-	transition: background-color 0.3s, color 0.3s;
+  -webkit-transition: background-color 0.3s, color 0.3s;
+  -o-transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s, color 0.3s;
 	text-indent: 20%;
  	/*border: 2px #31353c solid;*/
  	/*border-right: none;*/
@@ -447,23 +466,27 @@ form.edit_combo {
 }
 
 .new_order_form .product_box {
-  height: 15%;
+  height: 3.5em;
   border: 1px solid #31353c;
   margin: 5px 0px;
+  overflow: auto;
 }
 img.x-button {
-  width: 6%;  
-    position: relative;
-  left: 93%;
-  top: -2.3em;
+  height: 1em;
   border: 1px solid transparent;
-  cursor: pointer;
+  position: absolute;
+  right: 1%;
+  margin: 1%;
+  -webkit-transition: border 0.5s;
+  -o-transition: border 0.5s;
   transition: border 0.5s;
 }
 
 img.x-button:hover {
 	border: 1px solid #31353c;
- 	transition: border 0.5s;
+  -webkit-transition: border 0.5s;
+  -o-transition: border 0.5s;
+  transition: border 0.5s;
 }
 
 
@@ -477,6 +500,107 @@ img.x-button:hover {
 height: 100%
 }
 
+
+.new_order_pop_up_screen {
+  display: none;
+}
+
+.new_order_pop_up_screen.active {
+  display: block;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0%;
+  top: 7%;
+  background-color: white;
+  border: 1px solid black;
+  background: rgb(34,34,34);
+  background: rgba(34,34,34,0.75);
+}
+.new_order_pop_up_fields {
+    /* overflow: scroll; */
+  background-color: white;
+  border: 1px solid black;
+  position: absolute;
+  top: 2%;
+  left: 32.5%;
+  width: 35%;
+}
+
+.new_order_field {
+  position: relative;
+  display: block;
+  padding: .4em .8em .4em 2em;
+  margin: .5em .5em .5em .5em;
+  background: #fdfdfd;
+  color: #444;
+  text-decoration: none;
+  border-radius: 0;
+  border: 1px solid rgba(0,0,0,.1);
+  font-size: 12px;
+}
+
+.new_order_field:before {
+  position: absolute;
+  left: -1.3em;
+  margin-top: -1.3em;
+  top: 50%;
+  background: #f78793;
+  height: 2em;
+  color: #fff;
+  width: 2em;
+  line-height: 2em;
+  border: .3em solid #F6F6F6;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 2em;
+}
+
+.order_name_field_container:before {
+  content: "1";
+}
+
+.order_comment_field_container:before {
+  content: "2";
+}
+
+.order_date_field_container:before {
+  content: "3";
+}
+
+.new_order_field_information {
+  color: #1885D7;
+}
+
+
+.new_order_date_field_explanation {
+  width: 18em;
+}
+
+.date_field_container {
+  width: 50%;
+  position: absolute;
+  right: 1%;
+  top: 1%;
+  padding: 1%;
+}
+
+#timepicker {
+  margin: 2% 0%;
+}
+
+.new_order_pop_up_fields.active {
+
+}
+
+.new_order_title_area {
+
+}
+
+input#order_title {
+
+}
+
 .product_form_area {
 	  height: 85%;
   width: 98%;
@@ -484,62 +608,107 @@ height: 100%
   left: 1%;
   overflow-y: scroll;
   border-bottom: 1px solid #31353c;
-  border-top: 1px solid #31353c;
+  /*border-top: 1px solid #31353c;*/
 }
-form#new_order.new_order_form input[type=submit] {
-	  border: 1px solid transparent;
+
+.product_form_area.active {
+  border-bottom: 1px solid transparent;
+  /*border-top: 1px solid #31353c;*/
+}
+
+.product_box label{
+  margin:; 1%;
+}
+
+#new_order_submit {
+  border: 1px solid #3d3d3e;
+  color: #3d3d3e;
   background-color: transparent;
   text-transform: uppercase;
-  position: absolute;
-  left: 5%;
-  bottom: 3%;
   cursor: pointer;
+  /* background-color: #8DC44E; */
+  /* color: white; */
+  font-weight: lighter;
+  margin: 0em 0.5em 0.5em 0.5em;
+  -webkit-transition: border 0.3s, color 0.3s;
+  -o-transition: border 0.3s, color 0.3s;
   transition: border 0.3s, color 0.3s;
 }
 
 
 
-form#new_order.new_order_form input[type=submit]:hover {
-	color: #ff6500;
-	border: 1px solid #ff6500;
-  	transition: border 0.3s, color 0.3s;
+#new_order_submit:hover {
+	color: #8DC44E;
+	border: 1px solid #8DC44E;
+  -webkit-transition: border 0.3s, color 0.3s;
+  -o-transition: border 0.3s, color 0.3s;
+  transition: border 0.3s, color 0.3s;
 
 }
+
+button#new_order_form_continue_button {
+  position: absolute;
+  bottom: 0%;
+  margin: 6%;
+  right: 0%;
+  border: 1px solid black;
+  background-color: transparent;
+  -webkit-transition: color 0.5s, border-color 0.5s;
+  -o-transition: color 0.5s, border-color 0.5s;
+  transition: color 0.5s, border-color 0.5s;
+}
+
+button#new_order_form_continue_button:hover {
+  position: absolute;
+  border: 1px solid rgb(255, 101, 0);
+  background-color: transparent;
+  color: rgb(255, 101, 0);
+}
+
+
 
 form#new_order.new_order_form input[type=number] {
 	width: 13%
 }
 
-form#new_order.new_order_form textarea {
+form#new_order #com {
 	display: none;
 }
-form#new_order.new_order_form textarea.active {
+
+#new_order .comment_field {
+  display: none;
+}
+
+
+
+form#new_order .comment_field.active {
   position: relative;
   width: 100%;
   height: 9em;
   top: -4em;
   resize: none;
 }
-form#new_order.new_order_form textarea.editable {
+
+form#new_order .comment_field.editable {
   z-index: 4;
   display: block;
-  position: relative;
-  bottom: 11em;
-  width: 98%;
-  height: 94%;
   resize: none;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  bottom: 2em;
+  border-left: none;
 }
 
 .letter_image_box {
 	/*background-image: image-url("letter-#31353c.png");*/
 	/*border: 1px solid #31353c;*/
-  	width: 14%;
-  	height: 40%;
-  	position: relative;
-  	left: 57%;
-  	top: -61%;
-  	cursor: pointer;
-  	display: hidden;
+  	  /* display: none; */
+  /* background-image: image-url("letter-#31353c.png"); */
+  position: absolute;
+  height: 2.3em;
+  left: 50%;
+  cursor: pointer;
 }
 
 .letter_image_box img {
@@ -1068,11 +1237,19 @@ textarea, input {outline: none;}
 }
 
 .order_index .product_list_area{
-  /* border: 1px solid white; */
-   width: 95%; 
+
+  /* width: 95%; 
   margin-left: 2.5%;
   overflow: auto;
   margin-bottom: 2%;
+  border-bottom: 1px solid #e5e5e5;
+  border-top: 1px solid #e5e5e5;*/
+
+    /* border: 1px solid white; */
+  width: 100%;
+  /* margin-left: 2.5%; */
+  overflow: auto;
+  /* margin-bottom: 2%; */
   border-bottom: 1px solid #e5e5e5;
   border-top: 1px solid #e5e5e5;
 }
@@ -1618,15 +1795,11 @@ form.edit_offer {
 
 /*poner en posicion adecuada*/
 #datepicker {
-  position: absolute;
-  bottom: 6%;
-  right: 8%;
+  
 }
 
 #timepicker {
-  position: absolute;
-  bottom: 2%;
-  right: 8%;
+  
 }
 
 .due_date_info {
@@ -1649,6 +1822,28 @@ form.edit_offer {
   right: -36%;
   transition: background-color 0.3s;
   -webkit-animation: slide-out-order-info 0.5s ease 1;
+}
+
+.order_comment_container {
+  position: relative;
+  display: block;
+  padding: .4em .8em .4em 2em;
+  margin: .5em .5em .5em 0.5em;
+  background: #232323;
+  color: #cccccc;
+  text-decoration: none;
+  border-radius: 0;
+  border: 1px solid rgba(0,0,0,.1);
+  font-size: 12px;
+}
+
+.order_info_comment_header {
+  margin-bottom: 5px;
+  color: #F6F6F6;
+  /* font-size: 20px; */
+  /* text-align: center; */
+  font-weight: normal;
+  line-height: normal;
 }
 
 .column.order_info.active  {
@@ -2224,7 +2419,7 @@ div#user_product_form_header::before {
 
   .offer_comment_history_container {
     text-indent: 0px;
-    color: red;    
+    color: #005686;    
     max-height: 0px;
     padding-left: 5%;
     font-size: 0.8em;
@@ -2232,7 +2427,6 @@ div#user_product_form_header::before {
   }
 
   .offer_comment_history_container.active {
-    color: #005686;    
     max-height: 500px;
   }
 
@@ -2307,7 +2501,7 @@ div#user_product_form_header::before {
   }
 
   .locked_information {
-    color: #DDDDDD;
+    color: #999999;
     display: inline;
     font-weight: 200;
     float: left;
@@ -2315,7 +2509,7 @@ div#user_product_form_header::before {
   }
 
   .received_information {
-    color: #DDDDDD;
+    color: #999999;
     display: inline;
     font-weight: 200;
     float: left;
@@ -2325,7 +2519,110 @@ div#user_product_form_header::before {
   li.order_product_history {
     margin: 1%;
     font-weight: 500;
+  }
+
+  ul.provider_combo_histories_list {
+    overflow: hidden;
+    max-height: 0px;
+    width: 100%;
+    -webkit-transition: max-height 0.5s;
+    -o-transition: max-height 0.5s;
+    transition: max-height 0.5s;
+  }
+
+  ul.provider_combo_histories_list.active {
+    overflow: scroll;
+    max-height: 50em;
+    width: 100%;
+  }
+
+  li.combo_history {
+  /* max-height: 1.5em; */
+  overflow: hidden;
+  cursor: pointer;
+  text-indent: 2%;
+  margin: 1%;
 }
+
+.combo_history_header {
+    border-bottom: 1px solid transparent;
+    border-radius: 1em;
+    -webkit-transition: background-color 0.3s;
+    -o-transition: background-color 0.3s;
+    transition: background-color 0.3s;
+    padding: 1%;
+  }
+
+  .combo_history_header:hover {
+    background-color: #DDDDDD;
+  }
+
+  .combo_history_header.received{
+    background-color: #b0ffb0;
+  }
+
+  .combo_history_header.locked{
+    background-color: #f5dc8f;
+  }
+
+  
+
+  li.combo_history.active {
+    /*max-height: 500px;*/
+    overflow: scroll
+  }
+
+  .combo_comment_history_container {
+    text-indent: 0px;
+    color: #005686;    
+    max-height: 0px;
+    padding-left: 5%;
+    font-size: 0.8em;
+    -webkit-transition: max-height 0.5s;
+    -o-transition: max-height 0.5s;
+    transition: max-height 0.5s;
+  }
+
+  .combo_comment_history_container.active {
+    max-height: 500px;
+  }
+
+
+
+  ul.combo_product_history_list {
+    width:100%;
+    overflow: auto;
+  }
+
+  li.combo_product_history {
+  width: 45%;
+  border: 1px solid transparent;
+  border-radius: 1em;
+  background-color: white;
+  margin: 1%;
+  float: left;
+}
+
+.settings_loading_animation_container .loading_animation {
+  position: fixed;
+  margin: auto;
+}
+
+.content_body img.loading_animation {
+  display: none;
+  width: 33%;
+  height: auto;
+  /* margin: 30% 35%; */
+  margin: 0% 33%;
+  margin-top: 10%;
+}
+
+.content_body img.loading_animation.active {
+   display: block; 
+}
+
+
+
 
   /*.offer_comment_history_container {
     display: none;

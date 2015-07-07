@@ -17,6 +17,7 @@ $('.confirmation_button').remove()
 
 $('.order_title_container').append('<%= j @order.title %>')
 <% if @order.comment %>
+	$('.order_comment_container').append('<div class="order_info_comment_header">Tu Mensaje:</div>')
 	$('.order_comment_container').append('<%= j @order.comment.content %>')
 <% end %>
 
@@ -174,3 +175,9 @@ $('.product_main_info').on('click', function(e) {
 $('.confirmation_button').on('click', function() {
 	$('#order_form_submit').click();
 })
+
+
+
+
+
+$('.loading_animation').removeClass('active')
