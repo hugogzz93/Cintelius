@@ -43,6 +43,10 @@ class User < ActiveRecord::Base
     self.product_scores.create(product_id: product_id)
   end
 
+  def get_service_score
+    self.service_score.get_score
+  end
+
   def closed_orders
     
   end

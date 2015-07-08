@@ -40,8 +40,9 @@
 					<!-- no tiene el offer. pero es el sintax correcto -->
 				</div>
 				<span style="float:left;margin-top:11%;"><%= f.product.name %></span>
+			</div>	
 
-				<div class="offer_numbers_box">
+			<div class="offer_numbers_box">
 
 					<div class="wanted unit_container"> <!-- unidades deseadas por comprador-->
 						<span style="float:left;margin-top: -2%;margin-left:5%">Kg:</span>
@@ -53,7 +54,7 @@
 						<div class="unit_container">
 							<span style="float:left;;margin-left:5%">Kg:</span>
 							<div class="background_box units offer_form_fields" data-product-id="<%= f.product.id %>" >								
-									<%= offer_detail_fields.number_field :units, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)", class: "new_offer_unit_input", :value => 0.00  %>
+									<%= offer_detail_fields.number_field :units, step: 0.1, min: 0.1, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)", class: "new_offer_unit_input", :value => 0.00  %>
 							</div>
 						</div>
 
@@ -61,13 +62,12 @@
 							<div class="unit_code" style="float: left; margin-top: -2%; margin-left: 5%;">Unitario</div>
 							<div class="currency_code"><%= t 'currency_code' %>:</div>
 							<div class="background_box total_price offer_form_fields">
-								<%= offer.number_field :unitary_price, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)", class: "new_offer_unitary_input", :value => 0.00   %>
+								<%= offer.number_field :unitary_price, step: 0.1, min: 0.1, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)", class: "new_offer_unitary_input", :value => 0.00   %>
 							</div>
 						</div>
 					<% end %>
 
 				</div>
-			</div>	
 
 		</div>
 		<div class="right_side">

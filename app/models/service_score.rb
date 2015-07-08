@@ -19,5 +19,9 @@ class ServiceScore < ActiveRecord::Base
     	end
     end
 
+    def get_score
+        self.total_score / self.total_reviews
+    end
+
 
 end

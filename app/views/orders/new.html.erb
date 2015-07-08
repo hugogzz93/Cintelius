@@ -98,3 +98,39 @@
 		</div>
 	</div>	
 </div>
+
+<script>
+function setChosenLink(link) {
+	$(link).addClass('choice')
+}
+
+setChosenLink('.new_order_link')
+
+
+
+// datepicker se movio aqui desde applicatino.js por problemas con turbolinks
+$.datepicker.regional['es'] = {clearText: 'Borrar', clearStatus: '',
+    closeText: 'Cerrar', closeStatus: '',
+    prevText: 'Anterior', prevStatus: 'Ver mes anterior',
+    nextText: 'Siguiente;', nextStatus: 'Ver siguiente mes',
+    currentText: 'Actual', currentStatus: 'Ver mes actual',
+    monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+    'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+    monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
+    'Jul','Ago','Sep','Oct','Nov','Dic'],
+    monthStatus: 'Ver otros meses', yearStatus: 'Ver otros años',
+    weekHeader: 'Sm', weekStatus: '',
+    dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+    dayNamesShort: ['Dom','Lun','Mar','Mie','Jue','Vie','Sab'],
+    dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
+    dayStatus: 'Utilice DD como el primer día de la semana', dateStatus: 'Elija DD , MM d',
+    dateFormat: 'dd/mm/yy', firstDay: 0, 
+    initStatus: 'Elija la fecha', isRTL: false};
+
+     $.datepicker.setDefaults($.datepicker.regional['es']);
+// Seleccion fecha limite en nueva orden
+$(function() {
+    $('#datepicker').datepicker({dateFormat: 'yy-mm-dd', minDate: 1, maxDate: 10})
+  });
+	
+</script>

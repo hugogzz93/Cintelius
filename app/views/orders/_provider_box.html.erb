@@ -1,3 +1,12 @@
 <div class="provider_box" data-attribute-user-id="<%= provider.id %>">
 	<%= provider.user_detail.organization %>
+	<div class="provider_service_score" data-score="<%= provider.get_service_score %>"></div>
 </div>
+
+<script>
+$('.provider_service_score').raty({ 
+	readOnly: true,
+	path: '/assets/stars/',
+	score: 5
+	 });
+</script>

@@ -21,7 +21,7 @@
 	<div class="combo_form_footer">
 		<span class="combo_price_label">
 			Total <span class="unit_code" style="color:#C8C8C8"><%= t 'currency_code' %>:</span> </span>
-			<%= combo.number_field :price, value: 0.00, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)"  %>
+			<%= combo.number_field :price, value: 0.00, step: 0.1, min: 0.1, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)"  %>
 	</div>	
 	
 <% end %>

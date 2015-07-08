@@ -8,7 +8,18 @@
 </head>
 <body>
 	<div class="top-bar">
-		<%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+		<%= link_to('Cerrar Sesión', destroy_user_session_path, :method => :delete, class: "log_out_link") %>
+		<% if current_user.is_buyer? or current_user.is_admin? %>
+			<%= link_to('Nueva Orden', new_order_path, class: "new_order_link") %>
+			<%= link_to('Ordenes', orders_path, class: "order_index_link") %>
+		<% end %>
+
+		<% if current_user.is_seller? or current_user.is_admin? %>
+			<%= link_to('Ofertas', offers_path, class: "offer_index_link") %>
+		<% end %>
+
+		<%= link_to('Herramientas', settings_path, class: "user_settings_link") %>
+
 	</div>
 	<div class="flash_messages">
 		<p class="notice"><%= notice %></p>
@@ -29,3 +40,7 @@
 
 </body>
 </html>
+
+<script>
+	// $('.top-bar a').on('click', function)
+</script>

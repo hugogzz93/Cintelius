@@ -17,17 +17,38 @@
 //= require_tree .
 
 
-$(function() {
+var do_on_load = function() { 
+
+	// $('.top-bar a').on('click', function(e) {
+	// 	$('choice').removeClass('choice')
+	// 	$(e.target).addClass('choice')
+	// 	console.log('added choice')
+	// })
+
+
 
 	$('#new_order_form_continue_button').on('click', function(e) {
 		e.preventDefault();
-		console.log('activated')
 		$('.new_order_pop_up_screen').addClass('active')
 		$('.product_form_area').addClass('active')
-		$(e.target).css('display', 'none')
+		$('#new_order_form_continue_button').css('display', 'none')
+	})
+
+	$('#new_order_submit').on('click', function() {
+		$('#new_order').submit()
+	})
+
+	$('.new_order_pop_up_screen').on('click', function(e) {
+		$('.new_order_pop_up_screen').removeClass('active')
+		$('.product_form_area').removeClass('active')
+		$('#new_order_form_continue_button').css('display', 'block')
+	}).children().on('click', function() {
+		return false;
 	})
 
 	$('.user_settings_list a').on('click', function() {
+		$('.content_body').empty()
+		$('.loading_animation_screen').addClass('active')
 		$('.loading_animation').addClass('active')
 		console.log('clicked')
 	})
@@ -55,6 +76,10 @@ $(function() {
 
 // Order Index {
 $('.order_box a').on('click', function(e) {
+
+	// limpia la lista de ofertas y objetivos
+	$('.offer_list').empty()
+	$('.order_product_list').empty()
 
 	// agregar animacion de cargando
 	$('.loading_animation').addClass('active');
@@ -156,9 +181,9 @@ $('.return_arrow').on('click', function(e) {
 
 			// para que la tacha borre al producto del formulario
 			$('.product_box img.x-button').on('click', function(e) {
-				textForTarget = $(e.target).parent().children().first().text()
+				targetId = $(e.target).attr('data-product-id')
 				$(e.target).parent().remove()
-				$('button.selected_product:contains('+textForTarget+')').removeClass('selected_product')
+				$('button.selected_product[data-product-id=' + targetId + ']').removeClass('selected_product')
 
 				console.log()
 			})
@@ -211,35 +236,22 @@ $('.return_arrow').on('click', function(e) {
 		event.preventDefault()
 	})
 
-	// $('.order_box a').on()
-})
+  // do some things 
+}
+$(document).ready(do_on_load)
+$(window).bind('page:change', do_on_load)
+
+
+// $(function() {
+
+	
+// 	// $('.order_box a').on()
+// })
 
 
 
 // Para que calendario este en español
- $.datepicker.regional['es'] = {clearText: 'Borrar', clearStatus: '',
-    closeText: 'Cerrar', closeStatus: '',
-    prevText: 'Anterior', prevStatus: 'Ver mes anterior',
-    nextText: 'Siguiente;', nextStatus: 'Ver siguiente mes',
-    currentText: 'Actual', currentStatus: 'Ver mes actual',
-    monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
-    'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
-    monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
-    'Jul','Ago','Sep','Oct','Nov','Dic'],
-    monthStatus: 'Ver otros meses', yearStatus: 'Ver otros años',
-    weekHeader: 'Sm', weekStatus: '',
-    dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
-    dayNamesShort: ['Dom','Lun','Mar','Mie','Jue','Vie','Sab'],
-    dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
-    dayStatus: 'Utilice DD como el primer día de la semana', dateStatus: 'Elija DD , MM d',
-    dateFormat: 'dd/mm/yy', firstDay: 0, 
-    initStatus: 'Elija la fecha', isRTL: false};
-
-     $.datepicker.setDefaults($.datepicker.regional['es']);
-// Seleccion fecha limite en nueva orden
-$(function() {
-    $('#datepicker').datepicker({dateFormat: 'yy-mm-dd', minDate: 1, maxDate: 10})
-  });
+ // datepicker. movido a <orders/new.html.erb> por problemas de turbolinks
 
 
 
@@ -260,7 +272,10 @@ function InvalidMsg(textbox) {
     return true;
 }
 
-
+function setChosenLink(link) {
+	$(link).addClass('choice')
+	console.log('asdfasdf')
+}
 
 
 

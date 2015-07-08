@@ -1,13 +1,10 @@
 NEWORDER
 
-	Error en los event handlers que utilizan nombre como identificacion de objectos
-	ya que si dos objetos tienen el mismo nombre en cualquier ubicacoin, los dos son
-	cambiados por el event handler "Carne, Carne Blanca"
+	
 
 NEWOFFER
 	
-	Que se deshabilite el boton de terminar combo cuando no hay productos y en las ofertas cuando
-	no esta la informacion requerida.
+	Que se deshabilite el boton de terminar combo cuando no hay productos y en las ofertas cuando no esta la informacion requerida.
 
 	>Agregar producto
 	>Mandar Oferta

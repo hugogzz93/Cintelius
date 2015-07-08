@@ -1,8 +1,6 @@
 // recibe una orden en @order
 // Este limpio la lista al cambiar de orden
 $('.provider_box').remove()
-$('.offer_list').empty()
-$('.order_product_list').empty()
 $('.column.order_info').removeClass('active')
 $('.column.order_info').children().empty()
 $('.order_product_info_container').append('<ul class="order_product_info_list"></ul>')
@@ -61,8 +59,14 @@ $('.info_tab_close_button').append("<%= j image_tag('icons/icon-x.png') %>")
 
 // Los productos del provedor indicado se vuelvan visibles
 $('.provider_box').on('click', function(e) {
-	$('.offer_product_box.active').removeClass('active')	
+	$('.selected_provider_box').removeClass('selected_provider_box')
+	$(e.target).addClass('selected_provider_box')
+
+	// hace invisible todas las ofertas y productos
+	$('.offer_product_box.active').removeClass('active')
+	$('.combo_box').removeClass('active')
 	idToCheck = $(e.target).attr('data-attribute-user-id')
+	// hace visible las ofertas y productos que tienen el user-id
 	$('.offer_product_box[data-attribute-user-id=' + idToCheck + ']').addClass('active')
 	$('.combo_box[data-attribute-user-id=' + idToCheck + ']').addClass('active')
 })
