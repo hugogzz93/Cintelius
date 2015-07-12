@@ -46,6 +46,7 @@ $('.combo_product_add_button').on('click', function(e) {
 	$($('.combo_product_remove_button').last()).attr('data-product-id', idToCheck).attr('type', 'button')
 	$(e.target).prop('disabled', true)
 	productName = $(e.target).attr('data-product-name')
+	console.log($(e.target))
 	console.log(productName)
 	$('.combo_product_box').last().children('.combo_product_name').text(productName)
 	// Para que se eliminen los campos si se desea remover el producto

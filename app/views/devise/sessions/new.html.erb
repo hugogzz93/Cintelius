@@ -78,22 +78,37 @@
   <div class="message">
   </div>
   <div class="line-holder" id="arrow-holder">
-    <%= image_tag("frontpage/arrow.png") %>
+    <%= image_tag("frontpage/arrow.png", class: "outlined-image") %>
   </div>
-  <%= image_tag("frontpage/ramen.png") %>
+  <%= image_tag("frontpage/water.jpg", class: "frontpage-square-background-image") %>
+  <figcaption>
+    <h2>Messy <span>Duke</span></h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, ullam.</p>
+  </figcaption>
 </div>
+
 <div id="square2" class="frontpage-square">
   <div class="line-holder">
-    <%= image_tag("frontpage/aguila.png") %>
+    <%= image_tag("frontpage/aguila.png", class: "outlined-image") %>
   </div>
-  <%= image_tag("frontpage/cuadrado2.jpg") %>
+  <%= image_tag("frontpage/cuadrado2.jpg", class: "frontpage-square-background-image") %>
+  <figcaption>
+    <h2>Messy <span>Duke</span></h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, quisquam.</p>
+  </figcaption>
 </div>
+
 <div id="square3" class="frontpage-square">
   <div class="line-holder">
-    <%= image_tag("frontpage/nopal.png") %>
+    <%= image_tag("frontpage/nopal.png", class: "outlined-image") %>
   </div>
-  <%= image_tag("frontpage/cuadromapa.jpg") %>
+  <%= image_tag("frontpage/road.jpg", class: "frontpage-square-background-image") %>
+  <figcaption>
+    <h2>Nueva <span>Cuenta</span></h2>
+    <p><%= link_to "Aplica ahora para poder utilizar los servicios de Cintelius" %></p>
+  </figcaption>
 </div>
+
 
 <!-- # <%= render "devise/shared/links" %> -->
 

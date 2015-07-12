@@ -130,7 +130,7 @@ $('.info_tab_close_button').on('click', function() {
 
 // tab de info debe actualizar la cantidad de productos seleccionados
 function prodSelUpdate(prodId, mode) {
-	offerQuantity = parseInt($('.units[data-product-id=' + prodId + ']').text());
+	offerQuantity = parseFloat($('.units[data-product-id=' + prodId + ']').text());
 	infoTabProdChange(prodId, offerQuantity, mode); //debe de actualizar el string en tab de informacion
 
 }
@@ -139,7 +139,9 @@ function comboSelUpdate(comboId, mode) {
 	products = $('.combo_box[data-combo-id='+ comboId + '] .product_list_area').children()
 	for(var i =0; i < products.length; i++) {
 		productId = $(products[i]).attr('data-product-id');
-		quantity = parseInt($(products[i]).attr('data-product-units'));
+		quantity = parseFloat($(products[i]).attr('data-product-units'));
+		console.log("cantidad")
+		console.log(quantity)
 		infoTabProdChange(productId, quantity, mode)
 	}
 }
@@ -147,8 +149,8 @@ function comboSelUpdate(comboId, mode) {
 // recibe el cantidad, el modo y la identificacion de producto y actualiza el tab de informacion
 function infoTabProdChange(prodId, offerQuantity, mode ) {
 	productInfoArray = $('.product_quantity_container[data-product-id=' + prodId + ']').text().split("/");
-	tabQuantity = parseInt(productInfoArray[0]);
-	objectiveQuantity = productInfoArray[1];
+	tabQuantity = parseFloat(productInfoArray[0]);
+	objectiveQuantity = parseFloat(productInfoArray[1]);
 
 	if (mode == "select") {
 		newQuantity = tabQuantity + offerQuantity;

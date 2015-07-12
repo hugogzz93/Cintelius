@@ -5,7 +5,7 @@
 		<div class="product_name_box">
 			<!-- color del circulo debe indicar el estado de la oferta { -->
 			<div class="status_circle <%= f.complete_status %>" data-offer-id="<%= f.id %>">
-				<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id} if f.order.is_open? %>
+				<%= button_tag "+", class: "combo_product_add_button", data: {product_id: f.product.id, product_name: f.product.name} if f.order.is_open? %>
 			</div>
 			<span style="float:left;margin-top:11%;"><%= f.product.name %></span>
 		</div>

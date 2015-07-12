@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
+  resource :user, only: [:edit] do
+    collection do
+      patch 'update_password'
+    end
+  end
+  
   resources :orders
   resources :combos
   resources :offers

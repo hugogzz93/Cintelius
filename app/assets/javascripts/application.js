@@ -54,26 +54,6 @@ var do_on_load = function() {
 	})
 
 
-// {fontpage
-	$(".frontpage-square").on({
-	    mouseenter: function (e) {
-	        //stuff to do on mouse enter
-			$(e.target).parent().siblings('img').addClass('hover')
-			console.log(e.target)
-	    },
-	    mouseleave: function (e) {
-	        //stuff to do on mouse leave
-			$(e.target).parent().siblings('img').removeClass('hover')
-			console.log('leave')
-	    }
-	});
-	
-
-
-
-// }
-
-
 // Order Index {
 $('.order_box a').on('click', function(e) {
 
@@ -244,7 +224,7 @@ $(window).bind('page:change', do_on_load)
 
 // $(function() {
 
-	
+
 // 	// $('.order_box a').on()
 // })
 

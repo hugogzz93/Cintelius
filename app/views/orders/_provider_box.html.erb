@@ -7,6 +7,8 @@
 $('.provider_service_score').raty({ 
 	readOnly: true,
 	path: '/assets/stars/',
-	score: 5
+	score: function() {
+		    return $(this).attr('data-score');
+		  }	
 	 });
 </script>
