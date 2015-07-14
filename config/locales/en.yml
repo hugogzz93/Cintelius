@@ -25,6 +25,7 @@ en:
   currency_code: "USD"
   confirm_selection: "Confirm Selection"
   selection: "Selection"
+  combo_instructions: "Choose products from the column on the left."
   order_lock_success: "Selection confirmed."
   order_lock_failure: "An error has ocurred."
   user_detail_update_success: "Informacion updated."

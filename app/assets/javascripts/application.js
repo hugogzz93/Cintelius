@@ -92,9 +92,6 @@ $('.return_arrow').on('click', function(e) {
 })
 
 
-
-
-
 // }
 
 

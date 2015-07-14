@@ -32,10 +32,10 @@ $('.order_title_container').append('<%= j @order.title %>')
 		$('.orders .provider_list').append("<%= j render partial: 'provider_box.html.erb', locals: {provider: provider}%>")
 	<% end %>
 
-	<% @order.offers.each do |offer| %>
-		$('.offer_list').append("<%= j render partial: 'buyer_offer_status_form.html.erb', locals: {f: offer}%>")
-		$('.order_product_list').prepend("<%= j render partial: 'selected_offer_box.html.erb', locals: {f: offer}%>")
-	<% end %>
+	// # <% @order.offers.each do |offer| %>
+		// $('.offer_list').append("<%= j render partial: 'buyer_offer_status_form.html.erb', locals: {f: offer}%>")
+		// $('.order_product_list').prepend("<%= j render partial: 'selected_offer_box.html.erb', locals: {f: offer}%>")
+	// # <% end %>
 
 	// agrega combos
 	<% @order.combos.each do |combo| %>
@@ -97,8 +97,16 @@ $('.offer_deselection_button').on('click', function(e) {
 	$('.selected_offer_box[data-offer-id=' + idToCheck + ']').removeClass('selected')
 	prodSelUpdate(prodID, "deselect");
 })
+// haz click en cualquier parte del combo y se selecciona
+$('.order_index .combo_box').on('click', function(e) {
+	if (!$(e.target).hasClass('combo_selection_button')) {
+		comboId = $(e.target).closest('.combo_box').attr('data-combo-id')
+		$('.combo_selection_button[data-combo-id=' + comboId +']').click();
+	};
+})
 
 $('.combo_selection_button').on('click', function(e) {
+	console.log('clicked')
 	$(e.target).attr('type', 'button').prop('disabled', true).addClass('active')
 	idToCheck = $(e.target).attr('data-combo-id')
 	$('.combo_deselection_button[data-combo-id=' + idToCheck + ']').prop('disabled', false)

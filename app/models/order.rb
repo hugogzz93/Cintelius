@@ -67,6 +67,13 @@ class Order < ActiveRecord::Base
 		end
 	end
 
+	def get_participating_providers
+		providers_from_offers = self.offers.collect {|offer| offer.user}.uniq
+		providers_from_combos = self.combos.collect {|combo| combo.user}.uniq
+		providers = providers_from_combos + providers_from_offers
+		return providers.uniq
+	end
+
 
 	# proveedores que tienen un producto seleccionado
 	def get_selected_providers

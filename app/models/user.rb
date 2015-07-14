@@ -51,6 +51,10 @@ class User < ActiveRecord::Base
     
   end
 
+  def get_address
+    self.user_detail.address
+  end
+
   def get_organization
     self.user_detail.organization
   end

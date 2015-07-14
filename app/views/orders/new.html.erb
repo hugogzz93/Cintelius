@@ -70,7 +70,7 @@
 								<div class="order_message_explanation">
 									<!-- Informacion para los proveedores -->
 								</div>
-								<%= comment.text_area :content %>
+								<%= comment.text_area :content, value: "Mi Direccion: \n" + current_user.get_address %>
 							<% end %>
 						</div> 
 

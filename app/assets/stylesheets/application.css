@@ -65,7 +65,7 @@ p.notice {
   color: white;
   clear: both;
   display: block;
-  height: 10em;
+  max-height: 10em;
   float: left;
   width: 21em;
   border-top: 1px solid white;
@@ -751,6 +751,8 @@ height: 100%
 
 #order_comment_attributes_content {
   max-width: 95%;
+  width: 90%;
+  height: 5em;
 }
 
 #order_title {
@@ -975,11 +977,13 @@ form#new_order .comment_field.editable {
   }
 
  .new_offer .column.new_offer_order_products {
-  width: 40%;
+  /*width: 40%;*/
+  width: 27%;
  }
 
  .column.new_offer_order_combos {
-  width: 34.5%;
+  /*width: 34.5%;*/
+  width: 47.55%;
  }
 
 
@@ -992,6 +996,230 @@ form#new_order .comment_field.editable {
 .new_offer li {
   overflow: auto;
 }
+
+.combo_product_add_button, .order_product_title, .order_product_unit_container {
+  float: left;
+}
+
+.offer_options_box {
+  position: relative;
+  display: block;
+  padding: .4em .8em .4em 0em;
+  margin: .5em .5em .5em 0.5em;
+  background: #fdfdfd;
+  color: #444;
+  text-decoration: none;
+  border-radius: 0;
+  border: 1px solid rgba(0,0,0,.1);
+  font-size: 14px;
+  overflow: auto;
+}
+
+.combo_product_add_button {
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  /*box-sizing: border-box;*/
+  font-size: 1.5em;
+  padding: .5em;
+  padding-top: .3em;
+  margin: -.5em 0em;
+  cursor: pointer;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.combo_product_add_button:hover {
+  color: #20bdff;
+}
+
+.combo_product_add_button:active {
+  color: #fff;
+  background:#20bdff;
+
+}
+
+.order_product_title {
+  margin-left: 1.5em;
+}
+
+.order_product_unit_container {
+  float: right;
+}
+
+.combo_instructions_container {
+  position: relative;
+  display: block;
+  padding: .4em .8em .4em 0em;
+  margin: .5em .5em .5em 0.5em;
+  background: #fdfdfd;
+  color: #444;
+  text-decoration: none;
+  border-radius: 0;
+  /* border: 1px solid rgba(0,0,0,.1); */
+  font-size: 16px;
+  overflow: auto;
+  text-align: center;
+}
+
+.combo_instructions_container.hidden {
+  display: none !important;
+}
+
+.combo_box {
+  position: relative;
+  padding: .4em 0em .4em 0em;
+  margin: .5em .5em .5em 0.5em;
+  background: #fdfdfd;
+  color: #444;
+  text-decoration: none;
+  border-radius: 0;
+  border: 1px solid rgba(0,0,0,.1);
+  font-size: 14px;
+  overflow: auto;
+}
+
+.combo_box .product_list_area {
+  border: none;
+  width: 50%;
+  float: left;
+  overflow: auto;
+}
+
+.combo_box .combo_product_box {
+  width: 90%;
+  padding: .4em .8em .4em 0em;
+  margin: .54em .5em .5em .5em;
+  background: #fff;
+}
+
+.combo_box .comment_box {
+  float: left;
+  width: 45%;
+  max-width: 45%;
+  height: 7.3em;
+  background-color: transparent;
+  color: #20bdff;
+  padding: .4em .8em .4em .4em;
+  margin: .7em .7em .5em .5em;
+  background: #fff;
+  border: 1px solid #999;
+  font-size: 11px;
+}
+
+.combo_box_footer {
+  overflow: auto;
+  width: 100%;
+  border-top: 1px solid #e5e5e5;
+}
+
+#new_combo {
+  display: none;
+  position: relative;
+  padding: .4em 0em .4em 0em;
+  margin: .5em .5em .5em 0.5em;
+  background: #fdfdfd;
+  color: #444;
+  text-decoration: none;
+  border-radius: 0;
+  border: 1px solid rgba(0,0,0,.1);
+  font-size: 14px;
+  overflow: auto;
+}
+
+#new_combo .products_and_comment_field.hidden {
+  display: none !important;
+}
+
+#new_combo.active {
+  display: block;
+}
+
+#new_combo_submit_button {
+  border: 1px solid #e5e5e5;
+  background-color: #fff;
+  float: right;
+  margin: .6em .6em 0.2em .5em;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+#new_combo_submit_button:active {
+  color: #fff;
+  background: #20bdff;
+}
+#new_combo_submit_button:hover {
+  color: #20bdff;
+  border-color: #20bdff;
+}
+
+#new_combo_submit_button[disabled] {
+  opacity: 0.1;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+#new_combo_submit_button[disabled]:hover {
+  opacity: 0.1;
+  color: #ff204e;
+  border-color: #ff204e;
+}
+
+.combo_price_form {
+  overflow: auto;
+  float: left;
+  margin: .6em .6em 0.2em .5em;
+}
+
+.add_new_combo_button {
+  display: none;
+  position: relative;
+  display: block;
+  padding: .4em .8em .4em 0em;
+  margin: .5em .5em .5em 0.5em;
+  background: #fdfdfd;
+  color: #444;
+  text-decoration: none;
+  border-radius: 0;
+  border: 1px solid rgba(0,0,0,.1);
+  font-size: 17px;
+  overflow: auto;
+  text-align: center;
+  cursor: pointer;
+}
+
+.add_new_combo_button.active {
+  display: block;
+  animation: button_glow 1.5s linear infinite alternate;
+}
+
+.add_new_combo_button.hidden {
+  display: none;
+}
+
+@keyframes button_glow{
+  0% {
+    background-color: transparent
+  }
+
+  100% {
+    background-color:#ffff9a;
+  }
+}
+
+.combo_product_form_units {
+  padding-top: 0.2em;
+  overflow: auto;
+}
+
+#new_combo .combo_product_name {
+  padding-top: 0.2em;
+}
+
+
+
+
+
 /*#e8f4f8*/
 
 /*.new_offer li.order_box {
@@ -1023,7 +1251,7 @@ form#new_order .comment_field.editable {
   /*margin-left: 1%;*/
 }
 
-.new_offer .status_circle.new_offer_form_status_circle {
+/*.new_offer .status_circle.new_offer_form_status_circle {
   background-color: #cc686c;
 }
 
@@ -1033,9 +1261,27 @@ form#new_order .comment_field.editable {
 
 .new_offer .status_circle.locked {
   background-color: #39bf00;
+}*/
+
+.combo_box.ready {
+  background-color: white;
+  color: black;
+  border-left: 3px solid #cc686c;
 }
 
-.order_index .status_circle.ready-provider, .combo_status_circle.ready{
+.combo_box.locked {
+  background-color: white;
+  color: black;
+  border-left: 3px solid #EB9E4A;
+}
+
+.combo_box.received {
+  background-color: white;
+  color: black;
+  border-left: 3px solid #39bf00;
+}
+
+/*.order_index .status_circle.ready-provider, .combo_status_circle.ready{
   transition: background-color 1s;
   background-color: #cc686c;
 }
@@ -1064,7 +1310,7 @@ form#new_order .comment_field.editable {
   border-radius: 2em;
   float: left;
   margin: 7%;
-}
+}*/
 
 /*.new_offer*/ .offer_product_box .left_side, .selected_offer_box .left_side {
   width: 37%;
@@ -1186,6 +1432,7 @@ form#new_order .comment_field.editable {
   /*display:none*/;
 }
 
+
 .new_combo_submit_button {
     height: auto;
   width: 2.5em;
@@ -1205,12 +1452,6 @@ form#new_order .comment_field.editable {
   background-color: red;
 }
 
-
-.combo.comment_box {
-  border:1px solid #E5E5E5;
-  border-top: none;
-  height: 7.35em;
-}
 .comment_box {
   overflow-x: scroll;
   padding: 1%;
@@ -1409,36 +1650,52 @@ textarea, input {outline: none;}
   display: none;
 }
 
-.new_offer .product_list_area{
-  /* border: 1px solid white; */
-  /* width: 95%; */
-  border-bottom: 1px solid #e5e5e5;
-  overflow: auto;
-  border-top: 1px solid #e5e5e5;
+#new_combo .product_list_area {
+  border: none;
+  width: 50%;
+  float: left;
+}
+
+#new_combo .combo_product_box {
+  width: 90%;
+  padding: .4em .8em .4em 0em;
+  margin: .5em .5em .5em .5em;
+  background: #fff;
+}
+
+.new_offer .combo_status_circle {
+  display: none;
+}
+
+
+.order_index .combo_box {
+  cursor: pointer;
+}
+
+.order_index .combo_box .comment_box {
+  width: 44%;
 }
 
 .order_index .product_list_area{
-
-  /* width: 95%; 
-  margin-left: 2.5%;
-  overflow: auto;
-  margin-bottom: 2%;
-  border-bottom: 1px solid #e5e5e5;
-  border-top: 1px solid #e5e5e5;*/
-
-    /* border: 1px solid white; */
-  width: 100%;
-  /* margin-left: 2.5%; */
-  overflow: auto;
-  /* margin-bottom: 2%; */
-  border-bottom: 1px solid #e5e5e5;
-  border-top: 1px solid #e5e5e5;
+  border: none;
+  width: 50%;
+  float: left;
 }
 
 .product_list_area_box{
   float: left;
   width: 32%;
   margin-left: 2%;
+}
+
+.selected_combo_box .product_list_area {
+  /* border: 1px solid white; */
+  width: 100%;
+  /* margin-left: 2.5%; */
+  overflow: auto;
+  /* margin-bottom: 2%; */
+  border-bottom: 1px solid #e5e5e5;
+  border-top: 1px solid #e5e5e5;
 }
 
 .product_id_field {
@@ -1456,8 +1713,27 @@ textarea, input {outline: none;}
 }
 
 button.combo_product_remove_button {
-  float: right;
+  float: left;
+  border: none;
+  background-color: transparent;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 1.5em;
+  padding: .3em .5em;
+  padding-bottom: .4em;
+  margin: -.3em 0em;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
 }
+
+button.combo_product_remove_button:active {
+  color: white;
+  background-color: #ff204e;
+}
+button.combo_product_remove_button:hover {
+  color: #ff204e;
+}
+
 
 .combo_product_unit_field {
   color: #20bdff;
@@ -1495,13 +1771,12 @@ input.combo_price {
 }
 
 .combo_product_name {
-    display: inline;
+  display: inline;
   float: left;
-  overflow-x: scroll;
-  overflow-y: hidden;
   height: 1em;
   width: 50%;
   color: black;
+  margin-left: 0.5em;
 }
 
 .combo_product_box .background_box {
@@ -1529,27 +1804,22 @@ input.combo_price {
 
 #combo_comment_attributes_content {
   float: left;
-  resize: none;
+  width: 45%;
+  max-width: 45%;
+  height: 7.3em;
   background-color: transparent;
-  width: 83%;
-  height: 5em;
   color: #20bdff;
-  border:none;
-  border-left: 1px solid #e5e5e5;
+  padding: .4em .8em .4em .4em;
+  margin: .7em .7em .5em .5em;
+  background: #fff;
 }
 
 .combo_form_footer {
-  padding: 1%;
+  /*padding: 1%;*/
   overflow: auto;
   width: 100%;
   border-top: 1px solid #e5e5e5;
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.new_combo_form input[type=submit]{
-  position: relative;
-  bottom: 2.5em;
-  left: 2.5%;
+  /*border-bottom: 1px solid #e5e5e5;*/
 }
 
 .submit_button {
@@ -1846,6 +2116,18 @@ img.package_img, input.package_img {
   padding: 0.9% 2%;
 }
 
+.selected_combo_box.received {
+  padding: .4em 0em 0em 0em;
+  margin: .5em .5em .5em 0.5em;
+  background: #fdfdfd;
+  color: #444;
+  text-decoration: none;
+  border-radius: 0;
+  border: 1px solid rgba(0,0,0,.1);
+  font-size: 14px;
+  overflow: auto;
+}
+
 .selected_combo_box img.package_img {
   border-bottom: none;
 }
@@ -1853,7 +2135,6 @@ img.package_img, input.package_img {
 .selected_combo_box .status_icon {
   width: 100%;
   overflow: auto;
-  border-top: 1px solid #e5e5e5;
 }
 
 input.package_img {
@@ -1891,7 +2172,7 @@ form.edit_offer {
   background-color: transparent;
 }
 
-.order_index .offer_selection_button, .combo_product_add_button {
+/*.order_index .offer_selection_button, .combo_product_add_button {
 
   float: right;
   font-size: 2em;
@@ -1908,7 +2189,7 @@ form.edit_offer {
   color: white;
   cursor: pointer;
   border:1px solid transparent;
-}
+}*/
 
 .offer_selection_button.active {
   cursor: default;
@@ -1971,22 +2252,11 @@ form.edit_offer {
   display: block;
 }
 
-.combo_selection_button, .combo_product_add_button {
-  /*float: right;
-  font-size: 2em;
-  padding-bottom: 25%;
-  border-radius: 5em;
-  height: 120%;
-  box-sizing: content-box;
-  width: 120%;
-  background-color: transparent;
-  position: relative;
-  left: 29%;
-  bottom: 5%;
-  border: none;
-  color: white;
-  cursor: pointer;
-  border: 1px solid transparent;*/
+.combo_selection_button {
+  display: none;
+}
+
+/*.combo_selection_button, .combo_product_add_button {
 
     font-size: 3em;
   float: right;
@@ -2003,7 +2273,7 @@ form.edit_offer {
   color: white;
   cursor: pointer;
   border: 1px solid transparent;
-}
+}*/
 
 .combo_selection_button.active {
   cursor: default;

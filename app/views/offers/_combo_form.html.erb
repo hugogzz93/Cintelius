@@ -5,23 +5,33 @@
 				class: "new_combo_form"}, remote: true do |combo|%>
 
 	<%= combo.number_field :order_id %> <!-- escondido -->
-	<ul class="product_list_area">
-		<%= link_to_add_combo_fields "Add combo fields", combo, :combo_products %>	<!-- escondido, llama a _combo_product_fields -->			
-	</ul>
+	<div class="combo_instructions_container">
+		<%= t('combo_instructions') %>
+	</div>
+	<div class="products_and_comment_field hidden">
+		<ul class="product_list_area">
+			<%= link_to_add_combo_fields "Add combo fields", combo, :combo_products %>	<!-- escondido, llama a _combo_product_fields -->			
+		</ul>
 
-	<div class="new_combo_status_icon">
+		
 
-		<%= image_submit_tag('icons/icon-style-checkmark-white.png', class: "new_combo_submit_button" )%>
+		<%= combo.fields_for(:comment, comment_object, child_index: comment_object.object_id) do |comment|%>
+			<%=  comment.text_area :content, placeholder: "Tu comentario..", required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
+		<% end %>
 	</div>
 
-	<%= combo.fields_for(:comment, comment_object, child_index: comment_object.object_id) do |comment|%>
-		<%=  comment.text_area :content, placeholder: "Tu comentario..", required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
-	<% end %>
+	<!-- <div class="new_combo_status_icon"> -->
+		<!-- # <%= image_submit_tag('icons/icon-style-checkmark-white.png', class: "new_combo_submit_button" )%> -->
+	<!-- </div> -->
+
 
 	<div class="combo_form_footer">
-		<span class="combo_price_label">
+		<div class="combo_price_form">
+			<span class="combo_price_label">
 			Total <span class="unit_code" style="color:#C8C8C8"><%= t 'currency_code' %>:</span> </span>
 			<%= combo.number_field :price, value: 0.00, step: 0.1, min: 0.1, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)"  %>
+		</div>
+		<%= combo.submit "Terminar Orden", id: "new_combo_submit_button", disabled: true, data: {confirm: "Porfavor confirma el registro de tu orden. "} %>
 	</div>	
 	
 <% end %>

@@ -2,7 +2,7 @@
 <div class="combo_box <%= f.status %>" data-combo-id="<%= f.id %>", 
 		data-attribute-user-id="<%= f.user.id %>">
 
-	<ul class="product_list_area">
+	<ul class="product_list_area" data-combo-id="<%= f.id %>">
 		<% f.combo_products.each do |combo_product| %>		
 			<li class="combo_product_box" data-product-id="<%= combo_product.product.id %>" data-product-units="<%= combo_product.units %>">
 				<div class="combo_product_name">
@@ -16,21 +16,21 @@
 		<% end %>
 	</ul>
 
-	<div class="combo_status_circle <%= f.status %>" data-combo-id="<%= f.id %>" >
 		<% if function == "order" and f.is_ready? %>
 			<%= button_tag "+", class: "combo_selection_button", data: {combo_id: f.id} if f.order.is_open? %>
 		<% end %>
-	</div>
 
 	<div class="comment_box combo">
 		<%= f.comment.content %>
 	</div>
-	<span class="combo_price_label">
-		Total <%= t 'currency_code' %>:
-	</span>
-	<div class="combo_price_label">
-		<div class="background_box">
-			<%= f.price %>
+	<div class="combo_box_footer">
+		<span class="combo_price_label">
+			Total <%= t 'currency_code' %>:
+		</span>
+		<div class="combo_price_label">
+			<div class="background_box">
+				<%= f.price %>
+			</div>
 		</div>
 	</div>
 	

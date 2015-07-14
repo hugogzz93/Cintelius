@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
 		respond_to do |format|
 			format.js {
 				@order = (Order.where(id: params[:id]).includes(offers: [:comment, :offer_details], combos: :comment, order_products: :comment)).first
-				@providers = User.find(@order.offers.collect {|offer| offer.user_id}.uniq)
+				@providers = @order.get_participating_providers
 			}
 		end
 	end
