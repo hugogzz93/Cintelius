@@ -9,71 +9,113 @@
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
 
-    <div class="field">
-      <div class="form_label">
-        <%= f.label :email %><br />
+    <div class="user_fields">
+      <div class="field">
+        <div class="form_label">
+          <%= f.label :email, "Correo" %><br />
+        </div>
+        <%= f.email_field :email, autofocus: true, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
       </div>
-      <%= f.email_field :email, autofocus: true %>
-    </div>
 
-    <div class="field">
-      <div class="form_label">
-        <%= f.label :password %>
+      <div class="field">
+        <div class="form_label">
+          <%= f.label :password, "Clave" %>
+        </div>
+        <% if @validatable %>
+        <!-- # <em>(<%= @minimum_password_length %> characters minimum)</em> -->
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "off", required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
       </div>
-      <% if @validatable %>
-      <!-- # <em>(<%= @minimum_password_length %> characters minimum)</em> -->
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "off" %>
-    </div>
 
-    <div class="field">
-      <div class="form_label">
-        <%= f.label :password_confirmation %><br />
+      <div class="field">
+        <div class="form_label">
+          <%= f.label :password_confirmation, "Confirmacion" %><br />
+        </div>
+        <%= f.password_field :password_confirmation, autocomplete: "off", required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
       </div>
-      <%= f.password_field :password_confirmation, autocomplete: "off" %>
     </div>
 
 
     <%= fields_for :user_detail do |user_detail| %>
 
-    <div class="field">
-      <div class="form_label">
-          <span>Organizacion</span> <span style="color:#20bdff">*</span>
-      </div>
-      <%= user_detail.text_field :organization %>
-    </div>
-
-      
-
-
-    <div class="field">
-      <div class="form_label">
-        <span>Telefono</span> <span style="color:#20bdff">*</span>
-      </div>
-      <%= user_detail.number_field :telephone %>
-    </div>
-      
-    <div class="field">
+    <div class="user_detail_fields">
+      <div class="field">
         <div class="form_label">
-          <span>Vendedor</span> <span style="color:#20bdff">*</span>
+            <span>Organizacion</span> <span style="color:#20bdff">*</span>
         </div>
-        <%= user_detail.radio_button :credentials, 1 %>
+        <%= user_detail.text_field :organization, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
+      </div>
+
+        
+
+
+      <div class="field">
         <div class="form_label">
-          <span>Comprador</span> <span style="color:#20bdff">*</span>
+          <span>Telefono</span> <span style="color:#20bdff">*</span>
         </div>
-        <%= user_detail.radio_button :credentials, 2 %>
+        <%= user_detail.number_field :telephone, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
+      </div>
+
+      <div class="field account_type_field">
+          <div class="form_label">
+            <span>Vendedor</span> <span style="color:#20bdff">*</span>
+          </div>
+          <%= user_detail.radio_button :credentials, 1, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)"%>
+      </div>
+
+      <div class="field account_type_field">
+          <div class="form_label">
+            <span>Comprador</span> <span style="color:#20bdff">*</span>
+          </div>
+          <%= user_detail.radio_button :credentials, 2, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
+      </div>
     </div>
-
-      
-      
-
 
     <% end %>
 
     <div class="actions">
-      <%= f.submit "Sign up" %>
+      <%= f.submit "Registrar" %>
     </div>
   <% end %>
 </div>
 
 <%= render "devise/shared/links" %>
+
+<script>
+  function validateEditForms() {
+
+    function validate(e, erMsg, REGEX) {
+      target = e.target;
+      submitButton = document.querySelector('.edit_user_detail input[type=submit]')
+      if (!target.value.match(REGEX)) {
+        target.style.backgroundColor = "#F6C8BD";
+        submitButton.disabled = true;
+      }
+      else
+      { 
+        target.style.backgroundColor = "#BDF6C8";
+        submitButton.disabled = false;
+
+      }
+
+    }
+
+    // eMailMainForm = document.getElementById('user_detail_organization');
+    // if (eMailMainForm) {eMailMainForm.addEventListener('keyup', function(e) {
+    //  validate(e, "Correo Invalido", "^[A-Za-z\\._\\-0-9]*[@][A-Za-z]*[\\.][a-z]{2,4}$", "userEmailMainLabel");
+    // }, false)};
+
+    // eMailSecForm = document.getElementById('user_emailSec');
+    // if (eMailSecForm) {eMailSecForm.addEventListener('keyup', function(e) {
+    //  validate(e, "Correo Invalido", "^[A-Za-z\\._\\-0-9]*[@][A-Za-z]*[\\.][a-z]{2,4}$", "userEmailSecLabel");
+    // }, false)};
+    
+
+    phoneForm = document.getElementById('user_detail_telephone');
+    if (phoneForm) {phoneForm.addEventListener('keyup', function(e) {
+      validate(e, "Numero Invalido", "^[0-9]{8,10}$", "userTelephoneLabel");
+    }, false)};
+}
+
+validateEditForms();
+</script>
