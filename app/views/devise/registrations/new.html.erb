@@ -1,29 +1,79 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+<div class="sign_up">
+  <div class="sign_up_header">
+    <div class="sign_up_header_container">
+      <h2>Crea tu Cuenta</h2>
+      <p>podras cambiar tus datos despues</p>
+      <p>***No esta acabado el diseño de esta pagina.***</p>
+    </div>
   </div>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @validatable %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+    <div class="field">
+      <div class="form_label">
+        <%= f.label :email %><br />
+      </div>
+      <%= f.email_field :email, autofocus: true %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+    <div class="field">
+      <div class="form_label">
+        <%= f.label :password %>
+      </div>
+      <% if @validatable %>
+      <!-- # <em>(<%= @minimum_password_length %> characters minimum)</em> -->
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "off" %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+    <div class="field">
+      <div class="form_label">
+        <%= f.label :password_confirmation %><br />
+      </div>
+      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    </div>
+
+
+    <%= fields_for :user_detail do |user_detail| %>
+
+    <div class="field">
+      <div class="form_label">
+          <span>Organizacion</span> <span style="color:#20bdff">*</span>
+      </div>
+      <%= user_detail.text_field :organization %>
+    </div>
+
+      
+
+
+    <div class="field">
+      <div class="form_label">
+        <span>Telefono</span> <span style="color:#20bdff">*</span>
+      </div>
+      <%= user_detail.number_field :telephone %>
+    </div>
+      
+    <div class="field">
+        <div class="form_label">
+          <span>Vendedor</span> <span style="color:#20bdff">*</span>
+        </div>
+        <%= user_detail.radio_button :credentials, 1 %>
+        <div class="form_label">
+          <span>Comprador</span> <span style="color:#20bdff">*</span>
+        </div>
+        <%= user_detail.radio_button :credentials, 2 %>
+    </div>
+
+      
+      
+
+
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit "Sign up" %>
+    </div>
+  <% end %>
+</div>
 
 <%= render "devise/shared/links" %>

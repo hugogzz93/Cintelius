@@ -12,12 +12,13 @@ class User < ActiveRecord::Base
   has_many :order_histories, dependent: :destroy
   has_many :offer_histories, dependent: :destroy
   has_many :combo_histories, dependent: :destroy
-  has_many :product_scores
+  has_many :product_scores, dependent: :destroy
   has_many :review_tickets, dependent: :destroy
-  has_one :service_score
+  has_one :service_score, dependent: :destroy
   has_one :user_detail, dependent: :destroy
 
   after_create :setup_service_score
+  # accepts_nested_attributes_for :user_detail
 
   def authorized_products
     self.products.collect {|product| product.id}

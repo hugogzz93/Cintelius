@@ -2116,7 +2116,7 @@ img.package_img, input.package_img {
   padding: 0.9% 2%;
 }
 
-.selected_combo_box.received {
+.selected_combo_box {
   padding: .4em 0em 0em 0em;
   margin: .5em .5em .5em 0.5em;
   background: #fdfdfd;
@@ -2731,6 +2731,9 @@ input#user_detail_telephone {
   
 
   .product_label {
+    display: none;
+  }
+  .product_label.active {
     position: relative;
     cursor: pointer;
     display: block;
@@ -2745,7 +2748,7 @@ input#user_detail_telephone {
     transition: all 0.3s;
   }
 
-  .product_label:hover {
+  /*.product_label:hover {
     margin-left: 2em;
   }
 
@@ -2753,7 +2756,7 @@ input#user_detail_telephone {
     background-color: #6BB6C9;
     color: #fff;
     text-indent: 2em;
-  }
+  }*/
 
   .edit_user_product_submit {
     position: relative;
