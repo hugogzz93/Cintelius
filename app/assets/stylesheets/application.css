@@ -458,7 +458,7 @@ form.edit_combo {
 	height: 90%;
 	width: 100%;
 	margin-top: 1%;
-	overflow: scroll;
+	overflow: auto;
  }
 
 .categories-list {
@@ -646,7 +646,7 @@ height: 100%
   background: rgba(34,34,34,0.75);
 }
 .new_order_pop_up_fields {
-    /* overflow: scroll; */
+    /* overflow: auto; */
   background-color: white;
   border: 1px solid black;
   position: absolute;
@@ -2387,7 +2387,7 @@ li.order_product_info_tab {
 .product_main_info{
   /*width: 100%;*/
   padding: 3%;
-  overflow: scroll;
+  overflow: auto;
   transition: background-color 0.3s;
   cursor: pointer;
   -webkit-animation: background-color-change 0.5s linear 1;  
@@ -2613,7 +2613,7 @@ input#user_detail_telephone {
 
 #user_products_form_container {
   width: 23%;
-  overflow: scroll;
+  overflow: auto;
   height: 95%;
   border: 1px solid black;
   margin: 1% 1%;
@@ -2636,7 +2636,7 @@ input#user_detail_telephone {
     width: 95%;
     padding: 1%;
     margin: 0% 2%;
-    overflow: scroll;
+    overflow: auto;
     border-bottom: 1px solid black;
   }
 
@@ -2660,7 +2660,7 @@ input#user_detail_telephone {
     float: left;
     height: 95%;
     margin: 1% 0%;
-    overflow: scroll;
+    overflow: auto;
   }
 
   .content_body li.menu_button {
@@ -2916,7 +2916,7 @@ input#user_detail_telephone {
   }
   .order_history_container.active  {
     /*display: block;*/
-    overflow: scroll;
+    overflow: auto;
     position: fixed;
     background-color: white;
     top: 10%;
@@ -3104,7 +3104,7 @@ input#user_detail_telephone {
   }
 
   ul.provider_combo_histories_list.active {
-    overflow: scroll;
+    overflow: auto;
     max-height: 50em;
     width: 100%;
   }
