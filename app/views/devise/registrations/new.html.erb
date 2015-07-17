@@ -46,8 +46,12 @@
         <%= user_detail.text_field :organization, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
       </div>
 
-        
-
+      <div class="field">
+        <div class="form_label">
+            <span>Direccion</span> <span style="color:#20bdff">*</span>
+        </div>
+        <%= user_detail.text_field :address, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
+      </div>
 
       <div class="field">
         <div class="form_label">
