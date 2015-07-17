@@ -1854,10 +1854,27 @@ input.combo_price {
 }
 /*#e8f4f8*/
 
+.new_offer li.order_box:before {
+  content: "";
+  width: 1em;
+  display: block;
+  float: right;
+  /*border-right: 1px solid #dddddd;*/
+  border-left: 1px solid #dddddd;
+  height: 4.6em;
+  margin-bottom: -0.7em;
+  margin-top: -0.7em;
+  margin-right: -.7em;
+}
+
+.new_offer li.order_box.has_selected:before {
+  background: #8DC44E;
+}
+
  li.order_box {
   border-bottom: 1px solid #E5E5E5;
   padding: 3%;
-
+  height: 3.2em;
 }
 
  li.order_box:first-child {

@@ -128,6 +128,10 @@ class Order < ActiveRecord::Base
 
 	end
 
+	def has_selected_combo_from_user(user)
+		self.combos.where(user_id: user.id, status: Combo.statuses["locked"]).any?
+	end
+
 
 
 end

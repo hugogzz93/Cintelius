@@ -7,8 +7,11 @@
 
 		<ul class="order_list">
 			<% @orders.each do |order|  %>
-				<li class="order_box">
-
+			<% if order.has_selected_combo_from_user(current_user) %>
+				<li class="order_box has_selected"> 
+			<% else %>
+				<li class="order_box"> 
+			<% end %>
 					<%= image_tag("icons/icon-back-arrow.png", class: "return_arrow") %>
 					<% if order.due_date_past? %>
 						<% if order.is_locked? %>
