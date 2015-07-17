@@ -1,0 +1,89 @@
+
+// @user_products, @supercategories, @subcategories, @products
+
+$('.content_body').empty()
+// tiene escape_javascript y .html_safe para que se interprete bien el parcial
+<% user_product_ids = @user_products.collect {|user_product| user_product.product_id} %>
+$('.content_body').append('<div id="user_products_form_container"></div>')
+$('#user_products_form_container').append("<%= escape_javascript(render partial: 'edit_user_products_form.html.erb', locals: {user_product_ids: user_product_ids, subcategories: @subcategories, supercategories: @supercategories, products: @products}).html_safe %>")
+
+$('#user_products_form_container').prepend('<div id="user_product_form_header"></span></div>')
+form_header = "<%= t 'products' %>"
+form_subheader = "<%= t 'selected' %>"
+// $('#user_product_form_header').append(form_header + '<span>' + form_subheader + '</span>')
+
+
+// agrega categorias, subcategorias y productos para seleccionar
+$('.content_body').append("<%= escape_javascript(render partial: 'user_products_menu.html.erb', locals: {supercategories: @supercategories, subcategories: @subcategories, products: @products} ).html_safe%>")
+
+
+// activa los productos que ya estan en la lista
+function activateProductsInList() {
+	console.log('activated')
+	for (var i = 0; i < $('input[type=checkbox][checked]').size(); i++) {
+		productId = $($('input[type=checkbox][checked]')[i]).attr('data-product-id')
+		$('.product_button[data-product-id='+ productId + ']').addClass('active')
+	};	
+}
+
+activateProductsInList();
+
+// funcionalidad del menu
+// despliega subcategorias cuando se escoge la categoria
+$('li.supercategory_button').on('click', function(e) {
+	$('li.supercategory_button.active').removeClass('active')
+	$(e.target).addClass('active')
+	$('li.subcategory_button').removeClass('selected')
+	supercategory_id = $(e.target).attr('data-supercategory-id')
+	$('li.subcategory_button[data-supercategory-id=' + supercategory_id + ']').addClass('selected')
+})
+
+
+// despliega productos cuando se escoge la subcategoria
+$('li.subcategory_button').on('click', function(e) {
+	$('li.subcategory_button.active').removeClass('active')
+	$(e.target).addClass('active')
+	$('li.product_button').removeClass('selected')
+	subcategory_id = $(e.target).attr('data-subcategory-id')
+	console.log(subcategory_id)
+	$('li.product_button[data-subcategory-id=' + subcategory_id + ']').addClass('selected')
+})
+
+// activa el checkbox cuando se hace click en el producto
+$('.product_button').on('click', function(e) {
+
+	if ($(e.target).hasClass('active')) {
+		toggleProduct('deselect', $(e.target).attr('data-product-id'))
+	} else {
+		toggleProduct('select', $(e.target).attr('data-product-id'))
+	}
+})
+
+$('.product_label').on('click', function(e) {
+	console.log('lalala')
+		
+	if ( $(e.target).hasClass('active') ) {
+		toggleProduct('deselect', $(e.target).attr('data-product-id'))
+	} else {
+		toggleProduct('select', $(e.target).attr('data-product-id'))
+	}
+})
+
+
+function toggleProduct(mode, product_id) {
+		if (mode == "select") {
+			$('.product_button[data-product-id=' + product_id + ']').addClass('active')
+			$('input[type=checkbox][data-product-id=' + product_id + ']').prop('checked', true);
+			$('.product_label[data-product-id=' + product_id + ']').addClass('active')
+		} else {
+			$('.product_button[data-product-id=' + product_id + ']').removeClass('active')
+			$('input[type=checkbox][data-product-id=' + product_id + ']').prop('checked', false);
+			$('.product_label[data-product-id=' + product_id + ']').removeClass('active')
+
+		};
+}
+
+
+
+$('.loading_animation').removeClass('active')
+$('.loading_animation_screen').removeClass('active')

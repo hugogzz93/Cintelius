@@ -1,0 +1,14 @@
+<!-- recibe el tipe de alerta en type, url de image en image_url y mensaje en message -->
+
+<!-- alert_class, message, image_url, title, message_box_type ('active' si tiene contenido) -->
+<div class="flash_messages">  
+	<div class="alert <%= alert_class %>">  
+		<%= image_tag image_url, class: "alert-icon" %> 
+		<div class="flash_value_box"> 
+			 <%= title %>
+		</div> 
+		<div class="message_box <%= message_box_type %>">
+			<%= message %>
+		</div>
+	</div>  
+</div>

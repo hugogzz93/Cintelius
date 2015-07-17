@@ -1,0 +1,13 @@
+<%= form_for service_score, data: {review_ticket_id: review_ticket.id}, remote: true do |f| %>
+	<span style="color:#BFB7B7;">Servicio</span>
+	<div class="service_score"></div>
+	<%= hidden_field_tag 'review_ticket_id', review_ticket.id %>
+	<%= f.submit "" %>
+<% end %>
+
+<script>
+	$('.service_score').raty({
+		path: '/assets/stars/',
+		scoreName: 'service_score'
+	});
+</script>

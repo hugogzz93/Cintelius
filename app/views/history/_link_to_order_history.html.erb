@@ -1,0 +1,17 @@
+<%= link_to order_history_path(id: order_history.id), class: "order_history_link", remote: true do %>
+
+	<div class="history_link_title">
+		<%= order_history.title %>
+	</div>
+
+	<div class="history_link_date">
+		<span style="margin-right: 23.5px;">Creado:</span>
+		<%= l order_history.created_at.in_time_zone("America/Monterrey"), format: :cust %>
+	</div>
+
+	<div class="history_link_date">
+		<span>Terminado:</span>
+		<%= l order_history.updated_at.in_time_zone("America/Monterrey"), format: :cust %>
+	</div>
+
+<% end %>

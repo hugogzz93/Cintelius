@@ -1,0 +1,24 @@
+<ul class="supercategories">
+	<% supercategories.each do |supercategory| %>
+		<li class="supercategory_button menu_button" data-supercategory-id="<%= supercategory.id %>">
+			<%= supercategory.name %>
+		</li>
+	<% end %>
+</ul>
+
+<ul class="subcategories">
+	<% subcategories.each do |subcategory|  %>
+		<li class="subcategory_button menu_button" data-supercategory-id="<%= subcategory.supercategory_id %>" data-subcategory-id="<%= subcategory.id %>">
+			<%= subcategory.name %>
+		</li>
+	<% end %>
+</ul>
+
+<ul class="products">
+	<% products.each do |product| %>
+		<li class="product_button menu_button" data-product-id="<%= product.id %>" data-subcategory-id="<%= product.category_id %>">
+			<%= product.name %>
+		</li>
+	<% end %>
+</ul>
+

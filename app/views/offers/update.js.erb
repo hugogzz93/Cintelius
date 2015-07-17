@@ -1,0 +1,6 @@
+// recibe una oferta en @offer, llamado por el boton de recibido en orders/index
+// cambia el icono de el paquete al de manos para indicar que esta recibido.
+	$('form#edit_offer_' + <%= @offer.id %>).remove()
+	$('.status_circle[data-offer-id= ' + <%= @offer.id %> + ']').removeClass('locked').addClass('received')
+	$('.package_img[data-offer-id= ' + <%= @offer.id %> + ']').remove()
+	$('.status_icon[data-offer-id=' + <%= @offer.id %> + ']').append("<%= j image_tag('icons/icon-package-hands.png', class: 'package_img ', data: {offer_id: @offer.id }) if @offer.is_received? %>")

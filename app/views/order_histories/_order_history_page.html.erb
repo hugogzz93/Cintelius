@@ -1,0 +1,85 @@
+<!-- llamado en show.js.erb de order_history -->
+<!-- recibe @order_history -->
+
+<div class="order_history_header">
+	<%= @order_history.title %>
+	<div class="time_container">
+		<%= l @order_history.created_at, format: :cust %>
+	</div>
+</div>
+<div class="order_history_body">
+	<ul class="order_product_histories">
+		<% @order_history.order_product_histories.each do |order_product_history| %>
+			<li class="order_product_history">
+				<%= order_product_history.product.name %>
+				<span style="float:right;">Kg: <%= order_product_history.units %></span>
+			</li>
+		<% end %>
+	</ul>
+	<ul class="provider_history_list">
+		<% @provider_list.each do |provider| %>
+			<li class="provider_history_item">
+				<div class="provider_header">
+					<%= provider %>
+				</div>
+				<ul class="provider_offer_histories_list" >
+					<% if @providers_offer_hash.has_key?(provider) %>
+						<% @providers_offer_hash[provider].each do |offer| %>
+							<li class="offer_history" data-offer-history-id="<%= offer.id %>">
+								<div class="offer_history_header <%= offer.complete_status %>">
+									<%= offer.product_name %>
+									<span style="color:#4B4F54;">Kg:</span>
+									<%= offer.units %>
+									<span style="color:#4B4F54;">Total</span>
+									<span style="color: #b7b7b7"><%= t 'currency_code' %>:</span>
+									<%= offer.total_price %>
+								</div>
+								<div class="offer_comment_history_container ">
+									<%= offer.comment_history.content %>
+								</div>
+							</li>
+						<% end %>
+					<% end %>
+				</ul>
+
+				<% if @providers_combo_hash.has_key?(provider) %>
+					<ul class="provider_combo_histories_list">
+						<% @providers_combo_hash[provider].each do |combo| %>
+							<li class="combo_history" data-combo-history-id="<%= combo.id %>">
+								<div class="combo_history_header <%= combo.status %>">
+									<ul class="combo_product_history_list">
+										<% combo.combo_product_histories.each do |combo_product_history| %>
+											<li class="combo_product_history">
+												<%= combo_product_history.product.name %>
+												<span style="color:#4B4F54;">Kg:</span>
+												<%= combo_product_history.units %>
+											</li>
+										<% end %>
+									</ul>
+									<div class="combo_history_footer">
+										<span style="color:#4B4F54;">Total</span>
+										<span style="color: #b7b7b7"><%= t 'currency_code' %>:</span>
+										<%= combo.price %>
+									</div>
+								</div>
+								<div class="combo_comment_history_container ">
+									<%= combo.comment_history.content %>
+								</div>
+							</li>
+						<% end %>
+					</ul>
+				<% end %>
+			</li>
+		<% end %>
+	</ul>
+</div>
+
+<div class="order_history_footer">
+	<div class="order_history_legend">
+		<div class="status_locked"></div>
+		<div class="locked_information">elegido</div>
+		<div class="status_received"></div>
+		<div class="received_information">recibido</div>
+	</div>
+	
+</div>

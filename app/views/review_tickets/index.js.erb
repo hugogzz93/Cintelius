@@ -1,0 +1,29 @@
+$('.content_body').empty()
+$('.content_body').append('<ul id="order_review_list"</ul>')
+// $('.content_body').addClass('review_background')
+
+<% @orders.each do |order|  %>
+	$('#order_review_list').append('<li>  <%= escape_javascript(render partial: "order_review_file.html.erb", locals:{order: order}).html_safe %>   </li>')
+<% end %>
+
+$('.service_score img').on('click', function(e) {
+	$(e.target).closest('form').submit()
+	// $('.edit_service_score').submit()
+})
+
+$('.product_score img').on('click', function(e) {
+	$(e.target).closest('form').submit()
+	// $('.edit_product_score').submit()
+})
+
+
+
+$('img').on('click', function(e) {
+	setTimeout(function() {
+		$($(e.target).closest('.edit_service_score')).css('display', 'none')
+		$($(e.target).closest('.edit_product_score')).css('display', 'none')
+	}, 1000)
+})
+
+$('.loading_animation').removeClass('active')
+$('.loading_animation_screen').removeClass('active')

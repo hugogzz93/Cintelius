@@ -1,0 +1,20 @@
+<div class="offer_options_box" 
+	 data-product-id="<%= order_product.product.id %>" 
+	 data-product-name="<%= order_product.product.name %>">
+
+		<div class="combo_product_add_button" 
+			 data-product-id="<%= order_product.product.id %>" 
+			 data-product-name="<%= order_product.product.name %>"
+			 data-product-units="<%= order_product.units %>"
+			 disabled="false">
+			 +
+		</div>
+
+		<div class="order_product_title">
+			<%= order_product.product.name %>
+		</div>
+
+		<div class="order_product_unit_container">
+			Kg: <span> <%= order_product.units %> </span>
+		</div>
+</div>

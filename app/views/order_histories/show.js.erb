@@ -1,0 +1,27 @@
+$('.order_history_container').empty()
+$('.order_history_container').addClass('active')
+$('.order_history_container').append('<div class="hide_order_history_button"></div>')
+$('.fade_layer').addClass('active')
+$('.order_history_container').append('<%= j render partial: "order_history_page.html.erb", locals: {order_history: @order_history} %>')
+
+$('.offer_history_header').on('click', function(e) {
+	$(e.target).toggleClass('active').siblings('.offer_comment_history_container').toggleClass('active')
+})
+
+$('.combo_history').on('click', function(e) {
+	$(e.target).children('.combo_comment_history_container').toggleClass('active')
+	console.log("hhjbj")
+})
+
+
+
+$('.provider_header').on('click', function(e) {
+	$($(e.target)[0]).siblings('.provider_offer_histories_list').toggleClass('active')
+	$($(e.target)[0]).siblings('.provider_combo_histories_list').toggleClass('active')
+})
+
+
+$('.hide_order_history_button').on('click', function() {
+	$('.order_history_container').removeClass('active').empty()
+	$('.fade_layer').removeClass('active')
+})

@@ -1,0 +1,33 @@
+<div class="side_bar">
+	<div id="logo-holder">
+      <%= image_tag "logo.png" %>      
+    </div>
+	<ul class="user_settings_list">
+		<li><%= link_to 'Cambiar Informacion', edit_user_detail_path(id: @user_id), remote: true %></li>
+		<% if current_user.is_buyer? %>
+			<li><%= link_to 'Reseñas', review_tickets_path(id: @user_id, format: "js"), remote: true %></li>
+			<li><%= link_to 'Historial', history_path(id: @user_id), remote: true %></li>
+		<% end %>
+		<% if current_user.is_seller? %>
+			<li><%= link_to 'Matching', edit_user_product_path(id: @user_id), remote: true %></li>
+		<% end %>
+
+	</ul>
+</div>
+
+
+<div class="loading_animation_screen">
+	<%= render partial: "/layouts/loading_animation.html.erb" %>
+</div>
+
+<div class="content_body">
+</div>
+
+<script>
+function setChosenLink(link) {
+	$(link).addClass('choice')
+}
+
+setChosenLink('.user_settings_link')
+	
+</script>

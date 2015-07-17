@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cintelius</title>
+  <%= stylesheet_link_tag    'frontpage', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link href='http://fonts.googleapis.com/css?family=Raleway:800,300' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+  <%= csrf_meta_tags %>
+</head>
+<body >
+	<p class="notice"><%= notice %></p>
+	<p class="alert"><%= alert %></p>
+
+	<%= yield %>
+
+</body>
+</html>

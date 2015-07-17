@@ -1,0 +1,6 @@
+// recibe una combo en @combo, llamado por el boton de recibido en orders/index
+// cambia el icono de el paquete al de manos para indicar que esta recibido.
+	$('form#edit_combo_' + <%= @combo.id %>).remove()
+	$('.combo_box[data-combo-id= ' + <%= @combo.id %> + ']').removeClass('locked').addClass('received')
+	$('.package_img[data-combo-id= ' + <%= @combo.id %> + ']').remove()
+	$('.status_icon[data-combo-id=' + <%= @combo.id %> + ']').prepend("<%= j image_tag('icons/icon-package-hands.png', class: 'package_img ', data: {combo_id: @combo.id }) if @combo.is_received? %>")

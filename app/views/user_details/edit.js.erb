@@ -1,0 +1,48 @@
+// recibe @user_detail
+$('.content_body').empty()
+$('.content_body').append('<%= j render partial: "edit_user_detail_form.html.erb",
+							 locals: {user_detail: @user_detail} %>')
+
+$('.content_body').append('<%= j render partial: "/users/edit_user_password_form.html.erb",
+							 locals: {user: current_user} %>')
+
+$('.loading_animation').removeClass('active')
+$('.loading_animation_screen').removeClass('active')
+
+
+function validateEditForms() {
+
+		function validate(e, erMsg, REGEX) {
+			target = e.target;
+			submitButton = document.querySelector('.edit_user_detail input[type=submit]')
+			if (!target.value.match(REGEX)) {
+				target.style.backgroundColor = "#F6C8BD";
+				submitButton.disabled = true;
+			}
+			else
+			{ 
+				target.style.backgroundColor = "#BDF6C8";
+				submitButton.disabled = false;
+
+			}
+
+		}
+
+		// eMailMainForm = document.getElementById('user_detail_organization');
+		// if (eMailMainForm) {eMailMainForm.addEventListener('keyup', function(e) {
+		// 	validate(e, "Correo Invalido", "^[A-Za-z\\._\\-0-9]*[@][A-Za-z]*[\\.][a-z]{2,4}$", "userEmailMainLabel");
+		// }, false)};
+
+		// eMailSecForm = document.getElementById('user_emailSec');
+		// if (eMailSecForm) {eMailSecForm.addEventListener('keyup', function(e) {
+		// 	validate(e, "Correo Invalido", "^[A-Za-z\\._\\-0-9]*[@][A-Za-z]*[\\.][a-z]{2,4}$", "userEmailSecLabel");
+		// }, false)};
+		
+
+		phoneForm = document.getElementById('user_detail_telephone');
+		if (phoneForm) {phoneForm.addEventListener('keyup', function(e) {
+			validate(e, "Numero Invalido", "^[0-9]{8,10}$", "userTelephoneLabel");
+		}, false)};
+}
+
+validateEditForms();
