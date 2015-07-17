@@ -11,10 +11,10 @@ mysql: &mysql
   username: root
   password: ''
 
-# default: &default
-#   adapter: sqlite3
-#   pool: 5
-#   timeout: 5000
+default: &default
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
 
 development:
 #mysql: &mysql
@@ -24,13 +24,25 @@ development:
   username: root
   password: ''
 
-production:
-#mysql: &mysql
-  host: 127.0.0.1
-  adapter: mysql2
-  database: Cintelius
-  username: root
-  password: ''
+# development:
+#   adapter: postgresql
+#   host: localhost
+#   username: user
+#   database: app-dev
+
+# production:
+#   adapter: postgresql
+#   host: localhost
+#   username: user
+#   database: app-dev
+
+# production:
+# #mysql: &mysql
+#   host: 127.0.0.1
+#   adapter: mysql2
+#   database: Cintelius
+#   username: root
+#   password: ''
 
 
 # Warning: The database defined as "test" will be erased and

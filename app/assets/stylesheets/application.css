@@ -30,17 +30,6 @@
  /*verde #39bf00*/
  /*naranja padre #ff6500*/
 
-@font-face {
-  font-family: 'din1451alt';
-  src: url(/assets/fonts/din1451alt.eot);
-  src: url(/assets/fonts/din1451alt.eot?#iefix) format("embedded-opentype"), 
-    url(/assets/fonts/din1451alt.ttf) format("truetype"), 
-    url(/assets/fonts/din1451alt.woff) format("woff"), 
-    url(/assets/fonts/din1451alt.svg#din1451alt) format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-
 .flash_messages {
   position: fixed;
   color: white;
@@ -197,46 +186,6 @@ img.alert-icon {
 }
 
 a.choice {
- /* background-attachment: scroll;
-background-clip: border-box;
-background-color: rgb(52, 152, 219);
-background-image: none;
-background-origin: padding-box;
-background-size: auto;
-border-bottom-color: rgb(255, 255, 255);
-border-bottom-style: none;
-border-bottom-width: 0px;
-border-image-outset: 0px;
-border-image-repeat: stretch;
-border-image-slice: 100%;
-border-image-source: none;
-border-image-width: 1;
-border-left-color: rgb(255, 255, 255);
-border-left-style: none;
-border-left-width: 0px;
-border-right-color: rgb(255, 255, 255);
-border-right-style: none;
-border-right-width: 0px;
-border-top-color: rgb(255, 255, 255);
-border-top-style: none;
-border-top-width: 0px;
-color: rgb(255, 255, 255);
-cursor: auto;
-display: inline;
-font-family: sans-serif;
-font-size: 11px;
-font-style: normal;
-font-variant: normal;
-font-weight: 600;
-height: auto;
-line-height: 40px;
-list-style-image: none;
-list-style-position: outside;
-list-style-type: none;
-padding-bottom: 10px;
-padding-left: 8px;
-padding-right: 8px;
-padding-top: 10px;*/
 background-color: rgb(52, 152, 219);
 position: relative;
 text-align: left;
@@ -346,7 +295,7 @@ form.edit_combo {
   .order_box.fade-out {
     position: relative;
     bottom: 3em;
-    opacity: 1
+    opacity: 1;
     left: 38%;
     -webkit-animation: order-box-fade-out 0.5s cubic-bezier(.27,.4,.02,.99)  1;
   }
@@ -799,7 +748,7 @@ input#order_title {
 }
 
 .product_box label{
-  margin:; 1%;
+  margin: 1%;
 }
 
 #new_order_submit {

@@ -20,7 +20,8 @@ class ServiceScore < ActiveRecord::Base
     end
 
     def get_score
-        self.total_score / self.total_reviews
+        self.total_score / self.total_reviews unless self.total_reviews == nil
+        return 0
     end
 
 
