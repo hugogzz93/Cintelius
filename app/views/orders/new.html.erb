@@ -5,7 +5,7 @@
 		<!-- categorias -->
 		<ul class="category-list">
 			<% @categories.each do |category|  %>
-				<li><%= button_tag category.name %></li>
+				<li><%= button_tag category.name, data: {category_id: category.id} %></li>
 			<% end %>
 		</ul>
 		
@@ -14,9 +14,9 @@
 	<div class="column subcategories">
 		<!-- subcategorias -->
 			<% @categories.each do |category| %>
-				<ul class="<%=category.name%>-list">
+				<ul class="<%=category.name%>-list new-order-subcategory-list" data-category-id="<%= category.id %>">
 					<% category.subcategories.each do |subcategory| %>
-						<li><%= button_tag subcategory.name %></li>
+						<li><%= button_tag subcategory.name, data: {category_id: subcategory.id}%></li>
 					<% end %>
 				</ul>
 			<% end %>
@@ -26,7 +26,7 @@
 		<!-- productos -->
 		<% @categories.each do |category| %>
 			<% category.subcategories.each do |subcategory| %>
-				<ul class="<%=subcategory.name%>-list">
+				<ul class="<%=subcategory.name%>-list new-order-product-list" data-category-id="<%= subcategory.id %>">
 					<% subcategory.products.each do |product| %>
 						<li><%= button_tag product.name, data: {product_id: product.id} %></li>
 					<% end %>

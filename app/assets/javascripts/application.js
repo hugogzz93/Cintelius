@@ -103,12 +103,14 @@ $('.return_arrow').on('click', function(e) {
 	// Para que la subcategoria tenga el efecto fade-in
 	$('ul.category-list button').on('click', function(e) {
 		e.preventDefault();
-		className = "." + e.target.textContent + "-list";
-		// indexNo = $('.category-list button:contains(\"' + e.target.textContent +'")').parent().index();
-
-		$('.subcategories ul, .category-list button').removeClass('active');
+		categoryId = $(e.target).attr('data-category-id')
+		console.log('one')
+		// className = "." + e.target.textContent + "-list";
+		// // indexNo = $('.category-list button:contains(\"' + e.target.textContent +'")').parent().index();
 		$('.products ul').removeClass('active');
-		$(className).addClass('active');
+		$('.subcategories ul, .category-list button').removeClass('active');
+		$('.new-order-subcategory-list[data-category-id=' + categoryId +']').addClass('active')
+		// $(className).addClass('active');
 		// $($(className).children()[indexNo]).css('border-left', 'none')
 
 		$(e.target).addClass('active');		
@@ -116,13 +118,16 @@ $('.return_arrow').on('click', function(e) {
 
 	$('.subcategories ul li button').on('click', function(e) {
 		e.preventDefault();
-		className = "." + e.target.textContent + "-list";
+		categoryId = $(e.target).attr('data-category-id')
+		// className = "." + e.target.textContent + "-list";
 		// indexNo = $('.subcategory-list button:contains(\"' + e.target.textContent +'")').parent().index();
 
 		$('.subcategories ul li button').removeClass('active');
 		$('.products ul').removeClass('active');
+		$('.new-order-product-list[data-category-id=' + categoryId +']').addClass('active')
 
-		$(className).addClass('active');
+
+		// $(className).addClass('active');
 		// $($(className).children()[indexNo]).css('border-left', 'none')
 
 		$(e.target).addClass('active');	
@@ -155,6 +160,7 @@ $('.return_arrow').on('click', function(e) {
 			$(targetProductBox.children('#comment_content')).attr('name', commentName)
 
 			$(e.target).addClass('selected_product')
+			console.log($(e.target))
 
 			// para que la tacha borre al producto del formulario
 			$('.product_box img.x-button').on('click', function(e) {
