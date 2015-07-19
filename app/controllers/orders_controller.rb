@@ -19,14 +19,11 @@ class OrdersController < ApplicationController
 
 	def edit
 			if Order.lock(params[:id], params[:selected_offers_id], params[:selected_combos_id])
-				# flash[:success] = t('order_lock_success')
 				redirect_to root_path, flash: {success: t('order_lock_success')}
 			else
 
 				redirect_to root_path, flash: {failure: t('order_lock_failure')}
 			end
-				# flash.keep(:success)
-				# render js: "window.location = '#{order_path(id: params[:id])}'"
 	end
 
 	def show
@@ -42,7 +39,9 @@ class OrdersController < ApplicationController
 		respond_to do |format|
 			format.js {
 				@order = Order.find(params[:id])
+				@order.create_history_recursively
 				@order.destroy
+				OrderHistory.where(user_id: current_user.id)[-1].create_review_tickets
 			}
 		end
 	end

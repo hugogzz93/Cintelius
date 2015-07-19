@@ -1,8 +1,8 @@
-<div class="order_review_file" data-order-id="<%= order.id %>">
+<div class="order_review_file" data-order-id="<%= order_history.id %>">
 	<div class="order_title">
-		<%= order.title %>
+		<%= order_history.title %>
 	</div>
-	<% order.review_tickets.where(reviewable_type: "ServiceScore").each do |service_review_ticket| %>
+	<% order_history.review_tickets.where(reviewable_type: "ServiceScore").each do |service_review_ticket| %>
 
 		<% reviewee = service_review_ticket.get_reviewee %>
 		<div class="provider_review_container" data-reviewee-id="<%= service_review_ticket.user_id %>">
@@ -10,7 +10,7 @@
 				<%= reviewee.get_organization %>
 				<%= render partial: '/service_scores/service_score_form.html.erb', locals: {review_ticket: service_review_ticket, service_score: service_review_ticket.reviewable} %>
 			</div>
-			<% order.review_tickets.where(reviewable_type: "ProductScore").each do |product_review_ticket| %>
+			<% order_history.review_tickets.where(reviewable_type: "ProductScore").each do |product_review_ticket| %>
 				<% if product_review_ticket.reviewable.user_id == service_review_ticket.reviewable.user_id %>
 					<%= render partial: '/product_scores/product_score_form.html.erb', locals: {review_ticket: product_review_ticket, product_score: product_review_ticket.reviewable } %>
 				<% end %>

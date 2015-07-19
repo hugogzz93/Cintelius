@@ -8,10 +8,9 @@ class Combo < ActiveRecord::Base
 	accepts_nested_attributes_for :combo_products
 	accepts_nested_attributes_for :comment
 
-	after_update :create_review_tickets, if: :received?
+	# after_update :create_review_tickets, if: :received?
 
     validates :price, presence: true, numericality: true
-    # before_destroy :create_history
 
 	enum status: [:ready, :selected, :locked, :received]
 
@@ -35,13 +34,13 @@ class Combo < ActiveRecord::Base
 		self.user.user_detail.organization
 	end
 
-	def create_review_tickets
-		self.combo_products.each do |combo_product|
-			product_score_id = ProductScore.where(product_id: combo_product.product_id, user_id: self.user_id).first.id
-			ReviewTicket.create_ticket_for_product(self.order_id, self.order.user_id, product_score_id, combo_product.product_id)
-		end
+	# def create_review_tickets
+	# 	self.combo_products.each do |combo_product|
+	# 		product_score_id = ProductScore.where(product_id: combo_product.product_id, user_id: self.user_id).first.id
+	# 		ReviewTicket.create_ticket_for_product(self.order_id, self.order.user_id, product_score_id, combo_product.product_id)
+	# 	end
 		
-	end
+	# end
 
 	def self.lock_set(combo_ids)
 		return unless combo_ids #checar que no este vacia
@@ -55,6 +54,8 @@ class Combo < ActiveRecord::Base
 		history_object_hash = self.attributes
 		history_object_hash.delete("id")
 		history_object_hash.delete("order_id")
+		logger.info order_history_object.inspect
+		logger.info "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 		history_object_hash["order_history_id"] = order_history_object.id
 		combo_history_object = ComboHistory.create(history_object_hash)
 		self.combo_products.each do |combo_product|

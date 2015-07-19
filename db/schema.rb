@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150629190902) do
+ActiveRecord::Schema.define(version: 20150719023843) do
 
   create_table "categories", force: true do |t|
     t.integer  "supercategory_id", limit: 4
@@ -169,14 +169,15 @@ ActiveRecord::Schema.define(version: 20150629190902) do
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
 
   create_table "review_tickets", force: true do |t|
-    t.integer  "reviewable_id",   limit: 4
-    t.string   "reviewable_type", limit: 255
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "user_id",         limit: 4
-    t.integer  "order_id",        limit: 4,   null: false
+    t.integer  "reviewable_id",    limit: 4
+    t.string   "reviewable_type",  limit: 255
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "user_id",          limit: 4
+    t.integer  "order_history_id", limit: 4
   end
 
+  add_index "review_tickets", ["order_history_id"], name: "index_review_tickets_on_order_history_id", using: :btree
   add_index "review_tickets", ["reviewable_id", "reviewable_type"], name: "index_review_tickets_on_reviewable_id_and_reviewable_type", using: :btree
   add_index "review_tickets", ["user_id"], name: "index_review_tickets_on_user_id", using: :btree
 

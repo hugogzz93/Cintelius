@@ -1,5 +1,6 @@
 class OrderHistory < ActiveRecord::Base
 	belongs_to :user
+	has_many :review_tickets, dependent: :destroy
 	has_many :offer_detail_histories, dependent: :destroy
 	has_many :offer_histories, dependent: :destroy
 	has_many :combo_histories, dependent: :destroy
@@ -12,9 +13,11 @@ class OrderHistory < ActiveRecord::Base
 	accepts_nested_attributes_for :order_product_histories
 	accepts_nested_attributes_for :comment_history
 
-	# after_update :create_service_review_tickets, if: :locked?
+	# after_create :create_review_tickets
 
 	validates :title, presence: true, length: {maximum: 100}
+
+
 
 
 	# open: usuario puede seleccionar ofertas, locked: ya selecciono, closed: se recibieron los productos
@@ -85,6 +88,37 @@ class OrderHistory < ActiveRecord::Base
 		return provider_list.uniq
 	end
 
+	# # proveedores que tienen un producto seleccionado
+	def get_received_product_providers
+		providers_from_offer_histories = self.offer_histories.where(status: OfferHistory.statuses[:received]).collect {|offer_history| offer_history.user}.uniq
+		providers_from_combo_histories = self.combo_histories.where(status: ComboHistory.statuses[:received]).collect {|combo_history| combo_history.user}.uniq
+		providers = providers_from_combo_histories + providers_from_offer_histories
+		return providers.uniq
+
+	end
+
+	def create_review_tickets
+		providers = self.get_received_product_providers
+		providers.each do |provider| 
+			self.review_tickets.create(reviewable_type: "ServiceScore", user_id: self.user_id, reviewable_id: provider.service_score.id)
+		end
+		self.combo_histories.where(status: ComboHistory.statuses[:received]).each do |combo_history|
+			combo_history.combo_product_histories.each do |combo_product_history|
+				product_score_id = ProductScore.where(product_id: combo_product_history.product_id, user_id: combo_history.user_id).first.id
+				ReviewTicket.create_ticket_for_product(self.id, self.user_id, product_score_id, combo_product_history.product_id)
+			end
+		end
+		# no agrege para ofertas porque todavia no decidimos si las vamos a dejar o no
+	end
+
+	def get_service_review_tickets
+		review_tickets = self.review_tickets.where(reviewable_type: "ServiceScore")
+	end
+
+	def get_product_review_tickets
+		review_tickets = self.review_tickets.where(reviewable_type: "ProductScore")
+	end
+
 
 
 	# def self.lock(order_id, offer_ids, combo_ids)
@@ -107,14 +141,7 @@ class OrderHistory < ActiveRecord::Base
 	# end
 
 
-	# # proveedores que tienen un producto seleccionado
-	# def get_selected_providers
-	# 	providers_from_offers = self.offers.where(status: Offer.statuses[:locked]).collect {|offer| offer.user}.uniq
-	# 	providers_from_combos = self.combos.where(status: Combo.statuses[:locked]).collect {|combo| combo.user}.uniq
-	# 	providers = providers_from_combos + providers_from_offers
-	# 	return providers.uniq
-
-	# end
+	
 
 	# def get_service_review_tickets
 	# 	review_tickets = self.review_tickets.where(reviewable_type: "ServiceScore")

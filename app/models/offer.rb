@@ -11,7 +11,7 @@ class Offer < ActiveRecord::Base
 	validates :unitary_price, presence: true, numericality: true
 	# validate :authorized_product
 	after_update :create_review_ticket, if: :received?
-	# before_destroy :create_history
+
 	validates :user_id, uniqueness: { scope: [:order_id, :product_id],
     message: "No se puede hacer mas de una oferta para le mismo producto." }
 

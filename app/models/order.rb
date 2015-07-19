@@ -1,6 +1,5 @@
 class Order < ActiveRecord::Base
 	belongs_to :user
-	has_many :review_tickets
 	has_many :offer_details, dependent: :destroy
 	has_many :offers, dependent: :destroy
 	has_many :combos, dependent: :destroy
@@ -13,9 +12,6 @@ class Order < ActiveRecord::Base
 	accepts_nested_attributes_for :order_products
 	accepts_nested_attributes_for :comment
 
-	after_update :create_service_review_tickets, if: :locked?
-	before_destroy :create_history_recursively
-
 	validates :title, presence: true, length: {maximum: 100}
 
 
@@ -24,13 +20,6 @@ class Order < ActiveRecord::Base
 	enum status: [:open, :locked, :closed]
 
 	def due_date_past?
-		# if due_date <= Time.now
-		# 	self.update(status: "choosing_offers")
-		# 	return true
-		# else
-		# 	return false
-		# end
-
 		self.due_date <= Time.now
 	end
 
@@ -60,12 +49,12 @@ class Order < ActiveRecord::Base
 		# pasar al historial
 	end
 
-	def create_service_review_tickets
-		providers = self.get_selected_providers
-		providers.each do |provider| 
-			self.review_tickets.create(reviewable_type: "ServiceScore", user_id: self.user_id, reviewable_id: provider.service_score.id)
-		end
-	end
+	# def create_service_review_tickets
+	# 	providers = self.get_selected_providers
+	# 	providers.each do |provider| 
+	# 		self.review_tickets.create(reviewable_type: "ServiceScore", user_id: self.user_id, reviewable_id: provider.service_score.id)
+	# 	end
+	# end
 
 	def get_participating_providers
 		providers_from_offers = self.offers.collect {|offer| offer.user}.uniq
@@ -84,13 +73,13 @@ class Order < ActiveRecord::Base
 
 	end
 
-	def get_service_review_tickets
-		review_tickets = self.review_tickets.where(reviewable_type: "ServiceScore")
-	end
+	# def get_service_review_tickets
+	# 	review_tickets = self.review_tickets.where(reviewable_type: "ServiceScore")
+	# end
 
-	def get_product_review_tickets
-		review_tickets = self.review_tickets.where(reviewable_type: "ProductScore")
-	end
+	# def get_product_review_tickets
+	# 	review_tickets = self.review_tickets.where(reviewable_type: "ProductScore")
+	# end
 
 	def reset
 
@@ -106,8 +95,6 @@ class Order < ActiveRecord::Base
 		self.combos.each do |combo|
 			combo.update(status: 0)
 		end
-
-		self.review_tickets.destroy
 	end
 
 	def create_history_recursively

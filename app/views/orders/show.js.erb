@@ -195,14 +195,10 @@ $('.product_main_info').on('click', function(e) {
 // confirmation button es una imagen que actua como boton proxy para el submit
 $('.confirmation_button').on('click', function() {
 	$('#order_form_submit').click();
-})
-
-// intercambia el spinner
-
-$('.edit_combo').on('submit', function(e) {
-	$('img.order_finish_image').addClass('hidden')
+	$('img.confirmation_button').addClass('hidden')
 	$('.loader').removeClass('hidden')
 })
+
 
 // order_finish_image es una imagen que actua como boton proxy para el submit
 $('.order_finish_image').on('click', function() {

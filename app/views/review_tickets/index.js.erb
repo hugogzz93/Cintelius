@@ -2,8 +2,8 @@ $('.content_body').empty()
 $('.content_body').append('<ul id="order_review_list"</ul>')
 // $('.content_body').addClass('review_background')
 
-<% @orders.each do |order|  %>
-	$('#order_review_list').append('<li>  <%= escape_javascript(render partial: "order_review_file.html.erb", locals:{order: order}).html_safe %>   </li>')
+<% @order_histories.each do |order_history|  %>
+	$('#order_review_list').append('<li>  <%= escape_javascript(render partial: "order_review_file.html.erb", locals:{order_history: order_history}).html_safe %>   </li>')
 <% end %>
 
 $('.service_score img').on('click', function(e) {

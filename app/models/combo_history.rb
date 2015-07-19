@@ -33,21 +33,4 @@ class ComboHistory < ActiveRecord::Base
 	def organization
 		self.user.user_detail.organization
 	end
-
-
-	# funciones de la version activa
-	# def create_review_tickets
-	# 	self.combo_product_history.each do |combo_product|
-	# 		product_score_id = ProductScore.where(product_id: combo_product.product_id, user_id: self.user_id).first.id
-	# 		ReviewTicket.create_ticket_for_product(self.order_id, self.order.user_id, product_score_id, combo_product.product_id)
-	# 	end
-	# end
-
-	# def self.lock_set(combo_ids)
-	# 	return unless combo_ids #checar que no este vacia
-	# 	combo_ids.each do |combo_id|
-	# 		combo = Combo.find(combo_id)
-	# 		combo.update(status: "locked")
-	# 	end
-	# end
 end

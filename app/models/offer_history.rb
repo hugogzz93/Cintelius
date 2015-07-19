@@ -8,11 +8,8 @@ class OfferHistory < ActiveRecord::Base
 	accepts_nested_attributes_for :offer_detail_histories
 	accepts_nested_attributes_for :comment_history
 
-	# after_create :bind_to_parent
-
 	validates :unitary_price, presence: true, numericality: true
-	# validate :authorized_product
-	# after_update :create_review_ticket, if: :received?
+
 	validates :user_id, uniqueness: { scope: [:order_history_id, :product_id],
     message: "No se puede hacer mas de una oferta para le mismo producto." }
 
@@ -77,42 +74,15 @@ class OfferHistory < ActiveRecord::Base
 		self.product.name
 	end
 
-	# def bind_to_parent
-	# 	new_order_id = OrderHistory.last.id + 1
-	# 	self.update(order_history_id: new_order_id)
-	# end
-
-	
-
-	# Falta craer un offer_detail con al craer el offer
-
 	def authorized_product
 		authorized_products = self.user.products.collect { |product| product.id}
 		errors.add(:product_id, 'Producto no autorizado para esta cuenta.') unless authorized_products.include?(self.product_id)
 	end
 
+	def create_review_ticket
+		product_score_id = ProductScore.where(product_id: self.product_id, user_id: self.user_id).first.id
+		ReviewTicket.create_ticket_for_product(self.order_id, self.order.user_id, product_score_id, self.product_id)
+	end
 
-	# def create_offer_detail_histories(units, order_id)
-	# 	self.offer_detail_histories.create(order_id: order_id, units: units)
-	# end
-
-	# def create_review_ticket
-	# 	product_score_id = ProductScore.where(product_id: self.product_id, user_id: self.user_id).first.id
-	# 	ReviewTicket.create_ticket_for_product(self.order_id, self.order.user_id, product_score_id, self.product_id)
-	# end
-
-	# def self.lock_set(offers_ids) 
-	# #le cambie el nombre de lock_offer para ver donde se utiliza, 
-	# # tambien la altere para que ahora reciba ids en vez de ofertas
-	# return unless offers_ids
-	# 	offers_ids.each do |offer_id|
-	# 		offer = Offer.find(offer_id)
-	# 		if offer.offer_detail_histories.last.status == "provider"
-	# 			offer.update(status: "locked")
-	# 			offer.offer_detail_histories.last.update(status: "both")
-	# 		end
-	# 	end
-		
-	# end
-
+	
 end
