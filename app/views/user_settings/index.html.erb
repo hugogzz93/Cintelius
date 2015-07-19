@@ -2,6 +2,9 @@
 	<div id="logo-holder">
       <%= image_tag "logo.png" %>      
     </div>
+    <div class="user_settings_email_container">
+    	<%= current_user.email %>
+    </div>
 	<ul class="user_settings_list">
 		<li><%= link_to 'Cambiar Informacion', edit_user_detail_path(id: @user_id), remote: true %></li>
 		<% if current_user.is_buyer? %>

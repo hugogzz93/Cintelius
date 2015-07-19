@@ -76,7 +76,7 @@ p.notice {
 }
 
 #rectangle {
-	/*background-image: url("/assets/frontpage/colorfulForest.jpg");*/
+	background-image: url("/colorfulForest.jpg");
 	height: 60%;
 	background-position: 53% 17%;
 }
@@ -192,7 +192,7 @@ p.notice {
 }
 
 #image-blur-background {
-	/*background-image: url("/assets/frontpage/colorfulForest.jpg");*/
+	background-image: url("/colorfulForest.jpg");
 	z-index: 1;
   background-position: 52% 17%;
   -webkit-filter: blur(1.7px);
@@ -262,6 +262,9 @@ figcaption {
   list-style-type: none;
   text-align: center;
   text-transform: uppercase;
+}
+.frontpage-square {
+  cursor: pointer;
 }
 
 .frontpage-square h2 {
@@ -574,6 +577,19 @@ cuando el mouse pase arriba*/
 
 .sign_up input[type=submit] {
   display: block !important;
+  cursor: pointer;
+  -webkit-transition: background 0.3s, color 0.1s;
+  -o-transition: background 0.3s, color 0.1s;
+  transition: background 0.3s, color 0.1s;
+}
+.sign_up input[type="submit"]:active {
+  background-color: rgb(102, 102, 102);
+  color: #fff;
+}
+.sign_up input[type="submit"]:hover {
+  border: 1px solid rgb(102, 102, 102);
+  color: rgb(102, 102, 102);
+  
 }
 
 .sign_up #new_user {
@@ -647,6 +663,7 @@ input[type=submit] {
   padding: 0;
   margin: 1%;
   float: left;
+  width:1em;
 }
 
 

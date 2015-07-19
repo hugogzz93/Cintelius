@@ -80,7 +80,7 @@
 								<div class="new_order_field_information">*Recuerda que tu no podras ver las ofertas antes de la fecha limite.</div>
 							</div>
 							<div class="date_field_container">
-								<%= order.text_field "due_date", id: "datepicker", placeholder: "Fecha limite", required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)", html: {readonly: true}  %>
+								<%= order.text_field "due_date", id: "datepicker", placeholder: "Fecha limite", required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)", readonly: true  %>
 								<br>
 								<%= order.time_field "due_time", id: "timepicker", required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
 							</div>

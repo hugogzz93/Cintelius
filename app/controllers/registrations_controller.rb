@@ -7,7 +7,9 @@ class RegistrationsController < Devise::RegistrationsController
 		super
 		params[:user_detail][:credentials] = params[:user_detail][:credentials].to_i
 		if current_user
-			current_user.create_user_detail(user_detail_params)
+			unless current_user.create_user_detail(user_detail_params)
+				current_user.destroy
+			end
 		end
 	end
 

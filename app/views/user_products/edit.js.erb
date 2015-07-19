@@ -33,6 +33,7 @@ activateProductsInList();
 $('li.supercategory_button').on('click', function(e) {
 	$('li.supercategory_button.active').removeClass('active')
 	$(e.target).addClass('active')
+	$('li.product_button').removeClass('selected')
 	$('li.subcategory_button').removeClass('selected')
 	supercategory_id = $(e.target).attr('data-supercategory-id')
 	$('li.subcategory_button[data-supercategory-id=' + supercategory_id + ']').addClass('selected')

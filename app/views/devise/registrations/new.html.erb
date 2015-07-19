@@ -90,7 +90,7 @@
 
     function validate(e, erMsg, REGEX) {
       target = e.target;
-      submitButton = document.querySelector('.edit_user_detail input[type=submit]')
+      submitButton = document.querySelector('input[type=submit]')
       if (!target.value.match(REGEX)) {
         target.style.backgroundColor = "#F6C8BD";
         submitButton.disabled = true;
@@ -117,7 +117,7 @@
 
     phoneForm = document.getElementById('user_detail_telephone');
     if (phoneForm) {phoneForm.addEventListener('keyup', function(e) {
-      validate(e, "Numero Invalido", "^[0-9]{8,10}$", "userTelephoneLabel");
+      validate(e, "Numero Invalido", "^[0-9]{8,9}$", "userTelephoneLabel");
     }, false)};
 }
 

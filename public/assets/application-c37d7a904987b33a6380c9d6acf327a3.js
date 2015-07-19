@@ -13946,22 +13946,31 @@ return $.datepicker;
 }).call(this);
 
 var do_on_load = function() { 
+	console.log('first')
 	$(window).load(function(){
+		console.log('second')
 		$('.loading_screen').remove()
 		if ($('p.alert').text() == "") {
 			$('p.alert').css('display', "none")
 		};
 
+		$('#square3').on('click', function(e) {
+			console.log('click')
+			$('#square3 a')[0].click();
+		})
+
+		$('.frontpage-square a').on('click', function(e) {
+			e.stopImmediatePropagation();
+		})
+
 		$(".frontpage-square").on({
 		    mouseenter: function (e) {
 		        //stuff to do on mouse enter
 				$(e.target).parent().siblings('img').addClass('hover')
-				console.log(e.target)
 		    },
 		    mouseleave: function (e) {
 		        //stuff to do on mouse leave
 				$(e.target).parent().siblings('img').removeClass('hover')
-				console.log('leave')
 		    }
 		});
 	})
@@ -14882,6 +14891,7 @@ $('.return_arrow').on('click', function(e) {
 
 	// Click agrega el nombre al product_box o destruye la caja si ya esta seleccionado el prod
 	$('.products button').on('click', function(e) {
+		console.log('clicked')
 		if ($(e.target).hasClass('selected_product')) {
 			$('.product_box:contains('+ $(e.target).text() +')').remove();
 			$(e.target).removeClass('selected_product')

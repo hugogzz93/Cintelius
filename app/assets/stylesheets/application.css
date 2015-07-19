@@ -34,6 +34,10 @@
   display: none !important;
  }
 
+ textarea {
+  font-family: '.HelveticaNeueDeskInterface-Regular' !important;
+ }
+
 .flash_messages {
   position: fixed;
   color: white;
@@ -111,6 +115,11 @@ img.alert-icon {
   margin-right: 10%;
   padding: 6%;
   color: #E23351;
+  background-color: #39bf00;
+  background-color: #33e26d;
+  margin-right: 10%;
+  padding: 6%;
+  overflow: auto;
 }
 
 .alert-success {
@@ -256,7 +265,7 @@ form.edit_combo {
     pointer-events: none;
   }
 
-  .confirmation_button {
+  .confirmation_button, .order_finish_image {
   height: auto;
   width: 5%;
   float: left;
@@ -265,6 +274,19 @@ form.edit_combo {
   cursor: pointer;
   /*background-color:green;*/
   }
+
+  a.order_finish_button {
+  display: none;
+  text-decoration: none;
+  color: #454E59;
+  font-size: 0.8em;
+  height: auto;
+  width: 5%;
+  float: left;
+  margin-left: 5%;
+  margin-right: -8%;
+  cursor: pointer;
+}
 
   .loading_animation_screen {
     display: none;
@@ -442,6 +464,8 @@ form.edit_combo {
   font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif !important;
  	background-color: #262626;  /*343026*/
   margin: 0px;
+  min-width: 1400px;
+  min-height: 765px;
  }
 
  .container {
@@ -451,6 +475,8 @@ form.edit_combo {
   height: 95%;
   width: 100% !important; 
   margin: 0px !important;
+  min-width: 1400px !important;
+  min-height: 760px !important;
   overflow: auto;
   background-color: white;
   /*box-shadow: -5px -5px 20px #31353c;*/
@@ -1765,8 +1791,8 @@ input.combo_price {
 
 #combo_comment_attributes_content {
   float: left;
-  width: 45%;
-  max-width: 45%;
+  width: 44%;
+  max-width: 44%;
   height: 7.3em;
   background-color: transparent;
   color: #20bdff;
@@ -1830,6 +1856,7 @@ input.combo_price {
   height: 97%;
   margin-left:1%;*/
   height: 100%;
+  min-width: 1400px;
  }
 
  .order_index .column {
@@ -1844,14 +1871,18 @@ input.combo_price {
 
  .order_index .column.orders {
     width: 25%;
+    min-width: 306.75px;
   }
 
  .order_index .column.order_offers {
   width: 40%;
+  min-width: 490.796875px;
+
  }
 
  .order_index .column.order_products {
   width: 34.5%;
+  min-width: 423.3125px;
  }
 
 
@@ -3196,6 +3227,19 @@ input#user_detail_telephone {
 
 .content_body img.loading_animation.active {
    display: block; 
+}
+
+.user_settings_email_container {
+  display: block;
+  height: 3em;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  padding-top: 1.3em;
+  background-image: -webkit-linear-gradient(left,transparent 0,rgba(0,0,0,.07) 15%,rgba(0,0,0,.1) 50%,rgba(0,0,0,.07) 85%,transparent 100%);
+  background-image: -moz-linear-gradient(left,transparent 0,rgba(0,0,0,.07) 15%,rgba(0,0,0,.1) 50%,rgba(0,0,0,.07) 85%,transparent 100%);
+  background-image: -ms-linear-gradient(left,transparent 0,rgba(0,0,0,.07) 15%,rgba(0,0,0,.1) 50%,rgba(0,0,0,.07) 85%,transparent 100%);
+  background-image: linear,to right,transparent 0,rgba(0,0,0,.07) 15%,rgba(0,0,0,.1) 50%,rgba(0,0,0,.07) 85%,transparent 100%;
 }
 
 

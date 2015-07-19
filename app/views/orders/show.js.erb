@@ -6,6 +6,7 @@ $('.column.order_info').children().empty()
 $('.order_product_info_container').append('<ul class="order_product_info_list"></ul>')
 $('.info_tab_button').remove()
 $('.confirmation_button').remove()
+$('.order_finish_button').remove()
 
 // tab de informacion debe estar actualizado
 // <div class="order_title_container"></div>
@@ -26,6 +27,10 @@ $('.order_title_container').append('<%= j @order.title %>')
 	<% if @order.is_open? %>
 		$('#selection_header').append("<%= j image_tag('icons/icon-style-checkmark-gray.png', class: 'confirmation_button', alt: t('confirm_selection') )%>")
 		$('.order_product_list').append("<%= j render partial: 'offer_selection_form.html.erb', locals: {f: @order}%>")
+	<% elsif @order.is_locked? %>
+	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		$('#selection_header').append("<%= j image_tag('icons/icon-style-checkmark-gray.png', class: 'order_finish_image', alt: t('confirm_selection') )%>")
+		$('#selection_header').append("<%= j link_to 'Terminar', order_path(@order), method: :delete, data: { confirm: 'Esto terminara su orden.' }, class: 'order_finish_button', remote: true %>")
 	<% end %>
 
 	<% @providers.each do |provider| %>
@@ -188,6 +193,11 @@ $('.product_main_info').on('click', function(e) {
 // confirmation button es una imagen que actua como boton proxy para el submit
 $('.confirmation_button').on('click', function() {
 	$('#order_form_submit').click();
+})
+
+// order_finish_image es una imagen que actua como boton proxy para el submit
+$('.order_finish_image').on('click', function() {
+	$('.order_finish_button')[0].click();
 })
 
 

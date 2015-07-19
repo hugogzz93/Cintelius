@@ -37,6 +37,15 @@ class OrdersController < ApplicationController
 			}
 		end
 	end
+
+	def destroy
+		respond_to do |format|
+			format.js {
+				@order = Order.find(params[:id])
+				@order.destroy
+			}
+		end
+	end
 	
 	private
 		def order_params

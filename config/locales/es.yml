@@ -1,6 +1,8 @@
 es:
   products: "Productos"
   selected: "Seleccionados"
+  user_order_destruction_success: "Orden Terminada"
+  user_order_destruction_success_message: "No olvide calificar el servicio de su proveedor."
   combo_instructions: "Elige tus productos de la columna a la izquierda."
   user_detail_update_success: "Se actualizo su informacion."
   user_detail_update_failure: "Error al actualizar informacion"
