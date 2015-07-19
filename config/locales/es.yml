@@ -1,4 +1,5 @@
 es:
+  loading: "Cargando..."
   products: "Productos"
   selected: "Seleccionados"
   user_order_destruction_success: "Orden Terminada"

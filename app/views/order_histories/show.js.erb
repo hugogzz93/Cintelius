@@ -9,8 +9,10 @@ $('.offer_history_header').on('click', function(e) {
 })
 
 $('.combo_history').on('click', function(e) {
-	$(e.target).children('.combo_comment_history_container').toggleClass('active')
-	console.log("hhjbj")
+	comboHistoryId = $(e.target).closest('.combo_history').attr('data-combo-history-id')
+	$('.combo_comment_history_container[data-combo-history-id=' + comboHistoryId + ']').toggleClass('active')
+	// console.log("hhjbj")
+	consal.log
 })
 
 

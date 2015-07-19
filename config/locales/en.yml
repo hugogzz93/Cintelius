@@ -20,6 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  loading: "Loading..."
   hello: "Hello world"
   log_in: 'Log In'
   currency_code: "USD"

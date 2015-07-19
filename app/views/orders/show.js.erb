@@ -7,6 +7,8 @@ $('.order_product_info_container').append('<ul class="order_product_info_list"><
 $('.info_tab_button').remove()
 $('.confirmation_button').remove()
 $('.order_finish_button').remove()
+$('img.order_finish_image').remove()
+$('.loader').remove()
 
 // tab de informacion debe estar actualizado
 // <div class="order_title_container"></div>
@@ -23,7 +25,7 @@ $('.order_title_container').append('<%= j @order.title %>')
 
 
 <% if @order.due_date_past? %>
-
+	$('#selection_header').append('<div class="loader hidden"><%= j t("loading...") %></div>')
 	<% if @order.is_open? %>
 		$('#selection_header').append("<%= j image_tag('icons/icon-style-checkmark-gray.png', class: 'confirmation_button', alt: t('confirm_selection') )%>")
 		$('.order_product_list').append("<%= j render partial: 'offer_selection_form.html.erb', locals: {f: @order}%>")
@@ -195,9 +197,23 @@ $('.confirmation_button').on('click', function() {
 	$('#order_form_submit').click();
 })
 
+// intercambia el spinner
+
+$('.edit_combo').on('submit', function(e) {
+	$('img.order_finish_image').addClass('hidden')
+	$('.loader').removeClass('hidden')
+})
+
 // order_finish_image es una imagen que actua como boton proxy para el submit
 $('.order_finish_image').on('click', function() {
 	$('.order_finish_button')[0].click();
+})
+
+// intercambia el spinner
+
+$('.order_finish_button').on('click', function(e) {
+	$('img.order_finish_image').addClass('hidden')
+	$('.loader').removeClass('hidden')
 })
 
 
