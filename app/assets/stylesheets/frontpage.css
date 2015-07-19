@@ -1,4 +1,4 @@
-::-webkit-scrollbar, scrollbar, -o-scrollbar {
+::-webkit-scrollbar, ::scrollbar, ::-o-scrollbar {
   display: none !important;
  }
 
@@ -425,8 +425,8 @@ cuando el mouse pase arriba*/
   width: 120px;
   margin: 50px auto;
   margin-top: 10%;
-  min-height: 765px !important;
-  min-width: 1328px !important;
+  /*min-height: 765px !important;
+  min-width: 1328px !important;*/
 }
 
 .circle-1 {
