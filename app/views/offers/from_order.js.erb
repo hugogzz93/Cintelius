@@ -1,3 +1,4 @@
+
 // Para que salga un formulario nuevo si no se ha hecho oferta e indique con un formulario diferente si ya se ha hecho
 
 // ids de ofertas para esta orden que ha hecho el usuario
@@ -28,6 +29,11 @@
 
 
 // order_info
+
+<% @order.order_products.each do |order_product| %>
+	$('.order_product_info_list').append("<%= j render partial: '/orders/tab_product_info.html.erb', locals: {f: order_product}%>") // actualizar el tab	
+<% end %>
+
 <% if @order.comment %>
 	$('.order_comment_container').append('<div class="order_info_comment_header">Mensaje del comprador:</div>')
 	$('.order_comment_container').append('<%= j @order.comment.content %>')
@@ -120,8 +126,6 @@ $('.new_combo_form .submit_button').on('click', function(e) {
 })
 
 
-
-
 // Para que se agreguen campos por producto
 $('form .add_fields').on('click', function(e) {
 		time = new Date().getTime()
@@ -139,6 +143,18 @@ $('.add_new_combo_button').on('click', function(e) {
 })
 
 // 
+
+// Revela/esconde el comentrio de cada producto en into tabQuantity
+$('.product_main_info').on('click', function(e) {
+	if ($(e.target).hasClass('active')) {
+		$(e.target).removeClass('active')
+		$(e.target).siblings('.product_comment_container').removeClass('active')		
+	} else {
+		$(e.target).addClass('active')
+		$(e.target).siblings('.product_comment_container').addClass('active')	
+	}
+})
+
 $('.info_tab_button').on('click', function() {
 	$('.column.order_info').addClass('active')
 })

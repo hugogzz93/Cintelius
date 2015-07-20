@@ -215,6 +215,7 @@ $(function() {
 		$('.new_offer .combo_list').empty()
 		$('.column.order_info').removeClass('active')
 		$('.column.order_info').children().empty()
+		$('.order_product_info_container').append('<ul class="order_product_info_list"></ul>')
 	})
 
 	$('form .add_combo_field').on('click', function(e) {
