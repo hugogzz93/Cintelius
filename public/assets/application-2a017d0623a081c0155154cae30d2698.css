@@ -21,6 +21,8 @@ body {
 	width: 100%;
 	margin: 0px;
 	background-color: #345;
+  min-height: 765px !important;
+  min-width: 1200px !important;
 }
 
 p.alert {
@@ -425,6 +427,8 @@ cuando el mouse pase arriba*/
   margin-top: 10%;
 }
 
+/*unswerving tower*/
+
 .circle-1 {
   height: 120px;
   width: 120px;
@@ -495,20 +499,28 @@ cuando el mouse pase arriba*/
 }
 
 @keyframes spin {
-  from {
-    transform: rotate(0deg);
+  0% {
+    -webkit-transform: rotate(0deg) ;
+    -o-transform: rotate(0deg) ;
+    transform: rotate(0deg) ;
   }
-  to {
+  100% {
     transform: rotate(360deg);
+    -webkit-transform: rotate(360deg) ;
+    -o-transform: rotate(360deg) ;
   }
 }
 
 @-webkit-keyframes spin {
-  from {
-    transform: rotate(0deg);
+  0% {
+    -webkit-transform: rotate(0deg) ;
+    -o-transform: rotate(0deg) ;
+    transform: rotate(0deg) ;
   }
-  to {
+  100% {
     transform: rotate(360deg);
+    -webkit-transform: rotate(360) ;
+    -o-transform: rotate(360) ;
   }
 }
 
@@ -699,10 +711,14 @@ input[type=submit] {
  /*verde #39bf00*/
  /*naranja padre #ff6500*/
 
+ /*prueba*/
+
 
  ::-webkit-scrollbar {
   display: none !important;
  }
+
+
 
  textarea {
   font-family: '.HelveticaNeueDeskInterface-Regular' !important;
@@ -1136,8 +1152,8 @@ form.edit_combo {
   margin: 0px;
   /*min-width: 1400px;
   min-height: 765px;*/
-  min-height: 765px;
-  min-width: 1328px;
+  min-height: 765px !important;
+  min-width: 1200px !important;
  }
 
  .container {
@@ -1150,7 +1166,7 @@ form.edit_combo {
   /*min-width: 1400px !important;
   min-height: 760px !important;*/
   min-height: 765px !important;
-  min-width: 1328px !important;
+  min-width: 1200px !important;
   overflow: auto;
   background-color: white;
   /*box-shadow: -5px -5px 20px #31353c;*/
@@ -1644,7 +1660,7 @@ form#new_order .comment_field.editable {
 
  .column.new_offer_order_combos {
   /*width: 34.5%;*/
-  width: 47.55%;
+  width: 47%;
  }
 
 
@@ -1673,7 +1689,7 @@ form#new_order .comment_field.editable {
   border-radius: 0;
   border: 1px solid rgba(0,0,0,.1);
   font-size: 14px;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .combo_product_add_button {
@@ -2090,7 +2106,7 @@ form#new_order .comment_field.editable {
 }
 
 .new_combo_form input[type=checkbox] {
-  /*display:none*/;
+  /*display:none;*/
 }
 
 
@@ -2387,12 +2403,13 @@ button.combo_product_remove_button {
   transition: all 0.3s;
 }
 
+button.combo_product_remove_button:hover {
+  color: #ff204e;
+}
+
 button.combo_product_remove_button:active {
   color: white;
   background-color: #ff204e;
-}
-button.combo_product_remove_button:hover {
-  color: #ff204e;
 }
 
 
@@ -2465,8 +2482,8 @@ input.combo_price {
 
 #combo_comment_attributes_content {
   float: left;
-  width: 44%;
-  max-width: 44%;
+  width: 43%;
+  max-width: 43%;
   height: 7.3em;
   background-color: transparent;
   color: #20bdff;
@@ -2530,7 +2547,6 @@ input.combo_price {
   height: 97%;
   margin-left:1%;*/
   height: 100%;
-  min-width: 1400px;
  }
 
  .order_index .column {
@@ -2555,8 +2571,9 @@ input.combo_price {
  }
 
  .order_index .column.order_products {
-  width: 34.5%;
-  min-width: 423.3125px;
+  /*width: 34.5%;*/
+  /*min-width: 423.3125px;*/
+  width: 33%;
  }
 
 
@@ -2996,7 +3013,7 @@ form.edit_offer {
   color: white;
   background-color: #1e1e1e;
   margin-right: -3%;
-  width: 35%;
+  width: 36%;
   border: 0px solid #31353c;
   position: absolute;
   right: -36%;
@@ -3081,15 +3098,16 @@ li.order_product_info_tab {
 }
 
  .info_tab_button {
-  position: absolute;
-  right: 0%;
-  top: 2%;
+  position: initial;
+  float: right;
+  margin-top: -.3em;
+  margin-left: -2em;
   cursor: pointer;
 }
 
 .info_tab_button img {
   height: auto;
-  width: 50%;
+  width: 1.7em;
 }
 
 
@@ -3919,7 +3937,6 @@ input#user_detail_telephone {
 
 
 /*css spinner*/
-
 .loader {
   float: left;
   margin: 0;

@@ -9,7 +9,7 @@ var do_on_load = function() {
 	})
 	$(window).load(function(){
 		console.log('second')
-		$('.loading_screen').remove()
+		// $('.loading_screen').remove()
 		if ($('p.alert').text() == "") {
 			$('p.alert').css('display', "none")
 		};
@@ -41,3 +41,4 @@ var do_on_load = function() {
 
 $(document).ready(do_on_load)
 $(window).bind('page:change', do_on_load)
+;

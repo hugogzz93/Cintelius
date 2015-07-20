@@ -1,4 +1,4 @@
-::-webkit-scrollbar {
+::-webkit-scrollbar, ::scrollbar, ::-o-scrollbar {
   display: none !important;
  }
 
@@ -21,6 +21,8 @@ body {
 	width: 100%;
 	margin: 0px;
 	background-color: #345;
+  min-height: 765px !important;
+  min-width: 1200px !important;
 }
 
 p.alert {
@@ -425,6 +427,8 @@ cuando el mouse pase arriba*/
   margin-top: 10%;
 }
 
+/*unswerving tower*/
+
 .circle-1 {
   height: 120px;
   width: 120px;
@@ -495,20 +499,28 @@ cuando el mouse pase arriba*/
 }
 
 @keyframes spin {
-  from {
-    transform: rotate(0deg);
+  0% {
+    -webkit-transform: rotate(0deg) ;
+    -o-transform: rotate(0deg) ;
+    transform: rotate(0deg) ;
   }
-  to {
+  100% {
     transform: rotate(360deg);
+    -webkit-transform: rotate(360deg) ;
+    -o-transform: rotate(360deg) ;
   }
 }
 
 @-webkit-keyframes spin {
-  from {
-    transform: rotate(0deg);
+  0% {
+    -webkit-transform: rotate(0deg) ;
+    -o-transform: rotate(0deg) ;
+    transform: rotate(0deg) ;
   }
-  to {
+  100% {
     transform: rotate(360deg);
+    -webkit-transform: rotate(360) ;
+    -o-transform: rotate(360) ;
   }
 }
 

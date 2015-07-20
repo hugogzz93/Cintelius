@@ -25,6 +25,17 @@
 	$('.combo_list').append("<%= j render partial: 'combo_form.html.erb', locals: {f: combo} %>")
 	$('.combo_list').append("<div class='add_new_combo_button active'>Nuevo Paquete</div>")
 <% end %>
+
+
+// order_info
+<% if @order.comment %>
+	$('.order_comment_container').append('<div class="order_info_comment_header">Mensaje del comprador:</div>')
+	$('.order_comment_container').append('<%= j @order.comment.content %>')
+<% end %>
+
+// Se pueda acceder al tab de informacion con un boton
+$('#combos_header').append("<div class='info_tab_button'><%= j image_tag('icons/icon-info.png')%></div>")
+$('.info_tab_close_button').append("<%= j image_tag('icons/icon-x.png') %>")
 	
 
 
@@ -126,6 +137,14 @@ $('.add_new_combo_button').on('click', function(e) {
 	$(e.target).addClass('hidden')
 })
 
+// 
+$('.info_tab_button').on('click', function() {
+	$('.column.order_info').addClass('active')
+})
+
+$('.info_tab_close_button').on('click', function() {
+	$('.column.order_info').removeClass('active')
+})
 
 
 

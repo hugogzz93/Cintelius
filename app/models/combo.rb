@@ -54,8 +54,6 @@ class Combo < ActiveRecord::Base
 		history_object_hash = self.attributes
 		history_object_hash.delete("id")
 		history_object_hash.delete("order_id")
-		logger.info order_history_object.inspect
-		logger.info "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 		history_object_hash["order_history_id"] = order_history_object.id
 		combo_history_object = ComboHistory.create(history_object_hash)
 		self.combo_products.each do |combo_product|

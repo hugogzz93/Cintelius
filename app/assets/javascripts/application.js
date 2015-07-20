@@ -213,6 +213,8 @@ $(function() {
 	$('.order_box a').on('click', function() {
 		$('.new_offer .offer_list').empty()
 		$('.new_offer .combo_list').empty()
+		$('.column.order_info').removeClass('active')
+		$('.column.order_info').children().empty()
 	})
 
 	$('form .add_combo_field').on('click', function(e) {

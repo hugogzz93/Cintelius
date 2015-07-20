@@ -13997,9 +13997,15 @@ return $.datepicker;
 
 var do_on_load = function() { 
 	console.log('first')
+	$('form#new_user').on('keypress', function(e) {
+			console.log('keypress')
+			if(e.which == 13) {
+		        $('form.new_user').submit();
+		    }
+	})
 	$(window).load(function(){
 		console.log('second')
-		$('.loading_screen').remove()
+		// $('.loading_screen').remove()
 		if ($('p.alert').text() == "") {
 			$('p.alert').css('display', "none")
 		};
@@ -14026,11 +14032,7 @@ var do_on_load = function() {
 	})
 }
 
-$('form.new_user').on('keypress', function(e) {
-	if(e.which == 13) {
-        $('form.new_user').submit();
-    }
-})
+
 
 
 $(document).ready(do_on_load)

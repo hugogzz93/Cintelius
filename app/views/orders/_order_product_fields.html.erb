@@ -2,8 +2,10 @@
 <div class="product_box">
 	<%= f.label "Producto" %>
 	<%= f.text_area :product_id, style: "display: none;", class: "order_product_id_field" %>
-	<%= f.label :units,  "Kg" %>
-	<%= f.number_field :units, step: 0.1, min: 0.1, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
+	<div class="new_order_unit_field">
+		<%= f.label :units,  "Kg" %>
+		<%= f.number_field :units, step: 0.1, min: 0.1, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
+	</div>
 	<%= image_tag 'x-image.png', class: 'x-button' %>
 	<%= image_tag 'letter_orange.png', class: "letter_image_box" %>
 	<%= fields_for(:comment, comment_object, child_index: comment_object.object_id) do |comment|%>
