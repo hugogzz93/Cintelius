@@ -1,35 +1,37 @@
 <div class="new_offer">
 	<div class="column new_offer_orders">
-
 		<div class="column_header" id="orders_header">
 			Órdenes
 		</div>
 
 		<ul class="order_list">
 			<% @orders.each do |order|  %>
-			<% if order.has_selected_combo_from_user(current_user) %>
-				<li class="order_box has_selected"> 
-			<% else %>
-				<li class="order_box"> 
-			<% end %>
-					<%= image_tag("icons/icon-back-arrow.png", class: "return_arrow") %>
-					<% if order.due_date_past? %>
-						<% if order.is_locked? %>
-							<%= image_tag("icons/icon-checkmark.png") %>
-						<% elsif order.is_open?%>
-							<%= image_tag("icons/icon-eye.png") %>
-						<% end %>
+				<!-- verifica que la orden es relevante para el vendedor -->
+				<% unless !order.is_accepting_offers? and !order.has_combo_from_user(current_user) %>			
+					<% if order.has_selected_combo_from_user(current_user) %>
+						<li class="order_box has_selected"> 
 					<% else %>
-							<%= image_tag("icons/icon-clock.png") %>
+						<li class="order_box"> 
 					<% end %>
+						<%= image_tag("icons/icon-back-arrow.png", class: "return_arrow") %>
+						<% if order.due_date_past? %>
+							<% if order.is_locked? %>
+								<%= image_tag("icons/icon-checkmark.png") %>
+							<% elsif order.is_open?%>
+								<%= image_tag("icons/icon-eye.png") %>
+							<% end %>
+						<% else %>
+								<%= image_tag("icons/icon-clock.png") %>
+						<% end %>
 
-					<%= link_to(from_order_path(id: order.id), remote: true) do %>
-					  <%= order.user.user_detail.organization %>
-					  <div class="due_date_info">
-					  	<%= l order.due_date, format: :cust %>
-					  </div>
-					<% end %>
-				</li>			
+						<%= link_to(from_order_path(id: order.id), remote: true) do %>
+						  <%= order.user.user_detail.organization %>
+						  <div class="due_date_info">
+						  	<%= l order.due_date, format: :cust %>
+						  </div>
+						<% end %>
+					</li>
+				<% end %>
 			<% end %>
 		</ul>
 	</div>

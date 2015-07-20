@@ -31,6 +31,10 @@ class Order < ActiveRecord::Base
 		self.status == "open"
 	end
 
+	def is_accepting_offers?
+		self.is_open? and !self.due_date_past?
+	end
+
 	def is_closed?
 		self.status == "closed"
 	end
@@ -113,6 +117,10 @@ class Order < ActiveRecord::Base
 		end
        	self.comment.create_history_recursively(new_order_history)
 
+	end
+
+	def has_combo_from_user(user)
+		self.combos.where(user_id: user.id).any?
 	end
 
 	def has_selected_combo_from_user(user)

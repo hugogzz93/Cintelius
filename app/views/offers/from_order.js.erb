@@ -134,6 +134,7 @@ $('form .add_fields').on('click', function(e) {
 //se vuelve visible el formulario de combo
 $('.add_new_combo_button').on('click', function(e) {
 	$('#new_combo').addClass('active')
+	$('.combo_product_add_button').removeClass('disabled')
 	$(e.target).addClass('hidden')
 })
 
