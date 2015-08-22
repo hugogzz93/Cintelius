@@ -210,6 +210,10 @@ img.alert-icon {
   background-color: rgb(52, 152, 219);
 }
 
+.top-bar a:active {
+  background-color: #34db77;
+}
+
 a.choice {
 background-color: rgb(52, 152, 219);
 position: relative;
@@ -387,6 +391,7 @@ form.edit_combo {
 .combo_deselection_button img {
   height: auto;
   width: 35%;
+  cursor: pointer;
 }
 
 .combo_options_box {
@@ -691,7 +696,8 @@ height: 100%
   position: absolute;
   top: 10%;
   left: 32.5%;
-  width: 35%;
+  /*width: 35%;*/
+  width: 40%;
   cursor: initial;
 }
 
@@ -748,7 +754,7 @@ height: 100%
 #order_comment_attributes_content {
   max-width: 95%;
   width: 90%;
-  height: 5em;
+  height: 10em;
 }
 
 #order_title {
@@ -1010,6 +1016,16 @@ form#new_order .comment_field.editable {
   overflow: hidden;
 }
 
+.combo_unit_container {
+  overflow: auto;
+  float: right;
+}
+
+.combo_unitary_price_container {
+  overflow: auto;
+  float: right;
+}
+
 /*
 .offer_options_box:hover:after {
   position: absolute;
@@ -1108,7 +1124,8 @@ form#new_order .comment_field.editable {
 
 .combo_box .product_list_area {
   border: none;
-  width: 50%;
+  /*width: 50%;*/
+  width: 100%;
   float: left;
   overflow: auto;
 }
@@ -1122,8 +1139,8 @@ form#new_order .comment_field.editable {
 
 .combo_box .comment_box {
   float: left;
-  width: 45%;
-  max-width: 45%;
+  width: 90%;
+  max-width: 90%;
   height: 7.3em;
   background-color: transparent;
   color: #20bdff;
@@ -1238,6 +1255,15 @@ form#new_order .comment_field.editable {
 .combo_product_form_units {
   padding-top: 0.2em;
   overflow: auto;
+  width: 10em;
+  float: left;
+}
+
+.combo_product_form_price {
+  padding-top: 0.2em;
+  overflow: auto;
+  width: 14em;
+  float: left;
 }
 
 #new_combo .combo_product_name {
@@ -1292,20 +1318,41 @@ form#new_order .comment_field.editable {
 }*/
 
 .combo_box.ready {
-  background-color: white;
   color: black;
   border-left: 3px solid #cc686c;
 }
 
 .combo_box.locked {
-  background-color: white;
   color: black;
   border-left: 3px solid #EB9E4A;
 }
 
 .combo_box.received {
-  background-color: white;
   color: black;
+  border-left: 3px solid #39bf00;
+}
+
+.color_information_message {
+      padding: .4em 0em .4em 1em;
+    margin: .5em .5em .5em 0.5em;
+    color: white;
+    text-decoration: none;
+    border-radius: 0;
+    border: 1px solid rgba(0,0,0,.1);
+    font-size: 14px;
+    overflow: auto;
+    background-color: #232323;
+}
+
+.color_information_message.ready {
+  border-left: 3px solid #cc686c;
+}
+
+.color_information_message.locked {
+  border-left: 3px solid #EB9E4A;
+}
+
+.color_information_message.received {
   border-left: 3px solid #39bf00;
 }
 
@@ -1656,8 +1703,16 @@ textarea, input {outline: none;}
   overflow: auto;
 }
 
-.combo_box.ready {
-  background-color: white;
+.combo_box {
+  background-color: #FDFDFD;
+  color: black;
+  -webkit-transition: all 1s;
+  -o-transition: all 1s;
+  transition: all 1s;
+}
+
+.combo_box:hover {
+  background-color: #f8fdff;
   color: black;
 }
 
@@ -1680,7 +1735,8 @@ textarea, input {outline: none;}
 
 #new_combo .product_list_area {
   border: none;
-  width: 50%;
+  /*width: 50%;*/
+  width: 100%;
   float: left;
 }
 
@@ -1701,12 +1757,12 @@ textarea, input {outline: none;}
 }
 
 .order_index .combo_box .comment_box {
-  width: 44%;
+  width: 90%;
 }
 
 .order_index .product_list_area{
   border: none;
-  width: 50%;
+  width: 100%;
   float: left;
 }
 
@@ -1733,7 +1789,8 @@ textarea, input {outline: none;}
 .combo_product_box {
   padding: 1%;
   border: 1px solid #E5E5E5;
-  width: 45%;
+  /*width: 45%;*/
+  width: 90%;
   color: black;
   font-weight: 300;
   float: left;
@@ -1764,11 +1821,11 @@ button.combo_product_remove_button:active {
 }
 
 
-.combo_product_unit_field {
+.combo_product_unit_field, .combo_product_price_field {
   color: #20bdff;
   font-size: 0.9em;
   padding: 0;
-  width: 65%;
+  width: 5em;
   margin-left: 2%;
 }
 
@@ -1803,16 +1860,18 @@ input.combo_price {
   display: inline;
   float: left;
   height: 1em;
-  width: 50%;
+  /*width: 50%;*/
+  width: 15em;
   color: black;
   margin-left: 0.5em;
 }
 
 .combo_product_box .background_box {
-  width: 3em;
+  width: 5em;
   text-align: left;
   float: right;
   border-radius: 0px;
+  margin-left: 0.3em;
   color: #20bdff;
 }
 
@@ -1833,8 +1892,8 @@ input.combo_price {
 
 #combo_comment_attributes_content {
   float: left;
-  width: 43%;
-  max-width: 43%;
+  width: 90%;
+  max-width: 90%;
   height: 7.3em;
   background-color: transparent;
   color: #20bdff;
@@ -2116,6 +2175,20 @@ img.return_arrow {
 
 .order_offers .offer_product_box .seller_comment {
   display: block;
+}
+
+.order_warning_message {
+    position: relative;
+    padding: .4em 0em .4em 0em;
+    margin: .5em .5em .5em 0.5em;
+    background: #fdfdfd;
+    color: #444;
+    text-decoration: none;
+    border-radius: 0;
+    border: 1px solid rgba(0,0,0,.1);
+    font-size: 14px;
+    overflow: auto;
+    text-align: center;
 }
 
 .offer_selection_add_button {
@@ -2461,6 +2534,12 @@ li.order_product_info_tab {
   width: 1.7em;
 }
 
+.color_informatiion_message {
+    padding: .4em .8em .4em 0em;
+    margin: .54em .5em .5em .5em;
+    background: #fff;
+}
+
 
 .product_main_info{
   /*width: 100%;*/
@@ -2511,13 +2590,13 @@ li.order_product_info_tab {
   font-size: 0.8em;
   font-weight: 200;
   box-shadow: inset 1px 2px 6px 1px black;
-  max-height: 0px;
+  max-height: 500px;
   transition: max-height 0.3s ease-in-out;
 }
 
 .product_comment_container.active {
+  max-height: 0px;
   height: auto;
-  max-height: 500px;
   overflow-y: scroll;
   transition: max-height 0.3s ease-in-out;  
 }
@@ -2534,6 +2613,12 @@ li.order_product_info_tab {
 .product_quantity_container {
   float: right;
   padding-right: 6%;
+}
+
+.new_offer .product_quantity_container {
+  float: right;
+  padding-right: 6%;
+  display: none;
 }
 
 .order_title_container {
@@ -2785,17 +2870,30 @@ input#user_detail_telephone {
   }
 
   .content_body li.product_button {
-  display: none;
-  opacity: 0;
-  position: relative;
-  left: -100%;
-  transition: all 0.3s;
+    display: none;
+    opacity: 0;
+    position: relative;
+    left: -100%;
+    transition: all 0.3s;
   }
   
+
+  ul.user_product_category_list {
+    width: 100%;
+  }
+
+  .supercategory_label {
+    display: none;
+  }
+
+  .supercategory_label.active {
+    display: block;
+  }
 
   .product_label {
     display: none;
   }
+
   .product_label.active {
     position: relative;
     cursor: pointer;
@@ -3306,6 +3404,14 @@ input#user_detail_telephone {
   -webkit-animation: load8 1.1s infinite linear;
   animation: load8 1.1s infinite linear;
 }
+
+.top-bar .loader {
+  float: right;
+  position: relative;
+  right: 2%;
+  top: 15%;
+}
+
 .loader,
 .loader:after {
   border-radius: 50%;

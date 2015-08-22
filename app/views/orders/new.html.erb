@@ -76,8 +76,8 @@
 
 						<div class="order_date_field_container new_order_field">
 							<div class="new_order_date_field_explanation">
-								Escoge la fecha y hora limite para hacerte ofertas
-								<div class="new_order_field_information">*Recuerda que tu no podras ver las ofertas antes de la fecha limite.</div>
+								Fecha limite de cotizaciòn.
+								<div class="new_order_field_information">*Recuerda que tu no podras ver las ofertas antes de esta fecha.</div>
 							</div>
 							<div class="date_field_container">
 								<%= order.text_field "due_date", id: "datepicker", placeholder: "Fecha limite", required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)", readonly: true  %>
@@ -130,7 +130,7 @@ $.datepicker.regional['es'] = {clearText: 'Borrar', clearStatus: '',
      $.datepicker.setDefaults($.datepicker.regional['es']);
 // Seleccion fecha limite en nueva orden
 $(function() {
-    $('#datepicker').datepicker({dateFormat: 'yy-mm-dd', minDate: 1, maxDate: 10})
+    $('#datepicker').datepicker({dateFormat: 'yy-mm-dd', minDate: 0, maxDate: 10})
   });
 	
 </script>

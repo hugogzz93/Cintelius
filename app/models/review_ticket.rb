@@ -6,6 +6,7 @@ class ReviewTicket < ActiveRecord::Base
     message: "Ya puede hacer reseña sobre este producto para esta orden." }
 
     # crea un review ticket para el producto solo si no se ha hecho previamente
+    # llamado al terminar una orden
 	def self.create_ticket_for_product(order_history_id, reviewer_id, product_score_id, product_id)
 		# verifica que no exista otro review para ese producto de esa orden para ese proveedor
 		unless ReviewTicket.where(reviewable_type: "ProductScore", user_id: reviewer_id, order_history_id: order_history_id, reviewable_id: product_score_id).any?

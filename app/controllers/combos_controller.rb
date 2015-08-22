@@ -8,6 +8,8 @@ class CombosController < ApplicationController
 	def create
 		respond_to do |format| 
 			format.js {
+				logger.info "@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+				logger.info params.inspect
 				@combo = current_user.combos.build(combo_params)
 				@order = @combo.order
 				if @order.due_date > Time.now and @combo.save
@@ -38,6 +40,6 @@ class CombosController < ApplicationController
 
 	private
 		def combo_params
-			params.require(:combo).permit(:order_id, :price, combo_products_attributes: [:product_id, :units], comment_attributes:[:content])
+			params.require(:combo).permit(:order_id, :price, combo_products_attributes: [:product_id, :units, :unitary_price], comment_attributes:[:content])
 		end
 end

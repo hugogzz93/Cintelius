@@ -14005,7 +14005,7 @@ var do_on_load = function() {
 	})
 	$(window).load(function(){
 		console.log('second')
-		// $('.loading_screen').remove()
+		$('.loading_screen').remove()
 		if ($('p.alert').text() == "") {
 			$('p.alert').css('display', "none")
 		};
@@ -14835,6 +14835,11 @@ $(function() {
 	// 	console.log('added choice')
 	// })
 
+	$('.top-bar a').on('click', function(e) {
+		$('.top-bar .loader').removeClass('hidden')
+		console.log('loader revealed')
+	})
+
 
 
 	$('#new_order_form_continue_button').on('click', function(e) {
@@ -15021,6 +15026,9 @@ $(function() {
 	$('.order_box a').on('click', function() {
 		$('.new_offer .offer_list').empty()
 		$('.new_offer .combo_list').empty()
+		$('.column.order_info').removeClass('active')
+		$('.column.order_info').children().empty()
+		$('.order_product_info_container').append('<ul class="order_product_info_list"></ul>')
 	})
 
 	$('form .add_combo_field').on('click', function(e) {

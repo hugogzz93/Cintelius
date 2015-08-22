@@ -8,10 +8,21 @@
 				<div class="combo_product_name">
 					<%= combo_product.product.name %>
 				</div>
-				<div class="background_box">
-					<%= combo_product.units %>
+				
+				<div class="combo_unit_container">
+					<div class="background_box">
+						<%= combo_product.units %>
+					</div>
+					<span class="combo_product_unit_label">Kg:</span>
 				</div>
-				<span class="combo_product_unit_label">Kg:</span>
+
+				<div class="combo_unitary_price_container">
+					<div class="background_box">
+						<%= combo_product.unitary_price %>
+					</div>
+					<span class="combo_product_unit_label">Unitario <%= t "currency_code" %>:</span>
+				</div>
+
 			</li>
 		<% end %>
 	</ul>
@@ -33,5 +44,4 @@
 			</div>
 		</div>
 	</div>
-	
 </div>

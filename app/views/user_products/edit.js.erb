@@ -17,12 +17,15 @@ form_subheader = "<%= t 'selected' %>"
 $('.content_body').append("<%= escape_javascript(render partial: 'user_products_menu.html.erb', locals: {supercategories: @supercategories, subcategories: @subcategories, products: @products} ).html_safe%>")
 
 
-// activa los productos que ya estan en la lista
+// activa los productos que ya estan en la lista y sus categorias
 function activateProductsInList() {
-	console.log('activated')
 	for (var i = 0; i < $('input[type=checkbox][checked]').size(); i++) {
 		productId = $($('input[type=checkbox][checked]')[i]).attr('data-product-id')
+		categoryId = $($('input[type=checkbox][checked]')[i]).attr('data-supercategory-id')
+		// console.log(categoryId)
 		$('.product_button[data-product-id='+ productId + ']').addClass('active')
+		$('.supercategory_label[data-supercategory-id=' + categoryId + ']').addClass('active')
+
 	};	
 }
 
@@ -50,6 +53,9 @@ $('li.subcategory_button').on('click', function(e) {
 	$('li.product_button[data-subcategory-id=' + subcategory_id + ']').addClass('selected')
 })
 
+// activa las categorias que ya tienen productos selecionados
+
+
 // activa el checkbox cuando se hace click en el producto
 $('.product_button').on('click', function(e) {
 
@@ -72,14 +78,20 @@ $('.product_label').on('click', function(e) {
 
 
 function toggleProduct(mode, product_id) {
+	console.log("in")
 		if (mode == "select") {
 			$('.product_button[data-product-id=' + product_id + ']').addClass('active')
 			$('input[type=checkbox][data-product-id=' + product_id + ']').prop('checked', true);
-			$('.product_label[data-product-id=' + product_id + ']').addClass('active')
+			categoryId = $('.product_label[data-product-id=' + product_id + ']').addClass('active').attr('data-supercategory-id')
+			$('.supercategory_label[data-supercategory-id=' + categoryId + ']').addClass('active')
 		} else {
 			$('.product_button[data-product-id=' + product_id + ']').removeClass('active')
 			$('input[type=checkbox][data-product-id=' + product_id + ']').prop('checked', false);
-			$('.product_label[data-product-id=' + product_id + ']').removeClass('active')
+			categoryId = $('.product_label[data-product-id=' + product_id + ']').removeClass('active').attr('data-supercategory-id')
+			targetSupercategoryLabel = $('.supercategory_label[data-supercategory-id=' + categoryId + ']')
+			if ($('.user_product_category_list[data-supercategory-id= ' + categoryId +'] .product_label.active').size() < 1) {
+				targetSupercategoryLabel.removeClass('active')
+			};
 
 		};
 }

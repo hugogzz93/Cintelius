@@ -2,13 +2,20 @@
 // Este limpio la lista al cambiar de orden
 $('.provider_box').remove()
 $('.column.order_info').removeClass('active')
-$('.column.order_info').children().empty()
+cleanInfoTab()
 $('.order_product_info_container').append('<ul class="order_product_info_list"></ul>')
 $('.info_tab_button').remove()
 $('.confirmation_button').remove()
 $('.order_finish_button').remove()
 $('img.order_finish_image').remove()
 $('.loader').remove()
+
+// mensaje si todavia no ha pasado la fecha limite
+<% if !@order.due_date_past? %>
+	$('ul.offer_list').append("<div class='order_warning_message'>Podrás ver las cotizaciones después de la fecha límite de cotizacion. <br/> <%= j l @order.due_date.in_time_zone('America/Monterrey'), format: :cust %> </div>")
+<% elsif !@order.combos.any? and !@order.offers.any? %> // mensaje si no le mandaron ofertas
+	$('ul.offer_list').append("<div class='order_warning_message'>No recibiste ninguna cotizacion.  </div>")
+<% end %>
 
 // tab de informacion debe estar actualizado
 // <div class="order_title_container"></div>
@@ -30,8 +37,7 @@ $('.order_title_container').append('<%= j @order.title %>')
 		$('#selection_header').append("<%= j image_tag('icons/icon-style-checkmark-gray.png', class: 'confirmation_button', alt: t('confirm_selection') )%>")
 		$('.order_product_list').append("<%= j render partial: 'offer_selection_form.html.erb', locals: {f: @order}%>")
 	<% elsif @order.is_locked? %>
-	// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		$('#selection_header').append("<%= j image_tag('icons/icon-style-checkmark-gray.png', class: 'order_finish_image', alt: t('confirm_selection') )%>")
+		$('#selection_header').append("<%= j image_tag('icons/arrow_up.svg', class: 'order_finish_image', alt: t('confirm_selection') )%>")
 		$('#selection_header').append("<%= j link_to 'Terminar', order_path(@order), method: :delete, data: { confirm: 'Esto terminara su orden.' }, class: 'order_finish_button', remote: true %>")
 	<% end %>
 
@@ -211,6 +217,15 @@ $('.order_finish_button').on('click', function(e) {
 	$('img.order_finish_image').addClass('hidden')
 	$('.loader').removeClass('hidden')
 })
+
+// limpia la columna de informacion
+function cleanInfoTab() {
+	$('.info_tab_close_button').empty()
+	$('.order_title_container').empty()
+	$('.order_product_info_container').empty()
+	$('.order_comment_container').empty()
+	$('.order_date_container').empty()
+}
 
 
 

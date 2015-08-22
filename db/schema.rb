@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150719023843) do
+ActiveRecord::Schema.define(version: 20150804011316) do
 
   create_table "categories", force: true do |t|
     t.integer  "supercategory_id", limit: 4
@@ -37,14 +37,16 @@ ActiveRecord::Schema.define(version: 20150719023843) do
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
     t.integer  "product_id",       limit: 4
+    t.decimal  "unitary_price",              precision: 7, scale: 2, null: false
   end
 
   create_table "combo_products", force: true do |t|
-    t.integer  "combo_id",   limit: 4
-    t.decimal  "units",                precision: 7, scale: 2, null: false
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
-    t.integer  "product_id", limit: 4
+    t.integer  "combo_id",      limit: 4
+    t.decimal  "units",                   precision: 7, scale: 2, null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.integer  "product_id",    limit: 4
+    t.decimal  "unitary_price",           precision: 7, scale: 2, null: false
   end
 
   add_index "combo_products", ["product_id"], name: "index_combo_products_on_product_id", using: :btree

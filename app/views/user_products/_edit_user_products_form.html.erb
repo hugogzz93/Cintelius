@@ -1,19 +1,29 @@
 <!-- recibe: user_product_ids y la lista de categorias, subcategorias y productos-->
 <%= form_tag user_product_path, method: "patch", class: "user_products_form", remote: true do %>
 	<ul class="user_selected_products_list">
-		<% products.each do |product| %>
-				<% if user_product_ids.include?(product.id) %>
-					<div class="product_label active" data-product-id="<%= product.id %>">
-						<%= product.name %>
-					</div>
-					<%= check_box_tag "products[]", product.id, true, 
-					data: {product_id: product.id} %>
-				<% else %>
-					<div class="product_label" data-product-id="<%= product.id %>">
-						<%= product.name %>
-					</div>
-					<%= check_box_tag "products[]", product.id, false, data: {product_id: product.id} %>
+		<% @supercategories.each do |supercategory| %>
+			<ul class="user_product_category_list" data-supercategory-id="<%= supercategory.id %>">
+				<div class="supercategory_label" data-supercategory-id="<%= supercategory.id %>">
+					<%= supercategory.name %>
+				</div>
+				<%  supercategory.subcategories.each do |subcategory| %>
+					<% subcategory.products.each do |product| %>
+							<!-- hace positivos los checkboxes que de productos que ya esten seleccionados -->
+							<% if user_product_ids.include?(product.id) %>
+								<div class="product_label active" data-product-id="<%= product.id %>" data-supercategory-id="<%= supercategory.id %>">
+									<%= product.name %>
+								</div>
+								<%= check_box_tag "products[]", product.id, true, 
+								data: {product_id: product.id, supercategory_id: supercategory.id} %>
+							<% else %>
+								<div class="product_label" data-product-id="<%= product.id %>" data-supercategory-id="<%= supercategory.id %>">
+									<%= product.name %>
+								</div>
+								<%= check_box_tag "products[]", product.id, false, data: {product_id: product.id, supercategory_id: supercategory.id} %>
+							<% end %>
+					<% end %>
 				<% end %>
+			</ul>
 		<% end %>	
 	</ul>
 

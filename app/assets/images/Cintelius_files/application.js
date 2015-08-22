@@ -10,12 +10,12 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery.turbolinks
-//= require jquery_ujs
-//= require jquery-ui/datepicker
-//= require turbolinks
-//= require_tree .
+
+
+
+
+
+
 
 
 // var do_on_load = function() { 
@@ -26,11 +26,6 @@ $(function() {
 	// 	$(e.target).addClass('choice')
 	// 	console.log('added choice')
 	// })
-
-	$('.top-bar a').on('click', function(e) {
-		$('.top-bar .loader').removeClass('hidden')
-		console.log('loader revealed')
-	})
 
 
 
@@ -214,21 +209,12 @@ $(function() {
 
 	// @NEWOFFER
 
-	// limpia la columna de informacion
-	function cleanInfoTab() {
-		$('.info_tab_close_button').empty()
-		$('.order_title_container').empty()
-		$('.order_product_info_container').empty()
-		$('.order_comment_container').empty()
-		$('.order_date_container').empty()
-	}
-
 	// Limpia las listas despues de cada ajax
 	$('.order_box a').on('click', function() {
 		$('.new_offer .offer_list').empty()
 		$('.new_offer .combo_list').empty()
 		$('.column.order_info').removeClass('active')
-		cleanInfoTab()
+		$('.column.order_info').children().empty()
 		$('.order_product_info_container').append('<ul class="order_product_info_list"></ul>')
 	})
 
@@ -282,3 +268,4 @@ function setChosenLink(link) {
 
 
 
+;

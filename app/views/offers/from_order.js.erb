@@ -24,14 +24,16 @@
 <% if !@order.due_date_past? and @order.is_open? %>
 	<% combo = @order.combos.create %>
 	$('.combo_list').append("<%= j render partial: 'combo_form.html.erb', locals: {f: combo} %>")
-	$('.combo_list').append("<div class='add_new_combo_button active'>Nuevo Paquete</div>")
+	$('.combo_list').append("<div class='add_new_combo_button active'>Nueva Cotización</div>")
 <% end %>
 
 
 // order_info
 
 <% @order.order_products.each do |order_product| %>
-	$('.order_product_info_list').append("<%= j render partial: '/orders/tab_product_info.html.erb', locals: {f: order_product}%>") // actualizar el tab	
+	<% if @authorized_products.include?(order_product.product_id) %>
+		$('.order_product_info_list').append("<%= j render partial: '/orders/tab_product_info.html.erb', locals: {f: order_product}%>") // actualizar el tab	
+	<% end %>
 <% end %>
 
 <% if @order.comment %>
@@ -57,10 +59,12 @@ $('.combo_product_add_button').on('click', function(e) {
 		$(e.target).addClass('disabled')
 		productName = $(e.target).attr('data-product-name')
 		productUnits = $(e.target).attr('data-product-units')
-		console.log($(e.target))
-		console.log(productName)
+		productId = $(e.target).attr('data-product-id')
 		$('.combo_product_box').last().children('.combo_product_name').text(productName)
-		$($('.combo_product_unit_field').last()).val(productUnits)
+		$('.combo_product_price_field').last().attr('data-product-id', productId)
+		$('.combo_product_price_field').last().attr('data-previous-value', '0')
+		$($('.combo_product_unit_field').last()).val(productUnits).attr('data-product-id', productId)
+
 
 		// Para que se eliminen los campos si se desea remover el producto
 		$('button.combo_product_remove_button').on('click', function(e){
@@ -75,6 +79,10 @@ $('.combo_product_add_button').on('click', function(e) {
 				$('#new_combo_submit_button').prop('disabled', true)
 			};
 		})
+
+		// actualiza el precio total cuando se actualiza el individual
+		bindUnitaryPriceToTotal()
+
 
 		// quita las instrucciones cuando se seleccionan productos, tambien habilida el boton de submit
 		if ($('.combo_product_form').size() > 0) {
@@ -91,6 +99,11 @@ $('#new_combo').on('submit', function() {
 	$('#new_combo_submit_button').prop('disabled', false)
 })
 
+
+// actualiza el precio total del combo
+$('.combo_product_price_field').on('change', function(e) {
+
+})
 
 
 
@@ -162,6 +175,39 @@ $('.info_tab_button').on('click', function() {
 $('.info_tab_close_button').on('click', function() {
 	$('.column.order_info').removeClass('active')
 })
+
+// modifica el valor del campo precio total de acuerdo a los productos que tiene
+function bindUnitaryPriceToTotal() {
+
+	$('.combo_product_remove_button:last').on('click', function(e) {
+		productId = $(e.target).attr('data-product-id')
+		unitPrice = $('.combo_product_price_field[data-product-id=' + productId +']').attr('data-previous-value')
+
+		comboPrice = $('#combo_price').val()
+		newComboPrice = parseFloat(unitPrice.toFixed(2)) + parseFloat(comboPrice)
+		$('#combo_price').val(parseFloat(newComboPrice).toFixed(2))
+	})
+
+	// actualiza en cambio al precio unitario
+	$('.combo_product_price_field:last').on('keyup', function(e) {
+		productId = $(e.target).attr('data-product-id')
+		units = $('.combo_product_unit_field[data-product-id=' + productId +']').val()
+		newUnitPrice = parseFloat($(e.target).val()) * parseFloat(units)
+
+		if (isNaN(newUnitPrice)) {
+			newUnitPrice = 0
+		};
+
+		difference = newUnitPrice - $(e.target).attr('data-previous-value')
+		$(e.target).attr('data-previous-value', newUnitPrice)
+		comboPrice = $('#combo_price').val()
+		newComboPrice = parseFloat(difference.toFixed(2)) + parseFloat(comboPrice)
+		$('#combo_price').val(parseFloat(newComboPrice).toFixed(2))
+		console.log('changed')
+	})
+}
+
+
 
 
 
