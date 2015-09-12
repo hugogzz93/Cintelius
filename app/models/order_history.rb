@@ -79,22 +79,22 @@ class OrderHistory < ActiveRecord::Base
 
 	# clasifica todas las ofertas de productos individuales por producto
 	# y toda las ofertas de varios productos por proveedor
-	def categorize_combos
+	def table_format
 		single_product_hash = Hash.new { |h, k| h[k] = [] } # la llave es el producto y el valor es una lista de ofertas
 		multi_product_hash = Hash.new { |q, w| q[w] = Hash.new { |e, r| e[r] = Hash.new  } }
-		# { |q, w| q[w] = Hash.new { |e, r| e[r] = Hash.new { |t, y| t[y] = Hash.new} } }
-		 # {|q, w| q[w] = Hash.new{ |e, r| e[r] = Hash.new { |t, y| t[y] = [] } }}  
+
 		single_product, multi_product = self.get_combos_divided_by_quantity
 		single_product.each do |single_combo| 
 			product_id = single_combo.combo_product_histories.first.product_id
 			single_product_hash[product_id] << single_combo
 		end
+
+		# provider > combo id > product id
 		multi_product.each do |multi_combo|
 			provider_id = multi_combo.user_id
 			multi_combo.combo_product_histories.each do |combo_product|
 				multi_product_hash[provider_id][multi_combo.id][combo_product.product_id] = combo_product
 			end
-
 		end
 
 		return single_product_hash, multi_product_hash

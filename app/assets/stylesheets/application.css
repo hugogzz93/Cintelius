@@ -3468,11 +3468,11 @@ input#user_detail_telephone {
         margin-left: 10em;
     }
 
-    .group_headers_container {
+    /*.group_headers_container {
         overflow: auto;
         display: block;
         width: 100em;
-    }
+    }*/
 
     .group_combos_container {
         display: block;
@@ -3493,51 +3493,51 @@ input#user_detail_telephone {
       box-sizing: border-box;
     }
 
-    .combo_history {
+    /*.combo_history {
       display: block;
       clear: both;
-    }
+    }*/
 
     .group_offers .combo_product_history {
       float: left;
     }
 
-    ul.combo_products_history {
+    /*ul.combo_products_history {
         display: block;
         overflow: auto;
         width: 100em;
-    }
+    }*/
 
-    .combo_products_history_window {
+    /*.combo_products_history_window {
       width: 39.6em;
       overflow-x: hidden;
       display: block;
-    }
+    }*/
 
-    .product_history_header_window {
+    /*.product_history_header_window {
       width: 39.6em;
       overflow-x: hidden; 
       display: block;
-    }
+    }*/
 
     /*.combo_products_history_window {
         overflow-x: hidden;
     }*/
 
-    .product_history_header_list {
+    /*.product_history_header_list {
         width: 100em;
-    }
+    }*/
 
     .combo_user {
         display: block;
         overflow: hidden;
-        float: left;
+        /*float: left;*/
         width: 100px;
         font-size: 10px;
         white-space: nowrap;
         text-overflow: ellipsis;
-        margin-left: -110px;
-        margin-right: 10px;
+        /*margin-left: -110px;*/
+        /*margin-right: 10px;*/
         height: 3em;
         padding-top: 1.7em;
     }
@@ -3569,12 +3569,12 @@ input#user_detail_telephone {
     .combo_total_price {
       display: block;
       overflow: hidden;
-      float: right;
+      /*float: right;*/
       width: 100px;
       font-size: 10px;
       height: 3em;
-      margin-right: -15em;
-      margin-top: -4.5em;
+      /*margin-right: -15em;*/
+      /*margin-top: -4.5em;*/
   }
 
   /*}*/
