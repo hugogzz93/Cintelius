@@ -1,0 +1,126 @@
+<!-- llamado por show.js de order_history, recibe single_combos, multi_combos y product_name_hash -->
+
+<div class="order_history_products_block">
+	<div class="individual_offers">
+		<% if single_combos.any? %>
+			<div class="individual_offers_container">
+				<% product_name_hash.each do |id, name|  %>
+					<ul class="combo_product_history_list" data-product-id="<%= id %>">
+						<li class="product_history_list_header">
+							<div> <%= name %> </div>
+						</li>
+						
+						<% single_combos[id].each do |single_combo| %>
+						<% combo_product_history = single_combo.combo_product_histories.first %>
+							<li class="combo_product_history  <%= combo_product_history.parent_combo_status %>" 
+							data-price=" <%= combo_product_history.unitary_price.to_f %> " data-product-id="<%= id %>", data-combo-history-id="<%= combo_product_history.id %>">
+								<div class="product_history_provider">
+									<%= combo_product_history.combo_history.order_history.user.get_organization %>
+								</div>
+
+								<div class="first_row">
+									<span class="product_history_price">
+										$ <%= combo_product_history.unitary_price.to_f %>
+									</span>
+
+									<span class="product_history_difference">
+										<span class="difference_percentage"></span>
+										<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+
+											 width="200" height="200" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve" class="percentage_arrow" data-product-id="<%= id %>">
+
+											<polygon class="percentage_arrow_polygon" points="0,0 200,100, 0, 200"/>
+										</svg>
+									</span>
+								</div>
+
+								<div class="second_row">
+									<span class="product_history_units">
+										Kg: <%= combo_product_history.units.to_f %>
+									</span>
+
+									<span class="product_history_product_score">
+										<%= image_tag "icons/star.svg", class: "score_star_svg"  %>
+									</span>
+								</div>
+							</li>
+						<% end %>
+						<li class="product_average_container">
+							<span class="product_average"></span>
+						</li>
+					</ul>
+				<% end %>
+			</div>
+		<% else %>
+			<div class="no_single_offers_message">
+				No recibio ofertas individuales en esta orden.
+			</div>
+		<% end %>
+	</div>
+	
+	<div class="individual_offers_step_button">
+		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+
+			 width="200" height="200" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve" class="step_button">
+
+			<polygon class="step_arrow" points="0,0 200,100, 0, 200"/>
+		</svg>
+	</div>
+
+	<div class="group_offers">
+		<div class="group_headers_container">
+			<div class="product_history_header_window">
+				<div class="product_history_header_list">
+					<% @product_name_hash.each do |product_id, product_name| %>
+					<div class="product_history_list_header" data-product-id=" <%= product_id %> ">
+								<%= product_name %>
+							</div>
+					<% end %>
+				</div>
+			</div>
+
+			<div class="group_offers_step_button">
+				<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+
+					 width="200" height="200" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve" class="step_button">
+
+					<polygon class="step_arrow" points="0,0 200,100, 0, 200"/>
+				</svg>
+			</div>
+		</div>
+			
+		<% multi_combos.each do |user_id, x, y|  %>
+
+					<% multi_combos[user_id].each do |combo_history_id, z|  %>
+						<div class="combo_history">
+							<div class="combo_user">
+								<%= User.find(user_id).get_organization %>
+							</div>
+								<div class="combo_products_history_window">
+									<ul class="combo_products_history" data-combo-history-id=" <%= combo_history_id %> ">
+										<% product_name_hash.each do |product_id, product_name| %>					
+												<% if combo_product_history = multi_combos[user_id][combo_history_id][product_id] %>
+													<li class="combo_product_history" data-product-id=" <%= product_id %> ">
+														<div class="first_row">
+															<span>$<%= combo_product_history.unitary_price.to_f %></span>
+														</div>
+														<div class="second_row">
+															<span>Kg:<%= combo_product_history.units.to_f %></span>
+														</div>
+													</li>
+												<% else %>
+													<li class="combo_product_history empty" data=product-id=" <%= product_id %> ">
+													</li>
+												<% end %>
+										<% end %>
+									</ul>
+								</div>
+							<div class="combo_total_price">
+								<div> <%= t "total" %>: </div>
+								$<%= ComboHistory.find(combo_history_id).price %>
+							</div>
+						</div>
+					<% end %>
+		<% end %>
+	</div>
+</div>

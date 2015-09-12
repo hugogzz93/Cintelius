@@ -20,6 +20,15 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  average_abv: "Avg"
+  creation_date: "Date"
+  title: "Title"
+  total_cost: "Total cost"
+  total: "Total"
+  month: "Month"
+  months: "Months"
+  quantity: "Quantity"
+  orders: "Orders"
   loading: "Loading..."
   hello: "Hello world"
   log_in: 'Log In'
@@ -42,3 +51,19 @@ en:
     failure:
       user:
         unauthenticated: 'Wrong username or password'
+
+  month_names:
+      January:   "January"
+      February:  "February"
+      March:     "March"
+      April:     "April"
+      May:       "May"
+      June:      "June"
+      July:      "July"
+      August:    "Agugust"
+      September: "September"
+      October:   "October"
+      November:  "November"
+      December:  "December"
+
+      

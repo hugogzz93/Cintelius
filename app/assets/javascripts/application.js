@@ -57,7 +57,6 @@ $(function() {
 		$('.content_body').empty()
 		$('.loading_animation_screen').addClass('active')
 		$('.loading_animation').addClass('active')
-		console.log('clicked')
 	})
 
 
@@ -142,7 +141,6 @@ $(function() {
 
 	// Click agrega el nombre al product_box o destruye la caja si ya esta seleccionado el prod
 	$('.products button').on('click', function(e) {
-		console.log('clicked')
 		if ($(e.target).hasClass('selected_product')) {
 			$('.product_box:contains('+ $(e.target).text() +')').remove();
 			$(e.target).removeClass('selected_product')

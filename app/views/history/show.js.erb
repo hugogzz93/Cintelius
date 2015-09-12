@@ -1,12 +1,19 @@
-	$('.content_body').empty()
-	$('.content_body').append('<div class="fade_layer"></div>')
-	$('.content_body').append('<div class="order_history_container"></div>')
-<% @order_histories.each do |oh| %>
-	$('.content_body').append('<%= escape_javascript(render partial: "link_to_order_history.html.erb", locals: {order_history: oh}) %>')
-<% end %>
+$('.content_body').empty()
+$('.content_body').append('<div class="order_history_layer"></div>')
+$('.order_history_layer').append('<%= escape_javascript(render partial: "history_index.html.erb", locals: {order_histories: @order_histories})%>')
+
 
 $('.loading_animation').removeClass('active')
 $('.loading_animation_screen').removeClass('active')
 
+// muestra las ordenes del mes
+$('.month_table_row').on('click', function(e) {
+	$month_number = $(e.target).attr('data-month')
+	displayOrdersOfMonth($month_number);
+})
 
 
+function displayOrdersOfMonth(month_number) {
+	$('.order_history_link').removeClass('revealed');
+	$('.order_history_link[data-month-number=' + month_number + ']').addClass('revealed');
+}

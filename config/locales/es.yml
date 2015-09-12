@@ -1,4 +1,13 @@
 es:
+  average_abv: "Prom"
+  creation_date: "Fecha"
+  title: "Titulo"
+  total_cost: "Costo Total"
+  total: "Total"
+  month: "Mes"
+  months: "Meses"
+  quantity: "Cantidad"
+  orders: "Ordenes"
   loading: "Cargando..."
   products: "Productos"
   selected: "Seleccionados"
@@ -23,6 +32,18 @@ es:
         unauthenticated: 'Usuario o clave incorrecta'
         not_found_in_database: 'Usuario o clave incorrecta'
   log_in: 'Iniciar Sesion'
+  January:   "Enero"
+  February:  "Febrero"
+  March:     "Marzo"
+  April:     "Abril"
+  May:       "Mayo"
+  June:      "Junio"
+  July:      "Julio"
+  August:    "Agosto"
+  September: "Septiembre"
+  October:   "Octubre"
+  November:  "Noviembre"
+  December:  "Diciembre"
   date:
     abbr_day_names:
     - dom
@@ -72,6 +93,7 @@ es:
     - Octubre
     - Noviembre
     - Diciembre
+
     order:
     - :day
     - :month
@@ -226,4 +248,5 @@ es:
       long: "%A, %d de %B de %Y a las %I:%M %p"
       short: "%d de %b a las %H:%M hrs"
       cust: "%A, %d %B  %H:%M"
+      cust_monthless: "%A %d, %H:%M"
     pm: pm

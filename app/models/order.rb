@@ -40,7 +40,6 @@ class Order < ActiveRecord::Base
 	end
 
 
-
 	def self.lock(order_id, offer_ids, combo_ids)
 		Offer.lock_set(offer_ids)
 		Combo.lock_set(combo_ids)
@@ -99,6 +98,14 @@ class Order < ActiveRecord::Base
 		self.combos.each do |combo|
 			combo.update(status: 0)
 		end
+	end
+
+	def total_cost
+		total = 0
+		self.combos.each do |combo|
+			total += combo.price
+		end
+		return total.to_f
 	end
 
 	def create_history_recursively

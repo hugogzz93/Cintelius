@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
 
+# postgres
+gem 'pg'
+    gem 'rails_12factor'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0.beta2'
 # Use sqlite3 as the database for Active Record
@@ -31,8 +34,8 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 group :production do
-	gem 'pg'
-  	gem 'rails_12factor'
+
+  
 end
 gem 'foundation-rails'
 gem 'binding_of_caller'
@@ -54,7 +57,6 @@ group :development, :test do
   # Call 'debugger' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem "better_errors"
-  gem 'mysql2'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0.0.beta4'

@@ -24,14 +24,15 @@ class OrderHistory < ActiveRecord::Base
 
 	enum status: [:open, :locked, :closed]
 
-	def due_date_past?
-		# if due_date <= Time.now
-		# 	self.update(status: "choosing_offers")
-		# 	return true
-		# else
-		# 	return false
-		# end
+	def total_cost
+		total = 0
+		self.combo_histories.each do |combo_history|
+			total += combo_history.price
+		end
+		return total.to_f
+	end
 
+	def due_date_past?
 		self.due_date <= Time.now
 	end
 
@@ -45,6 +46,72 @@ class OrderHistory < ActiveRecord::Base
 
 	def is_closed?
 		self.status == "closed"
+	end
+
+
+	# divide en combos con uno o muchos productos
+	def get_combos_divided_by_quantity
+		single_product = Array.new
+		multi_product = Array.new
+
+		combo_histories = self.combo_histories.includes(:combo_product_histories, :comment_history)
+
+		self.combo_histories.each do |combo_history|
+			if combo_history.combo_product_histories.size > 1
+				multi_product << combo_history 
+			else
+				single_product << combo_history 
+			end
+		end
+		return single_product, multi_product
+	end
+
+	# regresa un hash ligando los nombres de productos con sus ids
+	def get_product_name_hash
+		product_id_name_hash = Hash.new
+		self.order_product_histories.each do |order_product_history| 
+			product_id = order_product_history.product.id
+			product_name = order_product_history.product.name
+			product_id_name_hash[product_id] = product_name
+		end
+		return product_id_name_hash
+	end
+
+	# clasifica todas las ofertas de productos individuales por producto
+	# y toda las ofertas de varios productos por proveedor
+	def categorize_combos
+		single_product_hash = Hash.new { |h, k| h[k] = [] } # la llave es el producto y el valor es una lista de ofertas
+		multi_product_hash = Hash.new { |q, w| q[w] = Hash.new { |e, r| e[r] = Hash.new  } }
+		# { |q, w| q[w] = Hash.new { |e, r| e[r] = Hash.new { |t, y| t[y] = Hash.new} } }
+		 # {|q, w| q[w] = Hash.new{ |e, r| e[r] = Hash.new { |t, y| t[y] = [] } }}  
+		single_product, multi_product = self.get_combos_divided_by_quantity
+		single_product.each do |single_combo| 
+			product_id = single_combo.combo_product_histories.first.product_id
+			single_product_hash[product_id] << single_combo
+		end
+		multi_product.each do |multi_combo|
+			provider_id = multi_combo.user_id
+			multi_combo.combo_product_histories.each do |combo_product|
+				multi_product_hash[provider_id][multi_combo.id][combo_product.product_id] = combo_product
+			end
+
+		end
+
+		return single_product_hash, multi_product_hash
+	end
+
+
+	# regresa un hash donde se clasifican los historiales de ordenes por mes (order history controller)
+	def self.get_order_histories_hash(year, user_id)
+		order_histories = Hash.new()
+		for i in 1..Time.now.month
+			# busca ordenes creadas en el mes # i
+			earliest = Time.new(Time.now.year, i) 
+			latest = earliest.end_of_month 
+
+			order_histories[i] = OrderHistory.where(user_id: user_id, created_at: (earliest..latest))
+		end
+		return order_histories
 	end
 
 	# regresa un hash donde cada proveedor tiene un arreglo de ofertas

@@ -9,6 +9,8 @@ NEWOFFER
 	>Agregar producto
 	>Mandar Oferta
 	-Boton de agregar producto de la oferta en la nueva caja no se deshabilita si ya esta agregado el producto.
+
+	se pueden pedir productos con dos decimales, pero las ofertas no aceptan esa cantidad de precicision.
 	
 
 SHOW
@@ -39,3 +41,6 @@ sign up
 REvIEWS
 	elegir el service score sin elegir los products scores, hace que a la siguiente
 	los products scores on salgan, porque los products scores se determinan en un for loop adentro del loop para service scores
+
+Historial
+	que los cuadros del segundo bloque se centren si hay pocos productos.

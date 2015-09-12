@@ -17,12 +17,6 @@ $('.loader').remove()
 	$('ul.offer_list').append("<div class='order_warning_message'>No recibiste ninguna cotizacion.  </div>")
 <% end %>
 
-// tab de informacion debe estar actualizado
-// <div class="order_title_container"></div>
-// 		<div class="order_product_info_container"></div>
-// 		<div class="order_comment_container"></div>
-// 		<div class="order_date_container"></div>
-
 $('.order_title_container').append('<%= j @order.title %>')
 <% if @order.comment %>
 	$('.order_comment_container').append('<div class="order_info_comment_header">Tu Mensaje:</div>')
@@ -44,11 +38,6 @@ $('.order_title_container').append('<%= j @order.title %>')
 	<% @providers.each do |provider| %>
 		$('.orders .provider_list').append("<%= j render partial: 'provider_box.html.erb', locals: {provider: provider}%>")
 	<% end %>
-
-	// # <% @order.offers.each do |offer| %>
-		// $('.offer_list').append("<%= j render partial: 'buyer_offer_status_form.html.erb', locals: {f: offer}%>")
-		// $('.order_product_list').prepend("<%= j render partial: 'selected_offer_box.html.erb', locals: {f: offer}%>")
-	// # <% end %>
 
 	// agrega combos
 	<% @order.combos.each do |combo| %>
@@ -119,7 +108,6 @@ $('.order_index .combo_box').on('click', function(e) {
 })
 
 $('.combo_selection_button').on('click', function(e) {
-	console.log('clicked')
 	$(e.target).attr('type', 'button').prop('disabled', true).addClass('active')
 	idToCheck = $(e.target).attr('data-combo-id')
 	$('.combo_deselection_button[data-combo-id=' + idToCheck + ']').prop('disabled', false)
