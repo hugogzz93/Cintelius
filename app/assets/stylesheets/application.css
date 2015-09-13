@@ -3359,13 +3359,6 @@ input#user_detail_telephone {
     float: left;
   }
 
-  svg.step_button {
-    height: 1.5em;
-    width: 1.5em;
-    margin: 1em;
-    cursor: pointer;
-  }
-
   polygon.step_arrow {
     fill: #f78793;
     stroke: #F6F6F6;
@@ -3385,6 +3378,10 @@ input#user_detail_telephone {
     margin-left: 0;
     font-size: 0.8em;
     padding: 0.2em;
+    -webkit-box-sizing: initial;
+    -moz-box-sizing: initial;
+    box-sizing: initial;
+
   }
 
   .product_history_list_header {
@@ -3460,13 +3457,56 @@ input#user_detail_telephone {
   /* } */
 
   /* multiple offers{*/
+
+    /*.visible {*/
+      /*display: initial;*/
+    /*}*/
+
+    .hidden {
+      display: none;
+    }
     .group_offers {
         display: block;
         clear: both;
-        width: 39.8em;
+        /*width: 39.8em;*/
         margin: 5em;
-        margin-left: 10em;
+        margin-right: 0em;
+        overflow: auto;
+        /*margin-left: 10em;*/
     }
+
+    .left_side_bar {
+      width: 8em;
+      float: left;
+    }
+
+    .left_side_bar svg.step_button {
+      cursor: default;
+      float: right;
+    }
+
+    .right_side_bar svg.step_button {
+      cursor: default;
+      float: left;
+    }
+
+    .step_arrow {
+      cursor: pointer;
+    }
+
+    .step_arrow[steps="0"] {
+      cursor: default; 
+      opacity: 0.2;
+    }
+
+    svg.step_button {
+    height: 1.5em;
+    width: 1.5em;
+    margin: 1em;
+    margin-bottom: 0.57em;
+    margin-top: 0.3em;
+    cursor: pointer;
+}
 
     /*.group_headers_container {
         overflow: auto;
@@ -3480,7 +3520,24 @@ input#user_detail_telephone {
         width: 100em;
     }
 
-    .group_offers .product_history_list_header {
+    /*.group_offers .product_history_list_header {
+      border: 1px solid black;
+      width: 9.5em;
+      margin: 0.4em;
+      margin-left: 0;
+      font-size: 0.8em;
+      padding: 0.2em;
+      float: left;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }*/
+
+    .product_header_list {
+      overflow: auto;
+    }
+
+    .group_offers .product_header {
       border: 1px solid black;
       width: 9.5em;
       margin: 0.4em;
@@ -3500,6 +3557,26 @@ input#user_detail_telephone {
 
     .group_offers .combo_product_history {
       float: left;
+    }
+
+    .combo_product_history_list {
+      overflow: auto;
+    }
+
+    .left_side_bar {
+        width: 8em;
+        float: left;
+    }
+
+    .multiple_order_history_window {
+        overflow: auto;
+        float: left;
+        width: 40em;
+    }
+
+    .right_side_bar {
+        width: 8em;
+        float: left;
     }
 
     /*ul.combo_products_history {
@@ -3542,8 +3619,37 @@ input#user_detail_telephone {
         padding-top: 1.7em;
     }
 
-    li.combo_product_history {
+    .combo_product_history {
       border: 1px solid black;
+      /* height: 3.3em; */
+      width: 9.5em;
+      margin: 0.4em;
+      margin-left: 0;
+      margin-bottom: 0;
+      font-size: 0.8em;
+      padding: 0.2em;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    .organization_block {
+      border: 1px solid black;
+      /* height: 3.3em; */
+      width: 9.5em;
+      margin: 0.4em;
+      margin-left: 0;
+      font-size: 0.8em;
+      padding: 0.2em;
+      clear: both;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    .combo_history_total {
+      border: 1px solid black;
+      clear: both;
       /* height: 3.3em; */
       width: 9.5em;
       margin: 0.4em;
