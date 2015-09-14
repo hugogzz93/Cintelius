@@ -3266,7 +3266,7 @@ input#user_detail_telephone {
   }
 
   .order_info_header_link div {
-      margin-left: 20%;
+      margin-left: 25%;
       width: 50%;
       height: 1em;
       text-align: center;
@@ -3352,11 +3352,15 @@ input#user_detail_telephone {
 
   .individual_offers {
     display: block;
-    margin-left: 10em;
+    margin-left: 20%;
     margin-bottom: 2em;
     overflow-x: hidden;
     width: 39.5em;
     float: left;
+  }
+  
+  .individual_offers_step_button svg.step_button {
+    margin-top: 1em !important;
   }
 
   polygon.step_arrow {
@@ -3500,13 +3504,13 @@ input#user_detail_telephone {
     }
 
     svg.step_button {
-    height: 1.5em;
-    width: 1.5em;
-    margin: 1em;
-    margin-bottom: 0.57em;
-    margin-top: 0.3em;
-    cursor: pointer;
-}
+      height: 1.5em;
+      width: 1.5em;
+      margin: 1em;
+      margin-bottom: 0.57em;
+      margin-top: 0.3em;
+      cursor: pointer;
+    }
 
     /*.group_headers_container {
         overflow: auto;
@@ -3633,8 +3637,11 @@ input#user_detail_telephone {
       box-sizing: border-box;
     }
 
+    .combo_history_total, .organization_block {
+      color: rgba(0,0,0,0.6);
+    }
+
     .organization_block {
-      border: 1px solid black;
       /* height: 3.3em; */
       width: 9.5em;
       margin: 0.4em;
@@ -3645,6 +3652,28 @@ input#user_detail_telephone {
       -webkit-box-sizing: border-box;
       -moz-box-sizing: border-box;
       box-sizing: border-box;
+    }
+
+    .organization_block[data-combo-status="received"] {
+      border-right: 2px solid #46b98a;
+      background-color: rgba(70,185,138, 0.1);
+    }
+
+    .combo_product_history_list[data-combo-status="received"] .combo_product_history {
+        border: none;
+        color: rgba(70,185,138, 0.9);
+        background-color: rgba(70,185,138, 0.2);
+    }
+
+    .organization_block[data-combo-status='ready'] {
+      border-right: 2px solid rgba(0,0,0, 0.5);
+      background-color: rgba(207,207,207,0.1);
+    }
+
+    .combo_product_history_list[data-combo-status="ready"] .combo_product_history {
+        border: none;
+        color: rgba(207, 207, 207, 0.9);
+        background-color: rgba(207,207,207,0.2);
     }
 
     .combo_history_total {

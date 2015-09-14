@@ -14,10 +14,10 @@ test:
   username: hugo
   password: ''
 
-# production:
-#   adapter: postgresql
-#   host: localhost
-#   username: user
-#   database: app-dev
+production:
+  adapter: postgresql
+  host: localhost
+  username: user
+  database: app-dev
 
 

@@ -17,6 +17,7 @@ function getAverage() {
 			++quantity
 		})
 		average = sum/quantity
+		if (isNaN(average)) { average = " -"};
 		average_message = " <%= t 'average_abv' %>: $" + average
 		$(value).children('.product_average_container').text(average_message);
 
@@ -111,7 +112,7 @@ $.ajax({
 
 			// organization
 			organization = multiple_offer_combo.organization;
-			organization_div = "<div class='organization_block'>" + organization + "</div>";
+			organization_div = "<div class='organization_block' data-combo-status='" + multiple_offer_combo.combo_history.status+ "'>" + organization + "</div>";
 			$('.left_side_bar').append(organization_div)
 
 			// combo_history
@@ -120,7 +121,7 @@ $.ajax({
 
 
 			combo_history_list = "<div class='combo_product_history_list' data-combo-history-id='" + 
-										multiple_offer_combo.combo_history.id + "'>"
+										multiple_offer_combo.combo_history.id + "' data-combo-status='" + multiple_offer_combo.combo_history.status + "'>"
 
 			// esqueleto para cada producto
 			block_group = 1;
@@ -150,7 +151,7 @@ $.ajax({
 			};
 
 			// combo_history_total
-			combo_history_total = "<div class='combo_history_total'>Total:<br/>$" + multiple_offer_combo.combo_history.price + "</div>"
+			combo_history_total = "<div class='combo_history_total' data-combo-status='" + multiple_offer_combo.combo_history.status + "'>Total:<br/>$" + multiple_offer_combo.combo_history.price + "</div>"
 			$('.right_side_bar').append(combo_history_total)
 
 			// cantidad de movimientos para las flechas
