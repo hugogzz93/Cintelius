@@ -10,5 +10,6 @@ json.multiple_offer_combos @multi_combos do |combo|
 	json.combo_history combo, *combo.attributes.keys
 	json.combo_product_histories combo.combo_product_histories do |product_history|
 		json.combo_product_history product_history, *product_history.attributes.keys
+		json.product_id product_history.product.id
 	end
 end

@@ -44,6 +44,11 @@
 // Se pueda acceder al tab de informacion con un boton
 $('#combos_header').append("<div class='info_tab_button'><%= j image_tag('icons/icon-info.png')%></div>")
 $('.info_tab_close_button').append("<%= j image_tag('icons/icon-x.png') %>")
+$('.order_user_info_container').empty()
+$('.order_user_info_container').append('<span>Datos del comprador</span></br>')
+$('.order_user_info_container').append('<span> Correo: </span><%= j @order.user.email %> <br/>')
+$('.order_user_info_container').append('<span> Telefono: </span><%= j @order.user.user_detail.telephone.to_s %><br>')
+$('.order_user_info_container').append('<span> Direccion: </span><%= j @order.user.user_detail.address %> <br>')
 	
 
 

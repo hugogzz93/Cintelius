@@ -1,3 +1,4 @@
+
 $('.content_body').empty()
 $('.content_body').append('<div class="order_history_layer"></div>')
 $('.order_history_layer').append('<%= escape_javascript(render partial: "history_index.html.erb", locals: {order_histories: @order_histories})%>')

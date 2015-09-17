@@ -2,6 +2,8 @@
 $('.order_info_block_body').empty()
 $('.order_info_block_body').append(" <%= escape_javascript(render partial: 'order_history_products_block.html.erb', locals: { single_combos: @single_combos, multi_combos: @multi_combos, product_name_hash: @product_name_hash}).html_safe %> ")
 
+product_graph_data = [];
+
 
 // encuentra el promedio de cada producto para ofertas individuales
 function getAverage() {
@@ -22,7 +24,6 @@ function getAverage() {
 		$(value).children('.product_average_container').text(average_message);
 
 		// indica la divergencia del promedio para cada producto
-		console.log(children_array);
 		setAvgArrows(children_array, average);
 
 
@@ -86,7 +87,47 @@ $.ajax({
 	type: "GET",
 	success: function(jsonData) {
 
-		// product headers
+		// creaciion de cuadros para comparar combos
+		setUpOrderDetails(jsonData);
+
+		// creacion de las graficas
+		product_graph_data = getProductArray(jsonData);
+		setUpCostGraph(product_graph_data);
+		setUpUnitGraph(product_graph_data);
+
+
+		
+	},
+	fail: function(errorMsg) {
+
+	}
+})
+
+$('.step_button.left .step_arrow').on('click', function(e) {
+	steps = $(e.target).attr('steps')
+	if ( steps > 0) {
+		$(e.target).attr('steps', --steps)
+		rSteps = $('.step_button.right .step_arrow').attr('steps')
+		$('.step_button.right .step_arrow').attr('steps', ++rSteps)
+		stepIndividualOffers("left")
+	};
+})
+
+$('.step_button.right .step_arrow').on('click', function(e) {
+	steps = $(e.target).attr('steps')
+	if ( steps > 0) {
+		$(e.target).attr('steps', --steps)
+		lSteps = $('.step_button.left .step_arrow').attr('steps')
+		$('.step_button.left .step_arrow').attr('steps', ++lSteps)
+		stepIndividualOffers("right")
+	};
+})
+
+
+
+function setUpOrderDetails(jsonData) {
+
+	// product headers
 		var product_headers = "";
 		var block_group = 1;
 
@@ -105,6 +146,7 @@ $.ajax({
 		$(".product_header_list").append(product_headers);
 
 
+
 		// 
 
 		for (var i = 0; i < jsonData.multiple_offer_combos.length; i++) {
@@ -114,10 +156,6 @@ $.ajax({
 			organization = multiple_offer_combo.organization;
 			organization_div = "<div class='organization_block' data-combo-status='" + multiple_offer_combo.combo_history.status+ "'>" + organization + "</div>";
 			$('.left_side_bar').append(organization_div)
-
-			// combo_history
-			// combo_history = multiple_offer_combo.combo_history
-
 
 
 			combo_history_list = "<div class='combo_product_history_list' data-combo-history-id='" + 
@@ -164,32 +202,257 @@ $.ajax({
 			$('.combo_history_total').css('height', combo_product_history_height)
 			$('.group_offers .combo_product_history_list').css('min-height', $('.group_offers .combo_product_history:not("empty")').outerHeight(true))
 		};
-	},
-	fail: function(errorMsg) {
 
-	}
-})
+}
 
-$('.step_button.left .step_arrow').on('click', function(e) {
-	steps = $(e.target).attr('steps')
-	if ( steps > 0) {
-		$(e.target).attr('steps', --steps)
-		rSteps = $('.step_button.right .step_arrow').attr('steps')
-		$('.step_button.right .step_arrow').attr('steps', ++rSteps)
-		stepIndividualOffers("left")
+
+function getProductArray(jsonData) {
+	var product_array = [];
+	for (var i = 0; i < jsonData.products.length; i++) {
+			product_id = jsonData.products[i].id
+			product_name = jsonData.products[i].name
+			total_quantity = 0;
+			total_cost = 0;
+				
+			for (var x = 0; x < jsonData.multiple_offer_combos.length; x++) {
+				combo = jsonData.multiple_offer_combos[x];
+		
+				if (combo.combo_history.status == "received"
+					|| combo.combo_history.status == "selected") {
+					for (var y = 0; y < combo.combo_product_histories.length; y++) {
+						if (combo.combo_product_histories[y].combo_product_history.product_id == product_id) {
+							total_quantity += parseInt(combo.combo_product_histories[y].combo_product_history.units)
+							total_cost += parseInt(combo.combo_product_histories[y].combo_product_history.unitary_price)
+						};
+					};
+				}
+			};
+			product_array.push({
+				product_id: product_id,
+				product_name: product_name,
+				total_quantity: total_quantity,
+				total_cost: total_cost
+			});
 	};
-})
+	return product_array
+}
 
-$('.step_button.right .step_arrow').on('click', function(e) {
-	steps = $(e.target).attr('steps')
-	if ( steps > 0) {
-		$(e.target).attr('steps', --steps)
-		lSteps = $('.step_button.left .step_arrow').attr('steps')
-		$('.step_button.left .step_arrow').attr('steps', ++lSteps)
-		stepIndividualOffers("right")
-		console.log("test")
-	};
-})
+function setUpCostGraph(product_graph_data) {
+	$('.order_history_graphs_block').append('<h2>Costo total por producto</h2>')
+	var canvasWidth = 500;
+	var canvasHeight = 250;
+	var xPadding = 50;
+	var yPadding = 100;
+	var height = canvasHeight - yPadding;
+	var width = canvasWidth - xPadding;
+
+	
+	var columnPadding = 1;
+	// var max_column_width = 40;
 
 
+	max_cost = d3.max(product_graph_data.map(function(d) {return d.total_cost}));
+
+	var costLinearScale = d3.scale.linear()
+								.domain([0, max_cost])
+								.range([1, height]);
+
+    var yAxisScale = d3.scale.linear()
+    							.domain([ max_cost, 0])
+								.range([1, height]);
+    
+	var xAxisScale = d3.scale.ordinal()
+					    .domain(product_graph_data.map(function(d) {return d.product_name}))
+					    .rangeRoundBands([0, width], .1);
+
+	var xAxis = d3.svg.axis()
+					    .scale(xAxisScale)
+					    .orient("bottom");					    
+
+	var yAxis = d3.svg.axis()
+						.scale(yAxisScale)
+						.orient('left')
+						.innerTickSize([width])
+						.outerTickSize([10])
+
+
+    var colorScale = d3.scale.linear()
+    							.domain([0, max_cost/2, max_cost])
+    							.range(['red', 'blue', 'green'])
+
+
+
+    var product_quantity_graph = d3.select('.order_history_graphs_block').append('svg')
+    															.attr('width', canvasWidth)
+    															.attr('height', canvasHeight)
+    var y_axis = product_quantity_graph.append('g')
+									.attr('class', 'y Axis')
+									.attr('transform', 'translate(' + canvasWidth + ')')
+    								.call(yAxis)
+
+    product_quantity_graph.append("g")
+							    .attr("class", "x Axis")
+							    .attr('transform', 'translate(' + xPadding + ', ' + height + ')')
+							    .call(xAxis)
+							    .selectAll("text")  
+						            .style("text-anchor", "end")
+						            .attr("dx", "-.8em")
+						            .attr("dy", ".15em")
+						            .attr("transform", "rotate(-75)" );
+
+
+    var column_group = product_quantity_graph.append('g')
+    											.attr('class', 'column_group')
+    											.attr('transform', 'translate(' + xPadding + ')');
+
+
+
+    var columns = column_group.selectAll('rect')
+    											.data(product_graph_data)
+    											.enter()
+    											.append('rect')
+    											
+
+    var columnAttributes = columns
+    						// .attr('width', function() {return d3.min([width / product_graph_data.length - columnPadding, max_column_width])	;})
+    						.attr('width', function(d) {return xAxisScale.rangeBand()})
+    						.attr('height', function(d) {return costLinearScale(d.total_cost); })
+    						// .attr('x', function(d, i) {return  i * ( width / product_graph_data.length);  } )
+    						.attr('x', function(d) {return xAxisScale(d.product_name)})
+    						.attr('y', function(d) {return height - costLinearScale(d.total_cost); })
+    						.attr('fill', function(d) {return colorScale(d.total_cost);} )
+
+    // var text = product_quantity_graph.selectAll('text')
+    // 					.data(product_graph_data)
+    // 					.enter()
+				// 	    .append('text')
+    // 					.attr('x', function(d) {return xAxisScale(d.product_name)})
+    // 					.attr('y', function(d) {return height - costLinearScale(d.total_cost);})
+    // 					.text(function(d) {return d.total_cost})
+    
+    
+}
+
+
+function setUpUnitGraph(product_graph_data) {
+
+	// Titulo
+	$('.order_history_graphs_block').append('<h2>Cantidad por producto</h2>')
+	var canvasWidth = 500;
+	var canvasHeight = 250;
+	var xPadding = 50;
+	var yPadding = 100;
+	var height = canvasHeight - yPadding;
+	var width = canvasWidth - xPadding;
+
+	
+	var columnPadding = 1;
+	// var max_column_width = 40;
+
+
+	max_units = d3.max(product_graph_data.map(function(d) {return d.total_quantity}));
+
+	var costLinearScale = d3.scale.linear()
+								.domain([0, max_units])
+								.range([1, height]);
+
+    var yAxisScale = d3.scale.linear()
+    							.domain([ max_units, 0])
+								.range([1, height]);
+    
+	var xAxisScale = d3.scale.ordinal()
+					    .domain(product_graph_data.map(function(d) {return d.product_name}))
+					    .rangeRoundBands([0, width], .1);
+
+	var xAxis = d3.svg.axis()
+					    .scale(xAxisScale)
+					    .orient("bottom");					    
+
+	var yAxis = d3.svg.axis()
+						.scale(yAxisScale)
+						.orient('left')
+						.innerTickSize([width])
+						.outerTickSize([10])
+
+
+    var colorScale = d3.scale.linear()
+    							.domain([0, max_units/2, max_units])
+    							.range(['red', 'blue', 'green'])
+
+
+
+    var product_unit_graph = d3.select('.order_history_graphs_block').append('svg')
+    															.attr('width', canvasWidth)
+    															.attr('height', canvasHeight)
+    															.append('g')
+    															.attr('transform', 'translate(0, 5)')
+    var y_axis = product_unit_graph.append('g')
+									.attr('class', 'y Axis')
+									.attr('transform', 'translate(' + canvasWidth + ')')
+    								.call(yAxis)
+
+    product_unit_graph.append("g")
+							    .attr("class", "x Axis")
+							    .attr('transform', 'translate(' + xPadding + ', ' + height + ')')
+							    .call(xAxis)
+							    .selectAll("text")  
+						            .style("text-anchor", "end")
+						            .attr("dx", "-.8em")
+						            .attr("dy", ".15em")
+						            .attr("transform", "rotate(-75)" );
+
+
+    var column_group = product_unit_graph.append('g')
+    											.attr('class', 'column_group')
+    											.attr('transform', 'translate(' + xPadding + ')');
+
+
+
+    var columns = column_group.selectAll('rect')
+    											.data(product_graph_data)
+    											.enter()
+    											.append('rect')
+    											
+
+    var columnAttributes = columns
+    						// .attr('width', function() {return d3.min([width / product_graph_data.length - columnPadding, max_column_width])	;})
+    						.attr('width', function(d) {return xAxisScale.rangeBand()})
+    						.attr('height', function(d) {return costLinearScale(d.total_quantity); })
+    						// .attr('x', function(d, i) {return  i * ( width / product_graph_data.length);  } )
+    						.attr('x', function(d) {return xAxisScale(d.product_name)})
+    						.attr('y', function(d) {return height - costLinearScale(d.total_quantity); })
+    						.attr('fill', function(d) {return colorScale(d.total_quantity);} )
+
+    // var text = product_unit_graph.selectAll('text')
+    // 					.data(product_graph_data)
+    // 					.enter()
+				// 	    .append('text')
+    // 					.attr('x', function(d) {return xAxisScale(d.product_name)})
+    // 					.attr('y', function(d) {return height - costLinearScale(d.units);})
+    // 					.text(function(d) {return d.units})
+}
+
+function mockGraph() {
+
+	var data = [10, 20, 30 , 50]
+
+	var canvas = d3.select('.order_history_graphs_block')
+					.append('svg')
+					.attr('width',  100)
+					.attr('height', 100)
+
+    var columns = canvas.selectAll('rectangle')
+    			   .data(data)
+    			   .enter()
+    			   .append('rect')
+
+    var columnAttributes = columns
+    					   .attr('height', function(d) {return d})
+    					   .attr('width', 20)
+    					   .attr('fill', 'red')
+    					   .attr('y', function(d, i) {return i * 10} )
+
+}
+
+// mockGraph();
 

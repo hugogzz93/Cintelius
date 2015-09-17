@@ -15,7 +15,7 @@
 							<li class="combo_product_history  <%= combo_product_history.parent_combo_status %>" 
 							data-price=" <%= combo_product_history.unitary_price.to_f %> " data-product-id="<%= id %>", data-combo-history-id="<%= combo_product_history.id %>">
 								<div class="product_history_provider">
-									<%= combo_product_history.combo_history.order_history.user.get_organization %>
+									<%= combo_product_history.combo_history.user.get_organization %>
 								</div>
 
 								<div class="first_row">
@@ -109,4 +109,8 @@
 
 		
 	</div>
+</div>
+
+<div class="order_history_graphs_block">
+	
 </div>

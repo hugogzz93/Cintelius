@@ -21,7 +21,10 @@ $('.order_title_container').append('<%= j @order.title %>')
 <% if @order.comment %>
 	$('.order_comment_container').append('<div class="order_info_comment_header">Tu Mensaje:</div>')
 	$('.order_comment_container').append('<%= j @order.comment.content %>')
+	// telefono, email, direccion
+
 <% end %>
+
 
 
 

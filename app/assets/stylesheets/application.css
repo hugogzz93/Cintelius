@@ -2494,7 +2494,7 @@ form.edit_offer {
   -webkit-animation: slide-out-order-info 0.5s ease 1;
 }
 
-.order_comment_container {
+.order_comment_container, .order_user_info_container {
   position: relative;
   display: block;
   padding: .4em .8em .4em 2em;
@@ -3713,6 +3713,49 @@ input#user_detail_telephone {
   }
 
   /*}*/
+
+  /* graph_block */
+
+  .order_history_graphs_block svg, .order_history_graphs_block h2 {
+    margin: 0% 20%;
+  }
+
+  .order_history_graphs_block h2 {
+    font-weight: 400;
+    color: #454E59;
+  }
+
+  .Axis line, .xAxis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+  }
+
+  .Axis path {
+    display: none;
+  }
+
+  .y.Axis line {
+    stroke: rgba(0, 0, 0, 0.2);
+    stroke-dasharray: 1;
+  }
+
+
+
+  .Axis text {
+    fill: rgba(0, 0, 0, 0.6);
+    font-size: 11px;
+    font-family: helvetica;
+}
+
+  /*.grid .tick {
+    stroke: lightgrey;
+    opacity: 0.7;
+  }
+  .grid path {
+        stroke-width: 0;
+  }*/
+  /* end graph_block*/
 /*}*/
 
   .status_locked {
