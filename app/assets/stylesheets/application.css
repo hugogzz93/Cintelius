@@ -3245,7 +3245,7 @@ input#user_detail_telephone {
 
   /*segundo bloque { */
 
-  .order_history_products_block {
+  .order_history_block {
     padding-top: 3em;
   }
 
@@ -3274,12 +3274,24 @@ input#user_detail_telephone {
       top: 0.3em;
   }
 
-  .order_info_header_link span {
+  .order_history_header_button {
     font-weight: 200;
     display: block;
     background-color: white;
     text-align: center;
     padding: 0em 0.5em;
+    cursor: pointer;
+    -webkit-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    transition: all 0.2s;
+  }
+
+  .order_history_header_button.active {
+    color: #20bdff;
+  }
+
+  .order_history_header_button:hover {
+    color: #20bdff;
   }
 
   span.comparation_button {
@@ -3300,6 +3312,8 @@ input#user_detail_telephone {
     float: left;
     width: initial;
     color: white;
+    border-right: 1px solid #e5e5e5;
+    margin-left: 5px;
   }
 
   .combo_product_history span {
@@ -3716,14 +3730,17 @@ input#user_detail_telephone {
 
   /* graph_block */
 
-  .order_history_graphs_block svg, .order_history_graphs_block h2 {
-    margin: 0% 20%;
+  .order_history_graphs_block svg{
+    margin: 0% auto;
+    display: block;
   }
 
-  .order_history_graphs_block h2 {
+  .order_history_graphs_block .graph_label {
     font-weight: 400;
     color: #454E59;
-  }
+    font-size: small;
+    text-align: center;
+}
 
   .Axis line, .xAxis line {
     fill: none;

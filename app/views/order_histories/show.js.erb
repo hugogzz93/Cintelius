@@ -1,6 +1,8 @@
 // agrega informacion a la segunda parte del historial
 $('.order_info_block_body').empty()
 $('.order_info_block_body').append(" <%= escape_javascript(render partial: 'order_history_products_block.html.erb', locals: { single_combos: @single_combos, multi_combos: @multi_combos, product_name_hash: @product_name_hash}).html_safe %> ")
+$('.order_history_header_button.active').removeClass('active');
+$('.order_history_header_button:first').addClass('active');
 
 product_graph_data = [];
 
@@ -238,7 +240,7 @@ function getProductArray(jsonData) {
 }
 
 function setUpCostGraph(product_graph_data) {
-	$('.order_history_graphs_block').append('<h2>Costo total por producto</h2>')
+	$('.order_history_graphs_block').append('<div class="graph_label">Gasto total por producto</div>')
 	var canvasWidth = 500;
 	var canvasHeight = 250;
 	var xPadding = 50;
@@ -337,7 +339,7 @@ function setUpCostGraph(product_graph_data) {
 function setUpUnitGraph(product_graph_data) {
 
 	// Titulo
-	$('.order_history_graphs_block').append('<h2>Cantidad por producto</h2>')
+	$('.order_history_graphs_block').append('<div class="graph_label">Cantidad por producto</div>')
 	var canvasWidth = 500;
 	var canvasHeight = 250;
 	var xPadding = 50;
