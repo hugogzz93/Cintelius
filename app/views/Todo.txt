@@ -44,3 +44,7 @@ REvIEWS
 
 Historial
 	que los cuadros del segundo bloque se centren si hay pocos productos.
+
+
+Recent Orders
+	Si se escoge un producto no se actualiza el boton dentro de ordenes recientes.

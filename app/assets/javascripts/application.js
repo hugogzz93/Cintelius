@@ -37,7 +37,7 @@ $(function() {
 		productId = $(e.target).attr('data-order-product-id')
 		units = $(e.target).attr('data-order-product-units')
 		$('.order_product_history[data-order-product-id=' + productId + ']').toggleClass('active')
-		$('button[data-product-id=' + productId + ']').click();
+		$('button[data-product-id=' + productId + ']').click();	
 		$('.product_box[data-product-id=' + productId + '] input[type=number]').val(units)
 	})
 

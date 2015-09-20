@@ -19,9 +19,10 @@ function displayOrdersOfMonth(month_number) {
 	$('.order_history_link[data-month-number=' + month_number + ']').addClass('revealed');
 }
 
-// $('.order_history_header_button').on('click', function(e) {
-	// clicked_button = $(e.target);
-	// if(clicked_button.hasClass("comparation_button")) {
-		// a
-	// }
-// })
+$('.order_history_header_button').on('click', function(e) {
+	data_index_block = $(e.target).attr('data-index-block')
+	$('.order_history_header_button.active').removeClass('active')
+	$(e.target).addClass('active')
+	$('.order_history_block').addClass('hidden');
+	$('.order_history_block[data-index-block=' + data_index_block + ']').removeClass('hidden');
+})
