@@ -5,7 +5,6 @@ json.products @product_name_hash do |id, product_name|
     json.name product_name
 end
 
-
 json.single_offer_combos @single_combos do |combo|
 	json.organization combo.user.get_organization
 	json.combo_history combo, *combo.attributes.keys

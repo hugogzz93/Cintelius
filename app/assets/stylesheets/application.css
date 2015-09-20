@@ -3527,11 +3527,17 @@ input#user_detail_telephone {
 
   .individual_offers {
     display: block;
-    margin-left: 20%;
+    /*margin-left: 20%;*/
     margin-bottom: 2em;
-    overflow-x: hidden;
-    width: 39.5em;
+    /* overflow-x: hidden; */
+    width: 41em;
     float: left;
+  }
+
+  .individual_offers_step_button.left {
+      margin-left: 15%;
+      transform: rotate(180deg);
+      float: left;
   }
   
   .individual_offers_step_button svg.step_button {

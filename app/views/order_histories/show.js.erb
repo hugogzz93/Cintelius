@@ -21,6 +21,7 @@ function getAverage() {
 			++quantity
 		})
 		average = sum/quantity
+		average = Math.round(average).toFixed(2);
 		if (isNaN(average)) { average = " -"};
 		average_message = " <%= t 'average_abv' %>: $" + average
 		$(value).children('.product_average_container').text(average_message);
@@ -50,8 +51,26 @@ function setAvgArrows(array, average) {
 }
 
 getAverage()
+console.log('))')
 
-function stepIndividualOffers(direction) {
+function stepSingleOffers(direction) {
+	active_block = $('.individual_offers_container').attr('data-active-block')
+	console.log("hello")
+	if (direction == "left") {
+
+		$('.individual_offers_container').attr('data-active-block', parseInt(active_block) - 1)
+		$('.combo_product_history_list[data-block-group=' + active_block + ']').addClass('hidden')
+		active_block--
+		$('.combo_product_history_list[data-block-group=' + active_block + ']').removeClass('hidden')
+	}else if(direction == "right") {
+		$('.individual_offers_container').attr('data-active-block', parseInt(active_block) + 1)
+		$('.combo_product_history_list[data-block-group=' + active_block + ']').addClass('hidden')
+		active_block++
+		$('.combo_product_history_list[data-block-group=' + active_block + ']').removeClass('hidden')
+	};
+}
+
+function stepMultiOffers(direction) {
 	// left or right	
 	if (direction == "left") {
 		active_block = $('.multiple_order_history_window').attr('data-active-block')
@@ -75,9 +94,6 @@ function stepIndividualOffers(direction) {
 
 	};
 }
-
-
-
 
 
 // cantidad de bloques que caben a la vez en la tabla del historial
@@ -105,27 +121,45 @@ $.ajax({
 	}
 })
 
-$('.step_button.left .step_arrow').on('click', function(e) {
+$('.group_offers .step_button.left .step_arrow').on('click', function(e) {
 	steps = $(e.target).attr('steps')
 	if ( steps > 0) {
 		$(e.target).attr('steps', --steps)
-		rSteps = $('.step_button.right .step_arrow').attr('steps')
-		$('.step_button.right .step_arrow').attr('steps', ++rSteps)
-		stepIndividualOffers("left")
+		rSteps = $('.group_offers .step_button.right .step_arrow').attr('steps')
+		$('.group_offers .step_button.right .step_arrow').attr('steps', ++rSteps)
+		stepMultiOffers("left")
 	};
 })
 
-$('.step_button.right .step_arrow').on('click', function(e) {
+$('.group_offers  .step_button.right .step_arrow').on('click', function(e) {
 	steps = $(e.target).attr('steps')
 	if ( steps > 0) {
 		$(e.target).attr('steps', --steps)
-		lSteps = $('.step_button.left .step_arrow').attr('steps')
-		$('.step_button.left .step_arrow').attr('steps', ++lSteps)
-		stepIndividualOffers("right")
+		lSteps = $('.group_offers .step_button.left .step_arrow').attr('steps')
+		$('.group_offers .step_button.left .step_arrow').attr('steps', ++lSteps)
+		stepMultiOffers("right")
 	};
 })
 
+$('.individual_offers_step_button.left .step_arrow').on('click', function(e) {
+	steps = $(e.target).attr('steps')
+	if ( steps > 0) {
+		$(e.target).attr('steps', --steps)
+		rSteps = $('.individual_offers_step_button.right .step_arrow').attr('steps')
+		$('.individual_offers_step_button.right .step_arrow').attr('steps', ++rSteps)
+		stepSingleOffers("left")
+	};
+})
 
+$('.individual_offers_step_button.right .step_arrow').on('click', function(e) {
+	steps = $(e.target).attr('steps')
+	if ( steps > 0) {
+		$(e.target).attr('steps', --steps)
+		lSteps = $('.individual_offers_step_button.left .step_arrow').attr('steps')
+		$('.individual_offers_step_button.left .step_arrow').attr('steps', ++lSteps)
+		stepSingleOffers("right")
+	};
+})
 
 function setUpOrderDetails(jsonData) {
 
@@ -197,6 +231,9 @@ function setUpOrderDetails(jsonData) {
 			// cantidad de movimientos para las flechas
 			$('.step_button.left .step_arrow').attr('steps', 0);
 			$('.step_button.right .step_arrow').attr('steps', Math.floor( jsonData.products.length / groupOfferScreenAmount))
+
+			// step button de single offer
+			// $('.step_arrow')
 			$('[data-block-group="1"]').removeClass('hidden')
 
 			combo_product_history_height = $('.group_offers .combo_product_history:not("empty")').outerHeight()
@@ -204,7 +241,6 @@ function setUpOrderDetails(jsonData) {
 			$('.combo_history_total').css('height', combo_product_history_height)
 			$('.group_offers .combo_product_history_list').css('min-height', $('.group_offers .combo_product_history:not("empty")').outerHeight(true))
 		};
-
 }
 
 
@@ -227,6 +263,16 @@ function getProductArray(jsonData) {
 							total_cost += parseInt(combo.combo_product_histories[y].combo_product_history.unitary_price)
 						};
 					};
+				}
+			};
+			for (var x = 0; x < jsonData.single_offer_combos.length; x++) {
+				combo = jsonData.single_offer_combos[x]
+				if (combo.combo_history.status == "received"
+					|| combo.combo_history.status == "selected") {
+						if (combo.combo_product_history.product_id == product_id) {
+							total_quantity += parseInt(combo.combo_product_history.units)
+							total_cost += parseInt(combo.combo_product_history.unitary_price)
+						};
 				}
 			};
 			product_array.push({
@@ -323,18 +369,7 @@ function setUpCostGraph(product_graph_data) {
     						.attr('x', function(d) {return xAxisScale(d.product_name)})
     						.attr('y', function(d) {return height - costLinearScale(d.total_cost); })
     						.attr('fill', function(d) {return colorScale(d.total_cost);} )
-
-    // var text = product_quantity_graph.selectAll('text')
-    // 					.data(product_graph_data)
-    // 					.enter()
-				// 	    .append('text')
-    // 					.attr('x', function(d) {return xAxisScale(d.product_name)})
-    // 					.attr('y', function(d) {return height - costLinearScale(d.total_cost);})
-    // 					.text(function(d) {return d.total_cost})
-    
-    
 }
-
 
 function setUpUnitGraph(product_graph_data) {
 
@@ -434,27 +469,18 @@ function setUpUnitGraph(product_graph_data) {
     // 					.text(function(d) {return d.units})
 }
 
-function mockGraph() {
+function assignBlockIds() {
+	blockSize = 5;
+	block_group = 1;
+	$('.individual_offers_container').attr('data-active-block', block_group)
+	$('.combo_product_history_list[data-block-group=' + block_group + ']').removeClass('hidden')
+	offer_lists = $('.combo_product_history_list')
+	for (var i = 0; i < offer_lists.length; i++) {
+		$(offer_lists[i]).attr('data-block-group', block_group);
 
-	var data = [10, 20, 30 , 50]
-
-	var canvas = d3.select('.order_history_graphs_block')
-					.append('svg')
-					.attr('width',  100)
-					.attr('height', 100)
-
-    var columns = canvas.selectAll('rectangle')
-    			   .data(data)
-    			   .enter()
-    			   .append('rect')
-
-    var columnAttributes = columns
-    					   .attr('height', function(d) {return d})
-    					   .attr('width', 20)
-    					   .attr('fill', 'red')
-    					   .attr('y', function(d, i) {return i * 10} )
+		if ((i + 1) % blockSize == 0) { block_group++};
+	};
 
 }
 
-// mockGraph();
-
+assignBlockIds();

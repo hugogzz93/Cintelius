@@ -1,11 +1,22 @@
 <!-- llamado por show.js de order_history, recibe single_combos, multi_combos y product_name_hash -->
 
 <div class="order_history_products_block order_history_block" data-index-block="1">
+
+
+	<div class="individual_offers_step_button left">
+		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+
+			 width="200" height="200" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve" class="step_button left">
+
+			<polygon class="step_arrow left" points="0,0 200,100, 0, 200"/>
+		</svg>
+	</div>
+
 	<div class="individual_offers">
 		<% if single_combos.any? %>
 			<div class="individual_offers_container">
 				<% product_name_hash.each do |id, name|  %>
-					<ul class="combo_product_history_list" data-product-id="<%= id %>">
+					<ul class="combo_product_history_list hidden" data-product-id="<%= id %>">
 						<li class="product_history_list_header">
 							<div> <%= name %> </div>
 						</li>
@@ -58,12 +69,12 @@
 		<% end %>
 	</div>
 	
-	<div class="individual_offers_step_button">
+	<div class="individual_offers_step_button right">
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 
-			 width="200" height="200" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve" class="step_button">
+			 width="200" height="200" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve" class="step_button right">
 
-			<polygon class="step_arrow" points="0,0 200,100, 0, 200"/>
+			<polygon class="step_arrow right" points="0,0 200,100, 0, 200"/>
 		</svg>
 	</div>
 
