@@ -60,4 +60,9 @@ class User < ActiveRecord::Base
     self.user_detail.organization
   end
 
+  # def get_recent_orders
+  #   # agarra la combinacion de 
+  #   recent_orders = current_user.order_histories.last(5)
+  # end
+
 end

@@ -8,4 +8,8 @@ class OrderProductHistory < ActiveRecord::Base
 	validates :units, presence: true, numericality: true
 	validates :order_history_id, uniqueness: { scope: [:product_id],
     message: "Este producto ya se ah escogido para esta orden." }
+
+    def get_product_name
+    	self.product.name
+    end
 end

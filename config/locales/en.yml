@@ -20,6 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  recent_orders: "Recent Orders"
   average_abv: "Avg"
   creation_date: "Date"
   title: "Title"

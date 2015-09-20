@@ -8,6 +8,7 @@ class OrdersController < ApplicationController
 	def new
 		@categories = Category.supercategories
 		@order = Order.new
+		@recent_orders = current_user.order_histories.last(5)
 	end
 
 	def create

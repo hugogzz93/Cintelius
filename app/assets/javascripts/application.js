@@ -32,6 +32,24 @@ $(function() {
 		console.log('loader revealed')
 	})
 
+	// selecciona el producto desde una orden reciente
+	$('.order_product_history').on('click', function(e) {
+		productId = $(e.target).attr('data-order-product-id')
+		units = $(e.target).attr('data-order-product-units')
+		$('.order_product_history[data-order-product-id=' + productId + ']').toggleClass('active')
+		$('button[data-product-id=' + productId + ']').click();
+		$('.product_box[data-product-id=' + productId + '] input[type=number]').val(units)
+	})
+
+	$('.recent_order_title').on('click', function(e) {
+		$(e.target).siblings('.recent_order_products').toggleClass('inactive')
+	})
+
+	$('.recent_orders_widget_header').on('click', function(e) {
+		$('.recent_orders_widget').toggleClass('inactive')
+
+	})
+
 
 
 	$('#new_order_form_continue_button').on('click', function(e) {
