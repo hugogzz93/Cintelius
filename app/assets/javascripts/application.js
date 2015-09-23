@@ -162,10 +162,13 @@ $(function() {
 		if ($(e.target).hasClass('selected_product')) {
 			$('.product_box:contains('+ $(e.target).text() +')').remove();
 			$(e.target).removeClass('selected_product')
+			productId = $(e.target).attr('data-product-id')
+			$('.order_product_history[data-order-product-id=' + productId +']').removeClass('active')
 		} else {
 			$('a.add_fields').click()
 			productName = $(e.target).text()
 			productId = $(e.target).attr('data-product-id')
+			$('.order_product_history[data-order-product-id=' + productId +']').addClass('active')
 			targetProductBox = $('.product_box').last()
 			// agrega productId
 			targetProductBox.attr('data-product-id', productId)
