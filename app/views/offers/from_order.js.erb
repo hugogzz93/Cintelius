@@ -23,8 +23,8 @@
 // Para que no se pueda hcer ningun combo despues de la fecha limite
 <% if !@order.due_date_past? and @order.is_open? %>
 	<% combo = @order.combos.create %>
-	$('.combo_list').append("<%= j render partial: 'combo_form.html.erb', locals: {f: combo} %>")
-	$('.combo_list').append("<div class='add_new_combo_button active'>Nueva Cotización</div>")
+	$('.combo_list').prepend("<%= j render partial: 'combo_form.html.erb', locals: {f: combo} %>")
+	$('.combo_list').prepend("<div class='add_new_combo_button active'>Nueva Cotización</div>")
 <% end %>
 
 
@@ -57,15 +57,15 @@ $('.combo_product_add_button').on('click', function(e) {
 	// $(e.target).attr('type', 'button')
 	if (!$(e.target).hasClass('disabled')) {
 		idToCheck = $(e.target).attr('data-product-id')
-
+		console.log('a')
 		$('.product_list_area a.add_fields').click();
-		$($('ul.product_list_area').children('.combo_product_box').last().children('.product_id_field')).val(idToCheck)
+		$($('ul.product_list_area').children('#new_combo .combo_product_box').last().children('.product_id_field')).val(idToCheck)
 		$($('.combo_product_remove_button').last()).attr('data-product-id', idToCheck).attr('type', 'button')
 		$(e.target).addClass('disabled')
 		productName = $(e.target).attr('data-product-name')
 		productUnits = $(e.target).attr('data-product-units')
 		productId = $(e.target).attr('data-product-id')
-		$('.combo_product_box').last().children('.combo_product_name').text(productName)
+		$('#new_combo .combo_product_box').last().children('.combo_product_name').text(productName)
 		$('.combo_product_price_field').last().attr('data-product-id', productId)
 		$('.combo_product_price_field').last().attr('data-previous-value', '0')
 		$($('.combo_product_unit_field').last()).val(productUnits).attr('data-product-id', productId)

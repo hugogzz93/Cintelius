@@ -3,6 +3,8 @@ class UserDetail < ActiveRecord::Base
 	validates :user_id, uniqueness: {message: "Ya existe un registro para este usuario."}
 
 	enum credentials: [:admin, :seller, :buyer]
+	# enum state: [:nuevo_leon]
+	# enum city: [[:Apodaca :Escobedo :Guadalupe :San Nicolás de los Garza :San Pedro Garza García "Santa Catarina"];]
 
 
 	def is_buyer?
