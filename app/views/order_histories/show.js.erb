@@ -3,6 +3,8 @@ $('.order_info_block_body').empty()
 $('.order_info_block_body').append(" <%= escape_javascript(render partial: 'order_history_products_block.html.erb', locals: { single_combos: @single_combos, multi_combos: @multi_combos, product_name_hash: @product_name_hash}).html_safe %> ")
 $('.order_history_header_button.active').removeClass('active');
 $('.order_history_header_button:first').addClass('active');
+$('.tooltip').remove()
+$('.tooltip2').remove()
 
 product_graph_data = [];
 
@@ -164,6 +166,7 @@ $('.individual_offers_step_button.right .step_arrow').on('click', function(e) {
 function setUpOrderDetails(jsonData) {
 
 	// product headers
+
 		var product_headers = "";
 		var block_group = 1;
 

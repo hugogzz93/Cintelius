@@ -24,7 +24,7 @@
 						<% single_combos[id].each do |single_combo| %>
 						<% combo_product_history = single_combo.combo_product_histories.first %>
 							<li class="combo_product_history  <%= combo_product_history.parent_combo_status %>" 
-							data-price=" <%= combo_product_history.unitary_price.to_f %> " data-product-id="<%= id %>", data-combo-history-id="<%= combo_product_history.id %>">
+							data-price=" <%= combo_product_history.unitary_price.to_f %> " data-product-id="<%= id %>", data-combo-history-id="<%= single_combo.id %>">
 								<div class="product_history_provider">
 									<%= combo_product_history.combo_history.user.get_organization %>
 								</div>

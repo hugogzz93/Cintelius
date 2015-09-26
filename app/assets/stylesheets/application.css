@@ -3934,7 +3934,7 @@ input#user_detail_telephone {
     pointer-events: none;
     position: absolute;
     top: 8px;
-    width: 100.8438px;
+    min-width: 10px;
 
 }
 
