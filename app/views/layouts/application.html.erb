@@ -20,7 +20,7 @@
 		<% end %>
 
 		<% if current_user.is_admin? %>
-			<!-- panel administrador -->
+			<%= link_to('Admin', admin_path, class: "admin_index_link") %>
 		<% end %>
 
 		<%= link_to('Herramientas', settings_path, class: "user_settings_link") %>

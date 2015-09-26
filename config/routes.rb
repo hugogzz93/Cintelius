@@ -28,6 +28,11 @@ Rails.application.routes.draw do
   get '/history' => 'history#show', as: 'history'
   get '/history/:id/order/' => 'order_histories#show', as: 'order_history'
 
+  # admin_dashboard
+  get '/admin_dashboard' =>'users#admin_index', as: 'admin'
+
+
+
   # feedback
   get '/review_tickets' => 'review_tickets#index', as: 'review_tickets'
   # edit user information

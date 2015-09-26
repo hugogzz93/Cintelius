@@ -1,10 +1,14 @@
 class UsersController < ApplicationController
 
-  before_filter :authenticate_user!
+  # before_filter :authenticate_user!
 
-  # def edit
-  #   @user = current_user
-  # end
+
+
+def admin_index
+  redirect_to root_path unless current_user.is_admin?
+  @categories = Category.supercategories
+end
+
 
   def update_password
 

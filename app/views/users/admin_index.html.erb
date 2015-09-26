@@ -1,0 +1,11 @@
+<fieldset>
+	<% @categories.each do |category| %>
+		<div class="category_button"><%= category.name %></div>
+		<% category.subcategories.each do |subcategory| %>
+			<div class="subcategory_button"><%= subcategory.name %></div>
+			<% subcategory.products.each do |product|  %>
+				<div class="product_button"><%= product.name %></div>
+			<% end %>
+		<% end %>
+	<% end %>
+</fieldset>
