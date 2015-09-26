@@ -54,12 +54,20 @@ $(function() {
 
 	$('#new_order_form_continue_button').on('click', function(e) {
 		e.preventDefault();
+		for (var i = 0; i < $('.new_order_unit_field input').size(); i++) {
+			if ($($('.new_order_unit_field input')[i]).val() == '') {
+				alert('Debes de establecer la cantidad de kilos')
+				return false
+			};
+		};
 		$('.new_order_pop_up_screen').addClass('active')
 		$('.product_form_area').addClass('active')
 		$('#new_order_form_continue_button').css('display', 'none')
 	})
 
-	$('#new_order_submit').on('click', function() {
+	$('#new_order_submit').on('click', function(e) {
+		$(e.target).css('display', 'none');
+		$(e.target).off('click');
 		$('#new_order').submit()
 	})
 

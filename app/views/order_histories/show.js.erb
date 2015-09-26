@@ -326,7 +326,10 @@ function setUpCostGraph(product_graph_data) {
 
     var colorScale = d3.scale.linear()
     							.domain([0, max_cost/2, max_cost])
-    							.range(['red', 'blue', 'green'])
+    							.range(['#F44410', '#F5DA29', '#7D4BA4'])
+    							// .range(['#46AA37', '#4199ED', '#F54511'])
+    							// .domain([0, max_cost*.25, max_cost*.5, max_cost*.75, max_cost])
+    							// .range(['#41A736','#7D4BA4', '#2380D8', '#E27612', '#F54511'])
 
 
 
@@ -359,6 +362,12 @@ function setUpCostGraph(product_graph_data) {
     											.data(product_graph_data)
     											.enter()
     											.append('rect')
+
+    // Define the div for the tooltip
+	var div = d3.select("body").append("div")	
+	    .attr("class", "tooltip")
+	    .attr("z-index", "99")				
+	    .style("opacity", 1)
     											
 
     var columnAttributes = columns
@@ -369,6 +378,28 @@ function setUpCostGraph(product_graph_data) {
     						.attr('x', function(d) {return xAxisScale(d.product_name)})
     						.attr('y', function(d) {return height - costLinearScale(d.total_cost); })
     						.attr('fill', function(d) {return colorScale(d.total_cost);} )
+    						.attr('val', function(d) {return d.total_cost} )
+    						.on('mouseover', function(d, i) {
+						       div.transition()		
+				                .duration(0)		
+				                .style("opacity", .9)
+				                div.html('<span>' + d.product_name +'</span>'+ ' <span style="color:red">$' + d.total_cost + '</span>')
+				                // $('div.tooltip').offset({ top: event.pageY, left: event.pageX})
+				                $('div.tooltip').offset({ top: d3.event.pageY-50, left: d3.event.pageX})
+    							// console.log(d3.mouse(this)[0])
+    							d3.select(this).style('fill', '#4FAE3A')
+    						})
+    						.on('mousemove', function(d, i) {
+    							$('div.tooltip').offset({ top: d3.event.pageY-50, left: d3.event.pageX})
+    						})
+    						.on('mouseout', function(d, i) {
+						       div.transition()		
+				                .duration(0)		
+				                .style("opacity", 0);	
+    							d3.select(this).style('fill', colorScale(d.total_cost))
+    						})
+
+
 }
 
 function setUpUnitGraph(product_graph_data) {
@@ -414,7 +445,9 @@ function setUpUnitGraph(product_graph_data) {
 
     var colorScale = d3.scale.linear()
     							.domain([0, max_units/2, max_units])
-    							.range(['red', 'blue', 'green'])
+    							.range(['#F44410', '#F5DA29', '#7D4BA4'])
+    							// .domain([0, max_units*.25, max_units*.5, max_units*.75, max_units])
+    							// .range(['#F44410','#7D4BA4', '#2380D8', '#E27612', '#F54511'])
 
 
 
@@ -449,7 +482,12 @@ function setUpUnitGraph(product_graph_data) {
     											.data(product_graph_data)
     											.enter()
     											.append('rect')
-    											
+    
+        // Define the div for the tooltip
+	var div2 = d3.select("body").append("div")	
+	    .attr("class", "tooltip2")
+	    .attr("z-index", "99")				
+	    .style("opacity", 1)							
 
     var columnAttributes = columns
     						// .attr('width', function() {return d3.min([width / product_graph_data.length - columnPadding, max_column_width])	;})
@@ -459,6 +497,25 @@ function setUpUnitGraph(product_graph_data) {
     						.attr('x', function(d) {return xAxisScale(d.product_name)})
     						.attr('y', function(d) {return height - costLinearScale(d.total_quantity); })
     						.attr('fill', function(d) {return colorScale(d.total_quantity);} )
+    						.on('mouseover', function(d, i) {
+						       div2.transition()		
+				                .duration(0)		
+				                .style("opacity", .9)
+				                div2.html('<span>' + d.product_name +'</span>'+ ' <span style="color:red">' + d.total_quantity + 'Kg</span>')
+				                // $('div.tooltip').offset({ top: event.pageY, left: event.pageX})
+				                $('div.tooltip2').offset({ top: d3.event.pageY-50, left: d3.event.pageX})
+    							// console.log(d3.mouse(this)[0])
+    							d3.select(this).style('fill', '#4FAE3A')
+    						})
+    						.on('mousemove', function(d, i) {
+    							$('div.tooltip2').offset({ top: d3.event.pageY-50, left: d3.event.pageX})
+    						})
+    						.on('mouseout', function(d, i) {
+						       div2.transition()		
+				                .duration(0)		
+				                .style("opacity", 0);	
+    							d3.select(this).style('fill', colorScale(d.total_quantity))
+    						})
 
     // var text = product_unit_graph.selectAll('text')
     // 					.data(product_graph_data)
