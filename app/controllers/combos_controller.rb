@@ -8,8 +8,6 @@ class CombosController < ApplicationController
 	def create
 		respond_to do |format| 
 			format.js {
-				logger.info "@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-				logger.info params.inspect
 				@combo = current_user.combos.build(combo_params)
 				@order = @combo.order
 				if @order.due_date > Time.now and @combo.save

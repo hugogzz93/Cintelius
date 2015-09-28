@@ -1,11 +1,31 @@
+<% Category.subcategories.each do |subcategory| %>
+	<% subcategory.products.each do |product| %>
+		<%= form_for product, class: "edit_product_form", remote: true, data: {product_id: product.id}  do |d|%>
+			<%= d.text_field :name %>
+			<%= d.number_field :category_id %>
+			<%= d.submit "Actualizar" %>
+		<% end %>
+	<% end %>
+<% end %>
+
+<%= form_tag products_path, method: "post", remote: true do %>
+		<%= text_field_tag :name, nil, placeholder: "Nombre" %>
+		<%= number_field_tag :id, nil, placeholder: "Id subcategoria" %>
+	    <%= submit_tag "Crear Producto" %>
+<% end %>
+
+
+
 <fieldset>
 	<% @categories.each do |category| %>
 		<div class="category_button"><%= category.name %></div>
 		<% category.subcategories.each do |subcategory| %>
 			<div class="subcategory_button"><%= subcategory.name %></div>
 			<% subcategory.products.each do |product|  %>
-				<div class="product_button"><%= product.name %></div>
+				<div class="product_button" data-category-id="<%= subcategory.id %>" data-product-id="<%= product.id %>" data-product-name="<%= product.name %>"><%= product.name %></div>
 			<% end %>
 		<% end %>
 	<% end %>
 </fieldset>
+
+
