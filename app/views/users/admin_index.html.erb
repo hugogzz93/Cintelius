@@ -1,31 +1,35 @@
-<% Category.subcategories.each do |subcategory| %>
-	<% subcategory.products.each do |product| %>
-		<%= form_for product, class: "edit_product_form", remote: true, data: {product_id: product.id}  do |d|%>
-			<%= d.text_field :name %>
-			<%= d.number_field :category_id %>
-			<%= d.submit "Actualizar" %>
+<div class="admin_dashboard">
+	<% Category.subcategories.each do |subcategory| %>
+		<% subcategory.products.each do |product| %>
+			
 		<% end %>
 	<% end %>
-<% end %>
 
-<%= form_tag products_path, method: "post", remote: true do %>
-		<%= text_field_tag :name, nil, placeholder: "Nombre" %>
-		<%= number_field_tag :id, nil, placeholder: "Id subcategoria" %>
-	    <%= submit_tag "Crear Producto" %>
-<% end %>
-
+	<%= form_tag products_path, method: "post", remote: true do %>
+			<%= text_field_tag :name, nil, placeholder: "Nombre" %>
+			<%= number_field_tag :id, nil, placeholder: "Id subcategoria" %>
+		    <%= submit_tag "Crear Producto" %>
+	<% end %>
 
 
-<fieldset>
-	<% @categories.each do |category| %>
-		<div class="category_button"><%= category.name %></div>
-		<% category.subcategories.each do |subcategory| %>
-			<div class="subcategory_button"><%= subcategory.name %></div>
-			<% subcategory.products.each do |product|  %>
-				<div class="product_button" data-category-id="<%= subcategory.id %>" data-product-id="<%= product.id %>" data-product-name="<%= product.name %>"><%= product.name %></div>
+
+	<fieldset>
+		<% @categories.each do |category| %>
+			<div class="category_button" data-category-id="<%= category
+			.id %>"><%= category.name %></div>
+			<% category.subcategories.each do |subcategory| %>
+				<div class="subcategory_button hidden" data-subcategory-id="<%= subcategory.id %>" data-category-id="<%= category.id %>"><%= subcategory.name %> ( <%= subcategory.id %> ) </div>
+				<% subcategory.products.each do |product|  %>
+					<%= form_for product, html: {class: "edit_product hidden"}, remote: true, data: {product_id: product.id, subcategory_id: subcategory.id}  do |d|%>
+
+					<%= d.text_field :name %>
+					<%= d.number_field :category_id %>
+					<%= d.submit "Actualizar" %>
+				<% end %>
+				<% end %>
 			<% end %>
 		<% end %>
-	<% end %>
-</fieldset>
+	</fieldset>
+</div>
 
 

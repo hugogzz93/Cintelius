@@ -266,7 +266,32 @@ $(function() {
 		event.preventDefault()
 	})
 
-  // do some things 
+ 	// @admin_dashboard
+ 	$('.admin_dashboard .category_button').on('click', function(e) {
+ 		category_id = $(e.target).attr('data-category-id');
+ 		if ($(e.target).hasClass('active')) {
+ 			$(e.target).removeClass('active')
+ 			$(' .admin_dashboard .subcategory_button').addClass('hidden')
+ 			$('.admin_dashboard .edit_product').addClass('hidden')
+ 		} else {
+ 			$('.admin_dashboard .category_button').removeClass('active')
+	 		$(e.target).addClass('active')
+	 		$('.admin_dashboard .edit_product').addClass('hidden')
+	 		$('.admin_dashboard .subcategory_button').addClass('hidden')
+	 		$('.admin_dashboard .subcategory_button[data-category-id=' + category_id + ']').removeClass('hidden')
+ 		};
+
+
+ 	})
+
+ 	$('.admin_dashboard .subcategory_button').on('click', function(e) {
+ 		subcategory_id = $(e.target).attr('data-subcategory-id');
+ 		$('.admin_dashboard .subcategory_button').removeClass('active')
+ 		$(e.target).addClass('active')
+ 		$('.admin_dashboard .edit_product').addClass('hidden')
+ 		$('.admin_dashboard .edit_product[data-subcategory-id=' + subcategory_id + ']').removeClass('hidden')
+
+ 	})
 })
 // $(document).ready(do_on_load)
 $(window).bind('page:change', do_on_load)

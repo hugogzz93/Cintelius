@@ -4015,6 +4015,31 @@ input#user_detail_telephone {
   /* end graph_block*/
 /*}*/
 
+
+/*start admin dashboard*/
+    .admin_dashboard .active {
+      background-color: #ccc;
+    }
+    .admin_dashboard .category_button {
+      cursor: pointer;
+      margin: 1em;
+      border: 1px solid #ccc;
+      max-width: 15em;
+    }
+
+    .admin_dashboard .subcategory_button {
+     cursor: pointer;
+      margin: 1em;
+      border: 1px solid #ccc;
+      max-width: 15em; 
+      margin-left: 2em;
+    }
+
+    .admin_dashboard .edit_product {
+      margin-left: 4em;
+    }
+/*end admin dashboard*/
+
   .status_locked {
     float: left;
     border: 1px solid transparent;
