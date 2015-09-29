@@ -1,22 +1,9 @@
 <div class="admin_dashboard">
-	<% Category.subcategories.each do |subcategory| %>
-		<% subcategory.products.each do |product| %>
-			
-		<% end %>
-	<% end %>
-
-	<%= form_tag products_path, method: "post", remote: true do %>
-			<%= text_field_tag :name, nil, placeholder: "Nombre" %>
-			<%= number_field_tag :id, nil, placeholder: "Id subcategoria" %>
-		    <%= submit_tag "Crear Producto" %>
-	<% end %>
-
-
 
 	<fieldset>
 		<% @categories.each do |category| %>
 			<div class="category_button" data-category-id="<%= category
-			.id %>"><%= category.name %></div>
+			.id %>"><%= category.name %> (<%= category.id %>)</div>
 			<% category.subcategories.each do |subcategory| %>
 				<div class="subcategory_button hidden" data-subcategory-id="<%= subcategory.id %>" data-category-id="<%= category.id %>"><%= subcategory.name %> ( <%= subcategory.id %> ) </div>
 				<% subcategory.products.each do |product|  %>
@@ -30,6 +17,23 @@
 			<% end %>
 		<% end %>
 	</fieldset>
+
+
+	<%= form_tag products_path, method: "post", remote: true do %>
+		<%= text_field_tag :name, nil, placeholder: "Nombre" %>
+		<%= number_field_tag :id, nil, placeholder: "Id subcategoria" %>
+	    <%= submit_tag "Crear Producto" %>
+	<% end %>
+
+<% @categories.each do |category| %>
+	<% category.subcategories.each do |subcategory| %>
+		<%= form_for subcategory, html: {class: "edit_subcategory hidden"}, data: {subcategory_id: subcategory.id}, remote: true do |f| %>
+			<%= f.text_field :name %>
+			<%= f.number_field :supercategory_id %>
+			<%= f.submit "Actualizar Subcategoría"%>
+		<% end %>
+	<% end %>
+<% end %>
+
+
 </div>
-
-

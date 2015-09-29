@@ -1,0 +1,6 @@
+$('.flash_messages').remove()
+<% if @success %>
+	$('.container').append(' <%= j render partial: "layouts/flash_message.html.erb", locals: {alert_class: "alert-success", message: "", title: t("category_update_success"), image_url: "icons/icon-style-checkmark-white.png", message_box_type: ""} %>')
+<% else %>
+	$('.container').append('<%= j render partial: "layouts/flash_message.html.erb", locals: {alert_class: "alert-failure", message: "", title: t("category_update_failure"), image_url: "icons/icon-white-cross.png", message_box_type: ""} %> ')
+<% end %>

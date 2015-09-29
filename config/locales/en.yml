@@ -43,6 +43,8 @@ en:
   user_detail_update_failure: "An error has ocurred."
   product_update_success: "Product updated"
   product_update_failure: "An error has ocurred while updating the product"
+  category_update_success: "Category Updated"
+  category_update_failure: "An error has ocurred while updating the category"
   product_create_sucess: "Product created"
   product_create_failure: "An error has ocurred while creating the product"
   user_order_destruction_success: "Order Finished"

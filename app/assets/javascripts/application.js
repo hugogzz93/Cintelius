@@ -280,8 +280,6 @@ $(function() {
 	 		$('.admin_dashboard .subcategory_button').addClass('hidden')
 	 		$('.admin_dashboard .subcategory_button[data-category-id=' + category_id + ']').removeClass('hidden')
  		};
-
-
  	})
 
  	$('.admin_dashboard .subcategory_button').on('click', function(e) {
@@ -291,7 +289,12 @@ $(function() {
  		$('.admin_dashboard .edit_product').addClass('hidden')
  		$('.admin_dashboard .edit_product[data-subcategory-id=' + subcategory_id + ']').removeClass('hidden')
 
+
+ 		// despliega el formulario para editar la subcategoria
+ 		$('.edit_subcategory').addClass('hidden')
+ 		$('.edit_subcategory[data-subcategory-id=' + subcategory_id + ']').removeClass('hidden')
  	})
+
 })
 // $(document).ready(do_on_load)
 $(window).bind('page:change', do_on_load)

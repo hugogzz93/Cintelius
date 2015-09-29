@@ -4038,6 +4038,11 @@ input#user_detail_telephone {
     .admin_dashboard .edit_product {
       margin-left: 4em;
     }
+
+    .admin_dashboard fieldset {
+      width: 35%;
+      float: left;
+    }
 /*end admin dashboard*/
 
   .status_locked {
