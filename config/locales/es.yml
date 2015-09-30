@@ -21,6 +21,8 @@ es:
   product_update_failure: "Ocurrió un error al actualizar"
   category_update_success: "Se actualizó la subcategoría exitoósamente"
   category_update_failure: "Ocurrió un error al actualizar la subcategoría"
+  category_create_success: "Se creó la categoría de manera exitosa"
+  category_create_failure: "Ocurrió un error al crear la categoría"
   product_create_sucess: "Producto se creó exitósamente"
   product_create_failure: "Ocurrió un error al actualizar"
   order_lock_failure: "Error en confirmacion de pedido"

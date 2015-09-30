@@ -14,6 +14,15 @@ class CategoriesController < ApplicationController
 		end
 	end
 
+	def create
+		respond_to do |format|
+			format.js {
+				Category.create(category_params) ? @success = true : @success = false;
+
+			}
+		end
+	end
+
 	def category_params
 		params.require(:category).permit(:supercategory_id, :name)
 		
