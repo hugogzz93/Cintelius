@@ -274,13 +274,13 @@ form.edit_combo {
   }
 
   .confirmation_button, .order_finish_image {
-  height: auto;
-  width: 5%;
-  float: left;
-  margin-left: 5%;
-  margin-right: -8%;
-  cursor: pointer;
-  /*background-color:green;*/
+    height: auto;
+    width: 7%;
+    float: left;
+    margin-left: 5%;
+    margin-right: -10%;
+    cursor: pointer;
+    /* background-color: green; */
   }
 
   a.order_finish_button {
@@ -1147,7 +1147,7 @@ form#new_order .comment_field.editable {
   width: 47%;
  }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1250px) {
   .column.new_offer_order_combos {
     /*width: 34.5%;*/
     width: 47.5%;
@@ -1436,7 +1436,7 @@ form#new_order .comment_field.editable {
   float: left;
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1250px) {
 
   .combo_product_form_units {
     width: 8em;
@@ -2053,7 +2053,7 @@ input.combo_price {
 }
 
 .combo_product_box .background_box {
-  width: 5em;
+  width: 3em;
   text-align: left;
   float: right;
   border-radius: 0px;
@@ -2174,7 +2174,7 @@ input.combo_price {
  }
 
 
- @media screen and (min-width: 1280px){
+ @media screen and (min-width: 1250px){
   .order_index .column.order_products {
     width: 34.5%;
     /*min-width: 423.3125px;*/

@@ -6,7 +6,7 @@
     	<%= current_user.email %>
     </div>
 	<ul class="user_settings_list">
-		<li><%= link_to 'Cambiar Informacion', edit_user_detail_path(id: @user_id), remote: true %></li>
+		<li><%= link_to 'Cambiar Información', edit_user_detail_path(id: @user_id), remote: true %></li>
 		<% if current_user.is_buyer? %>
 			<li><%= link_to 'Reseñas', review_tickets_path(id: @user_id, format: "js"), remote: true %></li>
 			<li><%= link_to 'Historial', history_path(id: @user_id), remote: true %></li>

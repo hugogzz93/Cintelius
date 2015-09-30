@@ -12,7 +12,7 @@ $('.loader').remove()
 
 // mensaje si todavia no ha pasado la fecha limite
 <% if !@order.due_date_past? %>
-	$('ul.offer_list').append("<div class='order_warning_message'>Podrás ver las cotizaciones después de la fecha límite de cotizacion. <br/> <%= j l @order.due_date.in_time_zone('America/Monterrey'), format: :cust %> </div>")
+	$('ul.offer_list').append("<div class='order_warning_message'>Podrás ver las cotizaciones después de la fecha límite de cotización <br/> <%= j l @order.due_date.in_time_zone('America/Monterrey'), format: :cust %> </div>")
 <% elsif !@order.combos.any? and !@order.offers.any? %> // mensaje si no le mandaron ofertas
 	$('ul.offer_list').append("<div class='order_warning_message'>No recibiste ninguna cotizacion.  </div>")
 <% end %>
@@ -30,12 +30,12 @@ $('.order_title_container').append('<%= j @order.title %>')
 
 <% if @order.due_date_past? %>
 	$('#selection_header').append('<div class="loader hidden"><%= j t("loading...") %></div>')
-	<% if @order.is_open? %>
+	<% if @order.is_open? && @order.combos.any?%>
 		$('#selection_header').append("<%= j image_tag('icons/icon-style-checkmark-gray.png', class: 'confirmation_button', alt: t('confirm_selection') )%>")
 		$('.order_product_list').append("<%= j render partial: 'offer_selection_form.html.erb', locals: {f: @order}%>")
-	<% elsif @order.is_locked? %>
-		$('#selection_header').append("<%= j image_tag('icons/arrow_up.svg', class: 'order_finish_image', alt: t('confirm_selection') )%>")
-		$('#selection_header').append("<%= j link_to 'Terminar', order_path(@order), method: :delete, data: { confirm: 'Esto terminara su orden.' }, class: 'order_finish_button', remote: true %>")
+	<% else %>
+		$('#selection_header').append("<%= j image_tag('icons/certificate.svg', class: 'order_finish_image', alt: t('confirm_selection') )%>")
+		$('#selection_header').append("<%= j link_to 'Terminar', order_path(@order), method: :delete, data: { confirm: 'La orden será terminada y dirigida al historial. ¿Deseas terminar la orden?' }, class: 'order_finish_button', remote: true %>")
 	<% end %>
 
 	<% @providers.each do |provider| %>
