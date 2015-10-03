@@ -8,7 +8,7 @@
 		<% if f.order.is_open? %>
 			<%= button_tag "", class: "offer_deselection_button", 
 						data: {offer_id: f.id, product_id: f.product.id} do %> 
-						 <%= image_tag "icons/icon-x.png"%>
+						 <%= image_tag "icons/icon-x.svg"%>
 			<% end %>
 		<% elsif f.is_locked? %>
 			<%= render partial: 'received_offer_form', locals:{offer: f} %> 

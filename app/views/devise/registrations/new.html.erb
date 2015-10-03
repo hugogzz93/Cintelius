@@ -1,5 +1,5 @@
-<% @cities = ["Apodaca", "Escobedo", "Guadalupe", "San Nicolás de los Garza", "San Pedro Garza García", "Santa Catarina"] %>
-<% @states = ["Nuevo Leon"] %>
+<% @cities = ["Apodaca", "Monterrey", "Escobedo", "Guadalupe", "San Nicolás de los Garza", "San Pedro Garza García", "Santa Catarina"] %>
+<% @states = ["Nuevo León"] %>
 
 <div class="sign_up">
   <div class="sign_up_header">
@@ -51,7 +51,7 @@
         <div class="form_label">
             <span>Dirección</span> <span style="color:#20bdff">*</span>
         </div>
-        <%= user_detail.text_field :address, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
+        <%= user_detail.text_area :address, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
       </div>
 
       <div class="field">
@@ -82,7 +82,7 @@
         <div class="form_label">
           <span>Dirección Fiscal</span>
         </div>
-          <%= user_detail.text_field :fiscal_address%>
+          <%= user_detail.text_area :fiscal_address%>
       </div>
 
       <div class="field RFC">

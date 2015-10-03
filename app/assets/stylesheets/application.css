@@ -390,7 +390,7 @@ form.edit_combo {
 
 .combo_deselection_button img {
   height: auto;
-  width: 35%;
+  width: 2em;
   cursor: pointer;
 }
 
@@ -400,7 +400,7 @@ form.edit_combo {
   background-color: transparent;
   float: right;
   height: 1.15em;
-  margin-top: -1%;
+  margin-top: -2%;
 }
 
 
@@ -475,8 +475,9 @@ form.edit_combo {
   margin: 0px;
   /*min-width: 1400px;
   min-height: 765px;*/
-  min-height: 765px !important;
+  min-height: 660px !important;
   min-width: 1200px !important;
+  position: relative;
  }
 
  .container {
@@ -488,7 +489,7 @@ form.edit_combo {
   margin: 0px !important;
   /*min-width: 1400px !important;
   min-height: 760px !important;*/
-  min-height: 765px !important;
+  /*min-height: 765px !important;*/
   min-width: 1200px !important;
   overflow: auto;
   background-color: white;
@@ -526,7 +527,7 @@ form.edit_combo {
 
  .newOrder .column.order {
  	  width: 26%;
- 	  height: 80%;
+ 	  height: 90%;
     border: 1px solid #31353c;
     position: absolute;
     right: 1.85%;

@@ -7,7 +7,7 @@
 
 				<% if f.order.is_open? %>
 					<%= button_tag "-", class: "combo_deselection_button", data: {combo_id: f.id} do %>
-						<%= image_tag "icons/icon-x.png"%>
+						<%= image_tag "icons/icon-x.svg"%>
 					<% end %>
 				<% elsif f.is_locked? %>
 					<%= render partial: 'received_combo_form', locals:{combo: f} %> 
