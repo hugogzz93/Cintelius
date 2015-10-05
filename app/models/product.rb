@@ -11,5 +11,5 @@ class Product < ActiveRecord::Base
 	  has_many :combos, through: :combo_products, dependent: :destroy
 
  	  
-	  validates :name, uniqueness: {message: "Ya existe un producto con este nombre."}
+	  validates :name, uniqueness: {scope: [:category_id], message: "Ya existe un producto con este nombre."}
 end

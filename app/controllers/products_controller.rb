@@ -18,7 +18,7 @@ class ProductsController < ApplicationController
 	def create
 		respond_to do |format| 
 		format.js {
-			Product.create(name: params[:name], category_id: params[:id]) ? @success = true : @success = false
+			Product.create(name: params[:name], category_id: params[:id]).valid? ? @success = true : @success = false
 		}
 		end
 	end

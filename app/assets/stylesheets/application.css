@@ -2728,8 +2728,8 @@ li.order_product_info_tab {
 }
 
 .info_tab_close_button img {
-  height: auto;
-  width: 35%;
+    height: auto;
+    width: 1.5em;
 }
 
  .info_tab_button {
@@ -3899,7 +3899,7 @@ input#user_detail_telephone {
 
   /* graph_block */
 
-  .tooltip, .tooltip2 {
+  .tooltip_box {
     /*line-height: 1;
     font-weight: bold;
     padding: 12px;
@@ -4014,6 +4014,13 @@ input#user_detail_telephone {
         stroke-width: 0;
   }*/
   /* end graph_block*/
+
+  /*start product_graph block*/
+  select.product_selection {
+    float: right;
+    margin-right: 5em;
+  }
+  /*end product_graph block*/
 /*}*/
 
 

@@ -3,8 +3,7 @@ $('.order_info_block_body').empty()
 $('.order_info_block_body').append(" <%= escape_javascript(render partial: 'order_history_products_block.html.erb', locals: { single_combos: @single_combos, multi_combos: @multi_combos, product_name_hash: @product_name_hash}).html_safe %> ")
 $('.order_history_header_button.active').removeClass('active');
 $('.order_history_header_button:first').addClass('active');
-$('.tooltip').remove()
-$('.tooltip2').remove()
+$('.tooltip_box').remove()
 
 product_graph_data = [];
 
@@ -35,7 +34,6 @@ function getAverage() {
 	})
 }
 
-
 // recibe un arreglo de ofertas individuales
 function setAvgArrows(array, average) {
 	$.each(array, function(index, value) {
@@ -53,11 +51,9 @@ function setAvgArrows(array, average) {
 }
 
 getAverage()
-console.log('))')
 
 function stepSingleOffers(direction) {
 	active_block = $('.individual_offers_container').attr('data-active-block')
-	console.log("hello")
 	if (direction == "left") {
 
 		$('.individual_offers_container').attr('data-active-block', parseInt(active_block) - 1)
@@ -97,7 +93,6 @@ function stepMultiOffers(direction) {
 	};
 }
 
-
 // cantidad de bloques que caben a la vez en la tabla del historial
 var groupOfferScreenAmount = 5;
 
@@ -111,15 +106,20 @@ $.ajax({
 		setUpOrderDetails(jsonData);
 
 		// creacion de las graficas
-		product_graph_data = getProductArray(jsonData);
-		setUpCostGraph(product_graph_data);
-		setUpUnitGraph(product_graph_data);
+		general_graph_data = getProductArray(jsonData);
+		setUpCostGraph(general_graph_data);
+		setUpUnitGraph(general_graph_data);
 
+		// graficas productos individuales
+		addProductSelectionBox(jsonData);
+		setUpProductsPieGraph(general_graph_data);
+		// setUpProductsGraph(product_graph_data)
+		// setUpPie();
 
 		
 	},
 	fail: function(errorMsg) {
-
+		console.log(errorMsg)
 	}
 })
 
@@ -239,14 +239,17 @@ function setUpOrderDetails(jsonData) {
 			// $('.step_arrow')
 			$('[data-block-group="1"]').removeClass('hidden')
 
-			combo_product_history_height = $('.group_offers .combo_product_history:not("empty")').outerHeight()
+			combo_product_history_height = $('.group_offers .combo_product_history:not(".empty")').outerHeight()
 			$('.organization_block').css('height', combo_product_history_height)
 			$('.combo_history_total').css('height', combo_product_history_height)
-			$('.group_offers .combo_product_history_list').css('min-height', $('.group_offers .combo_product_history:not("empty")').outerHeight(true))
+			$('.group_offers .combo_product_history_list').css('min-height', $('.group_offers .combo_product_history:not(".empty")').outerHeight(true))
 		};
 }
 
 
+
+// crea un arreglo de objetos para cada producto que contiene total de costo y unidades compradas por 
+// el usuario junto con la contribución de unidades de cada proveedor
 function getProductArray(jsonData) {
 	var product_array = [];
 	for (var i = 0; i < jsonData.products.length; i++) {
@@ -254,6 +257,9 @@ function getProductArray(jsonData) {
 			product_name = jsonData.products[i].name
 			total_quantity = 0;
 			total_cost = 0;
+
+			var product_units_by_provider = new Array
+			var product_price_by_provider = new Array
 				
 			for (var x = 0; x < jsonData.multiple_offer_combos.length; x++) {
 				combo = jsonData.multiple_offer_combos[x];
@@ -262,8 +268,13 @@ function getProductArray(jsonData) {
 					|| combo.combo_history.status == "selected") {
 					for (var y = 0; y < combo.combo_product_histories.length; y++) {
 						if (combo.combo_product_histories[y].combo_product_history.product_id == product_id) {
-							total_quantity += parseInt(combo.combo_product_histories[y].combo_product_history.units)
-							total_cost += parseInt(combo.combo_product_histories[y].combo_product_history.unitary_price)
+							individual_quantity = parseInt(combo.combo_product_histories[y].combo_product_history.units)
+							total_quantity += individual_quantity
+							individual_cost = parseInt(combo.combo_product_histories[y].combo_product_history.unitary_price)
+							total_cost += individual_cost
+							product_units_by_provider[combo.organization] == undefined ? product_units_by_provider[combo.organization] = individual_quantity : product_units_by_provider[combo.organization] += individual_quantity
+							product_price_by_provider[combo.organization] == undefined ? product_price_by_provider[combo.organization] = individual_cost : product_price_by_provider[combo.organization] += individual_cost
+
 						};
 					};
 				}
@@ -273,8 +284,12 @@ function getProductArray(jsonData) {
 				if (combo.combo_history.status == "received"
 					|| combo.combo_history.status == "selected") {
 						if (combo.combo_product_history.product_id == product_id) {
-							total_quantity += parseInt(combo.combo_product_history.units)
-							total_cost += parseInt(combo.combo_product_history.unitary_price)
+							individual_quantity = parseInt(combo.combo_product_history.units)
+							individual_cost = parseInt(combo.combo_product_history.unitary_price)
+							total_quantity += individual_quantity
+							total_cost += individual_cost
+							product_units_by_provider[combo.organization] == undefined ? product_units_by_provider[combo.organization] = individual_quantity : product_units_by_provider[combo.organization] += individual_quantity
+							product_price_by_provider[combo.organization] == undefined ? product_price_by_provider[combo.organization] = individual_cost : product_price_by_provider[combo.organization] += individual_cost
 						};
 				}
 			};
@@ -282,11 +297,14 @@ function getProductArray(jsonData) {
 				product_id: product_id,
 				product_name: product_name,
 				total_quantity: total_quantity,
-				total_cost: total_cost
+				total_cost: total_cost,
+				units_by_provider: product_units_by_provider,
+				cost_by_provider: product_price_by_provider
 			});
 	};
 	return product_array
 }
+
 
 function setUpCostGraph(product_graph_data) {
 	$('.order_history_graphs_block').append('<div class="graph_label">Gasto total por producto</div>')
@@ -368,7 +386,7 @@ function setUpCostGraph(product_graph_data) {
 
     // Define the div for the tooltip
 	var div = d3.select("body").append("div")	
-	    .attr("class", "tooltip")
+	    .attr("class", "tooltip tooltip_box")
 	    .attr("z-index", "99")				
 	    .style("opacity", 1)
     											
@@ -401,8 +419,6 @@ function setUpCostGraph(product_graph_data) {
 				                .style("opacity", 0);	
     							d3.select(this).style('fill', colorScale(d.total_cost))
     						})
-
-
 }
 
 function setUpUnitGraph(product_graph_data) {
@@ -488,15 +504,13 @@ function setUpUnitGraph(product_graph_data) {
     
         // Define the div for the tooltip
 	var div2 = d3.select("body").append("div")	
-	    .attr("class", "tooltip2")
+	    .attr("class", "tooltip2 tooltip_box")
 	    .attr("z-index", "99")				
 	    .style("opacity", 1)							
 
     var columnAttributes = columns
-    						// .attr('width', function() {return d3.min([width / product_graph_data.length - columnPadding, max_column_width])	;})
     						.attr('width', function(d) {return xAxisScale.rangeBand()})
     						.attr('height', function(d) {return costLinearScale(d.total_quantity); })
-    						// .attr('x', function(d, i) {return  i * ( width / product_graph_data.length);  } )
     						.attr('x', function(d) {return xAxisScale(d.product_name)})
     						.attr('y', function(d) {return height - costLinearScale(d.total_quantity); })
     						.attr('fill', function(d) {return colorScale(d.total_quantity);} )
@@ -505,9 +519,7 @@ function setUpUnitGraph(product_graph_data) {
 				                .duration(0)		
 				                .style("opacity", .9)
 				                div2.html('<span>' + d.product_name +'</span>'+ ' <span style="color:red">' + d.total_quantity + 'Kg</span>')
-				                // $('div.tooltip').offset({ top: event.pageY, left: event.pageX})
 				                $('div.tooltip2').offset({ top: d3.event.pageY-50, left: d3.event.pageX})
-    							// console.log(d3.mouse(this)[0])
     							d3.select(this).style('fill', '#4FAE3A')
     						})
     						.on('mousemove', function(d, i) {
@@ -519,14 +531,230 @@ function setUpUnitGraph(product_graph_data) {
 				                .style("opacity", 0);	
     							d3.select(this).style('fill', colorScale(d.total_quantity))
     						})
+}
 
-    // var text = product_unit_graph.selectAll('text')
-    // 					.data(product_graph_data)
-    // 					.enter()
-				// 	    .append('text')
-    // 					.attr('x', function(d) {return xAxisScale(d.product_name)})
-    // 					.attr('y', function(d) {return height - costLinearScale(d.units);})
-    // 					.text(function(d) {return d.units})
+function setUpProductsPieGraph(product_graph_data) {
+
+	var width = 960,
+	    height = 500; // adjust for height of input bar div
+
+	var color = d3.scale.category20();
+
+	// draw and append the container
+	var svg = d3.select(".order_history_products_graphs_block").append("svg")
+	  .attr("width", width).attr("height", height);
+
+	// set the thickness of the inner and outer radii
+	var min = Math.min(width, height);
+	var oRadius = min / 2 * 0.9;
+	var iRadius = min / 2 * 0.85;
+
+	// construct default pie laoyut
+	var pie = d3.layout.pie().value(function(d){ return d.units; }).sort(null);
+
+	// construct arc generator
+	var arc = d3.svg.arc()
+	  .outerRadius(oRadius)
+	  .innerRadius(iRadius);
+
+	// creates the pie chart container
+	var g = svg.append('g')
+	var g = svg.append('g')
+	  .attr('transform', function(){
+	    if ( window.innerWidth >= 960 ) var shiftWidth = width / 2;
+	    if ( window.innerWidth < 960 ) var shiftWidth = width / 3;
+	    return 'translate(' + shiftWidth + ',' + height / 2 + ')';
+	  })
+
+	var data = new Array
+	for(key in general_graph_data[0].units_by_provider) {
+		data.push({provider_name: key, units: general_graph_data[0].units_by_provider[key]})
+	}
+
+	// enter data and draw pie chart
+	var path = g.datum(data).selectAll("path")
+	  .data(pie)
+	  .enter().append("path")
+	    .attr("class","piechart")
+	    .attr("fill", function(d,i){ return color(i); })
+	    .attr("d", arc)
+	    .each(function(d){ this._current = d; })
+
+	function render(index){
+	  data = new Array
+	  any = false; 
+	  data.push({prodiver_name: "empty", units: 1})
+		for(key in general_graph_data[index].units_by_provider) {
+			any = true
+			data.push({provider_name: key, units: general_graph_data[index].units_by_provider[key]})
+		}
+
+		if (any) {
+			data[0].units = 0;
+		};
+	  // add transition to new path
+	  g.datum(data).selectAll("path").data(pie).transition().duration(1000).attrTween("d", arcTween)
+
+	  // add any new paths
+	  g.datum(data).selectAll("path")
+	    .data(pie)
+	  .enter().append("path")
+	    .attr("class","piechart")
+	    .attr("fill", function(d,i){ return color(i); })
+	    .attr("d", arc)
+	    .each(function(d){ this._current = d; })
+
+	  // remove data not being used
+	  g.datum(data).selectAll("path")
+	    .data(pie).exit().remove();
+	}
+
+	$('select.product_selection').on('change', function(e) {
+		selected_id = $('select option:selected').val()
+		index = 0;
+		for (key in general_graph_data) {
+			if (general_graph_data[key].product_id == selected_id) {
+				break;
+			};
+			index++;
+		};
+
+		render(index)
+	})
+
+	render(0);
+	function makeData(size){
+	  return d3.range(size).map(function(item){
+	   return Math.random()*100;
+	  });
+	};
+
+	// Store the displayed angles in _current.
+	// Then, interpolate from _current to the new angles.
+	// During the transition, _current is updated in-place by d3.interpolate.
+	function arcTween(a) {
+	  var i = d3.interpolate(this._current, a);
+	  this._current = i(0);
+	  return function(t) {
+	    return arc(i(t));
+	  };
+	}
+}
+
+// indicastes price paid to each provider for product
+function setUpProductsGraph(product_graph_data) {
+	// Titulo
+	$('.order_history_graphs_block').append('<div class="graph_label">Cost por proveedor</div>')
+	var canvasWidth = 500;
+	var canvasHeight = 250;
+	var xPadding = 50;
+	var yPadding = 100;
+	var height = canvasHeight - yPadding;
+	var width = canvasWidth - xPadding;
+
+	
+	var columnPadding = 1;
+	
+	dataset = new Array
+	for(key in general_graph_data[0].units_by_provider) {
+		dataset.push({provider_name: key, units: general_graph_data[0].cost_by_provider[key]})
+	}
+
+
+	max_units = d3.max(product_graph_data.map(function(d) {return general_graph_data[0].total_quantity}));
+
+	var costLinearScale = d3.scale.linear()
+								.domain([0, max_units])
+								.range([1, height]);
+
+    var yAxisScale = d3.scale.linear()
+    							.domain([ max_units, 0])
+								.range([1, height]);
+    
+	var xAxisScale = d3.scale.ordinal()
+					    .domain(product_graph_data.map(function(d) {return d.provider_name}))
+					    .rangeRoundBands([0, width], .1);
+
+	var xAxis = d3.svg.axis()
+					    .scale(xAxisScale)
+					    .orient("bottom");					    
+
+	var yAxis = d3.svg.axis()
+						.scale(yAxisScale)
+						.orient('left')
+						.innerTickSize([width])
+						.outerTickSize([10])
+
+
+    var colorScale = d3.scale.linear()
+    							.domain([0, max_units/2, max_units])
+    							.range(['#F44410', '#F5DA29', '#7D4BA4'])
+    							// .domain([0, max_units*.25, max_units*.5, max_units*.75, max_units])
+    							// .range(['#F44410','#7D4BA4', '#2380D8', '#E27612', '#F54511'])
+
+
+
+    var product_unit_graph = d3.select('.order_history_graphs_block').append('svg')
+    															.attr('width', canvasWidth)
+    															.attr('height', canvasHeight)
+    															.append('g')
+    															.attr('transform', 'translate(0, 5)')
+    var y_axis = product_unit_graph.append('g')
+									.attr('class', 'y Axis')
+									.attr('transform', 'translate(' + canvasWidth + ')')
+    								.call(yAxis)
+
+    product_unit_graph.append("g")
+							    .attr("class", "x Axis")
+							    .attr('transform', 'translate(' + xPadding + ', ' + height + ')')
+							    .call(xAxis)
+							    .selectAll("text")  
+						            .style("text-anchor", "end")
+						            .attr("dx", "-.8em")
+						            .attr("dy", ".15em")
+						            .attr("transform", "rotate(-75)" );
+
+
+    var column_group = product_unit_graph.append('g')
+    											.attr('class', 'column_group')
+    											.attr('transform', 'translate(' + xPadding + ')');
+
+
+
+    var columns = column_group.selectAll('rect')
+    											.data(product_graph_data)
+    											.enter()
+    											.append('rect')
+    
+        // Define the div for the tooltip
+	var div2 = d3.select("body").append("div")	
+	    .attr("class", "tooltip4 tooltip_box")
+	    .attr("z-index", "99")				
+	    .style("opacity", 1)							
+
+    var columnAttributes = columns
+    						.attr('width', function(d) {return xAxisScale.rangeBand()})
+    						.attr('height', function(d) {return costLinearScale(d.total_quantity); })
+    						.attr('x', function(d) {return xAxisScale(d.product_name)})
+    						.attr('y', function(d) {return height - costLinearScale(d.total_quantity); })
+    						.attr('fill', function(d) {return colorScale(d.total_quantity);} )
+    						.on('mouseover', function(d, i) {
+						       div2.transition()		
+				                .duration(0)		
+				                .style("opacity", .9)
+				                div2.html('<span>' + d.product_name +'</span>'+ ' <span style="color:red">' + d.total_quantity + 'Kg</span>')
+				                $('div.tooltip4').offset({ top: d3.event.pageY-50, left: d3.event.pageX})
+    							d3.select(this).style('fill', '#4FAE3A')
+    						})
+    						.on('mousemove', function(d, i) {
+    							$('div.tooltip4').offset({ top: d3.event.pageY-50, left: d3.event.pageX})
+    						})
+    						.on('mouseout', function(d, i) {
+						       div2.transition()		
+				                .duration(0)		
+				                .style("opacity", 0);	
+    							d3.select(this).style('fill', colorScale(d.total_quantity))
+    						})
 }
 
 function assignBlockIds() {
@@ -540,7 +768,19 @@ function assignBlockIds() {
 
 		if ((i + 1) % blockSize == 0) { block_group++};
 	};
+}
 
+function addProductSelectionBox(jsonData) {
+	selectionBox = "<select class='product_selection'>"
+	for (var i = 0; i < jsonData.products.length; i++) {
+		productOption = "<option value='" + jsonData.products[i].id + "'>"
+		productOption += jsonData.products[i].name
+		productOption += "</option>"
+		selectionBox += productOption
+		
+	};
+	selectionBox += "</select>"
+	$('.order_history_products_graphs_block').append(selectionBox)
 }
 
 assignBlockIds();
