@@ -20,7 +20,7 @@ class Order < ActiveRecord::Base
 	enum status: [:open, :locked, :closed]
 
 	def due_date_past?
-		self.due_date <= Time.now
+		self.due_date <= Time.zone.now
 	end
 
 	def is_locked?

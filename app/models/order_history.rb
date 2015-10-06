@@ -33,7 +33,7 @@ class OrderHistory < ActiveRecord::Base
 	end
 
 	def due_date_past?
-		self.due_date <= Time.now
+		self.due_date <= Time.zone.now
 	end
 
 	def is_locked?
@@ -104,9 +104,9 @@ class OrderHistory < ActiveRecord::Base
 	# regresa un hash donde se clasifican los historiales de ordenes por mes (order history controller)
 	def self.get_order_histories_hash(year, user_id)
 		order_histories = Hash.new()
-		for i in 1..Time.now.month
+		for i in 1..Time.zone.now.month
 			# busca ordenes creadas en el mes # i
-			earliest = Time.new(Time.now.year, i) 
+			earliest = Time.new(Time.zone.now.year, i) 
 			latest = earliest.end_of_month 
 
 			order_histories[i] = OrderHistory.where(user_id: user_id, created_at: (earliest..latest))

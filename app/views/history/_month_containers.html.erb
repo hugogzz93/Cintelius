@@ -6,7 +6,7 @@
 		<span class="header_span"> <%= t "months" %> </span>  <span class="header_span header_subspan"> <%= t "orders" %> </span>
 	</div>
 
-	<% for i in 1..Time.now.month %>
+	<% for i in 1..Time.zone.now.month %>
 	<div class="month_table_row" data-month=" <%= i %> ">
 		<%= t Date::MONTHNAMES[i] %> 
 		<div class="order_quantity_span"> <%= @order_histories[i].size %> </div>
@@ -22,13 +22,13 @@
 		</header>
 
 	<div class="table_overflow_container">
-		<% for i in 1..Time.now.month %>
+		<% for i in 1..Time.zone.now.month %>
 			<% order_histories[i].each do |order_history| %>
 				<%= link_to order_history_path(id: order_history.id), class: "order_history_link", data: { order_history_id: order_history.id, month_number: i},  remote: true do %>
 				
 					<!-- <div class=""> data-order-history-id=" <%= order_history.id %> "> -->
 						<span class="span_order_title"> <%= order_history.title %> </span>
-						<span class="span_order_date"> <%= l order_history.due_date.in_time_zone("America/Monterrey"), format: :cust_monthless %> </span>
+						<span class="span_order_date"> <%= l order_history.due_date.in_time_zone(current_user.time_zone), format: :cust_monthless %> </span>
 						<span class="span_order_cost"> $<%= order_history.total_cost %> </span>
 					<!-- </div> -->
 

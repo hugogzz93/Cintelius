@@ -10,12 +10,12 @@ class CombosController < ApplicationController
 			format.js {
 				@combo = current_user.combos.build(combo_params)
 				@order = @combo.order
-				if @order.due_date > Time.now and @combo.save
+				if @order.due_date > Time.zone.now and @combo.save
 					@success = true
 				else
 					@success = false
-					@due_date = l @order.due_date.in_time_zone("America/Monterrey"), format: :cust
-					@message = @due_date + " era la fecha limite para hacer ofertas a esta orden." if @order.due_date < Time.now
+					@due_date = l @order.due_date.in_time_zone(current_user.time_zone), format: :cust
+					@message = @due_date + " era la fecha limite para hacer ofertas a esta orden." if @order.due_date < Time.zone.now
 				end
 			}
 		end

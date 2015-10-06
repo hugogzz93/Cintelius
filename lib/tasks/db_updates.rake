@@ -5,5 +5,5 @@ task :check_order_due_date => :environment do
 			puts "Updated #{order.id}: #{order.title}"
 		end
 	end	
-	puts "Order due_Date update: #{I18n.l Time.now, format: :cust}"
+	puts "Order due_Date update: #{I18n.l Time.zone.now, format: :cust}"
 end
