@@ -61,6 +61,13 @@
         <%= user_detail.telephone_field :telephone, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
       </div>
 
+      <div class="field">
+        <div class="form_label">
+          <span>Tiempo Local</span> <span style="color:#20bdff">*</span>
+        </div>
+        <%= user_detail.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %>
+      </div>
+
       <div class="field account_type_field">
           <div class="form_label">
             <span>Vendedor</span> <span style="color:#20bdff">*</span>

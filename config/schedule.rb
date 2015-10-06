@@ -23,6 +23,6 @@ set :output, "#{path}/log/cron.log"
 
 # every 1.minutes do 
 # 	rake "check_order_due_date"
-# 	puts "#{Time.now}"
+# 	puts "#{Time.zone.now}"
 # end
 

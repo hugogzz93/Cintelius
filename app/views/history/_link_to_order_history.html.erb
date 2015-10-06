@@ -6,12 +6,12 @@
 
 	<div class="history_link_date">
 		<span style="margin-right: 23.5px;">Creado:</span>
-		<%= l order_history.created_at.in_time_zone("America/Monterrey"), format: :cust %>
+		<%= l order_history.created_at.in_time_zone(current_user.time_zone), format: :cust %>
 	</div>
 
 	<div class="history_link_date">
 		<span>Terminado:</span>
-		<%= l order_history.updated_at.in_time_zone("America/Monterrey"), format: :cust %>
+		<%= l order_history.updated_at.in_time_zone(current_user.time_zone), format: :cust %>
 	</div>
 
 <% end %>

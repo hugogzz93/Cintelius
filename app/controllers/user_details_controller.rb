@@ -1,5 +1,6 @@
 class UserDetailsController < ApplicationController
 	before_action :authenticate_user!
+	validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.zones_map(&:name)
 
 	def edit
 		respond_to do |format|
@@ -25,7 +26,7 @@ class UserDetailsController < ApplicationController
 
 	private
 		def user_detail_params
-			params.require(:user_detail).permit(:organization, :address, :telephone)
+			params.require(:user_detail).permit(:organization, :address, :telephone, :time_zone)
 		end
 
 end

@@ -48,6 +48,10 @@ class User < ActiveRecord::Base
     self.service_score.get_score
   end
 
+  def time_zone
+    self.user_detail.time_zone
+  end
+
   def closed_orders
     
   end
