@@ -6,7 +6,6 @@ class RegistrationsController < Devise::RegistrationsController
 	end
 
 	def create
-		exit
 		super
 		params[:user_detail][:credentials] = params[:user_detail][:credentials].to_i
 		if current_user

@@ -12,7 +12,6 @@ class OrdersController < ApplicationController
 	end
 
 	def create
-		# exit
 		# params[:order][:due_date] = params[:order][:due_date] + " " +params[:order][:due_time]
 		time = ActiveSupport::TimeZone[current_user.time_zone].parse(params[:order][:due_date] + " " +params[:order][:due_time])
 		params[:order][:due_date] = time.to_s
