@@ -113,7 +113,7 @@ $.ajax({
 		// graficas productos individuales
 		addProductSelectionBox(jsonData);
 		setUpProductsPieGraph(general_graph_data);
-		// setUpProductsGraph(product_graph_data)
+		setUpProductsGraph(product_graph_data)
 		// setUpPie();
 
 		
@@ -515,6 +515,7 @@ function setUpUnitGraph(product_graph_data) {
     						.attr('y', function(d) {return height - costLinearScale(d.total_quantity); })
     						.attr('fill', function(d) {return colorScale(d.total_quantity);} )
     						.on('mouseover', function(d, i) {
+    							console.log('e')
 						       div2.transition()		
 				                .duration(0)		
 				                .style("opacity", .9)
@@ -535,10 +536,10 @@ function setUpUnitGraph(product_graph_data) {
 
 function setUpProductsPieGraph(product_graph_data) {
 
-	var width = 960,
-	    height = 500; // adjust for height of input bar div
+	var width = 250,
+	    height = 200; // adjust for height of input bar div
 
-	var color = d3.scale.category20();
+	var color = d3.scale.category10();
 
 	// draw and append the container
 	var svg = d3.select(".order_history_products_graphs_block").append("svg")
@@ -546,16 +547,24 @@ function setUpProductsPieGraph(product_graph_data) {
 
 	// set the thickness of the inner and outer radii
 	var min = Math.min(width, height);
-	var oRadius = min / 2 * 0.9;
-	var iRadius = min / 2 * 0.85;
+	var oRadius = min / 2 * 0.85;
+	var iRadius = min / 2 * 0.78;
 
 	// construct default pie laoyut
 	var pie = d3.layout.pie().value(function(d){ return d.units; }).sort(null);
 
+	var tooltiper = d3.select("body").append("div")	
+	    .attr("class", "pie_tooltip tooltip_box")
+	    .attr("z-index", "99")				
+	    .style("opacity", 1)	
+
 	// construct arc generator
 	var arc = d3.svg.arc()
 	  .outerRadius(oRadius)
-	  .innerRadius(iRadius);
+	  .innerRadius(iRadius)
+	  
+
+	
 
 	// creates the pie chart container
 	var g = svg.append('g')
@@ -565,6 +574,7 @@ function setUpProductsPieGraph(product_graph_data) {
 	    if ( window.innerWidth < 960 ) var shiftWidth = width / 3;
 	    return 'translate(' + shiftWidth + ',' + height / 2 + ')';
 	  })
+	  
 
 	var data = new Array
 	for(key in general_graph_data[0].units_by_provider) {
@@ -576,14 +586,15 @@ function setUpProductsPieGraph(product_graph_data) {
 	  .data(pie)
 	  .enter().append("path")
 	    .attr("class","piechart")
-	    .attr("fill", function(d,i){ return color(i); })
+   	    .attr("fill", function(d,i){ return color(i); })
 	    .attr("d", arc)
 	    .each(function(d){ this._current = d; })
+
 
 	function render(index){
 	  data = new Array
 	  any = false; 
-	  data.push({prodiver_name: "empty", units: 1})
+	  data.push({provider_name: "empty", units: 1})
 		for(key in general_graph_data[index].units_by_provider) {
 			any = true
 			data.push({provider_name: key, units: general_graph_data[index].units_by_provider[key]})
@@ -596,18 +607,45 @@ function setUpProductsPieGraph(product_graph_data) {
 	  g.datum(data).selectAll("path").data(pie).transition().duration(1000).attrTween("d", arcTween)
 
 	  // add any new paths
+	  console.log("E")
 	  g.datum(data).selectAll("path")
 	    .data(pie)
 	  .enter().append("path")
 	    .attr("class","piechart")
-	    .attr("fill", function(d,i){ return color(i); })
+	    .attr("fill", function(d,i){ 
+	    	console.log(i)
+	    	console.log(color(i))
+	    	return i > 1 ? color(i + 1) : color(i); 
+	    })
 	    .attr("d", arc)
-	    .each(function(d){ this._current = d; })
+	    .each(function(d){ 
+	    	this._current = d; 
+	    })
 
 	  // remove data not being used
 	  g.datum(data).selectAll("path")
 	    .data(pie).exit().remove();
+
+	   d3.selectAll('.piechart').on('mouseover', function(d, i) {
+	       tooltiper.transition()		
+            .duration(0)		
+            .style("opacity", .9)
+            tooltiper.html('<span>' + this.__data__.data.provider_name +'</span>'+ ' <span style="color:red">' + this.__data__.data.units + 'Kg</span>')
+            $('div.pie_tooltip').offset({ top: d3.event.pageY-50, left: d3.event.pageX})
+			d3.select(this).style('fill', '#4FAE3A')
+		})
+		.on('mousemove', function(d, i) {
+			$('div.pie_tooltip').offset({ top: d3.event.pageY-50, left: d3.event.pageX})
+		})
+		.on('mouseout', function(d, i) {
+	       tooltiper.transition()		
+            .duration(0)		
+            .style("opacity", 0);	
+			d3.select(this).style('fill', i > 1 ? color(i + 1) : color(i))
+		})
 	}
+
+	
 
 	$('select.product_selection').on('change', function(e) {
 		selected_id = $('select option:selected').val()
@@ -644,7 +682,7 @@ function setUpProductsPieGraph(product_graph_data) {
 // indicastes price paid to each provider for product
 function setUpProductsGraph(product_graph_data) {
 	// Titulo
-	$('.order_history_graphs_block').append('<div class="graph_label">Cost por proveedor</div>')
+	$('.order_history_products_graphs_block').append('<div class="graph_label">Cost por proveedor</div>')
 	var canvasWidth = 500;
 	var canvasHeight = 250;
 	var xPadding = 50;
@@ -694,7 +732,7 @@ function setUpProductsGraph(product_graph_data) {
 
 
 
-    var product_unit_graph = d3.select('.order_history_graphs_block').append('svg')
+    var product_unit_graph = d3.select('.order_history_products_graphs_block').append('svg')
     															.attr('width', canvasWidth)
     															.attr('height', canvasHeight)
     															.append('g')
@@ -784,3 +822,25 @@ function addProductSelectionBox(jsonData) {
 }
 
 assignBlockIds();
+
+// var path_tooltip = $('path.piechart');
+//      	path_tooltip.on('hover', function(e) {
+// 	    	console.log('e')
+// 	    	target = $(e.target)
+// 	       tooltiper.transition()		
+//             .duration(0)		
+//             .style("opacity", .9)
+//             tooltiper.html('<span>' + target.attr("provider") +'</span>'+ ' <span style="color:red">' + target.attr("units") + 'Kg</span>')
+//             $('.pie_tooltip').offset({ top: d3.event.pageY-50, left: d3.event.pageX})
+// 			d3.select(this).style('fill', '#4FAE3A')
+// 		})
+// 		path_tooltip.on('mousemove', function(e) {
+// 			$('.pie_tooltip').offset({ top: d3.event.pageY-50, left: d3.event.pageX})
+// 		})
+// 		path_tooltip.on('mouseout', function(e) {
+// 		   target = $(e.target)
+// 	       tooltiper.transition()		
+//             .duration(0)		
+//             .style("opacity", 0);	
+// 			d3.select(this).style('fill', "red")
+// 		})
