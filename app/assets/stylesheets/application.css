@@ -4020,6 +4020,36 @@ input#user_detail_telephone {
     float: right;
     margin-right: 5em;
   }
+
+  .product_not_bought_message {
+    position: relative;
+    padding: .4em 0em .4em 0em;
+    margin: .5em .5em .5em 0.5em;
+    background: #fdfdfd;
+    color: #444;
+    text-decoration: none;
+    border-radius: 0;
+    border: 1px solid rgba(0,0,0,.1);
+    font-size: 14px;
+    overflow: auto;
+    text-align: center;
+  }
+
+  svg#product_donut_graph {
+    float: left;
+    border-radius: 8px;
+    margin-right: 1em;
+    margin-left: 1em;
+  }
+
+  svg#individual_product_cost_chart {
+    float: left;
+    margin: auto;
+    background-color: rgba(243,243,243,0.5);
+    padding-right: 20px;
+    padding-top: 20px;
+    border-radius: 8px;
+  }
   /*end product_graph block*/
 /*}*/
 
