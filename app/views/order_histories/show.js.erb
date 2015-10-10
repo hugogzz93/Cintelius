@@ -177,7 +177,7 @@ function setUpOrderDetails(jsonData) {
 			product_headers += "<div class='product_header hidden' product_id='" + id + 
 									"' data-block-group='" + block_group + "'>"
 
-				product_headers += name;
+			product_headers += name;
 			product_headers += "</div>"
 
 			if ((i + 1) % groupOfferScreenAmount == 0) { block_group++};
@@ -246,8 +246,6 @@ function setUpOrderDetails(jsonData) {
 		};
 }
 
-
-
 // crea un arreglo de objetos para cada producto que contiene total de costo y unidades compradas por 
 // el usuario junto con la contribución de unidades de cada proveedor
 function getProductArray(jsonData) {
@@ -294,12 +292,15 @@ function getProductArray(jsonData) {
 				}
 			};
 
-			// if (product_price_by_provider.length > 0) {
-			reformatted_cost_by_provider = new Array;
-			Object.keys(product_price_by_provider).map(function(obj) {
-			   var rObj = {key: obj, value: product_price_by_provider[obj] }
-			    reformatted_cost_by_provider.push(rObj);
-			})
+
+			function format_data(data) {
+				reformatted_data = new Array;
+				Object.keys(data).map(function(obj) {
+				   var rObj = {key: obj, value: data[obj] }
+				    reformatted_data.push(rObj);
+				})
+				return reformatted_data;
+			}
 			
 
 			product_array.push({
@@ -307,8 +308,8 @@ function getProductArray(jsonData) {
 				product_name: product_name,
 				total_quantity: total_quantity,
 				total_cost: total_cost,
-				units_by_provider: product_units_by_provider,
-				cost_by_provider: reformatted_cost_by_provider
+				units_by_provider: format_data(product_units_by_provider),
+				cost_by_provider: format_data(product_price_by_provider)
 			});
 	};
 	return product_array
@@ -549,9 +550,10 @@ function setUpProductsPieGraph(product_graph_data) {
 	    height = 200; // adjust for height of input bar div
 
 	var legendRectSize = 5;
+	var legendSpacing = 3;
+	var legend_xshift = -50;
 
 	var color = d3.scale.ordinal()
-					// .range(['#7f7f7f', '#1f77b4', '#ff7f0e', '#8c564b', '#d62728', ' #ff9896']);
 					.range(['#3182bd','#e6550d', '#756bb1', '#636363'])
 
 	// draw and append the container
@@ -564,7 +566,7 @@ function setUpProductsPieGraph(product_graph_data) {
 	var iRadius = min / 2 * 0.78;
 
 	// construct default pie laoyut
-	var pie = d3.layout.pie().value(function(d){ return d.units; }).sort(null);
+	var pie = d3.layout.pie().value(function(d){ return d.value; }).sort(null);
 
 	var tooltiper = d3.select("body").append("div")	
 	    .attr("class", "pie_tooltip tooltip_box")
@@ -575,20 +577,6 @@ function setUpProductsPieGraph(product_graph_data) {
 	var arc = d3.svg.arc()
 	  .outerRadius(oRadius)
 	  .innerRadius(iRadius)
-	  
-
-	
-
-	// creates the pie chart container
-	var pie_legend = svg.append('rect')
-						.attr('class', 'pie_legend')
-						.attr('x', legendRectSize)
-						.attr('y', legendRectSize)
-						.attr('transform', function(){
-					    	if ( window.innerWidth >= 960 ) var shiftWidth = width / 2;
-					    	if ( window.innerWidth < 960 ) var shiftWidth = width / 3;
-					    	return 'translate(' + shiftWidth + ',' + height / 2 + ')';
-					    })
 
 	var g = svg.append('g')
 	  .attr('transform', function(){
@@ -598,11 +586,7 @@ function setUpProductsPieGraph(product_graph_data) {
 	  })
 	  
 
-	var data = new Array
-	for(key in general_graph_data[0].units_by_provider) {
-		data.push({provider_name: key, units: general_graph_data[0].units_by_provider[key]})
-	}
-
+	var data = product_graph_data[0].units_by_provider
 	// enter data and draw pie chart
 	var path = g.datum(data).selectAll("path")
 	  .data(pie)
@@ -612,20 +596,25 @@ function setUpProductsPieGraph(product_graph_data) {
 	    .attr("d", arc)
 	    .each(function(d){ this._current = d; })
 
+	var pie_legend = g.append('g')
+					.attr('class', 'legend')
+					// .attr('transform', function(){
+					//     if ( window.innerWidth >= 960 ) var shiftWidth = width / 2;
+					//     if ( window.innerWidth < 960 ) var shiftWidth = width / 3;
+					//     return 'translate(' + shiftWidth + ',' + height / 2 + ')';
+					//   })
+					.attr('transform', function() {
+						return 'translate(' + legend_xshift + ', 0)';
+					})
+					.append('text')
+					  .attr('x', legendRectSize + legendSpacing)
+					  .attr('y', legendRectSize - legendSpacing)
+					  .html(function(d) {  return general_graph_data[index].total_quantity });
+
 
 	function render(index){
-	  data = new Array
-	  any = false; 
-	  // data.push({provider_name: "empty", units: 1})
-		for(key in general_graph_data[index].units_by_provider) {
-			any = true
-			data.push({provider_name: key, units: general_graph_data[index].units_by_provider[key]})
-		}
-		debugger;
+	  data = general_graph_data[index].units_by_provider
 
-		if (any) {
-			data[0].units = 0;
-		};
 	  // add transition to new path
 	  g.datum(data).selectAll("path").data(pie).transition().duration(1000).attrTween("d", arcTween)
 
@@ -650,7 +639,7 @@ function setUpProductsPieGraph(product_graph_data) {
 	       tooltiper.transition()		
             .duration(0)		
             .style("opacity", .9)
-            tooltiper.html('<span>' + this.__data__.data.provider_name +'</span>'+ ' <span style="color:red">' + this.__data__.data.units + 'Kg</span>')
+            tooltiper.html('<span>' + this.__data__.data.key +'</span>'+ ' <span style="color:red">' + this.__data__.data.value + 'Kg</span>')
             $('div.pie_tooltip').offset({ top: d3.event.pageY-50, left: d3.event.pageX})
 			d3.select(this).style('fill', '#4FAE3A')
 		})
@@ -664,11 +653,8 @@ function setUpProductsPieGraph(product_graph_data) {
 			d3.select(this).style('fill', color(i))
 		})
 
-
-		pie_legend.html(general_graph_data[index].product_name);
+		pie_legend.html(general_graph_data[index].total_quantity);
 	}
-
-	
 
 	$('select.product_selection').on('change', function(e) {
 		selected_id = $('select option:selected').val()
@@ -738,17 +724,17 @@ function setUpProductsGraph(product_graph_data) {
 	    .style("opacity", 1)
 						    
 	function draw(data) {
+		debugger;
 		if (data.length == 0) {
 			$('.product_not_bought_message').removeClass('hidden');
-
-			$('#individual_product_cost_chart').addClass("hidden");
+			$('#individual_product_cost_chart').attr("display", "none");
 			$('#product_donut_graph').css('display', 'none');
-			$('select.product_selection').addClass("hidden");
+			// $('select.product_selection').addClass("hidden");
 		} else {
 			$('.product_not_bought_message').addClass('hidden')
-			$('#individual_product_cost_chart').removeClass("hidden");
+			$('#individual_product_cost_chart').removeAttr("display", "initial");
 			$('#product_donut_graph').css('display', 'initial')
-			$('select.product_selection').removeClass("hidden")
+			// $('select.product_selection').removeClass("hidden")
 		}
 		max_units = d3.max(data.map(function(d) {
 			return d.value
@@ -824,16 +810,15 @@ function setUpProductsGraph(product_graph_data) {
 				.attr('fill', function(d) {return colorScale(d.value);} )
 
 	    columns.exit().remove();
-};
+	};
 
-function update(index) {
-    console.log("here");
-    var data = product_graph_data[index].cost_by_provider;
+	function update(index) {
+	    console.log("here");
+	    var data = product_graph_data[index].cost_by_provider;
+	    draw(data);
+	};
 
-    draw(data);
-};
-
-$('select.product_selection').on('change', function(e) {
+	$('select.product_selection').on('change', function(e) {
 		selected_id = $('select option:selected').val()
 		index = 0;
 		for (key in general_graph_data) {
@@ -850,109 +835,8 @@ $('select.product_selection').on('change', function(e) {
 
 
 
-dataset = product_graph_data[3].cost_by_provider;
-draw(dataset);
-
-// 	// Titulo
-// 	$('.order_history_products_graphs_block').append('<div class="graph_label">Costo por proveedor</div>')
-
-
-	
-// 	var columnPadding = 1;
-	
-// 	var costLinearScale = d3.scale.linear()
-// 								.domain([0, max_units])
-// 								.range([1, height]);
-
-//     var yAxisScale = d3.scale.linear()
-//     							.domain([ max_units, 0])
-// 								.range([1, height]);
-    
-// 	var xAxisScale = d3.scale.ordinal()
-// 					    .domain(product_graph_data.map(function(d) {return d.provider_name}))
-// 					    .rangeRoundBands([0, width], .1);
-
-// 	var xAxis = d3.svg.axis()
-// 					    .scale(xAxisScale)
-// 					    .orient("bottom");					    
-
-// 	var yAxis = d3.svg.axis()
-// 						.scale(yAxisScale)
-// 						.orient('left')
-// 						.innerTickSize([width])
-// 						.outerTickSize([10])
-
-
-//     var colorScale = d3.scale.category10()
-//     						// .linear()
-//     						// 	.domain([0, max_units/2, max_units])
-//     						// 	.range(['#F44410', '#F5DA29', '#7D4BA4'])
-//     							// .domain([0, max_units*.25, max_units*.5, max_units*.75, max_units])
-//     							// .range(['#F44410','#7D4BA4', '#2380D8', '#E27612', '#F54511'])
-
-
-
-//     var product_unit_graph = d3.select('.order_history_products_graphs_block').append('svg')
-//     															.attr('width', canvasWidth)
-//     															.attr('height', canvasHeight)
-//     															.append('g')
-//     															.attr('transform', 'translate(0, 5)')
-//     var y_axis = product_unit_graph.append('g')
-// 									.attr('class', 'y Axis')
-// 									.attr('transform', 'translate(' + canvasWidth + ')')
-//     								.call(yAxis)
-
-//     product_unit_graph.append("g")
-// 							    .attr("class", "x Axis")
-// 							    .attr('transform', 'translate(' + xPadding + ', ' + height + ')')
-// 							    .call(xAxis)
-// 							    .selectAll("text")  
-// 						            .style("text-anchor", "end")
-// 						            .attr("dx", "-.8em")
-// 						            .attr("dy", ".15em")
-// 						            .attr("transform", "rotate(-75)" );
-
-
-//     var column_group = product_unit_graph.append('g')
-//     											.attr('class', 'column_group')
-//     											.attr('transform', 'translate(' + xPadding + ')');
-
-
-
-//     var columns = column_group.selectAll('rect')
-//     											.data(product_graph_data)
-//     											.enter()
-//     											.append('rect')
-    
-//         // Define the div for the tooltip
-// 	var div2 = d3.select("body").append("div")	
-// 	    .attr("class", "tooltip4 tooltip_box")
-// 	    .attr("z-index", "99")				
-// 	    .style("opacity", 1)							
-
-//     var columnAttributes = columns
-//     						.attr('width', function(d) {return xAxisScale.rangeBand()})
-//     						.attr('height', function(d) {return costLinearScale(d.total_quantity); })
-//     						.attr('x', function(d) {return xAxisScale(d.product_name)})
-//     						.attr('y', function(d) {return height - costLinearScale(d.total_quantity); })
-//     						.attr('fill', function(d) {return colorScale(d.total_quantity);} )
-//     						.on('mouseover', function(d, i) {
-// 						       div2.transition()		
-// 				                .duration(0)		
-// 				                .style("opacity", .9)
-// 				                div2.html('<span>' + d.product_name +'</span>'+ ' <span style="color:red">' + d.total_quantity + 'Kg</span>')
-// 				                $('div.tooltip4').offset({ top: d3.event.pageY-50, left: d3.event.pageX})
-//     							d3.select(this).style('fill', '#4FAE3A')
-//     						})
-//     						.on('mousemove', function(d, i) {
-//     							$('div.tooltip4').offset({ top: d3.event.pageY-50, left: d3.event.pageX})
-//     						})
-//     						.on('mouseout', function(d, i) {
-// 						       div2.transition()		
-// 				                .duration(0)		
-// 				                .style("opacity", 0);	
-//     							d3.select(this).style('fill', colorScale(d.total_quantity))
-//     						})
+	dataset = product_graph_data[3].cost_by_provider;
+	draw(dataset);
 }
 
 function assignBlockIds() {

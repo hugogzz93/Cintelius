@@ -9,12 +9,12 @@
 
 	<div class="combo_product_form_units">
 		<span class="combo_product_form_label unit_code">Kg</span>
-		<%= d.number_field :units, class: "combo_product_unit_field", value: 0.00, step: 0.1, min: 0.1, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)"  %>	
+		<%= d.number_field :units, class: "combo_product_unit_field", value: 0.00,step: 0.5, within: 1...100000, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)"  %>	
 	</div>
 
 	<div class="combo_product_form_price">
 		<span class="combo_product_form_label unit_code">Unitario <%= t "currency_code" %></span>
-		<%= d.number_field :unitary_price, class: "combo_product_price_field", value: 0.00, step: 0.01, min: 0.01, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>	
+		<%= d.number_field :unitary_price, class: "combo_product_price_field", value: 0.00, step: 0.5, within: 1...100000, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>	
 	</div>
 
 	<!-- escondido -->

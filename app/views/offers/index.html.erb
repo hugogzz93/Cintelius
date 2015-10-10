@@ -5,7 +5,7 @@
 		</div>
 
 		<ul class="order_list">
-			<% @orders.each do |order|  %>
+			<% @orders.reverse.each do |order|  %>
 				<!-- verifica que la orden es relevante para el vendedor -->
 				<% unless !order.is_accepting_offers? and !order.has_combo_from_user(current_user) %>			
 					<% if order.has_selected_combo_from_user(current_user) %>
