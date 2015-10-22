@@ -3984,6 +3984,15 @@ input#user_detail_telephone {
     text-align: center;
 }
 
+  .order_history_products_graphs_block .graph_label.2 {
+      margin-left: 40%;
+      float: left;
+  }
+
+  .order_history_products_graphs_block .graph_label.1 {
+      margin-left: 40%;
+  }
+
   .Axis line, .xAxis line {
     fill: none;
     stroke: black;
@@ -4006,6 +4015,24 @@ input#user_detail_telephone {
     font-size: 11px;
     font-family: helvetica;
 }
+
+  .legend text {
+    fill: #20bdff;
+    font-weight: 100;
+  }
+  
+  .legend.one-digit text {
+      font-size: 3em;
+  }
+
+  .legend.two-digits text {
+      font-size: 3em;
+  }
+
+  .legend.three-digits text {
+      font-size: 2.5em;
+  }
+
 
   /*.grid .tick {
     stroke: lightgrey;

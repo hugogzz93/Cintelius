@@ -301,15 +301,23 @@ function getProductArray(jsonData) {
 				})
 				return reformatted_data;
 			}
-			
 
+			function total_by_provider(a, b) {
+				c = new Array;
+				Object.keys(a).map(function(obj, i) {
+				   var rObj = {key: obj, value: a[obj] * b[obj] }
+				    c.push(rObj);
+				})
+				return c;
+			}
+			
 			product_array.push({
 				product_id: product_id,
 				product_name: product_name,
 				total_quantity: total_quantity,
 				total_cost: total_cost,
 				units_by_provider: format_data(product_units_by_provider),
-				cost_by_provider: format_data(product_price_by_provider)
+				cost_by_provider: total_by_provider(product_price_by_provider, product_units_by_provider)
 			});
 	};
 	return product_array
@@ -552,6 +560,9 @@ function setUpProductsPieGraph(product_graph_data) {
 	var legendRectSize = 5;
 	var legendSpacing = 3;
 	var legend_xshift = -50;
+	// $('.order_history_products_graphs_block').append('<div class="graph_label 2">Unidades por proveedor</div>')
+	// $('.order_history_products_graphs_block').append('<div class="graph_label 1">Costo total por proveedor</div>')
+	
 
 	var color = d3.scale.ordinal()
 					.range(['#3182bd','#e6550d', '#756bb1', '#636363'])
@@ -605,15 +616,18 @@ function setUpProductsPieGraph(product_graph_data) {
 					//   })
 					.attr('transform', function() {
 						return 'translate(' + legend_xshift + ', 0)';
+						translate(-55, 10)
 					})
 					.append('text')
 					  .attr('x', legendRectSize + legendSpacing)
 					  .attr('y', legendRectSize - legendSpacing)
-					  .html(function(d) {  return general_graph_data[index].total_quantity });
+					  // .html(function(d, i) {  debugger; return general_graph_data[0].total_quantity });
 
 
 	function render(index){
-	  data = general_graph_data[index].units_by_provider
+		data = general_graph_data[index].units_by_provider
+		total_quantity = general_graph_data[index].total_quantity;
+
 
 	  // add transition to new path
 	  g.datum(data).selectAll("path").data(pie).transition().duration(1000).attrTween("d", arcTween)
@@ -653,7 +667,26 @@ function setUpProductsPieGraph(product_graph_data) {
 			d3.select(this).style('fill', color(i))
 		})
 
-		pie_legend.html(general_graph_data[index].total_quantity);
+
+		// adjust tooltip to different fonts
+		if (total_quantity >= 10 && total_quantity < 99) {
+			d3.select('.legend').attr('transform', function() {
+						return 'translate(-55, 10)';
+					}).attr('class', 'legend two-digits')
+		} else if(total_quantity >= 100 && total_quantity < 1000) {
+
+			d3.select('.legend').attr('transform', function() {
+						return 'translate(-60, 10)';
+					}).attr('class', 'legend three-digits')
+
+		} else {
+			d3.select('.legend').attr('transform', function() {
+						return 'translate(-42, 10)';
+					}).attr('class', 'legend one-digit')
+		}
+
+
+		pie_legend.html( function() {return total_quantity == 0 ? "" : total_quantity + "kg"} );
 	}
 
 	$('select.product_selection').on('change', function(e) {
@@ -698,6 +731,8 @@ function setUpProductsGraph(product_graph_data) {
 	var height = canvasHeight - yPadding;
 	var width = canvasWidth - xPadding;
 
+
+
     var product_unit_graph = d3.select('.order_history_products_graphs_block')
 											.append('svg')
 											.attr('id', 'individual_product_cost_chart')
@@ -705,6 +740,7 @@ function setUpProductsGraph(product_graph_data) {
 											.attr('height', canvasHeight)
 											.append('g')
 											.attr('transform', 'translate(0, 5)')
+
 
     var y_axis = product_unit_graph.append('g')
 									.attr('class', 'y Axis')
@@ -724,7 +760,6 @@ function setUpProductsGraph(product_graph_data) {
 	    .style("opacity", 1)
 						    
 	function draw(data) {
-		debugger;
 		if (data.length == 0) {
 			$('.product_not_bought_message').removeClass('hidden');
 			$('#individual_product_cost_chart').attr("display", "none");
@@ -783,6 +818,7 @@ function setUpProductsGraph(product_graph_data) {
 		var columnAttributes = columns
 	    						.attr('width', function(d) {return xAxisScale.rangeBand()})
 	    						// .attr('height', function(d) {return costLinearScale(d.value); })
+
 	    						.on('mouseover', function(d, i) {
 							       div5.transition()		
 					                .duration(0)		
@@ -835,7 +871,7 @@ function setUpProductsGraph(product_graph_data) {
 
 
 
-	dataset = product_graph_data[3].cost_by_provider;
+	dataset = product_graph_data[0].cost_by_provider;
 	draw(dataset);
 }
 
@@ -865,4 +901,9 @@ function addProductSelectionBox(jsonData) {
 	$('.order_history_products_graphs_block').append(selectionBox)
 }
 
+
+// adjust tooltip to different sizes
+function tooltipAdjust (number, tooltip) {
+
+}
 assignBlockIds();
