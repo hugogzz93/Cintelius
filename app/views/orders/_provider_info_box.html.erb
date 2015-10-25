@@ -1,0 +1,22 @@
+<!-- receives a user object  in provider-->
+<div class="provider_info_box hidden" data-provider-id="<%= provider.id %>">
+	<div class="info_logo">Información</div>
+	<div class="info_body">
+		<div class="provider_information_container">
+			<b>Organización</b><br>
+			<%= provider.get_organization %>
+		</div>
+		<div class="provider_information_container">
+			<b>Corréo</b><br>
+			<%= provider.email %>
+		</div>
+		<div class="provider_information_container">
+			<b>Teléfono</b><br>
+			<%= provider.get_telephone %>
+		</div>
+		<div class="provider_information_container">
+			<b>Dirección</b><br>
+			<%= provider.get_address %>
+		</div>
+	</div>
+</div>

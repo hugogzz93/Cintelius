@@ -8,6 +8,7 @@ $('.info_tab_button').remove()
 $('.confirmation_button').remove()
 $('.order_finish_button').remove()
 $('img.order_finish_image').remove()
+$('.provider_information_backdrop').empty()
 $('.loader').remove()
 
 // mensaje si todavia no ha pasado la fecha limite
@@ -40,6 +41,7 @@ $('.order_title_container').append('<%= j @order.title %>')
 
 	<% @providers.each do |provider| %>
 		$('.orders .provider_list').append("<%= j render partial: 'provider_box.html.erb', locals: {provider: provider}%>")
+		$('.provider_information_backdrop').append("<%= j render partial: 'provider_info_box.html.erb', locals: {provider: provider}%>")
 	<% end %>
 
 	// agrega combos
@@ -209,6 +211,22 @@ $('.order_finish_button').on('click', function(e) {
 	$('.loader').removeClass('hidden')
 })
 
+
+// funcionalidad para ver la informacion de cada proveedor
+$('.provider_information_backdrop').on("click", function(e) {
+		$(e.target).removeClass('active');
+	})
+
+
+	$('.profile_info_button').on('click', function(e) {
+		debugger;
+		providerId = $(e.target).closest('svg').attr('data-provider-id');
+		$('.provider_information_backdrop').addClass('active');
+		$('.provider_info_box').addClass('hidden');
+		$('.provider_info_box[data-provider-id=' + providerId + ']').removeClass('hidden');
+		e.stopPropagation();
+	})
+
 // limpia la columna de informacion
 function cleanInfoTab() {
 	$('.info_tab_close_button').empty()
@@ -217,6 +235,8 @@ function cleanInfoTab() {
 	$('.order_comment_container').empty()
 	$('.order_date_container').empty()
 }
+
+
 
 
 

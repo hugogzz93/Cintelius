@@ -20,95 +20,53 @@
   </div>
 </div>
 
-<div id="rectangle">
-  <div id="form-background" class="rectangle-middle-box">
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="email-container">
+<div class="log_in_sidebar">
+  <div class="logo_container"><%= image_tag "logo.png", class: "logo" %></div>
+  <div class="intro_quote">Expande tu Negocio</div>
+  <div class="login_form">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="box">
+            <div class="icon-container" id="user-icon">
+              <%= image_tag "icons/icon-user-3-icon.svg", class: "log_in_icon" %>      
+            </div>
 
-        <div class="box">
-          <div class="icon-container" id="user-icon">
-            <%= image_tag "icons/icon-user.jpg" %>      
+              <%= f.email_field :email, autofocus: true, autocomplete: "on", placeholder: "Correo", class: "log_in_field" %>
           </div>
 
-          <div class="field">
-            <%= f.email_field :email, autofocus: true, autocomplete: "off" %>
-          </div>
-        </div>
-      </div>
+          <div class="box">
+            <div class="icon-container" id="password-icon">
+                <%= image_tag "icons/icon-password-9-icon.svg", class: "log_in_icon" %>      
+            </div>
 
-      <div id="password-container">
-        <div class="box">
-          <div class="icon-container" id="password-icon">
-              <%= image_tag "icons/icon-lock.jpg" %>      
+              <%= f.password_field :password, autocomplete: "on", placeholder: "Contraseña", class: "log_in_field" %>
           </div>
 
-          <div class="field">
-            <%= f.password_field :password, autocomplete: "off" %>
-          </div>
-        </div>
-      </div>
+          <%= f.submit "Entrar", id: "log_in"%>
+      <% end %>  
+  </div>
+</div>
 
-      
-
-      <% if devise_mapping.rememberable? -%>
-        <div class="field">
-          <!-- <%= f.check_box :remember_me %> -->
-          <!-- <%= f.label "Recuerdame" %> -->
-        </div>
-      <% end -%>
-
-      <div class="actions">
-        <%= f.submit "Iniciar Sesion" %>
-      </div>
-    <% end %>  
-    <div id="logo-holder">
-      <%= image_tag "logo.png" %>      
-    </div>
+<div class="log_in_background">
+  <div class="background" id="third"><%= image_tag "frontpage/wall.jpg", class:"background-image"%>
+  </div>
+  <div class="background" id="second"><%= image_tag "frontpage/workstation.jpg", class:"background-image"%>
+  </div>
+  <div class="background" id="first"><%= image_tag "frontpage/workplace.jpg", class:"background-image"%>
+  </div>
+  <div class="overlay">
+    <p>Pedidos y Cotizaciónes <br> en Línea</p>
+    <p>Una solución disruptiva <br> a un problema primitivo.</p>
+    <p>Todas las herramientas a tu disposición</p>  
+    
   </div>
   
-
-  <div id="image-blur-background" class="rectangle-middle-box">
-  <!-- para que este el efecto de blur   -->
-  </div>
-
-
-</div>
-
-<div id="square1" class="frontpage-square">
-  <div class="message">
-  </div>
-  <div class="line-holder" id="arrow-holder">
-    <%= image_tag("frontpage/arrow.png", class: "outlined-image") %>
-  </div>
-  <%= image_tag("frontpage/water.jpg", class: "frontpage-square-background-image") %>
-  <figcaption>
-    <h2>Messy <span>Duke</span></h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, ullam.</p>
-  </figcaption>
-</div>
-
-<div id="square2" class="frontpage-square">
-  <div class="line-holder">
-    <%= image_tag("frontpage/aguila.png", class: "outlined-image") %>
-  </div>
-  <%= image_tag("frontpage/cuadrado2.jpg", class: "frontpage-square-background-image") %>
-  <figcaption>
-    <h2>Messy <span>Duke</span></h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, quisquam.</p>
-  </figcaption>
-</div>
-
-<div id="square3" class="frontpage-square">
-  <div class="line-holder">
-    <%= image_tag("frontpage/nopal.png", class: "outlined-image") %>
-  </div>
-  <%= image_tag("frontpage/road.jpg", class: "frontpage-square-background-image") %>
-  <figcaption>
-    <h2>Nueva <span>Cuenta</span></h2>
-    <p><%= link_to "Aplica ahora para poder utilizar los servicios de Cintelius", new_user_registration_path %></p>
-  </figcaption>
+  
+  
 </div>
 
 
-<!-- # <%= render "devise/shared/links" %> -->
+<script type="text/javascript">
+  
 
+
+</script>

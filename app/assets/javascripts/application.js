@@ -87,6 +87,9 @@ $(function() {
 
 
 	// Order Index {
+
+	
+
 	$('.order_box a').on('click', function(e) {
 	
 		// limpia la lista de ofertas y objetivos
