@@ -18,4 +18,8 @@ class UserDetail < ActiveRecord::Base
 	def is_admin?
 		self.credentials == "admin"
 	end
+
+	def make_admin
+		self.update(credentials: "admin")
+	end
 end

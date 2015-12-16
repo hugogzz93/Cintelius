@@ -52,6 +52,19 @@ img.log_in_icon {
     display: block;
 }
 
+#sign_up {
+        color: #FC5E44;
+    width: 18em;
+    margin: auto;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 1em;
+    font-family: helvetica;
+    font-weight: 100;
+    font-size: 13px;
+}
+
 img.logo {
     width: 18em;
     margin: 11% auto;

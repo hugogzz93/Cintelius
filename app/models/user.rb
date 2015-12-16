@@ -68,6 +68,10 @@ class User < ActiveRecord::Base
     self.user_detail.telephone
   end
 
+  def make_admin
+    self.user_detail.make_admin
+  end
+
   # def get_recent_orders
   #   # agarra la combinacion de 
   #   recent_orders = current_user.order_histories.last(5)
