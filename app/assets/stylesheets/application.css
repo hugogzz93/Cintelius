@@ -1256,6 +1256,11 @@ form#new_order .comment_field.editable {
   margin-left: 1.5em;
 }
 
+.product_subcategory_title {
+    font-size: 0.5em;
+    font-color: #636365;
+}
+
 .order_product_unit_container {
   float: right;
 }
