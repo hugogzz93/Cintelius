@@ -27,7 +27,10 @@ gem 'whenever', require: false
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
-# 
+# sending mails on date
+gem 'sidekiq'
+
+
 gem 'jquery-turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'

@@ -12,10 +12,16 @@ class OrdersController < ApplicationController
 	end
 
 	def create
-		# params[:order][:due_date] = params[:order][:due_date] + " " +params[:order][:due_time]
 		time = ActiveSupport::TimeZone[current_user.time_zone].parse(params[:order][:due_date] + " " +params[:order][:due_time])
 		params[:order][:due_date] = time.to_s
-		current_user.orders.create(order_params)
+		if order = current_user.orders.create(order_params)
+			users = order.find_valid_providers_for_order
+			ProviderMailer.order_received(current_user.get_organization, time.to_s, users).deliver_now
+			hour_difference = ((order.due_date - Time.now) / 1.hour).round
+			# BuyerMailer.order_visible(order).deliver_later(wait_until: hour_difference.hours.from_now)
+			# UserMailer.delay_until(3.days.from_now).status_report(@user.id)
+			BuyerMailer.delay_until(hour_difference.hours.from_now).order_visible(order)
+		end
 		redirect_to root_path
 	end
 
