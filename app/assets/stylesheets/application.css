@@ -76,7 +76,7 @@
   display: block;
   max-height: 10em;
   float: left;
-  width: 21em;
+  /*width: 21em;*/
   border-top: 1px solid white;
   margin: 2%;
 }
@@ -1258,7 +1258,8 @@ form#new_order .comment_field.editable {
 
 .product_subcategory_title {
     font-size: 0.5em;
-    font-color: #636365;
+    text-align: center;
+    color: #636365;
 }
 
 .order_product_unit_container {
@@ -1446,7 +1447,7 @@ form#new_order .comment_field.editable {
 @media screen and (min-width: 1250px) {
 
   .combo_product_form_units {
-    width: 8em;
+    width: 7em;
   }
 
   .combo_product_form_price {
@@ -2276,6 +2277,19 @@ img.return_arrow {
     /*-webkit-animation-direction: reverse;  Chrome, Safari, Opera 
     animation-direction: reverse;*/
   
+}
+
+span.provider_box_organization {
+    text-decoration: none;
+    color: black;
+    font-size: 0.85em;
+    font-weight: 400;
+width: 235px;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+    float: left;
 }
 
 svg.profile_info_button {
