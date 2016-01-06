@@ -134,6 +134,12 @@ class Order < ActiveRecord::Base
 		self.combos.where(user_id: user.id, status: Combo.statuses["locked"]).any?
 	end
 
+	def find_valid_providers_for_order
+		users = User.joins(:user_products, products: :order_products)
+						.where(order_products: {order_id: self.id }).distinct
+
+	end
+
 
 
 end
