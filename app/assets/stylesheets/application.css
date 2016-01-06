@@ -2278,6 +2278,19 @@ img.return_arrow {
   
 }
 
+span.provider_box_organization {
+    text-decoration: none;
+    color: black;
+    font-size: 0.85em;
+    font-weight: 400;
+width: 235px;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+    float: left;
+}
+
 svg.profile_info_button {
     width: 2em;
     height: 2em;
