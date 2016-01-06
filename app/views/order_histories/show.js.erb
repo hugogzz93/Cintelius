@@ -785,7 +785,14 @@ function setUpProductsGraph(product_graph_data) {
 									.range([1, height]);
 	    
 		var xAxisScale = d3.scale.ordinal()
-						    .domain(data.map(function(d) {return d.key}))
+						    .domain(data.map(function(d) {
+						    	if (d.key.length > 12) {
+						    		return d.key.substring(0,12) + "...";
+						    	} else {
+						    		return d.key;
+						    	}
+						    	
+						    }))
 						    .rangeRoundBands([0, width], .1);
 
 		var xAxis = d3.svg.axis()

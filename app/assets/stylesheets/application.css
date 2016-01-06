@@ -1258,7 +1258,8 @@ form#new_order .comment_field.editable {
 
 .product_subcategory_title {
     font-size: 0.5em;
-    font-color: #636365;
+    text-align: center;
+    color: #636365;
 }
 
 .order_product_unit_container {
@@ -1446,7 +1447,7 @@ form#new_order .comment_field.editable {
 @media screen and (min-width: 1250px) {
 
   .combo_product_form_units {
-    width: 8em;
+    width: 7em;
   }
 
   .combo_product_form_price {
