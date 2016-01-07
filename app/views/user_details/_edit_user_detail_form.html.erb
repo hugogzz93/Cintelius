@@ -1,17 +1,17 @@
 <%= form_for @user_detail, remote: true do |f| %>
 
 	<div class="form_label">
-		<span>Organizacion</span> <span style="color:#20bdff">*</span>
+		<span>Organización</span> <span style="color:#20bdff">*</span>
 	</div>
 	<%= f.text_field :organization, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
 
 	<div class="form_label">
-		<span>Direccion</span> <span style="color:#20bdff">*</span>
+		<span>Dirección</span> <span style="color:#20bdff">*</span>
 	</div>
 	<%= f.text_field :address, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
 
 	<div class="form_label">
-		<span>Telefono</span> <span style="color:#20bdff">*</span>
+		<span>Teléfono</span> <span style="color:#20bdff">*</span>
 	</div>
 	<%= f.number_field :telephone, required: true, oninvalid: "InvalidMsg(this);", oninput: "InvalidMsg(this)" %>
 	<%= f.submit "Actualizar" %>
