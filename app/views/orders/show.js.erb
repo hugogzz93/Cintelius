@@ -31,12 +31,13 @@ $('.order_title_container').append('<%= j @order.title %>')
 
 <% if @order.due_date_past? %>
 	$('#selection_header').append('<div class="loader hidden"><%= j t("loading...") %></div>')
+
 	<% if @order.is_open? && @order.combos.any?%>
 		$('#selection_header').append("<%= j image_tag('icons/icon-style-checkmark-gray.png', class: 'confirmation_button', alt: t('confirm_selection') )%>")
 		$('.order_product_list').append("<%= j render partial: 'offer_selection_form.html.erb', locals: {f: @order}%>")
 	<% else %>
 		$('#selection_header').append("<%= j image_tag('icons/certificate.svg', class: 'order_finish_image', alt: t('confirm_selection') )%>")
-		$('#selection_header').append("<%= j link_to 'Terminar', order_path(@order), method: :delete, data: { confirm: 'La orden será terminada y dirigida al historial. ¿Deseas terminar la orden?' }, class: 'order_finish_button', remote: true %>")
+		$('#selection_header').append("<%= j link_to 'Terminar', order_path(@order), method: :delete, class: 'order_finish_button', remote: true %>")
 	<% end %>
 
 	<% @providers.each do |provider| %>
@@ -193,24 +194,30 @@ $('.product_main_info').on('click', function(e) {
 
 // confirmation button es una imagen que actua como boton proxy para el submit
 $('.confirmation_button').on('click', function() {
-	$('#order_form_submit').click();
-	$('img.confirmation_button').addClass('hidden')
-	$('.loader').removeClass('hidden')
+	var c = confirm("Al confirmar la orden de estos pedidos, no podrás hacer más cambios. ¿Deseas ordenar solamente los seleccionados?");
+	if (c) {
+		$('#order_form_submit').click();
+		$('img.confirmation_button').addClass('hidden')
+		$('.loader').removeClass('hidden')	
+	};
+	
 })
-
 
 // order_finish_image es una imagen que actua como boton proxy para el submit
 $('.order_finish_image').on('click', function() {
-	$('.order_finish_button')[0].click();
+	
+	var c = confirm("La orden será terminada y dirigida al historial. ¿Deseas terminar la orden?")
+	if (c) {
+		$('.order_finish_button')[0].click()
+	};
+
 })
 
 // intercambia el spinner
-
 $('.order_finish_button').on('click', function(e) {
 	$('img.order_finish_image').addClass('hidden')
 	$('.loader').removeClass('hidden')
 })
-
 
 // funcionalidad para ver la informacion de cada proveedor
 $('.provider_information_backdrop').on("click", function(e) {
