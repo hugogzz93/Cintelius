@@ -25,11 +25,11 @@ class User < ActiveRecord::Base
   end
 
   def is_buyer?
-    self.user_detail.is_buyer?
+    self.user_detail.is_buyer? || self.user_detail.is_admin?
   end
 
   def is_seller?
-    self.user_detail.is_seller?
+    self.user_detail.is_seller? || self.user_detail.is_admin?
   end
 
   def is_admin?

@@ -1,4 +1,4 @@
 <!-- recibe un combo en combo -->
 <%= form_for(combo, remote: true) do |f| %>
-	<%= f.submit "", :type => :image, :src => "assets/icons/icon-package-hands.png", class: "package_img" %>
+	<%= image_submit_tag("icons/icon-package-hands.png", class: "package_img") %>
 <% end %>

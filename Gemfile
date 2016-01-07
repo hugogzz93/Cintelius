@@ -9,7 +9,7 @@ gem 'rails', '4.2.0.beta2'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
 # Use SCSS for stylesheets
-#gem 'sass-rails', '~> 5.0.0.beta1'
+# gem 'sass-rails', '~> 5.0.0.beta1'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
@@ -27,7 +27,10 @@ gem 'whenever', require: false
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
-# 
+# sending mails on date
+gem 'sidekiq'
+
+
 gem 'jquery-turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
@@ -38,7 +41,6 @@ group :production do
   
 end
 gem 'foundation-rails'
-gem 'binding_of_caller'
 gem 'devise'
 gem 'arel', '6.0.0.beta2'
 
@@ -57,6 +59,7 @@ group :development, :test do
   # Call 'debugger' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem "better_errors"
+  gem 'binding_of_caller'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0.0.beta4'
