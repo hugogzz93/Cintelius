@@ -145,8 +145,17 @@ $(function() {
 
 	// esconde el searchbar cuando se pierde enfoque
 	$('#search_bar_input').on('blur', function() {
-		hideSearchBar();
+		setTimeout(function() {
+			hideSearchBar();
+		}, 100);
+		
 	});
+
+	$('.suggestion_box').on('click', function(e) {
+		suggestionBoxSelectionHandler($(e.target));
+	})
+
+
 
 	// $('#search_bar_input').on('keyup', function(e) {
 	// 	if (e.which === 27) {
@@ -392,4 +401,17 @@ function searchBarSuggestionHandler() {
     	}
     	return this.selectedIndex;
     };
+}
+
+function suggestionBoxSelectionHandler(suggestion_box) {
+	$product_id = suggestion_box.attr('data-suggestion-id');
+	$product_button = $('button[data-product-id=' + $product_id + ']');
+	$subcategory_button = $('.subcategory_button[data-category-id=' + $product_button.attr('data-category-id') + ']');
+	$category_button = $('.category_button[data-category-id=' + $subcategory_button.attr('data-supercategory-id') + ']');
+
+	$category_button.click();
+	$subcategory_button.click();
+	$product_button.click();
+	hideSearchBar();
+
 }
