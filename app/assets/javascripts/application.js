@@ -148,11 +148,11 @@ $(function() {
 		hideSearchBar();
 	});
 
-	$('#search_bar_input').on('keyup', function(e) {
-		if (e.which === 27) {
-			hideSearchBar();
-		};
-	})
+	// $('#search_bar_input').on('keyup', function(e) {
+	// 	if (e.which === 27) {
+	// 		hideSearchBar();
+	// 	};
+	// })
 
 
 
@@ -368,9 +368,28 @@ function displaySearchBar() {
 }
 
 function hideSearchBar() {
+	// debugger;
 	$('.product_search_box').addClass('hidden');
 	$('#search_bar_input').val('');
 }
 
 
 
+// object handles the indexes for the searchbar suggestion
+function searchBarSuggestionHandler() {
+    this.selectedIndex = null;
+    this.indexes = null;
+    this.newSearch = function(quantity) {
+    	this.selectedIndex = 0;
+    	this.indexes = quantity;
+    	return 0;
+    };
+    this.scroll = function(direction) {
+    	if (direction == 0) {
+    		this.selectedIndex == 0 ? this.selectedIndex = this.indexes - 1 : this.selectedIndex = this.selectedIndex -1;
+    	} else {
+    		this.selectedIndex = (this.selectedIndex + 1) % this.indexes;
+    	}
+    	return this.selectedIndex;
+    };
+}
