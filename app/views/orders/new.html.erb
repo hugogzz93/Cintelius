@@ -104,17 +104,40 @@
 </div>
 
 <script>
+// searchbar function
+function setUpSearchBarSuggestions() {
+	var jsonData = $.ajax({
+		async: false,
+		url: "<%= j products_path %>",
+		contentType: "application/json",
+		type: "GET",
+		}).responseJSON;
+
+
+	var options = {
+		  caseSensitive: false,
+		  includeScore: false,
+		  shouldSort: true,
+		  threshold: 0.6,
+		  location: 0,
+		  distance: 100,
+		  maxPatternLength: 32,
+		  keys: ["name","subcategory.name"]
+		};
+	var fuse = new Fuse(jsonData.products, options);
+	return fuse;
+}
+
+var fuse = setUpSearchBarSuggestions();
+// var result = fuse.search("xoch");
+
+
+
 function setChosenLink(link) {
 	$(link).addClass('choice')
 }
 
 setChosenLink('.new_order_link')
-
-
-
-
-
-
 
 // datepicker se movio aqui desde applicatino.js por problemas con turbolinks
 $.datepicker.regional['es'] = {clearText: 'Borrar', clearStatus: '',

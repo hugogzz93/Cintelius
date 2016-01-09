@@ -1,5 +1,13 @@
 class ProductsController < ApplicationController
-	before_action :authenticate_user!, :check_if_admin
+	before_action :authenticate_user!, :check_if_admin, except: [:index]
+
+	def index
+		respond_to do |format|
+			format.json {
+				@products = Product.all
+			}
+		end
+	end
 
 	def update
 		respond_to do |format| 
