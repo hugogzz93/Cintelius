@@ -12,7 +12,7 @@
 		<%= link_to('Cerrar Sesión', destroy_user_session_path, :method => :delete, class: "log_out_link") %>
 		<% if current_user.is_buyer? or current_user.is_admin? %>
 			<%= link_to('Nueva Orden', new_order_path, class: "new_order_link") %>
-			<%= link_to('Ordenes', orders_path, class: "order_index_link") %>
+			<%= link_to('Órdenes', orders_path, class: "order_index_link") %>
 		<% end %>
 
 		<% if current_user.is_seller? or current_user.is_admin? %>

@@ -1,0 +1,17 @@
+<!-- receives all the suggestions on @suggestions -->
+<!-- suggestion must have a name and id attribute -->
+
+
+<div class="product_search_box hidden">
+	<div class="product_search_bar">
+		<%= image_tag "icons/search-lens.svg", class: "search-lens" %>
+		<%= text_field_tag "", nil, id: "search_bar_input" %>
+	</div>
+	<div class="product_search_suggestions">
+		<% suggestions.each do |suggestion| %>
+			<div class="suggestion_box hidden" data-suggestion-id="<%= suggestion.id %>">
+				<%= suggestion.name %>
+			</div>
+		<% end %>
+	</div>
+</div>

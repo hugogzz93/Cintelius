@@ -5,5 +5,6 @@
 	<% @order.combos.each do |combo| %>
 		<%= check_box_tag 'selected_combos_id[]', combo.id, nil, data: {combo_id: combo.id} %>		
 	<% end %>
-	<%= submit_tag "", id: "order_form_submit", data: {confirm: "Al confirmar la orden de estos pedidos no podrás hacer más cambios. ¿Deseas ordenar solamente los productos seleccionados?"} %>
+	<%= submit_tag "", id: "order_form_submit" %>
+	<!-- confirmed on show.js.erb  -->
 <% end %>

@@ -132,6 +132,39 @@ $(function() {
 
 	// @@NEWORDER
 
+	// encargado de mostrar y esconder el search bar
+	$(document).on('keypress', function(e) {
+	    var tag = e.target.tagName.toLowerCase();
+	    if(e.which === 27) {
+	    	hideSearchBar();
+	    }
+	    else if ( tag != 'input' && tag != 'textarea') {
+	        displaySearchBar();
+	    }
+	});
+
+	// esconde el searchbar cuando se pierde enfoque
+	$('#search_bar_input').on('blur', function() {
+		setTimeout(function() {
+			hideSearchBar();
+		}, 100);
+		
+	});
+
+	$('.suggestion_box').on('click', function(e) {
+		suggestionBoxSelectionHandler($(e.target));
+	})
+
+
+
+	// $('#search_bar_input').on('keyup', function(e) {
+	// 	if (e.which === 27) {
+	// 		hideSearchBar();
+	// 	};
+	// })
+
+
+
 	// Arreglar tamaño de la pantalla.
 	$('body').height($(window).height());
 
@@ -335,8 +368,55 @@ function InvalidMsg(textbox) {
 
 function setChosenLink(link) {
 	$(link).addClass('choice')
-	console.log('asdfasdf')
+}
+
+// despliega el search bar en la creación de ordenes
+function displaySearchBar() {
+	$('.product_search_box').removeClass('hidden');
+	$('#search_bar_input').focus();
+}
+
+function hideSearchBar() {
+	$('.product_search_box').addClass('hidden');
+	$('#search_bar_input').val('');
 }
 
 
 
+// object handles the indexes for the searchbar suggestion
+function searchBarSuggestionHandler() {
+    this.selectedIndex = null;
+    this.indexes = null;
+    this.newSearch = function(quantity) {
+    	this.selectedIndex = 0;
+    	this.indexes = quantity;
+    	return 0;
+    };
+    this.scroll = function(direction) {
+    	if (direction == 0) {
+    		this.selectedIndex == 0 ? this.selectedIndex = this.indexes - 1 : this.selectedIndex = this.selectedIndex -1;
+    	} else {
+    		this.selectedIndex = (this.selectedIndex + 1) % this.indexes;
+    	}
+    	return this.selectedIndex;
+    };
+}
+
+function suggestionBoxSelectionHandler(suggestion_box) {
+	$product_id = suggestion_box.attr('data-suggestion-id');
+	$product_button = $('.product_button[data-product-id=' + $product_id + ']');
+	$subcategory_button = $('.subcategory_button[data-category-id=' + $product_button.attr('data-category-id') + ']');
+	$category_button = $('.category_button[data-category-id=' + $subcategory_button.attr('data-supercategory-id') + ']');
+
+	// para que sirva en nuevas ordenes y en matching, falta optimizar
+	if($subcategory_button.length < 1) {
+		$subcategory_button = $('.subcategory_button[data-subcategory-id=' + $product_button.attr('data-subcategory-id') + ']')
+		$category_button = $('.supercategory_button[data-supercategory-id=' + $subcategory_button.attr('data-supercategory-id') + ']');
+		// $('.supercategory_button[data-supercategory-id=388]')
+	}
+	debugger;
+	$category_button.click();
+	$subcategory_button.click();
+	$product_button.click();
+	hideSearchBar();
+}

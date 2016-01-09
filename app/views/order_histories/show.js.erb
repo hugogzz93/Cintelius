@@ -5,6 +5,8 @@ $('.order_history_header_button.active').removeClass('active');
 $('.order_history_header_button:first').addClass('active');
 $('.tooltip_box').remove()
 
+
+
 product_graph_data = [];
 
 
@@ -234,16 +236,18 @@ function setUpOrderDetails(jsonData) {
 			// cantidad de movimientos para las flechas
 			$('.step_button.left .step_arrow').attr('steps', 0);
 			$('.step_button.right .step_arrow').attr('steps', Math.floor( jsonData.products.length / groupOfferScreenAmount))
+		};
 
-			// step button de single offer
-			// $('.step_arrow')
+		// hace visibles las tablas del historial y ajusta sus tamaños
 			$('[data-block-group="1"]').removeClass('hidden')
-
 			combo_product_history_height = $('.group_offers .combo_product_history:not(".empty")').outerHeight()
 			$('.organization_block').css('height', combo_product_history_height)
 			$('.combo_history_total').css('height', combo_product_history_height)
 			$('.group_offers .combo_product_history_list').css('min-height', $('.group_offers .combo_product_history:not(".empty")').outerHeight(true))
-		};
+
+
+		// adjusts multiple-offer graph to different product name sizes
+		$('.group_offers_step_button').outerHeight($('.product_header_list').outerHeight())
 }
 
 // crea un arreglo de objetos para cada producto que contiene total de costo y unidades compradas por 
@@ -621,7 +625,6 @@ function setUpProductsPieGraph(product_graph_data) {
 					.append('text')
 					  .attr('x', legendRectSize + legendSpacing)
 					  .attr('y', legendRectSize - legendSpacing)
-					  // .html(function(d, i) {  debugger; return general_graph_data[0].total_quantity });
 
 
 	function render(index){
@@ -914,3 +917,4 @@ function tooltipAdjust (number, tooltip) {
 
 }
 assignBlockIds();
+
