@@ -29,7 +29,7 @@
 			<% category.subcategories.each do |subcategory| %>
 				<ul class="<%=subcategory.name%>-list new-order-product-list" data-category-id="<%= subcategory.id %>">
 					<% subcategory.products.each do |product| %>
-						<li><%= button_tag product.name, data: {product_id: product.id, category_id: subcategory.id} %></li>
+						<li><%= button_tag product.name, class: "product_button", data: {product_id: product.id, category_id: subcategory.id} %></li>
 					<% end %>
 				</ul>
 			<% end %>

@@ -4331,6 +4331,7 @@ input#user_detail_telephone {
 }
 
 .product_search_box {
+  z-index: 3;
     position: fixed;
     width: 30em;
     height: auto;

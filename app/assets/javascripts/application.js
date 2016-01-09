@@ -377,7 +377,6 @@ function displaySearchBar() {
 }
 
 function hideSearchBar() {
-	// debugger;
 	$('.product_search_box').addClass('hidden');
 	$('#search_bar_input').val('');
 }
@@ -405,13 +404,19 @@ function searchBarSuggestionHandler() {
 
 function suggestionBoxSelectionHandler(suggestion_box) {
 	$product_id = suggestion_box.attr('data-suggestion-id');
-	$product_button = $('button[data-product-id=' + $product_id + ']');
+	$product_button = $('.product_button[data-product-id=' + $product_id + ']');
 	$subcategory_button = $('.subcategory_button[data-category-id=' + $product_button.attr('data-category-id') + ']');
 	$category_button = $('.category_button[data-category-id=' + $subcategory_button.attr('data-supercategory-id') + ']');
 
+	// para que sirva en nuevas ordenes y en matching, falta optimizar
+	if($subcategory_button.length < 1) {
+		$subcategory_button = $('.subcategory_button[data-subcategory-id=' + $product_button.attr('data-subcategory-id') + ']')
+		$category_button = $('.supercategory_button[data-supercategory-id=' + $subcategory_button.attr('data-supercategory-id') + ']');
+		// $('.supercategory_button[data-supercategory-id=388]')
+	}
+	debugger;
 	$category_button.click();
 	$subcategory_button.click();
 	$product_button.click();
 	hideSearchBar();
-
 }
