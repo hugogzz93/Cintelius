@@ -118,7 +118,7 @@ function setUpSearchBarSuggestions() {
 		  caseSensitive: false,
 		  includeScore: false,
 		  shouldSort: true,
-		  threshold: 0.6,
+		  threshold: 0.3,
 		  location: 0,
 		  distance: 100,
 		  maxPatternLength: 32,
@@ -130,7 +130,14 @@ function setUpSearchBarSuggestions() {
 
 var fuse = setUpSearchBarSuggestions();
 // var result = fuse.search("xoch");
-
+$('#search_bar_input').on('keyup', function(e) {
+	$text = $(e.target).val()
+	var results = fuse.search($text);
+	$('.suggestion_box').addClass('hidden');
+	for(i = 0; i < results.length; i++) {
+		$('.suggestion_box[data-suggestion-id="' + results[i].id + '"').removeClass('hidden')
+	}
+})
 
 
 function setChosenLink(link) {

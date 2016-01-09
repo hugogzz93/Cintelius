@@ -4337,6 +4337,7 @@ input#user_detail_telephone {
     border: 1px solid pink;
     left: 50%;
     margin-left: -15em;
+    background: white;
 }
 
 .product_search_bar {
