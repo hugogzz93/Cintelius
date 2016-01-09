@@ -6,7 +6,7 @@
 		<!-- categorias -->
 		<ul class="category-list">
 			<% @categories.each do |category|  %>
-				<li><%= button_tag category.name, data: {category_id: category.id} %></li>
+				<li><%= button_tag category.name, class: "category_button", data: {category_id: category.id} %></li>
 			<% end %>
 		</ul>
 		
@@ -17,7 +17,7 @@
 			<% @categories.each do |category| %>
 				<ul class="<%=category.name%>-list new-order-subcategory-list" data-category-id="<%= category.id %>">
 					<% category.subcategories.each do |subcategory| %>
-						<li><%= button_tag subcategory.name, data: {category_id: subcategory.id}%></li>
+						<li><%= button_tag subcategory.name, class: "subcategory_button", data: {category_id: subcategory.id, supercategory_id: category.id}%></li>
 					<% end %>
 				</ul>
 			<% end %>
@@ -29,7 +29,7 @@
 			<% category.subcategories.each do |subcategory| %>
 				<ul class="<%=subcategory.name%>-list new-order-product-list" data-category-id="<%= subcategory.id %>">
 					<% subcategory.products.each do |product| %>
-						<li><%= button_tag product.name, data: {product_id: product.id} %></li>
+						<li><%= button_tag product.name, class: "product_button", data: {product_id: product.id, category_id: subcategory.id} %></li>
 					<% end %>
 				</ul>
 			<% end %>
@@ -97,21 +97,85 @@
 
 			<% end %>
 		</div>
-	</div>	
+	</div>
+
+	<%= render partial: "layouts/product_search_box.html.erb", 
+								locals: {suggestions: @products} %>
 </div>
 
 <script>
+// searchbar function
+function setUpSearchBarSuggestions() {
+	var jsonData = $.ajax({
+		async: false,
+		url: "<%= j products_path %>",
+		contentType: "application/json",
+		type: "GET",
+		}).responseJSON;
+
+
+	var options = {
+		  caseSensitive: false,
+		  includeScore: false,
+		  shouldSort: true,
+		  threshold: 0.3,
+		  location: 0,
+		  distance: 100,
+		  maxPatternLength: 32,
+		  keys: ["name","subcategory.name"]
+		};
+	var fuse = new Fuse(jsonData.products, options);
+	return fuse;
+}
+
+var fuse = setUpSearchBarSuggestions();
+
+// maneja los tecleos en el searchbar
+suggestionScrollHandler = new searchBarSuggestionHandler();
+$('#search_bar_input').on('keyup', function(e) {
+	if (e.which === 27) {
+			hideSearchBar();
+	}
+	else if(e.which === 13) {
+		suggestionBoxSelectionHandler($('.suggestion_box.selected'));
+
+	} else if(e.which === 40 || e.which === 38) {
+		var direction, index;
+		e.which === 40 ? direction = 1: direction = 0;
+		index = suggestionScrollHandler.scroll(direction);
+		$('.suggestion_box.selected').removeClass('selected');
+		$($('.suggestion_box:not(.hidden)')[index]).addClass('selected');
+
+	} else {
+		$text = $(e.target).val()
+		var results = fuse.search($text), index;
+		$('.suggestion_box').addClass('hidden');
+		for(i = 0; i < results.length; i++) {
+			$('.suggestion_box[data-suggestion-id="' + results[i].id + '"').removeClass('hidden')
+		}
+		index = suggestionScrollHandler.newSearch(results.length);
+		$('.suggestion_box.selected').removeClass('selected');
+		$($('.suggestion_box:not(.hidden)')[index]).addClass('selected');
+	}
+})
+
+$('suggestion_box').on('click', function(e) {
+	suggestionBoxSelectionHandler($(e.target));
+})
+
+// function handleSuggestionHighlights(newSelection) {
+
+	// if (newSelection) {
+		// $($('.suggestion_box:not(.hidden)')[0]).addClass('selected')
+	// };
+// }
+
+
 function setChosenLink(link) {
 	$(link).addClass('choice')
 }
 
 setChosenLink('.new_order_link')
-
-
-
-
-
-
 
 // datepicker se movio aqui desde applicatino.js por problemas con turbolinks
 $.datepicker.regional['es'] = {clearText: 'Borrar', clearStatus: '',
