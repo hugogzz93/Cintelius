@@ -4334,14 +4334,17 @@ input#user_detail_telephone {
     position: fixed;
     width: 30em;
     height: auto;
-    border: 1px solid pink;
+    border: 1px solid rgba(69, 78, 89, 0.3);
     left: 50%;
     margin-left: -15em;
     background: white;
+    border-radius: 5px;
+    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
 .product_search_bar {
     height: 2.5em;
+    border-bottom: 1px solid #C7CACD;
 }
 
 #search_bar_input {
@@ -4353,6 +4356,11 @@ input#user_detail_telephone {
     border: none;
     font-size: 1.5em;
     font-weight: 300;
+}
+
+.product_search_suggestions {
+    max-height: 27em;
+    overflow: scroll;
 }
 
 img.search-lens {
