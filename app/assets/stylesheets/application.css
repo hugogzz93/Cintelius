@@ -4326,20 +4326,46 @@ input#user_detail_telephone {
   }
 }
 
-
-
-
-
 .hidden {
   display: none !important;
 }
 
+.product_search_box {
+    position: fixed;
+    width: 30em;
+    height: auto;
+    border: 1px solid pink;
+    left: 50%;
+    margin-left: -15em;
+}
 
+.product_search_bar {
+    height: 2.5em;
+}
 
+#search_bar_input {
+    height: 90%;
+    padding: 0px;
+    margin: 0px;
+    width: 88%;
+    float: right;
+    border: none;
+    font-size: 1.5em;
+    font-weight: 300;
+}
 
+img.search-lens {
+    float: left;
+    width: 1.5em;
+    margin: 0.5em 0.5em;
+}
 
+.suggestion_box {
+    font-size: 1.1em;
+    padding: 10px;
+}
 
-  /*.offer_comment_history_container {
-    display: none;
-  }*/
-/* }*/
+.suggestion_box.selected, .suggestion_box:hover {
+    background: #FF6500;
+    color: white;
+}

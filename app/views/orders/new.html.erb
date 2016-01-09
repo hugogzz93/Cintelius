@@ -97,7 +97,10 @@
 
 			<% end %>
 		</div>
-	</div>	
+	</div>
+
+	<%= render partial: "layouts/product_search_box.html.erb", 
+								locals: {suggestions: @products} %>
 </div>
 
 <script>

@@ -132,6 +132,30 @@ $(function() {
 
 	// @@NEWORDER
 
+	// encargado de mostrar y esconder el search bar
+	$(document).on('keypress', function(e) {
+	    var tag = e.target.tagName.toLowerCase();
+	    if(e.which === 27) {
+	    	hideSearchBar();
+	    }
+	    else if ( tag != 'input' && tag != 'textarea') {
+	        displaySearchBar();
+	    }
+	});
+
+	// esconde el searchbar cuando se pierde enfoque
+	$('#search_bar_input').on('blur', function() {
+		hideSearchBar();
+	});
+
+	$('#search_bar_input').on('keyup', function(e) {
+		if (e.which === 27) {
+			hideSearchBar();
+		};
+	})
+
+
+
 	// Arreglar tamaño de la pantalla.
 	$('body').height($(window).height());
 
@@ -335,7 +359,17 @@ function InvalidMsg(textbox) {
 
 function setChosenLink(link) {
 	$(link).addClass('choice')
-	console.log('asdfasdf')
+}
+
+// despliega el search bar en la creación de ordenes
+function displaySearchBar() {
+	$('.product_search_box').removeClass('hidden');
+	$('#search_bar_input').focus();
+}
+
+function hideSearchBar() {
+	$('.product_search_box').addClass('hidden');
+	$('#search_bar_input').val('');
 }
 
 
