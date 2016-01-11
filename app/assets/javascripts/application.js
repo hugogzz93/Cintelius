@@ -414,7 +414,6 @@ function suggestionBoxSelectionHandler(suggestion_box) {
 		$category_button = $('.supercategory_button[data-supercategory-id=' + $subcategory_button.attr('data-supercategory-id') + ']');
 		// $('.supercategory_button[data-supercategory-id=388]')
 	}
-	debugger;
 	$category_button.click();
 	$subcategory_button.click();
 	$product_button.click();

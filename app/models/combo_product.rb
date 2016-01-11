@@ -7,6 +7,9 @@ class ComboProduct < ActiveRecord::Base
 	validates :combo_id, uniqueness: { scope: [:product_id],
     message: "No se puede ofrecer el mismo producto dos veces en la misma orden." }
 
+	validates :unitary_price, presence: true, 
+    				numericality: { greater_than: 0 }
+
     def create_history_recursively(combo_history_object)
 		history_object_hash = self.attributes
 		history_object_hash.delete("id")
