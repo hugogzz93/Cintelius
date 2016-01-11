@@ -1,5 +1,5 @@
 <!-- receives all the suggestions on @suggestions -->
-<!-- suggestion must have a name and id attribute -->
+<!-- suggestion must have a name, category and id attribute -->
 
 
 <div class="product_search_box hidden">
@@ -10,7 +10,7 @@
 	<div class="product_search_suggestions">
 		<% suggestions.each do |suggestion| %>
 			<div class="suggestion_box hidden" data-suggestion-id="<%= suggestion.id %>">
-				<%= suggestion.name %>
+				<%= suggestion.name %> <span><%= suggestion.category.name %></span>
 			</div>
 		<% end %>
 	</div>
