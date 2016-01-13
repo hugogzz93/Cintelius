@@ -4379,3 +4379,16 @@ img.search-lens {
     background: #FF6500;
     color: white;
 }
+
+.suggestion_box span {
+  font-size: 0.1em;
+  color: #FF6500;
+  float: right;
+  margin-top: 5px;
+  font-weight: 400;
+}
+
+.suggestion_box.selected span, .suggestion_box:hover span{
+  color: white;
+}
+
